@@ -26,6 +26,7 @@ namespace control.Pages.Account
 
         public IActionResult OnGet()
         {
+            ViewData["email"] = HttpContext.Session.GetString("email");
             return Page();
         }
 
@@ -43,7 +44,7 @@ namespace control.Pages.Account
             //_context.User.Add(User);
             // await _context.SaveChangesAsync();
 
-            ViewData["email"] = HttpContext.Session.GetString("email");
+
             string? code_to_verify = HttpContext.Session.GetString("key");
             //return RedirectToPage("./Index");
 
