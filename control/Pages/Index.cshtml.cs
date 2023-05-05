@@ -14,7 +14,8 @@ namespace control.Pages
 
         public RedirectResult OnGet()
         {
-            return RedirectPermanent("Account");
+            //return RedirectPermanent("Account/Login");
+            return Redirect("Account/Login");
         }
     }
 }

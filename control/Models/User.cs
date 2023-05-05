@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace control.Models
 {
 
-    public enum AccessLevel
+    public enum EAccessLevel
     {
         kNone,
         kUser,
@@ -26,17 +26,14 @@ namespace control.Models
         [Required]
         public required string Email { get; set; }
 
-
-
         [Required]
         public string? AccessCode { get; set; }
 
         public DateTime? AccessCodeGenerationTime { get; set; }
 
-
-
         [Required]
-        public AccessLevel AccessLevel { get; set; }
+        public EAccessLevel AccessLevel { get; set; }
+
 
 
         public List<Door>? AccessDoors;

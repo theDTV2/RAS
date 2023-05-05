@@ -13,7 +13,13 @@ namespace control.Models
         [Key]
           public required string Id { get; set; }
 
+        [Required] 
+        public required string AccessToken { get; set; }
 
+        public required DateTime LastCheckInTime { get; set; }
+
+        //TODO: Think about how to do this efficiently
+        // public required List<DoorLog>
 
     }
 }
