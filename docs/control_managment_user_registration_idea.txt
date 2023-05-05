@@ -2,4 +2,4 @@
 2. Enter details: full name, password, email adress
 3. Accept room rules 
 4. Validate Email-Adress
-5. Go to staff to enter card and activate
+5. Go to staff to enter card and activate 

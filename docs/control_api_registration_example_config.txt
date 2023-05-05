@@ -1,0 +1,6 @@
+secret_client: 
+ip :
+dns_name:
+port:
+door_id:
+text_display:

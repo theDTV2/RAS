@@ -1,1 +1,29 @@
-e
+Die erforderliche Adresse/Port wird in der Config-Datei übergeben. Diese enthält ebenfalls ein ssl-zertifikat. Config-Datei wird danach automatisch gelöscht
+
+API RegisterDevice: 
+	- Documentation: Registriert die Tür abschließent mit dem Control-System. Dadurch wird die Tür im System verfügbar gemacht.
+	- Parameter:
+		door_id - ID der zu registrierenden Tür (Muss übereinstimmen mit vorregistrierung im System)
+		secret_client - Ein verschlüsseltes Secret, welches in der Config-Datei von control erzeugt wurde
+	- Return:
+		registration_sucessful -  War die registrierung erfolgreich?
+
+API RequestStatus
+	- Documentation: heartbeat to server
+	- Return:
+		command - Command for the client: ( <none>, <reboot>, <maintenance_start>, <maintenance_end>, <closed_start>, <closed_end>)
+
+API RequestUpdate
+	- Documentation: Heartbeat Request von Server and Door -> Schnelleres Update notwendig
+
+API RequestDoor
+	- Documentation. Send opening request to door
+	- Parameter:
+		card_id - id of read card
+		time - access time (To prevent delayed opening)
+	Return:
+		access_response - Access Response for the Door (mgl. <granted>, <unknown>, <account_expired>, <account_blocked>,<account_no_permissions>, <door_locked>)
+		message - Optional Message to show on the display instead of the default message for the access_response
+
+
+		
