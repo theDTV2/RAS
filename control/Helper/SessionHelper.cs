@@ -2,8 +2,7 @@
 {
     public static class SessionHelper
     {
-        [No]
-      public static bool SaveStringInSession(string ToSave, string Key, bool CheckIfOccupied = false)     
+        public static bool SaveStringInSession(string ToSave, string Key, bool CheckIfOccupied = false)
         {
             throw new NotImplementedException();
         }
@@ -15,7 +14,7 @@
 
         public static bool SaveDateTimeInSession(string ToSave, string Key, bool CheckIfOccupied = false)
         {
-            throw new NotImplementedException(); 
+            throw new NotImplementedException();
         }
 
         public static string GetStringFromSession(string ToSave, string Key)
@@ -35,3 +34,4 @@
 
 
     }
+}
