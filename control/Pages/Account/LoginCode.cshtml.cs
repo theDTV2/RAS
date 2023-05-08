@@ -10,6 +10,7 @@ using control.Models;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using control.Helper;
 
 namespace control.Pages.Account
 {
@@ -35,19 +36,19 @@ namespace control.Pages.Account
         [DataType(DataType.Text)]
         public string LoginCode { get; set; }
 
-
- 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-
             //_context.User.Add(User);
             // await _context.SaveChangesAsync();
 
-
-            string? code_to_verify = HttpContext.Session.GetString("key");
+       
+               
+            HttpContext.Session.SetString("key", AccessHelper.GenerateAccessCode());
+               
+            System.Console.WriteLine(HttpContext.Session.GetString("key"));
+            
             //return RedirectToPage("./Index");
-
 
             return Page();
         }

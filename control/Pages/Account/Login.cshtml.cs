@@ -10,6 +10,7 @@ using control.Models;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using control.Helper;
 
 namespace control.Pages.Account
 {
@@ -43,10 +44,8 @@ namespace control.Pages.Account
             //_context.User.Add(User);
             // await _context.SaveChangesAsync();
 
-
-
             HttpContext.Session.SetString("email", UserEmail);
-            HttpContext.Session.SetString("key", "Hello World!");
+            HttpContext.Session.SetString("key", AccessHelper.GenerateAccessCode());
             return RedirectToPage("LoginCode");
         }
     }
