@@ -44,6 +44,7 @@ namespace control.Pages.Account
             //_context.User.Add(User);
             // await _context.SaveChangesAsync();
 
+
             HttpContext.Session.SetString("email", UserEmail);
             HttpContext.Session.SetString("key", AccessHelper.GenerateAccessCode());
             return RedirectToPage("LoginCode");

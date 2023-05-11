@@ -475,3 +475,4 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/control/controlContext-36a39264-c839-4da6-bd6c-afd10ef80ba2.db
