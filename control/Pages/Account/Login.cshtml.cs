@@ -45,8 +45,10 @@ namespace control.Pages.Account
             // await _context.SaveChangesAsync();
 
 
-            HttpContext.Session.SetString("email", UserEmail);
-            HttpContext.Session.SetString("key", AccessHelper.GenerateAccessCode());
+            /*AccountHelper.SetLoggedInStatus(HttpContext);
+            AccountHelper.SetUserRole(HttpContext, EAccessLevel.kModerator);
+            AccountHelper.SetUserName(HttpContext, "Hello World");
+            */
             return RedirectToPage("LoginCode");
         }
     }

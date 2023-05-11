@@ -5,48 +5,46 @@ namespace control.Helper
 {
     public static class SessionHelper
     {
-        public static bool SaveStringInSession(HttpContext context, string ToSave, string Key, bool CheckIfOccupied = false)
+        public static bool SaveStringInSession(HttpContext context, string key, string toSave, bool checkIfOccupied = false)
         {
-            if (CheckIfOccupied)
+            if (checkIfOccupied)
             {
-                if (context.Session.GetString(Key) != null)
+                if (context.Session.GetString(key) != null)
                     return false;
             }
 
-            context.Session.SetString(Key, ToSave);
+            context.Session.SetString(key, toSave);
             return true;
                 }
 
-        public static bool SaveIntInSession(HttpContext context, int ToSave, string Key, bool CheckIfOccupied = false)
+        public static bool SaveIntInSession(HttpContext context, string key, int toSave, bool checkIfOccupied = false)
         {
-            if (CheckIfOccupied)
+            if (checkIfOccupied)
             {
-                if (context.Session.GetInt32(Key) != null)
+                if (context.Session.GetInt32(key) != null)
                     return false;
             }
 
-            context.Session.SetInt32(Key, ToSave);
+            context.Session.SetInt32(key, toSave);
             return true;
         }
 
-        public static bool SaveDateTimeInSession(HttpContext context, DateTime ToSave, string Key, bool CheckIfOccupied = false)
+        public static bool SaveDateTimeInSession(HttpContext context, string key, DateTime toSave, bool checkIfOccupied = false)
         {
-            string DateTimeAsString = Convert.ToString(ToSave);
-            if (CheckIfOccupied)
+            string DateTimeAsString = Convert.ToString(toSave);
+            if (checkIfOccupied)
             {
-                if (context.Session.GetString(Key) != null)
+                if (context.Session.GetString(key) != null)
                     return false;
             }
-
-
 
             return true;
 
         }
 
-        public static string GetStringFromSession(HttpContext context, string ToSave, string Key)
+        public static string GetStringFromSession(HttpContext context, string key)
         {
-            string? toReturn = context.Session.GetString(Key));
+            string? toReturn = context.Session.GetString(key);
             if (string.IsNullOrEmpty(toReturn))
                 return "";
 
@@ -54,24 +52,24 @@ namespace control.Helper
 
         }
 
-        public static int GetIntFromSession(HttpContext context, string ToSave, string Key)
+        public static int GetIntFromSession(HttpContext context, string key)
         {
-            int? ToReturn = context.Session.GetInt32(Key);
-            if (!ToReturn.HasValue)
+            int? toReturn = context.Session.GetInt32(key);
+            if (!toReturn.HasValue)
                 return 0;
 
-            return ToReturn.Value;
+            return toReturn.Value;
         }
 
-        public static DateTime GetDateTimeFromSession(HttpContext context, string ToSave, string Key)
+        public static DateTime GetDateTimeFromSession(HttpContext context, string key)
         {
-            string? DateTimeString = context.Session.GetString(Key);
+            string? DateTimeString = context.Session.GetString(key);
 
             if (DateTimeString.IsNullOrEmpty())
                 return DateTime.Now;
 
-            DateTime ToReturn = Convert.ToDateTime(DateTimeString);
-            return ToReturn;
+            DateTime toReturn = Convert.ToDateTime(DateTimeString);
+            return toReturn;
         }
 
 
