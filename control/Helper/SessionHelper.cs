@@ -1,35 +1,77 @@
-﻿namespace control.Helper
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.IdentityModel.Tokens;
+
+namespace control.Helper
 {
     public static class SessionHelper
     {
-        public static bool SaveStringInSession(string ToSave, string Key, bool CheckIfOccupied = false)
+        public static bool SaveStringInSession(HttpContext context, string ToSave, string Key, bool CheckIfOccupied = false)
         {
-            throw new NotImplementedException();
+            if (CheckIfOccupied)
+            {
+                if (context.Session.GetString(Key) != null)
+                    return false;
+            }
+
+            context.Session.SetString(Key, ToSave);
+            return true;
+                }
+
+        public static bool SaveIntInSession(HttpContext context, int ToSave, string Key, bool CheckIfOccupied = false)
+        {
+            if (CheckIfOccupied)
+            {
+                if (context.Session.GetInt32(Key) != null)
+                    return false;
+            }
+
+            context.Session.SetInt32(Key, ToSave);
+            return true;
         }
 
-        public static bool SaveIntInSession(string ToSave, string Key, bool CheckIfOccupied = false)
+        public static bool SaveDateTimeInSession(HttpContext context, DateTime ToSave, string Key, bool CheckIfOccupied = false)
         {
-            throw new NotImplementedException();
+            string DateTimeAsString = Convert.ToString(ToSave);
+            if (CheckIfOccupied)
+            {
+                if (context.Session.GetString(Key) != null)
+                    return false;
+            }
+
+
+
+            return true;
+
         }
 
-        public static bool SaveDateTimeInSession(string ToSave, string Key, bool CheckIfOccupied = false)
+        public static string GetStringFromSession(HttpContext context, string ToSave, string Key)
         {
-            throw new NotImplementedException();
+            string? toReturn = context.Session.GetString(Key));
+            if (string.IsNullOrEmpty(toReturn))
+                return "";
+
+            return toReturn;
+
         }
 
-        public static string GetStringFromSession(string ToSave, string Key)
+        public static int GetIntFromSession(HttpContext context, string ToSave, string Key)
         {
-            throw new NotImplementedException();
+            int? ToReturn = context.Session.GetInt32(Key);
+            if (!ToReturn.HasValue)
+                return 0;
+
+            return ToReturn.Value;
         }
 
-        public static int GetIntFromSession(string ToSave, string Key)
+        public static DateTime GetDateTimeFromSession(HttpContext context, string ToSave, string Key)
         {
-            throw new NotImplementedException();
-        }
+            string? DateTimeString = context.Session.GetString(Key);
 
-        public static DateTime GetDateTimeFromSession(string ToSave, string Key)
-        {
-            throw new NotImplementedException();
+            if (DateTimeString.IsNullOrEmpty())
+                return DateTime.Now;
+
+            DateTime ToReturn = Convert.ToDateTime(DateTimeString);
+            return ToReturn;
         }
 
 
