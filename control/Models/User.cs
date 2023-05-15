@@ -21,6 +21,7 @@ namespace control.Models
     {
 
         [Required]
+        [Key]
         public required string Email { get; set; }
 
         [Required]
