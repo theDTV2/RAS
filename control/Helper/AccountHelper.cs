@@ -4,37 +4,13 @@ namespace control.Helper
 {
     public static class AccountHelper
     {
-
-
-
-        public static bool LoginUser(HttpContext httpContext, string username, EAccessLevel level)
-        {
-            SetLoggedInStatus(httpContext);
-            SetUserName(httpContext, username);
-            SetUserRole(httpContext, level);
-
-            //TODO: Think, if anything needs to be caught here
-            return true;
-        }
-
-        public static bool LogoutUser(HttpContext httpContext, string username)
-        {
-            //TODO: Make this better
-
-            httpContext.Session.Clear();
-
-            //TODO: Think, if anything needs to be caught here
-            return true;
-            //return false;
-        }
-
-
-        private static void SetLoggedInStatus(HttpContext context, bool statusToSetTo = true)
+         
+        public static void SetLoggedInStatus(HttpContext context, bool statusToSetTo = true)
         {
             SessionHelper.SaveStringInSession(context,"loggedInStatus", statusToSetTo.ToString());
         }
 
-        private static bool SetUserName(HttpContext context, string userName)
+        public static bool SetUserName(HttpContext context, string userName)
         {
             SessionHelper.SaveStringInSession(context, "userName", userName);
 
@@ -42,20 +18,20 @@ namespace control.Helper
             return true;
         }
 
-        private static bool SetUserRole(HttpContext context, EAccessLevel role)
+        public static bool SetUserRole(HttpContext context, EAccessLevel role)
         {
             SessionHelper.SaveIntInSession(context, "userRole", Convert.ToInt32(role));
             //TODO: What to do when a User Role is already set?
             return true;
         }
 
-        private static bool GetLoggedIn(HttpContext context)
+        public static bool GetLoggedIn(HttpContext context)
         {
             if (SessionHelper.GetStringFromSession(context, "loggedInStatus") == "")
                 return false;
             return true;
         }
-        private static string GetUserName(HttpContext context)
+        public static string GetUserName(HttpContext context)
         {
             string userName = SessionHelper.GetStringFromSession(context, "userName");
 
@@ -64,7 +40,7 @@ namespace control.Helper
             return userName;
         }
 
-        private static EAccessLevel GetEAccessLevel(HttpContext context)
+        public static EAccessLevel GetEAccessLevel(HttpContext context)
         {
 
             if (!GetLoggedIn(context))
