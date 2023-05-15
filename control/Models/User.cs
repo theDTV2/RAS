@@ -19,15 +19,12 @@ namespace control.Models
 
     public class User
     {
-        [Required]
-        [Key]
-        public int ID { get; set; }
 
         [Required]
         public required string Email { get; set; }
 
         [Required]
-        public string? AccessCode { get; set; }
+        public int? AccessCode { get; set; }
 
         public DateTime? AccessCodeGenerationTime { get; set; }
 
