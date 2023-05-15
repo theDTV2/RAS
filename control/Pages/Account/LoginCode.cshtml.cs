@@ -46,7 +46,7 @@ namespace control.Pages.Account
                
            // HttpContext.Session.SetString("key", AccessHelper.GenerateAccessCode());
                
-            System.Console.WriteLine(HttpContext.Session.GetString("key"));
+         //   System.Console.WriteLine(HttpContext.Session.GetString("key"));
 
            /* var c = AccountHelper.GetLoggedIn(HttpContext);
             var b = AccountHelper.GetUserName(HttpContext);
