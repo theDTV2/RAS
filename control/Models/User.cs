@@ -24,7 +24,12 @@ namespace control.Models
         public required string Email { get; set; }
 
         [Required]
-        public int? AccessCode { get; set; }
+        public string? AccessCode { get { return AccessCode;} set
+            {
+              AccessCode = value;
+              AccessCodeGenerationTime = DateTime.Now;
+            }
+        }
 
         [Required]
         public string? FirstName { get; set; }
@@ -32,7 +37,7 @@ namespace control.Models
         [Required]
         public string? LastName { get; set; }
 
-        public DateTime? AccessCodeGenerationTime { get; set; }
+        public DateTime? AccessCodeGenerationTime { get; private set; }
 
         public DateTime? LastDoorAccessTime { get; set; }
 
@@ -42,6 +47,8 @@ namespace control.Models
         public EAccessLevel AccessLevel { get; set; }
 
         public List<Door>? AccessDoors; 
+
+
 
 
 
