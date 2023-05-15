@@ -5,8 +5,6 @@ namespace control.Helper
     public static class AccountHelper
     {
 
-
-
         public static bool LoginUser(HttpContext httpContext, string username, EAccessLevel level)
         {
             SetLoggedInStatus(httpContext);
@@ -27,7 +25,6 @@ namespace control.Helper
             return true;
             //return false;
         }
-
 
         private static void SetLoggedInStatus(HttpContext context, bool statusToSetTo = true)
         {
@@ -69,7 +66,6 @@ namespace control.Helper
 
             if (!GetLoggedIn(context))
                 return EAccessLevel.kNone;
-
 
             int userRoleRaw = SessionHelper.GetIntFromSession(context, "userRole");
 
