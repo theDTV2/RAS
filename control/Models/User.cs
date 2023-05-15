@@ -25,18 +25,12 @@ namespace control.Models
         public required string Email { get; set; }
 
         [Required]
-        public string? AccessCode { get { return AccessCode;} set
-            {
-              AccessCode = value;
-              AccessCodeGenerationTime = DateTime.Now;
-            }
-        }
-
-        [Required]
         public string? FirstName { get; set; }
 
         [Required]
         public string? LastName { get; set; }
+
+        public string? AccessCode { get; set; }
 
         public DateTime? AccessCodeGenerationTime { get; private set; }
 
