@@ -5,20 +5,20 @@
        //TODO: Mail handling
 
         //This function adds an mail, that the email routine will send
-        public void AddAccessMailToBeSent(int accessCode, string emailAdress)
+        public static void AddAccessMailToBeSent(string accessCode, string emailAdress)
         {
-           throw new NotImplementedException();
+            Console.WriteLine(emailAdress + Environment.NewLine + accessCode + Environment.NewLine);
         }
 
         //This function adds an reminder email to be send
-        public void AccessReminderEmailToBeSend(string emailAdress)
+        public static void AccessReminderEmailToBeSend(string emailAdress)
         {
             throw new NotImplementedException();
         }
 
 
-        //This function perdiodically sends out any pending emails 
-        public void SendAllPendingMails()
+        //This function perdiodically sends out any pending reminder emails (sometime in the night)
+        public static void SendAllPendingReminderMails()
         {
             throw new NotImplementedException();
         }
