@@ -32,6 +32,7 @@ namespace control.Helper
               //TODO: How do we handle errors in this?
             }
             string accessCode =  user.AccessCode = GenerateAccessCode();
+            await dataContext.SaveChangesAsync();
 
             return accessCode;
         }
@@ -93,7 +94,10 @@ namespace control.Helper
             User newUser = new()
             {
                 Email = email,
-                AccessLevel = EAccessLevel.kNone
+                AccessLevel = EAccessLevel.kNone,
+                //TODO: Do this
+                FirstName = "Tesla",
+                LastName = "Testi"
             };
             dataContext.User.Add(newUser);
             await dataContext.SaveChangesAsync();
@@ -101,7 +105,7 @@ namespace control.Helper
             return newUser;
         }
 
-        private static string GenerateAccessCode(int lenght = 18)
+        private static string GenerateAccessCode(int lenght = 9)
         {
             //We generate a random code with the given lenght but with at least given lenght.
             long new_code = random.NextInt64((long)Math.Pow(10, lenght), (long)Math.Pow(10, lenght + 1));
