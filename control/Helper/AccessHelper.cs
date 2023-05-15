@@ -22,45 +22,37 @@ namespace control.Helper
         //TODO: Better way then to use system time?
         static System.Random random  = new System.Random();
 
-
-
-
-        public static async Task<string> CreateLoginCodeForUser(control.Data.controlContext dataContext, HttpContext httpContext, string email)
+        public static async Task<string> CreateAndSetLoginCodeForUser(control.Data.controlContext dataContext, string email)
         {
             User? user = await GetUserAsync(dataContext, email);
 
             if (user is null) 
             {
-
+                user = await CreateUserAsync(dataContext, email);
+              //TODO: How do we handle errors in this?
             }
-            
+            string accessCode =  user.AccessCode = GenerateAccessCode();
+
+            return accessCode;
         }
 
-
-        public static async CreateNewUser(control.Data.controlContext dataContext)
+        public static AccessReturnValue TryToVerifyUserWithAccessCode(control.Data.controlContext dataContext, string email, string AccessCode, out User? user)
         {
 
-        }
-
-
-        public static async Task<AccessReturnValue> TryToVerifyUserWithAccessCode(control.Data.controlContext dataContext, HttpContext httpContext, string email, int AccessCode)
-        {
-
-            Task<User?> userToCheck = GetUserAsync(dataContext,email);
-
-            await userToCheck;
+            User? userToCheck = GetUserAsync(dataContext,email).Result;
+            user = userToCheck;
             //TODO: Add timeout to key check
-            if (userToCheck.Result is null)
+            if (userToCheck is null)
             {
                 return AccessReturnValue.kAccessDenied;
             }
 
-            if (userToCheck.Result.AccessCode is null)
+            if (userToCheck.AccessCode is null)
             {
                 return AccessReturnValue.kAccessDenied;
             }
 
-            if (userToCheck.Result.AccessCode.Value == AccessCode)
+            if (userToCheck.AccessCode == AccessCode)
             {
                 return AccessReturnValue.kAccessGranted;
             }
@@ -70,23 +62,20 @@ namespace control.Helper
 
         }
 
-        public static async Task<AccessReturnValue> TryToVerifyUserWithHash(control.Data.controlContext dataContext, HttpContext httpContext, string email, string AccessCode)
+        public static AccessReturnValue TryToVerifyUserWithHash(control.Data.controlContext dataContext, string email, string AccessCode, out User? user)
         {
-            Task<User?> userToCheck = GetUserAsync(dataContext, email);
-            
-
-            await userToCheck;
-            if (userToCheck.Result is null)
+            User? userToCheck = GetUserAsync(dataContext, email).Result;
+            user = userToCheck;
+            if (userToCheck is null)
             {
                 return AccessReturnValue.kAccessDenied;
             }
-            if (userToCheck.Result.AccessCode is null)
+            if (userToCheck.AccessCode is null)
             {
                 return AccessReturnValue.kAccessDenied;
             }
 
-
-            if (HashHelper.CompareIntToHashString(userToCheck.Result.AccessCode.Value, AccessCode))
+            if (HashHelper.CompareStringToHashString(userToCheck.AccessCode, AccessCode))
                 return AccessReturnValue.kAccessGranted;
 
             return AccessReturnValue.kAccessDenied;
@@ -99,14 +88,18 @@ namespace control.Helper
             return dataContext.User.Where(e => e.Email == email).FirstOrDefaultAsync();
         }
 
-        private static Task<User?> CreateUserAsync(control.Data.controlContext dataContext, string email)
+        private static async Task<User> CreateUserAsync(control.Data.controlContext dataContext, string email)
         {
-            User newUser;
-            newUser.AccessLevel = EAccessLevel.kUser;
-            newUser.Email = email;
+            User newUser = new()
+            {
+                Email = email,
+                AccessLevel = EAccessLevel.kNone
+            };
+            dataContext.User.Add(newUser);
+            await dataContext.SaveChangesAsync();
 
+            return newUser;
         }
-
 
         private static string GenerateAccessCode(int lenght = 18)
         {
