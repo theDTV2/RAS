@@ -49,6 +49,13 @@ namespace control.Pages.Account
             AccountHelper.SetUserRole(HttpContext, EAccessLevel.kModerator);
             AccountHelper.SetUserName(HttpContext, "Hello World");
             */
+
+            //var test = HashHelper.GetHashStringInBase64("1234");
+
+           // var result1 = HashHelper.CompareIntToHashString(12354, test);
+
+           // var result2 = HashHelper.CompareStringToHashString("1234", test);
+
             return RedirectToPage("LoginCode");
         }
     }
