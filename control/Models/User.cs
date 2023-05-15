@@ -26,12 +26,24 @@ namespace control.Models
         [Required]
         public int? AccessCode { get; set; }
 
+        [Required]
+        public string? FirstName { get; set; }
+
+        [Required]
+        public string? LastName { get; set; }
+
         public DateTime? AccessCodeGenerationTime { get; set; }
+
+        public DateTime? LastDoorAccessTime { get; set; }
+
+        public DateTime? LastControlLogin {get;set; }
 
         [Required]
         public EAccessLevel AccessLevel { get; set; }
 
         public List<Door>? AccessDoors; 
+
+
 
     }
 }

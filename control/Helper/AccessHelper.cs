@@ -25,12 +25,22 @@ namespace control.Helper
 
 
 
-        public static string CreateLoginCodeForUser(control.Data.controlContext dataContext, HttpContext httpContext, string email)
+        public static async Task<string> CreateLoginCodeForUser(control.Data.controlContext dataContext, HttpContext httpContext, string email)
         {
+            User? user = await GetUserAsync(dataContext, email);
 
+            if (user is null) 
+            {
+
+            }
+            
         }
 
 
+        public static async CreateNewUser(control.Data.controlContext dataContext)
+        {
+
+        }
 
 
         public static async Task<AccessReturnValue> TryToVerifyUserWithAccessCode(control.Data.controlContext dataContext, HttpContext httpContext, string email, int AccessCode)
@@ -84,25 +94,19 @@ namespace control.Helper
 
         }
 
-
-        public static bool LoginUser(HttpContext httpContext, string username)
-        {
-            throw new NotImplementedException();
-            //return false;
-        }
-
-        public static bool LogoutUser(HttpContext httpContext, string username)
-        {
-            throw new NotImplementedException();
-            //return false;
-        }
-
-   
-
-    private static Task<User?> GetUserAsync(control.Data.controlContext dataContext, string email)
+        private static Task<User?> GetUserAsync(control.Data.controlContext dataContext, string email)
         {
             return dataContext.User.Where(e => e.Email == email).FirstOrDefaultAsync();
         }
+
+        private static Task<User?> CreateUserAsync(control.Data.controlContext dataContext, string email)
+        {
+            User newUser;
+            newUser.AccessLevel = EAccessLevel.kUser;
+            newUser.Email = email;
+
+        }
+
 
         private static string GenerateAccessCode(int lenght = 18)
         {
