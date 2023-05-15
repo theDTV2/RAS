@@ -1,6 +1,10 @@
 ﻿using control.Data;
 using control.Models;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Common;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Unicode;
 
 namespace control.Helper
 {
@@ -18,51 +22,66 @@ namespace control.Helper
         //TODO: Better way then to use system time?
         static System.Random random  = new System.Random();
 
-        public static string GenerateAccessCode(int lenght = 18)
-        {
-            //We generate a random code with the given lenght but with at least given lenght.
-            long new_code = random.NextInt64((long)Math.Pow(10, lenght), (long)Math.Pow(10, lenght+1));
 
-            return Convert.ToString(new_code);
+
+
+        public static string CreateLoginCodeForUser(control.Data.controlContext dataContext, HttpContext httpContext, string email)
+        {
+
         }
-        
 
-        public static AccessReturnValue TryToVerifyUserWithAccessCode(control.Data.controlContext dataContext, HttpContext httpContext, string email, int AccessCode)
+
+
+
+        public static async Task<AccessReturnValue> TryToVerifyUserWithAccessCode(control.Data.controlContext dataContext, HttpContext httpContext, string email, int AccessCode)
         {
 
-            User userToCheck;
-            try 
-            {
-                userToCheck = dataContext.User.Where(d => d.Email == email).Single();      
-            }
-            catch (InvalidOperationException)
-            {
-                //This is thrown, then no user with this name exists 
-                //TODO: Handle this
-                return AccessReturnValue.kAccessDenied;
-            }
+            Task<User?> userToCheck = GetUserAsync(dataContext,email);
 
-            catch (Exception)
-            {
-                //This shouldnt occur
-                //TODO: Change this? Remove this?-
-                return AccessReturnValue.kAccessDenied;
-            }
-
+            await userToCheck;
             //TODO: Add timeout to key check
-            if (userToCheck.AccessCode == AccessCode)
+            if (userToCheck.Result is null)
+            {
+                return AccessReturnValue.kAccessDenied;
+            }
+
+            if (userToCheck.Result.AccessCode is null)
+            {
+                return AccessReturnValue.kAccessDenied;
+            }
+
+            if (userToCheck.Result.AccessCode.Value == AccessCode)
             {
                 return AccessReturnValue.kAccessGranted;
             }
+
 
             return AccessReturnValue.kAccessDenied;
 
         }
 
-        public static AccessReturnValue TryToVerifyUserWithHash(control.Data.controlContext dataContext, HttpContext httpContext, string username, string AccessCode)
+        public static async Task<AccessReturnValue> TryToVerifyUserWithHash(control.Data.controlContext dataContext, HttpContext httpContext, string email, string AccessCode)
         {
-            throw new NotImplementedException();
-     
+            Task<User?> userToCheck = GetUserAsync(dataContext, email);
+            
+
+            await userToCheck;
+            if (userToCheck.Result is null)
+            {
+                return AccessReturnValue.kAccessDenied;
+            }
+            if (userToCheck.Result.AccessCode is null)
+            {
+                return AccessReturnValue.kAccessDenied;
+            }
+
+
+            if (HashHelper.CompareIntToHashString(userToCheck.Result.AccessCode.Value, AccessCode))
+                return AccessReturnValue.kAccessGranted;
+
+            return AccessReturnValue.kAccessDenied;
+
+
         }
 
 
@@ -77,6 +96,22 @@ namespace control.Helper
             throw new NotImplementedException();
             //return false;
         }
+
+   
+
+    private static Task<User?> GetUserAsync(control.Data.controlContext dataContext, string email)
+        {
+            return dataContext.User.Where(e => e.Email == email).FirstOrDefaultAsync();
+        }
+
+        private static string GenerateAccessCode(int lenght = 18)
+        {
+            //We generate a random code with the given lenght but with at least given lenght.
+            long new_code = random.NextInt64((long)Math.Pow(10, lenght), (long)Math.Pow(10, lenght + 1));
+
+            return Convert.ToString(new_code);
+        }
+
 
     }
 
