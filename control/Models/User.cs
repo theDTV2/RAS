@@ -34,9 +34,7 @@ namespace control.Models
         [Required]
         public EAccessLevel AccessLevel { get; set; }
 
-
-
-        public List<Door>? AccessDoors;
+        public List<Door>? AccessDoors; 
 
     }
 }
