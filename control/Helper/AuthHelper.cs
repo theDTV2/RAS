@@ -5,10 +5,12 @@ namespace control.Helper
 {
     public class AuthHelper
     {
-        public static async Task<string> CreateLoginRequest(control.Data.controlContext dataContext, string email) 
+        public static async Task<string> CreateLoginRequest(control.Data.controlContext dataContext,HttpContext context, string email) 
         {
             var loginCode = AccessHelper.CreateAndSetLoginCodeForUser(dataContext, email);
 
+            //TODO: Improve this
+            AccountHelper.SetUserName(context, email);
             //TODO: Log Login Request Creation
             await loginCode;
             EmailHelper.AddAccessMailToBeSent(loginCode.Result,email);

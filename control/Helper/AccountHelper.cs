@@ -31,7 +31,7 @@ namespace control.Helper
             SessionHelper.SaveStringInSession(context,"loggedInStatus", statusToSetTo.ToString());
         }
 
-        private static bool SetUserName(HttpContext context, string userName)
+        public static bool SetUserName(HttpContext context, string userName)
         {
             SessionHelper.SaveStringInSession(context, "userName", userName);
 
@@ -46,13 +46,13 @@ namespace control.Helper
             return true;
         }
 
-        private static bool GetLoggedIn(HttpContext context)
+        public static bool GetLoggedIn(HttpContext context)
         {
             if (SessionHelper.GetStringFromSession(context, "loggedInStatus") == "")
                 return false;
             return true;
         }
-        private static string GetUserName(HttpContext context)
+        public static string GetUserName(HttpContext context)
         {
             string userName = SessionHelper.GetStringFromSession(context, "userName");
 
@@ -61,7 +61,7 @@ namespace control.Helper
             return userName;
         }
 
-        private static EAccessLevel GetEAccessLevel(HttpContext context)
+        public static EAccessLevel GetEAccessLevel(HttpContext context)
         {
 
             if (!GetLoggedIn(context))
