@@ -50,7 +50,8 @@ namespace control.Pages.Account
             AccountHelper.SetUserName(HttpContext, "Hello World");
             */
 
-           
+
+            await AuthHelper.CreateLoginRequest(_context,HttpContext, UserEmail);
             return RedirectToPage("LoginCode");
         }
     }

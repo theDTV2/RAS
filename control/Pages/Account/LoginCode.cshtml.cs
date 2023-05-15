@@ -42,18 +42,20 @@ namespace control.Pages.Account
             //_context.User.Add(User);
             // await _context.SaveChangesAsync();
 
-       
-               
-           // HttpContext.Session.SetString("key", AccessHelper.GenerateAccessCode());
-               
-         //   System.Console.WriteLine(HttpContext.Session.GetString("key"));
 
-           /* var c = AccountHelper.GetLoggedIn(HttpContext);
-            var b = AccountHelper.GetUserName(HttpContext);
-            var a = AccountHelper.GetEAccessLevel(HttpContext);
-              */
+
+            // HttpContext.Session.SetString("key", AccessHelper.GenerateAccessCode());
+
+            //   System.Console.WriteLine(HttpContext.Session.GetString("key"));
+
+            /* var c = AccountHelper.GetLoggedIn(HttpContext);
+             var b = AccountHelper.GetUserName(HttpContext);
+             var a = AccountHelper.GetEAccessLevel(HttpContext);
+               */
 
             //return RedirectToPage("./Index");
+
+            AuthHelper.ChallengeLoginRequestWithAccessCode(_context,HttpContext, AccountHelper.GetUserName(HttpContext), LoginCode);
 
             return Page();
         }
