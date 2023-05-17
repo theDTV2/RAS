@@ -12,7 +12,7 @@ namespace control.Helper
 
         public static byte[] GenerateSalt(int lenght = 64)
         {
-            return RandomNumberGenerator.GetBytes(32);
+            return RandomNumberGenerator.GetBytes(lenght);
         }
         
         public static string GetHashStringInBase64(string input)
