@@ -3,6 +3,7 @@ using control.Models;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Common;
 using System.ComponentModel;
+using System.Net.Cache;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Unicode;
@@ -26,7 +27,7 @@ namespace control.Helper
             return user;
         }
 
-        public static async Task<string> CreateAndSetLoginCodeForUser(control.Data.controlContext dataContext, string email)
+        public static async Task<string> CreateAndSetLoginCodeForUserAsync(control.Data.controlContext dataContext, string email)
         {
             User? user = await GetOrCreateUserAsync(dataContext, email);
 
@@ -37,9 +38,8 @@ namespace control.Helper
             return accessCode;
         }
 
-        public static EAccessReturnValue TryToVerifyUserWithAccessCode(control.Data.controlContext dataContext, string email, string AccessCode, out User? user)
+        public static EAccessReturnValue TryToAuthUserWithLoginCode(control.Data.controlContext dataContext, string email, string loginCode, out User? user)
         {
-
             User? userToCheck = GetUserAsync(dataContext,email).Result;
             user = userToCheck;
             //TODO: Add timeout to key check
@@ -53,7 +53,7 @@ namespace control.Helper
                 return EAccessReturnValue.kAccessDenied;
             }
 
-            if (userToCheck.AccessCode == AccessCode)
+            if (userToCheck.AccessCode == loginCode)
             {
                 return EAccessReturnValue.kAccessGranted;
             }
@@ -63,6 +63,23 @@ namespace control.Helper
 
         }
 
+        public static EAccessReturnValue TryToAuthUserWithLoginKey(control.Data.controlContext dataContext, string loginKey, out User? user)
+        {
+            var rval = LoginKeyHelper.VerifyLoginKeyForUserAsync(dataContext, loginKey).Result;
+            user = null;
+
+            if (rval == EAccessReturnValue.kAccessGranted)
+            {
+                user = LoginKeyHelper.RemoveUserFromLoginListAsync(dataContext, loginKey).Result;
+
+                //Case: User is deleted during login process
+                if (user is null)
+                    return EAccessReturnValue.kAccessDenied;
+            }
+            return rval;
+
+        }
+        [Obsolete("Not needed, we do not hash the access code anymore")]
         public static EAccessReturnValue TryToVerifyUserWithHash(control.Data.controlContext dataContext, string email, string AccessCode, out User? user)
         {
             User? userToCheck = GetUserAsync(dataContext, email).Result;

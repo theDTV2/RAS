@@ -5,9 +5,11 @@
        //TODO: Mail handling
 
         //This function adds an mail, that the email routine will send
-        public static void AddAccessMailToBeSent(string accessCode, string emailAdress)
+        public static void AddAccessMailToBeSent(string loginCode, string loginKey, string emailAdress)
         {
-            Console.WriteLine(emailAdress + Environment.NewLine + accessCode + Environment.NewLine);
+            //TODO: Everything
+            Console.WriteLine(emailAdress + Environment.NewLine + loginCode + Environment.NewLine);
+            Console.WriteLine(loginKey + Environment.NewLine);
         }
 
         //This function adds an reminder email to be send

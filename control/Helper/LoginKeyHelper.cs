@@ -1,5 +1,6 @@
 ﻿using control.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.IdentityModel.Protocols;
 using System.ComponentModel;
 using System.Security.Cryptography;
@@ -9,7 +10,7 @@ namespace control.Helper
     public static class LoginKeyHelper
     {
 
-        public static async Task<bool> RegisterLoginKeyForUser(Data.controlContext dataContext, string email)
+        public static async Task<string> RegisterLoginKeyForUserAsync(Data.controlContext dataContext, string email)
         {
             //1. Check, if user exists. If not -> Create 
             //2. Generate Login Code
@@ -29,7 +30,7 @@ namespace control.Helper
             dataContext.SaveChanges();
 
             //TODO: Can this fail?
-            return true;
+            return loginKey;
         }
 
         public static async Task<EAccessReturnValue> VerifyLoginKeyForUserAsync(Data.controlContext dataContext, string key)
@@ -44,8 +45,25 @@ namespace control.Helper
             if ((loginLink.GenerationTime - DateTime.Now) > TimeSpan.FromMinutes(60))
                 return EAccessReturnValue.kCodeExpired;
 
-
             return EAccessReturnValue.kAccessGranted;
+        }
+
+        public static async Task<User?> RemoveUserFromLoginListAsync(Data.controlContext dataContext, string key)
+        {
+            //Removes an LoginLink from the LoginList
+
+            LoginLink? loginLink = await GetLoginLinkAsync(dataContext, key);
+
+            if (loginLink is null)
+                return null;
+
+            User? user = dataContext.User.Where(u => u.Email == loginLink.Email).FirstOrDefault();
+
+            dataContext.LoginLink.Remove(loginLink);
+
+            dataContext.SaveChanges();
+
+            return user;
 
         }
 

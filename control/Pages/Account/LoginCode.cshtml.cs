@@ -51,7 +51,7 @@ namespace control.Pages.Account
 
             //return RedirectToPage("./Index");
 
-            AuthHelper.ChallengeLoginRequestWithAccessCode(_context,HttpContext, AccountHelper.GetUserName(HttpContext), LoginCode);
+            AuthHelper.ChallengeLoginRequestWithLoginCode(_context,HttpContext, AccountHelper.GetUserName(HttpContext), LoginCode);
 
             return Page();
         }
@@ -62,13 +62,15 @@ namespace control.Pages.Account
             if (SecretLoginCode is not null)
             {
 
+                EAccessReturnValue res = AuthHelper.ChallengeLoginRequestWithLoginKey(_context,HttpContext, SecretLoginCode);
 
-                //TODO: Act after secret Login Link
+                if (res == EAccessReturnValue.kAccessGranted)
+                {
+                    return Redirect("/");
+                }
+                return NotFound();
             }
 
-
-
-            AuthHelper.ChallengeLoginRequestWithAccessCode(_context, HttpContext, AccountHelper.GetUserName(HttpContext), LoginCode);
 
             return Page();
         }

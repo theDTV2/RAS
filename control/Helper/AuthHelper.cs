@@ -5,30 +5,53 @@ namespace control.Helper
 {
     public class AuthHelper
     {
-        public static async Task<string> CreateLoginRequest(control.Data.controlContext dataContext,HttpContext context, string email) 
+        public static async Task<bool> CreateLoginRequest(control.Data.controlContext dataContext,HttpContext context, string email) 
         {
-            var loginCode = AccessHelper.CreateAndSetLoginCodeForUser(dataContext, email);
+            var loginCode = AccessHelper.CreateAndSetLoginCodeForUserAsync(dataContext, email);
+
+            var loginKey = LoginKeyHelper.RegisterLoginKeyForUserAsync(dataContext, email);
 
             //TODO: Improve this
             AccountHelper.SetUserName(context, email);
+
+
             //TODO: Log Login Request Creation
             await loginCode;
-            EmailHelper.AddAccessMailToBeSent(loginCode.Result,email);
+            await loginKey;
 
-            return loginCode.Result;
+            EmailHelper.AddAccessMailToBeSent(loginCode.Result,loginKey.Result,  email);
+
+            return true;
         }
 
 
-        public static  EAccessReturnValue ChallengeLoginRequestWithAccessCode(control.Data.controlContext dataContext,HttpContext context, string email, string accessCode)
+        public static EAccessReturnValue ChallengeLoginRequestWithLoginCode(control.Data.controlContext dataContext,HttpContext context, string email, string loginCode)
         {
 
-            EAccessReturnValue result = AccessHelper.TryToVerifyUserWithAccessCode(dataContext, email, accessCode, out User? user);
+            EAccessReturnValue result = AccessHelper.TryToAuthUserWithLoginCode(dataContext, email, loginCode, out User? user);
+
+            //TODO: Move this somewhere else
             if (result  == EAccessReturnValue.kAccessGranted)
             {
                 AccountHelper.LoginUser(context, email, user!.AccessLevel);
             }
+
             return result;
             
         }
+
+        public static EAccessReturnValue ChallengeLoginRequestWithLoginKey(control.Data.controlContext dataContext, HttpContext context, string loginKey)
+        {
+            EAccessReturnValue result = AccessHelper.TryToAuthUserWithLoginKey(dataContext, loginKey, out User? user);
+
+            //TODO: Move this somewhere else
+            if (result == EAccessReturnValue.kAccessGranted)
+            {
+                AccountHelper.LoginUser(context, user!.Email, user!.AccessLevel);
+            }
+
+            return result;
+        }
+        
     }
 }
