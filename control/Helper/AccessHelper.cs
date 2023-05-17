@@ -2,6 +2,7 @@
 using control.Models;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Common;
+using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Unicode;
@@ -22,15 +23,22 @@ namespace control.Helper
         //TODO: Better way then to use system time?
         static System.Random random  = new System.Random();
 
-        public static async Task<string> CreateAndSetLoginCodeForUser(control.Data.controlContext dataContext, string email)
+
+        public static async Task<User> CreateUserIfNotExistant(control.Data.controlContext dataContext, string email)
         {
             User? user = await GetUserAsync(dataContext, email);
 
-            if (user is null) 
-            {
-                user = await CreateUserAsync(dataContext, email);
-              //TODO: How do we handle errors in this?
-            }
+            //If User is null, we create a new one
+            user ??= await CreateUserAsync(dataContext, email);
+
+            return user;
+        }
+
+        public static async Task<string> CreateAndSetLoginCodeForUser(control.Data.controlContext dataContext, string email)
+        {
+            User? user = await CreateUserIfNotExistant(dataContext, email);
+
+
             string accessCode =  user.AccessCode = GenerateAccessCode();
             await dataContext.SaveChangesAsync();
 
@@ -94,10 +102,7 @@ namespace control.Helper
             User newUser = new()
             {
                 Email = email,
-                AccessLevel = EAccessLevel.kNone,
-                //TODO: Do this
-                FirstName = "Tesla",
-                LastName = "Testi"
+                AccessLevel = EAccessLevel.kNone
             };
             dataContext.User.Add(newUser);
             await dataContext.SaveChangesAsync();
