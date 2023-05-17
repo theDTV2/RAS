@@ -20,13 +20,12 @@ namespace control.Models
     public class User
     {
 
+        [Required]
         [Key]
         public required string Email { get; set; }
 
-        [Required]
         public string? FirstName { get; set; }
 
-        [Required]
         public string? LastName { get; set; }
 
         public string? AccessCode { get; set; }
