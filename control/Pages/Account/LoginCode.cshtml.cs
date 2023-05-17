@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,26 +25,21 @@ namespace control.Pages.Account
         {
             _context = context;
         }
-
-        public IActionResult OnGet()
-        {
-            ViewData["email"] = HttpContext.Session.GetString("email");
-            return Page();
-        }
-
   
         [BindProperty]
         [DataType(DataType.Text)]
         public string LoginCode { get; set; }
 
+
+
+        [BindProperty(SupportsGet = true)]
+        public string? SecretLoginCode { get; set; }
+
+
+
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
-            //_context.User.Add(User);
-            // await _context.SaveChangesAsync();
-
-
-
             // HttpContext.Session.SetString("key", AccessHelper.GenerateAccessCode());
 
             //   System.Console.WriteLine(HttpContext.Session.GetString("key"));
@@ -59,5 +55,25 @@ namespace control.Pages.Account
 
             return Page();
         }
+
+
+        public IActionResult OnGet()
+        {
+            if (SecretLoginCode is not null)
+            {
+
+
+                //TODO: Act after secret Login Link
+            }
+
+
+
+            AuthHelper.ChallengeLoginRequestWithAccessCode(_context, HttpContext, AccountHelper.GetUserName(HttpContext), LoginCode);
+
+            return Page();
+        }
+
+
+
     }
 }
