@@ -20,7 +20,6 @@ namespace control.Models
     public class User
     {
 
-        [Required]
         [Key]
         public required string Email { get; set; }
 
