@@ -19,11 +19,11 @@ namespace control.Helper
         }
 
 
-        public static  AccessReturnValue ChallengeLoginRequestWithAccessCode(control.Data.controlContext dataContext,HttpContext context, string email, string accessCode)
+        public static  EAccessReturnValue ChallengeLoginRequestWithAccessCode(control.Data.controlContext dataContext,HttpContext context, string email, string accessCode)
         {
 
-            AccessReturnValue result = AccessHelper.TryToVerifyUserWithAccessCode(dataContext, email, accessCode, out User? user);
-            if (result  == AccessReturnValue.kAccessGranted)
+            EAccessReturnValue result = AccessHelper.TryToVerifyUserWithAccessCode(dataContext, email, accessCode, out User? user);
+            if (result  == EAccessReturnValue.kAccessGranted)
             {
                 AccountHelper.LoginUser(context, email, user!.AccessLevel);
             }

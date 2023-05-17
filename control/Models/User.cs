@@ -16,6 +16,15 @@ namespace control.Models
         kSuperAdmin
     }
 
+    public enum EAccessReturnValue
+    {
+        kAccessGranted,
+        kAccessDenied,
+        kCodeExpired,
+        kNoPermissionDenied,
+        kAccountExpired,
+        kAccountLocked
+    }
 
     public class User
     {

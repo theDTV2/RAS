@@ -11,20 +11,12 @@ namespace control.Helper
 {
     public static class AccessHelper
     {
-        public enum AccessReturnValue { 
-            kAccessGranted,
-            kAccessDenied,
-            kCodeExpired,
-            kNoPermissionDenied,
-            kAccountExpired,
-            kAccountLocked
-        }
 
         //TODO: Better way then to use system time?
         static System.Random random  = new System.Random();
 
 
-        public static async Task<User> CreateUserIfNotExistant(control.Data.controlContext dataContext, string email)
+        public static async Task<User> GetOrCreateUserAsync(control.Data.controlContext dataContext, string email)
         {
             User? user = await GetUserAsync(dataContext, email);
 
@@ -36,7 +28,7 @@ namespace control.Helper
 
         public static async Task<string> CreateAndSetLoginCodeForUser(control.Data.controlContext dataContext, string email)
         {
-            User? user = await CreateUserIfNotExistant(dataContext, email);
+            User? user = await GetOrCreateUserAsync(dataContext, email);
 
 
             string accessCode =  user.AccessCode = GenerateAccessCode();
@@ -45,7 +37,7 @@ namespace control.Helper
             return accessCode;
         }
 
-        public static AccessReturnValue TryToVerifyUserWithAccessCode(control.Data.controlContext dataContext, string email, string AccessCode, out User? user)
+        public static EAccessReturnValue TryToVerifyUserWithAccessCode(control.Data.controlContext dataContext, string email, string AccessCode, out User? user)
         {
 
             User? userToCheck = GetUserAsync(dataContext,email).Result;
@@ -53,41 +45,41 @@ namespace control.Helper
             //TODO: Add timeout to key check
             if (userToCheck is null)
             {
-                return AccessReturnValue.kAccessDenied;
+                return EAccessReturnValue.kAccessDenied;
             }
 
             if (userToCheck.AccessCode is null)
             {
-                return AccessReturnValue.kAccessDenied;
+                return EAccessReturnValue.kAccessDenied;
             }
 
             if (userToCheck.AccessCode == AccessCode)
             {
-                return AccessReturnValue.kAccessGranted;
+                return EAccessReturnValue.kAccessGranted;
             }
 
 
-            return AccessReturnValue.kAccessDenied;
+            return EAccessReturnValue.kAccessDenied;
 
         }
 
-        public static AccessReturnValue TryToVerifyUserWithHash(control.Data.controlContext dataContext, string email, string AccessCode, out User? user)
+        public static EAccessReturnValue TryToVerifyUserWithHash(control.Data.controlContext dataContext, string email, string AccessCode, out User? user)
         {
             User? userToCheck = GetUserAsync(dataContext, email).Result;
             user = userToCheck;
             if (userToCheck is null)
             {
-                return AccessReturnValue.kAccessDenied;
+                return EAccessReturnValue.kAccessDenied;
             }
             if (userToCheck.AccessCode is null)
             {
-                return AccessReturnValue.kAccessDenied;
+                return EAccessReturnValue.kAccessDenied;
             }
 
             if (HashHelper.CompareStringToHashString(userToCheck.AccessCode, AccessCode))
-                return AccessReturnValue.kAccessGranted;
+                return EAccessReturnValue.kAccessGranted;
 
-            return AccessReturnValue.kAccessDenied;
+            return EAccessReturnValue.kAccessDenied;
 
 
         }
