@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="Pages\API\" />
-    <Folder Include="Pages\Managment\" />
   </ItemGroup>
 
   <ItemGroup>

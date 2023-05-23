@@ -31,7 +31,7 @@ namespace control.Pages.Account
 
             if (_user.AcceptedEula) {
                 //TODO: Improve redirect after alert implementation
-                return RedirectToPage("/Index");
+                return RedirectToPage("Dashboard");
             }
 
             return Page();
@@ -50,7 +50,7 @@ namespace control.Pages.Account
                 _context.SaveChanges();
 
                 //TODO: Improve redirect after alert implementation
-                return RedirectToPage("/Index");
+                return RedirectToPage("Dashboard");
             }
 
             return Page();

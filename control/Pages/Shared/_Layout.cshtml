@@ -37,28 +37,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                          @if (userLevel >= EAccessLevel.kNone)
+
+                         @if (!AccountHelper.GetLoggedIn(Context))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Only for User</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>
                             </li>
                         }
-                        @if (userLevel > EAccessLevel.kModerator)
+                        @if (AccountHelper.GetLoggedIn(Context))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Only for Moderator</a>
-                            </li>
-                        }
-                        @if (userLevel > EAccessLevel.kAdmin)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Only for Admin</a>
-                            </li>
-                        }
-                        @if (userLevel > EAccessLevel.kSuperAdmin)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Only for SuperAdmin</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Logout</a>
                             </li>
                         }
                     </ul>
