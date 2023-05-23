@@ -27,6 +27,11 @@ namespace control.Helper
             return user;
         }
 
+        public static Task<User?> GetUserAsync(control.Data.controlContext dataContext, string email)
+        {
+            return dataContext.User.Where(e => e.Email == email).FirstOrDefaultAsync();
+        }
+
         public static async Task<string> CreateAndSetLoginCodeForUserAsync(control.Data.controlContext dataContext, string email)
         {
             User? user = await GetOrCreateUserAsync(dataContext, email);
@@ -101,17 +106,14 @@ namespace control.Helper
 
         }
 
-        private static Task<User?> GetUserAsync(control.Data.controlContext dataContext, string email)
-        {
-            return dataContext.User.Where(e => e.Email == email).FirstOrDefaultAsync();
-        }
-
         private static async Task<User> CreateUserAsync(control.Data.controlContext dataContext, string email)
         {
             User newUser = new()
             {
                 Email = email,
-                AccessLevel = EAccessLevel.kNone
+                AccessLevel = EAccessLevel.kNone,
+                ExpiryDate = DateTime.Now
+
             };
             dataContext.User.Add(newUser);
             await dataContext.SaveChangesAsync();
