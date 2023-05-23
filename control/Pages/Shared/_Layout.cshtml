@@ -1,4 +1,19 @@
-﻿<!DOCTYPE html>
+﻿@using control.Helper;
+@using control.Models;
+@{
+    //TODO: Add Localization
+    string userName = "Not logged In";
+    EAccessLevel userLevel = EAccessLevel.kNone;
+    if (AccountHelper.GetLoggedIn(Context))
+    {
+        userName = AccountHelper.GetUserName(Context);
+        userLevel = AccountHelper.GetEAccessLevel(Context);
+    }
+
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,9 +37,30 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
+                          @if (userLevel > EAccessLevel.kUser)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Only for User</a>
+                            </li>
+                        }
+                        @if (userLevel > EAccessLevel.kModerator)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Only for Moderator</a>
+                            </li>
+                        }
+                        @if (userLevel > EAccessLevel.kAdmin)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Only for Admin</a>
+                            </li>
+                        }
+                        @if (userLevel > EAccessLevel.kSuperAdmin)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Only for SuperAdmin</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
