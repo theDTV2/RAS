@@ -65,9 +65,7 @@ namespace control.Helper
                 return EAccessReturnValue.kAccessGranted;
             }
 
-
             return EAccessReturnValue.kAccessDenied;
-
         }
 
         public static EAccessReturnValue TryToAuthUserWithLoginKey(control.Data.controlContext dataContext, string loginKey, out User? user)
