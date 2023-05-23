@@ -27,7 +27,6 @@ namespace control.Helper
 
         public static EAccessReturnValue ChallengeLoginRequestWithLoginCode(control.Data.controlContext dataContext,HttpContext context, string email, string loginCode)
         {
-
             EAccessReturnValue result = AccessHelper.TryToAuthUserWithLoginCode(dataContext, email, loginCode, out User? user);
 
             //TODO: Move this somewhere else
@@ -89,5 +88,26 @@ namespace control.Helper
             return EAccessReturnValue.kAccessGranted;
         }
 
+        //Works same as CheckUserPermission(..), but only returns true/false
+        public static bool CheckUserAccess(control.Data.controlContext dataContext, HttpContext context, EAccessLevel requiredAccessLevel = EAccessLevel.kUser, Door? doorToOpen = null)
+        {
+            EAccessReturnValue perm = CheckUserPermission(dataContext, context, requiredAccessLevel, doorToOpen);
+            if (perm != EAccessReturnValue.kAccessGranted && perm != EAccessReturnValue.kAdminGranted)
+                return false;
+            return true;
+
+        }
+
+        //Works same as CheckUserPermission(..), but retirects users, when they have no permission to open a specific page
+        public static void CheckUserAccessWithRedirect(control.Data.controlContext dataContext, HttpContext context, EAccessLevel requiredAccessLevel = EAccessLevel.kUser, Door? doorToOpen = null)
+        {
+            EAccessReturnValue perm = CheckUserPermission(dataContext, context, requiredAccessLevel, doorToOpen);
+
+            if (perm != EAccessReturnValue.kAccessGranted && perm != EAccessReturnValue.kAdminGranted)
+                //TODO: Redirect to proper Error page
+                context.Response.Redirect("/");
+        }
+
+        
     }
 }
