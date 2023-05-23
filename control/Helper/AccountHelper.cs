@@ -56,8 +56,6 @@ namespace control.Helper
         {
             string userName = SessionHelper.GetStringFromSession(context, "userName");
 
-            if (userName == "")
-                return "No User Logged in";
             return userName;
         }
 

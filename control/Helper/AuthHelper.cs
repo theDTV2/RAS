@@ -52,6 +52,42 @@ namespace control.Helper
 
             return result;
         }
-        
+
+
+       public static EAccessReturnValue CheckUserPermission(control.Data.controlContext dataContext, HttpContext context, EAccessLevel requiredAccessLevel = EAccessLevel.kUser, Door? doorToOpen = null)
+        {
+            //No User logged in
+            if (!AccountHelper.GetLoggedIn(context))
+                return EAccessReturnValue.kAccessDenied;
+
+            string userName = AccountHelper.GetUserName(context);
+            User user = GetUserAsync(dataContext, userName).Result!;
+
+
+            //Check for Account expiry
+            if (user.ExpiryDate < DateTime.Now)
+                return EAccessReturnValue.kAccountExpired;
+
+            if (doorToOpen is not null)
+            {
+                //Check for regular Access right
+                if (!user.AccessDoors.Contains(doorToOpen))
+                    return EAccessReturnValue.kPermissionDenied;
+
+                //Check for Admin Rights
+                if (user.AdminDoors.Contains(doorToOpen))
+                    return EAccessReturnValue.kAdminGranted;
+
+            }
+
+
+            if (user!.AccessLevel < requiredAccessLevel)
+                return EAccessReturnValue.kPermissionDenied;
+
+
+            // If we reach this point, the user can access
+            return EAccessReturnValue.kAccessGranted;
+        }
+
     }
 }

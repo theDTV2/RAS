@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace control.Models
 {
@@ -19,9 +20,10 @@ namespace control.Models
     public enum EAccessReturnValue
     {
         kAccessGranted,
+        kAdminGranted,
         kAccessDenied,
         kCodeExpired,
-        kNoPermissionDenied,
+        kPermissionDenied,
         kAccountExpired,
         kAccountLocked
     }
@@ -37,18 +39,22 @@ namespace control.Models
 
         public string? LastName { get; set; }
 
+        public required DateTime ExpiryDate { get; set; }
+
         public string? AccessCode { get; set; }
 
         public DateTime? AccessCodeGenerationTime { get; private set; }
 
-        public DateTime? LastDoorAccessTime { get; set; }
-
-        public DateTime? LastControlLogin {get;set; }
+        public DateTime? LastLogin {get;set; }
 
         [Required]
         public EAccessLevel AccessLevel { get; set; }
 
-        public List<Door>? AccessDoors; 
+        [ForeignKey(nameof(Door))]
+        public List<Door> AccessDoors = new List<Door>();
+
+        [ForeignKey(nameof(Door))]
+        public List<Door> AdminDoors = new List<Door>();
 
 
 
