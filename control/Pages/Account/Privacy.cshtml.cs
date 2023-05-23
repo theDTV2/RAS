@@ -43,6 +43,8 @@ namespace control.Pages.Account
 
             if (AcceptEula)
             {
+
+                //TODO: Move this
                 var _user = AccountHelper.GetLoggedInUser(_context, HttpContext);
                 _user.AcceptedEula = true;
                 _context.SaveChanges();

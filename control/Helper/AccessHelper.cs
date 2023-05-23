@@ -111,8 +111,7 @@ namespace control.Helper
             User newUser = new()
             {
                 UserName = userName,
-                AccessLevel = EAccessLevel.kNone,
-                ExpiryDate = DateTime.Now
+                AccessLevel = EAccessLevel.kNone
 
             };
             dataContext.User.Add(newUser);

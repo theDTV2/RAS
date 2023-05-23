@@ -41,16 +41,6 @@ namespace control.Pages.Account
         public async Task<IActionResult> OnPostAsync()
         {
 
-            //_context.User.Add(User);
-            // await _context.SaveChangesAsync();
-
-
-            /*AccountHelper.SetLoggedInStatus(HttpContext);
-            AccountHelper.SetUserRole(HttpContext, EAccessLevel.kModerator);
-            AccountHelper.SetUserName(HttpContext, "Hello World");
-            */
-
-
             await AuthHelper.CreateLoginRequest(_context,HttpContext, UserEmail);
             return RedirectToPage("LoginCode");
         }

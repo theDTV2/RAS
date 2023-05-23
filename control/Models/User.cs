@@ -41,7 +41,7 @@ namespace control.Models
         [Required]
         public string LastName { get; set; } = "";
 
-        public DateTime ExpiryDate { get; set; } = DateTime.MinValue;
+        public DateTime ExpiryDate { get; set; } = DateTime.Now.AddDays(7);
 
         public string AccessCode { get; set; } = "";
 
