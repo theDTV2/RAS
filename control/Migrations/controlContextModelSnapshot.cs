@@ -65,13 +65,13 @@ namespace control.Migrations
                     b.Property<int>("AccessLevel")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("LastControlLogin")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("LastDoorAccessTime")
+                    b.Property<DateTime?>("LastLogin")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")

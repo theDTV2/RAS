@@ -11,8 +11,8 @@ using control.Data;
 namespace control.Migrations
 {
     [DbContext(typeof(controlContext))]
-    [Migration("20230517183221_Update6")]
-    partial class Update6
+    [Migration("20230523095427_NewMigration")]
+    partial class NewMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,13 +68,13 @@ namespace control.Migrations
                     b.Property<int>("AccessLevel")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("LastControlLogin")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("LastDoorAccessTime")
+                    b.Property<DateTime?>("LastLogin")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace control.Migrations
 {
     /// <inheritdoc />
-    public partial class Update6 : Migration
+    public partial class NewMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,6 +36,24 @@ namespace control.Migrations
                 {
                     table.PrimaryKey("PK_LoginLink", x => x.Key);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: true),
+                    LastName = table.Column<string>(type: "TEXT", nullable: true),
+                    ExpiryDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    AccessCode = table.Column<string>(type: "TEXT", nullable: true),
+                    AccessCodeGenerationTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LastLogin = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    AccessLevel = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Email);
+                });
         }
 
         /// <inheritdoc />
@@ -46,6 +64,9 @@ namespace control.Migrations
 
             migrationBuilder.DropTable(
                 name: "LoginLink");
+
+            migrationBuilder.DropTable(
+                name: "User");
         }
     }
 }
