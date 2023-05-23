@@ -15,7 +15,7 @@ namespace control.Helper
             return true;
         }
 
-        public static bool LogoutUser(HttpContext httpContext, string username)
+        public static bool LogoutUser(HttpContext httpContext)
         {
             //TODO: Make this better
 
