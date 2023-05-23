@@ -80,6 +80,7 @@ namespace control.Helper
 
             }
 
+
             if (user!.AccessLevel < requiredAccessLevel)
                 return EAccessReturnValue.kPermissionDenied;
 
