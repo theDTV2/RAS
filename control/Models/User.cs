@@ -50,10 +50,8 @@ namespace control.Models
         [Required]
         public EAccessLevel AccessLevel { get; set; }
 
-        [ForeignKey(nameof(Door))]
         public List<Door> AccessDoors = new List<Door>();
 
-        [ForeignKey(nameof(Door))]
         public List<Door> AdminDoors = new List<Door>();
 
 
