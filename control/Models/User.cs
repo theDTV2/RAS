@@ -33,13 +33,13 @@ namespace control.Models
 
         [Required]
         [Key]
-        public required string Email { get; set; }
+        public string Email { get; set; } = "";
 
         public string FirstName { get; set; } = "";
 
         public string LastName { get; set; } = "";
 
-        public required DateTime ExpiryDate { get; set; } = DateTime.MinValue;
+        public DateTime ExpiryDate { get; set; } = DateTime.MinValue;
 
         public string AccessCode { get; set; } = "";
 
