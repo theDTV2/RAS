@@ -29,9 +29,9 @@ namespace control.Pages.Account
 
             var _user = AccountHelper.GetLoggedInUser(_context, HttpContext);
 
-            if (_user.AcceptedEula == true) {
+            if (_user.AcceptedEula) {
                 //TODO: Improve redirect after alert implementation
-                return RedirectToPage("/");
+                return RedirectToPage("/Index");
             }
 
             return Page();
@@ -50,7 +50,7 @@ namespace control.Pages.Account
                 _context.SaveChanges();
 
                 //TODO: Improve redirect after alert implementation
-                return RedirectToPage("/");
+                return RedirectToPage("/Index");
             }
 
             return Page();
