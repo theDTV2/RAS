@@ -53,7 +53,7 @@ namespace control.Migrations
 
             modelBuilder.Entity("control.Models.User", b =>
                 {
-                    b.Property<string>("Email")
+                    b.Property<string>("UserName")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("AcceptedEula")
@@ -83,7 +83,7 @@ namespace control.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Email");
+                    b.HasKey("UserName");
 
                     b.ToTable("User");
                 });

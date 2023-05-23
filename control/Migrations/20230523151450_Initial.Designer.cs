@@ -11,8 +11,8 @@ using control.Data;
 namespace control.Migrations
 {
     [DbContext(typeof(controlContext))]
-    [Migration("20230523095427_NewMigration")]
-    partial class NewMigration
+    [Migration("20230523151450_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,10 +56,14 @@ namespace control.Migrations
 
             modelBuilder.Entity("control.Models.User", b =>
                 {
-                    b.Property<string>("Email")
+                    b.Property<string>("UserName")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("AcceptedEula")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("AccessCode")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("AccessCodeGenerationTime")
@@ -72,15 +76,17 @@ namespace control.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("LastLogin")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Email");
+                    b.HasKey("UserName");
 
                     b.ToTable("User");
                 });

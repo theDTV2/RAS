@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace control.Migrations
 {
     /// <inheritdoc />
-    public partial class NewMigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -41,18 +41,19 @@ namespace control.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    Email = table.Column<string>(type: "TEXT", nullable: false),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: true),
-                    LastName = table.Column<string>(type: "TEXT", nullable: true),
+                    UserName = table.Column<string>(type: "TEXT", nullable: false),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", nullable: false),
                     ExpiryDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    AccessCode = table.Column<string>(type: "TEXT", nullable: true),
+                    AccessCode = table.Column<string>(type: "TEXT", nullable: false),
                     AccessCodeGenerationTime = table.Column<DateTime>(type: "TEXT", nullable: true),
                     LastLogin = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    AccessLevel = table.Column<int>(type: "INTEGER", nullable: false)
+                    AccessLevel = table.Column<int>(type: "INTEGER", nullable: false),
+                    AcceptedEula = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Email);
+                    table.PrimaryKey("PK_User", x => x.UserName);
                 });
         }
 
