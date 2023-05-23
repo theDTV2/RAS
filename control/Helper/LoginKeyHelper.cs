@@ -57,7 +57,7 @@ namespace control.Helper
             if (loginLink is null)
                 return null;
 
-            User? user = dataContext.User.Where(u => u.Email == loginLink.Email).FirstOrDefault();
+            User? user = dataContext.User.Where(u => u.UserName == loginLink.Email).FirstOrDefault();
 
             dataContext.LoginLink.Remove(loginLink);
 

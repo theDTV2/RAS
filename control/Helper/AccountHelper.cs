@@ -73,5 +73,15 @@ namespace control.Helper
             return EAccessLevel.kNone;
         }
 
+        public static User GetLoggedInUser(control.Data.controlContext dataContext, HttpContext context)
+        {
+            if (!GetLoggedIn(context))
+                return new User();
+
+            string _userName = GetUserName(context);
+
+            return dataContext.User.Where(e => e.UserName == _userName).FirstOrDefault()!;
+        }
+
     }
 }

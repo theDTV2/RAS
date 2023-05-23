@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].Email)
+                @Html.DisplayNameFor(model => model.User[0].UserName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.User[0].AccessCode)
@@ -32,7 +32,7 @@
 @foreach (var item in Model.User) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                    @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AccessCode)
@@ -44,9 +44,9 @@
                 @Html.DisplayFor(modelItem => item.AccessLevel)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Email">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Email">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Email">Delete</a>
+                    <a asp-page="./Edit" asp-route-id="@item.UserName">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.UserName">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.UserName">Delete</a>
             </td>
         </tr>
 }

@@ -46,7 +46,7 @@ namespace control.Helper
             //TODO: Move this somewhere else
             if (result == EAccessReturnValue.kAccessGranted)
             {
-                AccountHelper.LoginUser(context, user!.Email, user!.AccessLevel);
+                AccountHelper.LoginUser(context, user!.UserName, user!.AccessLevel);
             }
 
             return result;
