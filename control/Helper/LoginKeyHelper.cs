@@ -45,6 +45,8 @@ namespace control.Helper
             if ((loginLink.GenerationTime - DateTime.Now) > TimeSpan.FromMinutes(60))
                 return EAccessReturnValue.kCodeExpired;
 
+
+            await RemoveUserFromLoginListAsync(dataContext, key);
             return EAccessReturnValue.kAccessGranted;
         }
 
