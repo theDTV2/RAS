@@ -43,7 +43,7 @@ namespace control.Models
 
         public string? AccessCode { get; set; }
 
-        public DateTime? AccessCodeGenerationTime { get; private set; }
+        public DateTime? AccessCodeGenerationTime { get; set; }
 
         public DateTime? LastLogin {get;set; }
 

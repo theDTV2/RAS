@@ -38,6 +38,8 @@ namespace control.Helper
 
 
             string accessCode =  user.AccessCode = GenerateAccessCode();
+            user.AccessCodeGenerationTime = DateTime.Now;
+
             await dataContext.SaveChangesAsync();
 
             return accessCode;
