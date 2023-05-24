@@ -11,6 +11,7 @@ namespace control.Helper
             SetUserName(httpContext, username);
             SetUserRole(httpContext, level);
 
+
             //TODO: Think, if anything needs to be caught here
             return true;
         }

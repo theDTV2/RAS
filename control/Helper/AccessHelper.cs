@@ -45,9 +45,9 @@ namespace control.Helper
             return accessCode;
         }
 
-        public static EAccessReturnValue TryToAuthUserWithLoginCode(control.Data.controlContext dataContext, string email, string loginCode, out User? user)
+        public static EAccessReturnValue TryToAuthUserWithLoginCode(control.Data.controlContext dataContext, string userName, string loginCode, out User? user)
         {
-            User? userToCheck = GetUserAsync(dataContext,email).Result;
+            User? userToCheck = GetUserAsync(dataContext, userName).Result;
             user = userToCheck;
             //TODO: Add timeout to key check
             if (userToCheck is null)
@@ -62,6 +62,13 @@ namespace control.Helper
 
             if (userToCheck.AccessCode == loginCode)
             {
+                //Remove login key after login
+                LoginKeyHelper.RemoveUserFromLoginListAsync(dataContext, userName).Wait();
+
+                //Remove Access Code after login
+                userToCheck.AccessCode = String.Empty;
+                userToCheck.AccessCodeGenerationTime = DateTime.MinValue;
+
                 return EAccessReturnValue.kAccessGranted;
             }
 
@@ -80,6 +87,10 @@ namespace control.Helper
                 //Case: User is deleted during login process
                 if (user is null)
                     return EAccessReturnValue.kAccessDenied;
+
+                //Remove Access Code after login
+                user.AccessCode = String.Empty;
+                user.AccessCodeGenerationTime = DateTime.MinValue;
             }
             return rval;
 

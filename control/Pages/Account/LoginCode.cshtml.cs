@@ -66,8 +66,10 @@ namespace control.Pages.Account
 
                 if (res == EAccessReturnValue.kAccessGranted)
                 {
-                    return Redirect("/");
+                    return Redirect("Dashboard");
                 }
+
+                //If we do not find the login key, redirect to 404
                 return NotFound();
             }
 
