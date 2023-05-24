@@ -10,13 +10,17 @@ namespace control.Models
     public class Door
     {
         [Required]
-        [Key]
-          public required string Id { get; set; }
+        [Key] 
+        public required string Id { get; set; }
 
-        [Required] 
-        public required string AccessToken { get; set; }
+        [Required]
+        public string AccessToken { get; set; } = "";
 
-        public required DateTime LastCheckInTime { get; set; }
+        public DateTime LastCheckInTime { get; set; }
+
+        public string DisplayName { get; set; } = "Placeholder";
+
+        public bool SelfRegisterAllowed { get; set; } = false;
 
         //TODO: Think about how to do this efficiently
         // public required List<DoorLog>
