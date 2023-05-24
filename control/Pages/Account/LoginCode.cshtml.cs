@@ -12,6 +12,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using control.Helper;
+using control.Generator;
 
 namespace control.Pages.Account
 {
@@ -55,9 +56,10 @@ namespace control.Pages.Account
             
             if (res == EAccessReturnValue.kAccessGranted)
             {
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Logged in successfully");
                 return Redirect("Dashboard");
             }
-
+            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Login failed");
             return Page();
         }
 
