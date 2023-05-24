@@ -9,10 +9,6 @@ namespace control.Pages.Account
     {
         public void OnGet()
         {
-            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Hello World1");
-            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kInformation, "Hello World2");
-            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kWarning, "Hello World3");
-            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Hello World4");
 
         }
     }
