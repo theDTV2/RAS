@@ -71,6 +71,7 @@
             </div>
         </nav>
     </header>
+
     <div>@Html.Raw(@AlertGenerator.GetAlertsFromSession(Context))</div>
     <div class="container">
         <main role="main" class="pb-3">
@@ -89,5 +90,16 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
+
+    <script>
+        //TODO: Improve / Move this
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 4000);
+
+    </script>
 </body>
 </html>
