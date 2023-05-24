@@ -41,16 +41,8 @@ namespace control.Pages.Account
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public IActionResult OnPost()
         {
-            // HttpContext.Session.SetString("key", AccessHelper.GenerateAccessCode());
-
-            //   System.Console.WriteLine(HttpContext.Session.GetString("key"));
-
-            /* var c = AccountHelper.GetLoggedIn(HttpContext);
-             var b = AccountHelper.GetUserName(HttpContext);
-             var a = AccountHelper.GetEAccessLevel(HttpContext);
-               */
-
-            //return RedirectToPage("./Index");
+            if (AccountHelper.GetLoggedIn(HttpContext))
+                Redirect("Account/Dashboard");
 
             EAccessReturnValue res = AuthHelper.ChallengeLoginRequestWithLoginCode(_context,HttpContext, AccountHelper.GetUserName(HttpContext), LoginCode);
             
@@ -66,6 +58,9 @@ namespace control.Pages.Account
 
         public IActionResult OnGet()
         {
+            if (AccountHelper.GetLoggedIn(HttpContext))
+                Redirect("Account/Dashboard");
+
             if (SecretLoginCode is not null)
             {
 

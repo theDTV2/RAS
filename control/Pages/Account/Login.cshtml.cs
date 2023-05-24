@@ -27,22 +27,24 @@ namespace control.Pages.Account
 
         public IActionResult OnGet()
         {
+            if (AccountHelper.GetLoggedIn(HttpContext))
+                Redirect("Account/Dashboard");
+
             return Page();
         }
 
-  
         [BindProperty]
         [DataType(DataType.EmailAddress)]
         public string UserEmail { get; set; }
 
-
- 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+            if (AccountHelper.GetLoggedIn(HttpContext))
+                Redirect("Account/Dashboard");
 
             await AuthHelper.CreateLoginRequest(_context,HttpContext, UserEmail);
-            return RedirectToPage("LoginCode");
+            return Redirect("LoginCode");
         }
     }
 }
