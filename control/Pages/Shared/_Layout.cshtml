@@ -3,12 +3,14 @@
 @using control.Models;
 @{
     //TODO: Add Localization
-    string userName = "Not logged In";
-    EAccessLevel userLevel = EAccessLevel.kNone;
-    if (AccountHelper.GetLoggedIn(Context))
+    string _userName = "Not logged In";
+    EAccessLevel _userLevel = EAccessLevel.kNone;
+
+    bool _loggedIn = AccountHelper.GetLoggedIn(Context);
+    if (_loggedIn)
     {
-        userName = AccountHelper.GetUserName(Context);
-        userLevel = AccountHelper.GetEAccessLevel(Context);
+        _userName = AccountHelper.GetUserName(Context);
+        _userLevel = AccountHelper.GetEAccessLevel(Context);
     }
 
 }
@@ -39,24 +41,26 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
 
-                            @if (userLevel > EAccessLevel.kModerator)
-                            {
-                                <li class="nav-item">
-                                   <a class="nav-link text-dark" asp-area="" asp-page="/DoorManagment">Door Managment</a>
-                                </li>
-                            }
-                            @if (userLevel > EAccessLevel.kUser)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/UserManagment">User Managment</a>
-                                </li>
-                            }
-                           
-                            <li class="nav-item">  
+                        @if (_userLevel >= EAccessLevel.kAdmin)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/DoorManagment">Door Managment</a>
+                            </li>
+                        }
+                        @if (_userLevel >= EAccessLevel.kModerator)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/UserManagment">User Managment</a>
+                            </li>
+                        }
+                        @if (!_loggedIn)
+                        {
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Logout</a>
                             </li>
+                        }
 
-                        @if (!AccountHelper.GetLoggedIn(Context))
+                        @if (_loggedIn)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>
@@ -79,7 +83,7 @@
             &copy; 2023 - control - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
- 
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
