@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using System.Reflection.Metadata;
 using System.Text;
 
 namespace control.Generator
@@ -41,15 +42,22 @@ namespace control.Generator
                     _alertTypeString = "alert-warning";
                     break;
                 case EAlertLevel.kSuccess:
-                    _alertTypeString = "alert_success";
+                    _alertTypeString = "alert-success";
                     break;
                 case EAlertLevel.kError:
-                    _alertTypeString = "alert-error";
+                    _alertTypeString = "alert-danger";
                     break;
             }
-            string _newMessage = "<div class=\"alert alert-dismissible " + _alertTypeString + "\">" +
-              "< button type = \"button\" class=\"close\" data-dismiss=\"alert\">×</button> \" " +
-              " <strong>" + message + "</strong > </div >";
+
+
+            string _newMessage = "<div class=\"alert "+ _alertTypeString +" alert-dismissible fade show\" role=\"alert\">" +
+  "<strong>Holy guacamole!</strong> You should check in on some of those fields below." +
+ " <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>" +
+"</div>";
+
+
+
+
 
             _alertMessages += _newMessage;
 
