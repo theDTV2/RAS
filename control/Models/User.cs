@@ -25,7 +25,8 @@ namespace control.Models
         kCodeExpired,
         kPermissionDenied,
         kAccountExpired,
-        kAccountLocked
+        kAccountLocked,
+        kAccountEulaNotAccepted
     }
 
     public class User
