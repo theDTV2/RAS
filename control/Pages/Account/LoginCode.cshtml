@@ -7,10 +7,10 @@
 
 <h1>Login</h1>
 
-<h4>User</h4>
+
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="align-content-center">
         <form method="post">
             <div class="form-group">
                 <label class="control-label">Code für @ViewData["email"]:</label>
@@ -24,9 +24,6 @@
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
