@@ -23,7 +23,7 @@ namespace control.Helper
             await user;
 
 
-            LoginLink loginLink = new LoginLink { Email = email, GenerationTime = DateTime.Now, Key = loginKey };
+            LoginLink loginLink = new LoginLink { UserName = email, GenerationTime = DateTime.Now, Key = loginKey };
 
             dataContext.Add(loginLink);
 
@@ -57,7 +57,7 @@ namespace control.Helper
             if (loginLink is null)
                 return null;
 
-            User? user = dataContext.User.Where(u => u.UserName == loginLink.Email).FirstOrDefault();
+            User? user = dataContext.User.Where(u => u.UserName == loginLink.UserName).FirstOrDefault();
 
             dataContext.LoginLink.Remove(loginLink);
 
@@ -69,7 +69,7 @@ namespace control.Helper
 
         public static void TryToRemoveLoginLinkByUserName(Data.controlContext dataContext, string userName)
         {
-            LoginLink? loginLink =  dataContext.LoginLink.Where(l => l.Email == userName).FirstOrDefault();
+            LoginLink? loginLink =  dataContext.LoginLink.Where(l => l.UserName == userName).FirstOrDefault();
 
             if (loginLink is null) return;
 

@@ -16,7 +16,7 @@ namespace control.Models
 
         [Required]
         [ForeignKey(nameof(User))]
-        public required string Email { get; set; }
+        public required string UserName { get; set; }
 
         [Required]
         public required DateTime GenerationTime { get; set; }
