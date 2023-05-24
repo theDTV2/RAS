@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Generator\" />
     <Folder Include="Pages\API\" />
   </ItemGroup>
 

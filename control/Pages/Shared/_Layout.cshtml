@@ -38,16 +38,27 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
 
-                         @if (!AccountHelper.GetLoggedIn(Context))
+                            @if (userLevel > EAccessLevel.kModerator)
+                            {
+                                <li class="nav-item">
+                                   <a class="nav-link text-dark" asp-area="" asp-page="/DoorManagment">Door Managment</a>
+                                </li>
+                            }
+                            @if (userLevel > EAccessLevel.kUser)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/UserManagment">User Managment</a>
+                                </li>
+                            }
+                           
+                            <li class="nav-item">  
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Logout</a>
+                            </li>
+
+                        @if (!AccountHelper.GetLoggedIn(Context))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>
-                            </li>
-                        }
-                        @if (AccountHelper.GetLoggedIn(Context))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Logout</a>
                             </li>
                         }
                     </ul>
