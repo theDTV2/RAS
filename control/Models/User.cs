@@ -55,9 +55,7 @@ namespace control.Models
 
         public bool AcceptedEula { get; set; } = false;
 
-        public string? SecretCode { get; set; };
-
-
+        public string SecretCode { get; set; } = "";
 
     }
 }
