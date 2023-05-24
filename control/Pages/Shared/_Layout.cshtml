@@ -53,14 +53,14 @@
                                 <a class="nav-link text-dark" asp-area="" asp-page="/UserManagment">User Managment</a>
                             </li>
                         }
-                        @if (!_loggedIn)
+                        @if (_loggedIn)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Logout</a>
                             </li>
                         }
 
-                        @if (_loggedIn)
+                        @if (!_loggedIn)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>

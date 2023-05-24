@@ -12,10 +12,10 @@ namespace control.Pages
             _logger = logger;
         }
 
-        public RedirectResult OnGet()
+        public IActionResult OnGet()
         {
             //return RedirectPermanent("Account/Login");
-            return Redirect("Account/Login");
+            return Page();
         }
     }
 }
