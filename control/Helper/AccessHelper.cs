@@ -63,11 +63,13 @@ namespace control.Helper
             if (userToCheck.AccessCode == loginCode)
             {
                 //Remove login key after login
-                LoginKeyHelper.RemoveUserFromLoginListAsync(dataContext, userName).Wait();
+                LoginKeyHelper.TryToRemoveLoginLinkByUserName(dataContext, userName);
 
                 //Remove Access Code after login
                 userToCheck.AccessCode = String.Empty;
                 userToCheck.AccessCodeGenerationTime = DateTime.MinValue;
+
+                dataContext.SaveChanges();
 
                 return EAccessReturnValue.kAccessGranted;
             }
@@ -91,6 +93,7 @@ namespace control.Helper
                 //Remove Access Code after login
                 user.AccessCode = String.Empty;
                 user.AccessCodeGenerationTime = DateTime.MinValue;
+                dataContext.SaveChanges();
             }
             return rval;
 

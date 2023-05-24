@@ -67,6 +67,16 @@ namespace control.Helper
 
         }
 
+        public static void TryToRemoveLoginLinkByUserName(Data.controlContext dataContext, string userName)
+        {
+            LoginLink? loginLink =  dataContext.LoginLink.Where(l => l.Email == userName).FirstOrDefault();
+
+            if (loginLink is null) return;
+
+            dataContext.LoginLink.Remove(loginLink);
+
+        }
+
         private static string GenerateLoginCode(int Lenght = 64)
         {
             byte[] code = RandomNumberGenerator.GetBytes(Lenght);
