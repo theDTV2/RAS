@@ -51,7 +51,12 @@ namespace control.Pages.Account
 
             //return RedirectToPage("./Index");
 
-            AuthHelper.ChallengeLoginRequestWithLoginCode(_context,HttpContext, AccountHelper.GetUserName(HttpContext), LoginCode);
+            EAccessReturnValue res = AuthHelper.ChallengeLoginRequestWithLoginCode(_context,HttpContext, AccountHelper.GetUserName(HttpContext), LoginCode);
+            
+            if (res == EAccessReturnValue.kAccessGranted)
+            {
+                return Redirect("Dashboard");
+            }
 
             return Page();
         }

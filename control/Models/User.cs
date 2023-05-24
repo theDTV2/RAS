@@ -50,7 +50,7 @@ namespace control.Models
         public DateTime? LastLogin {get;set;}
 
         [Required]
-        public EAccessLevel AccessLevel { get; set; }
+        public EAccessLevel AccessLevel { get; set; } = EAccessLevel.kUser;
 
         public List<Door> AccessDoors = new List<Door>();
 
