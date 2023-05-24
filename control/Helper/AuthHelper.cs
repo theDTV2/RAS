@@ -67,6 +67,12 @@ namespace control.Helper
             if (user.ExpiryDate < DateTime.Now)
                 return EAccessReturnValue.kAccountExpired;
 
+
+            //Agressively redirect users to the privacy page
+            if (!user.AcceptedEula)
+            {
+                return EAccessReturnValue.kAccountEulaNotAccepted;
+            }
             if (doorToOpen is not null)
             {
                 //Check for regular Access right
@@ -103,9 +109,13 @@ namespace control.Helper
         {
             EAccessReturnValue perm = CheckUserPermission(dataContext, context, requiredAccessLevel, doorToOpen);
 
+            if (perm == EAccessReturnValue.kAccountEulaNotAccepted)
+                context.Response.Redirect("/Account/Privacy");
+
+
             if (perm != EAccessReturnValue.kAccessGranted && perm != EAccessReturnValue.kAdminGranted)
                 //TODO: Redirect to proper Error page
-                context.Response.Redirect("/");
+                context.Response.Redirect("/Index");
         }
 
         
