@@ -25,12 +25,10 @@ namespace control.Pages.Account
 
         public IActionResult OnGet()
         {
-            AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kNone);
+            EAccessReturnValue _val =  AuthHelper.CheckUserPermission(_context, HttpContext);
 
-            var _user = AccountHelper.GetLoggedInUser(_context, HttpContext);
-
-            if (_user.AcceptedEula) {
-                //TODO: Improve redirect after alert implementation
+            if (_val != EAccessReturnValue.kAccountEulaNotAccepted) {
+                //TODO: Add Redirect Alert
                 return RedirectToPage("Dashboard");
             }
 
@@ -39,20 +37,18 @@ namespace control.Pages.Account
 
         public IActionResult OnPost()
         {
-            AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kNone);
+            EAccessReturnValue _val = AuthHelper.CheckUserPermission(_context, HttpContext);
 
-            if (AcceptEula)
+            if (AcceptEula && _val == EAccessReturnValue.kAccountEulaNotAccepted)
             {
-
                 //TODO: Move this
                 var _user = AccountHelper.GetLoggedInUser(_context, HttpContext);
                 _user.AcceptedEula = true;
                 _context.SaveChanges();
 
-                //TODO: Improve redirect after alert implementation
+                //TODO: Add Redirect Alert
                 return RedirectToPage("Dashboard");
             }
-
             return Page();
         }
     }

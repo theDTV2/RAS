@@ -112,7 +112,6 @@ namespace control.Helper
             if (perm == EAccessReturnValue.kAccountEulaNotAccepted)
                 context.Response.Redirect("/Account/Privacy");
 
-
             if (perm != EAccessReturnValue.kAccessGranted && perm != EAccessReturnValue.kAdminGranted)
                 //TODO: Redirect to proper Error page
                 context.Response.Redirect("/Index");
