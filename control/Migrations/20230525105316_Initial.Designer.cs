@@ -11,8 +11,8 @@ using control.Data;
 namespace control.Migrations
 {
     [DbContext(typeof(controlContext))]
-    [Migration("20230524133659_AddedSecretCode")]
-    partial class AddedSecretCode
+    [Migration("20230525105316_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,12 +25,26 @@ namespace control.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("AccessToken")
+                    b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("DoorDNSName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DoorIP")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DoorStatus")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("LastCheckInTime")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("SelfRegisterAllowed")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

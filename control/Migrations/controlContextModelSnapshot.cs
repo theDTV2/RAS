@@ -26,18 +26,18 @@ namespace control.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("DoorDNSName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DoorIP")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("DoorStatus")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("LastCheckInTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PrivateKeyServer")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PublicKeyClient")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("SelfRegisterAllowed")

@@ -21,10 +21,9 @@ namespace control.Models
         public required string Id { get; set; }
 
         [Required]
-        public string PrivateKeyServer{ get; set; } = "";
+        public string DoorIP{ get; set; } = "";
 
-        [Required]
-        public string PublicKeyClient { get; set; } = "";
+        public string DoorDNSName { get; set; } = "";
 
         public EDoorStatusType DoorStatus { get; set; } = EDoorStatusType.kCardAccess;
 
