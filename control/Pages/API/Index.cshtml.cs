@@ -17,7 +17,6 @@ namespace control.Pages.API
 
         public JsonResult OnPostRegister(string doorID, string timeStamp)
         {
-
             return new JsonResult("");
         }
 

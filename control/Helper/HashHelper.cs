@@ -14,7 +14,12 @@ namespace control.Helper
         {
             return RandomNumberGenerator.GetBytes(lenght);
         }
-        
+
+        public static string GenerateRandomBase64String(int lenght = 64)
+        {
+            return Convert.ToBase64String(RandomNumberGenerator.GetBytes(lenght));
+        }
+
         public static string GetHashStringInBase64(string input)
         {
             return Convert.ToBase64String(CalculateHash(input));

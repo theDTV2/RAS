@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using control.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using NuGet.Packaging.Signing;
+using System.Text.Json.Nodes;
 
 namespace control.Pages
 {
@@ -14,7 +17,6 @@ namespace control.Pages
 
         public IActionResult OnGet()
         {
-            //return RedirectPermanent("Account/Login");
             return Page();
         }
     }

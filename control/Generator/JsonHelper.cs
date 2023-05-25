@@ -5,10 +5,8 @@ using System.Text.Json.Nodes;
 namespace control.Generator
 {
 
-
     public class JsonHelper
     {
-
         public static JsonArray GenerateRegistrationResponse(string displayText, EDoorEntryMode entryMode, string secret, DateTime timeStamp)
         {
             return new JsonArray()
