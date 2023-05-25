@@ -1,5 +1,6 @@
 ﻿using control.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using NuGet.Packaging.Signing;
 using System.Text.Json.Nodes;
 using System.Threading;
@@ -29,8 +30,9 @@ namespace control.Helper
 
             _door.Secret = _newToken;
             _door.Registered = true;
+            _door.LastCheckInTime = DateTime.Now;
 
-            var _saving = dataContext.SaveChanges();
+            dataContext.SaveChanges();
 
             JsonObject _toReturnJsonRaw = new JsonObject()
             {
@@ -47,15 +49,14 @@ namespace control.Helper
 
         }
 
-        public static bool RequestDoorAccess(control.Data.controlContext dataContext, string doorID, string accessCode, DateTime timeStamp, ref JsonResult returnValue)
+        public static bool RequestDoorAccess(control.Data.controlContext dataContext, string doorId,string token, string accessCode, DateTime timeStamp, ref JsonResult returnValue)
         {
-            Door? _door = GetDoor(dataContext, doorID);
+            Door? _door = GetDoor(dataContext, doorId);
             User? _user = dataContext.User.Where(u => u.SecretCode == accessCode).FirstOrDefault();
 
             JsonObject _toReturnJsonRaw;
 
-
-            if (CheckForDoorAccessRestrictions(_door, timeStamp) && CheckForUserAccessRestrictions(_user, _door!, timeStamp))
+            if (CheckForDoorRestrictions(_door,token, timeStamp) && CheckForUserAccessRestrictions(_user, _door!, timeStamp))
             {
                 _toReturnJsonRaw = new JsonObject()
                 {
@@ -63,35 +64,60 @@ namespace control.Helper
                     { "displayText" ,""},
                     { "timeStamp",  DateTime.Now}
                 };
-
+                returnValue = new JsonResult(_toReturnJsonRaw);
                 return true;
-
             }
+
             _toReturnJsonRaw = new JsonObject()
             {
                 { "doorResponse" , false},
                 { "doorStatus" , ""},
                 { "displayText" ,""},
                 { "timeStamp",  DateTime.Now}
-
             };
 
-            //If we reached until here, access is allowed :)
-            return true;
+            //If we reached until here, access is NOT allowed
+            returnValue = new JsonResult(_toReturnJsonRaw);
+            return false;
         }
 
-        public static bool RegisterHeartBeat(control.Data.controlContext dataContext, EDoorEntryMode mode, string displayText, DateTime timeStamp, out JsonResult returnValue)
+        public static bool RegisterHeartBeat(control.Data.controlContext dataContext, EDoorEntryMode mode, string doorId, string displayText, string token, DateTime timeStamp, ref JsonResult returnValue)
         {
+            if (CheckIfTimedOut(timeStamp))
+                return false;
 
+            Door? _door = GetDoor(dataContext, doorId);
+            JsonObject _toReturnJsonRaw;
 
+            //No door with this name found
+            if (_door is null)
+                return false;
+
+            //Wrong token
+            if (_door.Secret != token)
+                return false;
+
+            _toReturnJsonRaw = new JsonObject()
+            {
+                { "entryMode" , false},
+                { "displayText" , displayText},
+                { "timeStamp",  DateTime.Now}
+            };
+
+            //If we reached until here, access is NOT allowed
+            returnValue = new JsonResult(_toReturnJsonRaw);
 
             return true;
         }
 
-        private static bool CheckForDoorAccessRestrictions(Door? door, DateTime timeStamp)
+        private static bool CheckForDoorRestrictions(Door? door,string token, DateTime timeStamp)
         {
             //No door with this name found
             if (door is null)
+                return false;
+
+            //Check, if token is the same as provided
+            if (token != door.Secret)
                 return false;
 
             //This door not registered yet or locked
