@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using control.Data;
 using control.Models;
+using control.Helper;
 
 namespace control.Pages.Managment.Door
 {
@@ -21,6 +22,8 @@ namespace control.Pages.Managment.Door
 
         public IActionResult OnGet()
         {
+            AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kAdmin);
+
             return Page();
         }
 
@@ -31,10 +34,7 @@ namespace control.Pages.Managment.Door
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Door == null || Door == null)
-            {
-                return Page();
-            }
+            AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kAdmin);
 
             _context.Door.Add(Door);
             await _context.SaveChangesAsync();

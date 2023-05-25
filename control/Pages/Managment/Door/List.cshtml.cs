@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using control.Data;
 using control.Models;
+using control.Helper;
 
 namespace control.Pages.Managment.Door
 {
@@ -23,6 +24,7 @@ namespace control.Pages.Managment.Door
 
         public async Task OnGetAsync()
         {
+            AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kAdmin);
             if (_context.Door != null)
             {
                 Door = await _context.Door.ToListAsync();
