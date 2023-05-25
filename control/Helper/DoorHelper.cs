@@ -21,6 +21,7 @@ namespace control.Helper
             if (_door.Registered)
                 return false;
 
+            //Request timed out
             if (CheckIfTimedOut(timeStamp))
                 return false;
 
@@ -81,7 +82,10 @@ namespace control.Helper
 
         public static bool RegisterHeartBeat(control.Data.controlContext dataContext, EDoorEntryMode mode, string displayText, DateTime timeStamp, out JsonResult returnValue)
         {
-            throw new NotImplementedException();
+
+
+
+            return true;
         }
 
         private static bool CheckForDoorAccessRestrictions(Door? door, DateTime timeStamp)
@@ -93,6 +97,10 @@ namespace control.Helper
             //This door not registered yet or locked
             if (!door.Registered || door.EntryStatus == EDoorEntryMode.kNoAccess)
                 return false;
+
+            //This door is set to accept all entries
+            if (door.EntryStatus == EDoorEntryMode.kUniversalAccess) 
+                return true;
 
             if (CheckIfTimedOut(timeStamp))
                 return false;
