@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Microsoft.IdentityModel.Tokens;
 
 namespace control.Helper
 {
@@ -65,7 +64,7 @@ namespace control.Helper
         {
             string? DateTimeString = context.Session.GetString(key);
 
-            if (DateTimeString.IsNullOrEmpty())
+            if (String.IsNullOrEmpty(DateTimeString))
                 return DateTime.Now;
 
             DateTime toReturn = Convert.ToDateTime(DateTimeString);

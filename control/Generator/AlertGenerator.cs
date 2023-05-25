@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using System.Reflection.Metadata;
 using System.Text;
 
@@ -18,7 +17,7 @@ namespace control.Generator
         public static string GetAlertsFromSession(HttpContext httpContext)
         {
             string _alertMessages = httpContext.Session.GetString("Alerts") ?? "";
-            if (!_alertMessages.IsNullOrEmpty())
+            if (!String.IsNullOrEmpty(_alertMessages))
                 httpContext.Session.SetString("Alerts", "");
 
             return _alertMessages;
