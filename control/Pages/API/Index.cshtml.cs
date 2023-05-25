@@ -1,3 +1,4 @@
+using control.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NuGet.Protocol;
@@ -15,9 +16,13 @@ namespace control.Pages.API
             _context = context;
         }
 
-        public JsonResult OnPostRegister(string doorID, string timeStamp)
+        public IActionResult OnPostRegister(string doorID, string timeStamp)
         {
-            return new JsonResult("");
+            JsonResult _returnVal = new("");
+
+            if (DoorHelper.AttemptToRegisterDoor(_context, doorID, DateTime.Parse(timeStamp), ref _returnVal))
+                return _returnVal;
+            return StatusCode(500);
         }
 
         public JsonResult OnPostAccess(string cardCode, string timeStamp, string secret)
