@@ -101,7 +101,7 @@ namespace control.Helper
         [Obsolete("Not needed, we do not hash the access code anymore")]
         public static EAccessReturnValue TryToVerifyUserWithHash(control.Data.controlContext dataContext, string email, string AccessCode, out User? user)
         {
-            User? userToCheck = GetUserAsync(dataContext, email).Result;
+            User? userToCheck = GetUserAsync(dataContext, email.ToLower()).Result;
             user = userToCheck;
             if (userToCheck is null)
             {

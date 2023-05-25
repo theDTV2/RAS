@@ -43,7 +43,7 @@ namespace control.Pages.Account
             if (AccountHelper.GetLoggedIn(HttpContext))
                 Redirect("Account/Dashboard");
 
-            await AuthHelper.CreateLoginRequest(_context,HttpContext, UserEmail);
+            await AuthHelper.CreateLoginRequest(_context,HttpContext, UserEmail.ToLower());
             return Redirect("LoginCode");
         }
     }
