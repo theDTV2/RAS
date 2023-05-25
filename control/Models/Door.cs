@@ -7,6 +7,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace control.Models
 {
+    public enum EDoorStatusType
+    {
+        kNoAccess,
+        kCardAccess,
+        kUniversalAccess
+    }
+
     public class Door
     {
         [Required]
@@ -14,16 +21,19 @@ namespace control.Models
         public required string Id { get; set; }
 
         [Required]
-        public string AccessToken { get; set; } = "";
+        public string PrivateKeyServer{ get; set; } = "";
+
+        [Required]
+        public string PublicKeyClient { get; set; } = "";
+
+        public EDoorStatusType DoorStatus { get; set; } = EDoorStatusType.kCardAccess;
 
         public DateTime LastCheckInTime { get; set; }
 
-        public string DisplayName { get; set; } = "Placeholder";
+        public string DisplayName { get; set; } = "";
 
         public bool SelfRegisterAllowed { get; set; } = false;
 
-        //TODO: Think about how to do this efficiently
-        // public required List<DoorLog>
 
     }
 }
