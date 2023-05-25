@@ -20,11 +20,6 @@ namespace control.Models
         [Key] 
         public required string Id { get; set; }
 
-        [Required]
-        public string DoorIP{ get; set; } = "";
-
-        public string DoorDNSName { get; set; } = "";
-
         public EDoorStatusType DoorStatus { get; set; } = EDoorStatusType.kCardAccess;
 
         public DateTime LastCheckInTime { get; set; }
