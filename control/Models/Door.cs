@@ -22,7 +22,9 @@ namespace control.Models
 
         public EDoorEntryMode EntryStatus { get; set; } = EDoorEntryMode.kCardAccess;
 
-        public bool DoorRegistered { get; set; } = false;
+        public bool Registered { get; set; } = false;
+
+        public string Secret { get; set; } = "";
 
         public DateTime LastCheckInTime { get; set; }
 
