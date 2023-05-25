@@ -14,12 +14,6 @@ namespace control.Models
         kUniversalAccess
     }
 
-    public enum EDoorAccessResponse
-    {
-        kAccessGranted,
-        kAccessDenied
-    }
-
     public class Door
     {
         [Required]
