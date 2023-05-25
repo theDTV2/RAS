@@ -26,15 +26,10 @@ namespace control.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("DoorDNSName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("DoorRegistered")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("DoorIP")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("DoorStatus")
+                    b.Property<int>("EntryStatus")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("LastCheckInTime")

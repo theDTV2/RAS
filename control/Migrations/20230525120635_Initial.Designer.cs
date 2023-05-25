@@ -11,7 +11,7 @@ using control.Data;
 namespace control.Migrations
 {
     [DbContext(typeof(controlContext))]
-    [Migration("20230525105316_Initial")]
+    [Migration("20230525120635_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -29,15 +29,10 @@ namespace control.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("DoorDNSName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("DoorRegistered")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("DoorIP")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("DoorStatus")
+                    b.Property<int>("EntryStatus")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("LastCheckInTime")

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace control.Models
 {
-    public enum EDoorStatusType
+    public enum EDoorEntryMode
     {
         kNoAccess,
         kCardAccess,
@@ -20,7 +20,9 @@ namespace control.Models
         [Key] 
         public required string Id { get; set; }
 
-        public EDoorStatusType DoorStatus { get; set; } = EDoorStatusType.kCardAccess;
+        public EDoorEntryMode EntryStatus { get; set; } = EDoorEntryMode.kCardAccess;
+
+        public bool DoorRegistered { get; set; } = false;
 
         public DateTime LastCheckInTime { get; set; }
 
