@@ -19,9 +19,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Door[0].AccessToken)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Door[0].LastCheckInTime)
             </th>
@@ -31,9 +29,7 @@
     <tbody>
 @foreach (var item in Model.Door) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccessToken)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.LastCheckInTime)
             </td>
