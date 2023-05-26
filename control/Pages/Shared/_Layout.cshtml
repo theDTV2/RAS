@@ -57,6 +57,16 @@
                                 </ul>
                             </li>
 
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    (Disabled) Stats
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-page="" disabled="">(Disabled) Live</a></li>
+                                    <li><a class="dropdown-item" asp-page="" disabled="">(Disabled) Over Time</a></li>
+                                </ul>
+                            </li>
+
                         }
                         @if (_userLevel >= EAccessLevel.kModerator)
                         {
