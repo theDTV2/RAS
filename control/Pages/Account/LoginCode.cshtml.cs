@@ -45,10 +45,23 @@ namespace control.Pages.Account
                 Redirect("Account/Dashboard");
 
             EAccessReturnValue res = AuthHelper.ChallengeLoginRequestWithLoginCode(_context,HttpContext, AccountHelper.GetUserName(HttpContext), LoginCode);
-            
+
             if (res == EAccessReturnValue.kAccessGranted)
             {
                 AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Logged in successfully");
+
+                res = AuthHelper.CheckUserPermission(_context, HttpContext);
+
+                if (res == EAccessReturnValue.kAccountEulaNotAccepted)
+                    return Redirect("Privacy");
+
+                if (res == EAccessReturnValue.kAccountRegistrationNotCompleted)
+                {
+                    int i = 2;
+                    //TODO
+                }
+
+
                 return Redirect("Dashboard");
             }
             AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Login failed");
