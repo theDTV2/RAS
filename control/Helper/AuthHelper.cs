@@ -1,4 +1,5 @@
-﻿using control.Models;
+﻿using control.Generator;
+using control.Models;
 using Microsoft.AspNetCore.Mvc;
 using static control.Helper.AccessHelper;
 
@@ -109,11 +110,11 @@ namespace control.Helper
 
             if (perm == EAccessReturnValue.kAccountEulaNotAccepted)
             {
-                context.Response.Redirect("/Account/Privacy");
-
-                //Abort thread execution, as a redirect is already on the way.
-                Thread.CurrentThread.Interrupt();
-                return true;
+                AlertGenerator.AddAlertToSession(context, AlertGenerator.EAlertLevel.kWarning, "Please accept the EULA");
+               
+                context.Response.Redirect("/Account/Login");
+                AccountHelper.LogoutUser(context);
+                return false;
             }
 
             if (perm != EAccessReturnValue.kAccessGranted && perm != EAccessReturnValue.kAdminGranted)
