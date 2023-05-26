@@ -57,8 +57,7 @@ namespace control.Pages.Account
 
                 if (res == EAccessReturnValue.kAccountRegistrationNotCompleted)
                 {
-                    int i = 2;
-                    //TODO
+                    return Redirect("Registration");
                 }
 
 

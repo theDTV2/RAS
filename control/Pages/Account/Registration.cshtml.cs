@@ -23,19 +23,9 @@ namespace control.Pages.Account
         [BindProperty]
         public User User { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (id == null || _context.User == null)
-            {
-                return NotFound();
-            }
-
-            var user =  await _context.User.FirstOrDefaultAsync(m => m.UserName == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            User = user;
+            
             return Page();
         }
 
