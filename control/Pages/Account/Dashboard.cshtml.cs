@@ -1,15 +1,27 @@
 using control.Generator;
 using control.Helper;
+using control.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace control.Pages.Account
 {
     public class DashboardModel : PageModel
     {
-        public void OnGet()
-        {
+        private readonly control.Data.controlContext _context;
 
+        public DashboardModel(control.Data.controlContext context)
+        {
+            _context = context;
+        }
+
+        public IActionResult OnGet()
+        {
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kUser))
+                return Unauthorized();
+
+            return Page();
         }
     }
 }

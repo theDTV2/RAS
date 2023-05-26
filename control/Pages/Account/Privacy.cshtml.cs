@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using control.Data;
 using control.Models;
 using control.Helper;
+using control.Generator;
 
 namespace control.Pages.Account
 {
@@ -28,7 +29,6 @@ namespace control.Pages.Account
             EAccessReturnValue _val =  AuthHelper.CheckUserPermission(_context, HttpContext);
 
             if (_val != EAccessReturnValue.kAccountEulaNotAccepted) {
-                //TODO: Add Redirect Alert
                 return RedirectToPage("Dashboard");
             }
 

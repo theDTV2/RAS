@@ -22,7 +22,8 @@ namespace control.Pages.Managment.Door
 
         public IActionResult OnGet()
         {
-            AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kAdmin);
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kAdmin))
+                return Unauthorized();
 
             return Page();
         }
@@ -34,7 +35,8 @@ namespace control.Pages.Managment.Door
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kAdmin);
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kAdmin))
+                return Unauthorized();
 
             _context.Door.Add(Door);
             await _context.SaveChangesAsync();

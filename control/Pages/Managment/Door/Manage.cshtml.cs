@@ -24,7 +24,10 @@ namespace control.Pages.Managment.Door
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kAdmin);
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kAdmin))
+                return Unauthorized();
+
+
             if (id == null || _context.Door == null)
             {
                 return NotFound();

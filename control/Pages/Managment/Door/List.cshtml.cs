@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using control.Data;
 using control.Models;
 using control.Helper;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace control.Pages.Managment.Door
 {
@@ -22,13 +23,16 @@ namespace control.Pages.Managment.Door
 
         public IList<control.Models.Door> Door { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kAdmin);
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kAdmin))
+                return Unauthorized();
+
             if (_context.Door != null)
             {
                 Door = await _context.Door.ToListAsync();
             }
+            return Page();
         }
     }
 }
