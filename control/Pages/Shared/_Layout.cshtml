@@ -6,11 +6,13 @@
     string _userName = "Not logged In";
     EAccessLevel _userLevel = EAccessLevel.kNone;
 
+    string _homeLink = "/Index";
     bool _loggedIn = AccountHelper.GetLoggedIn(Context);
     if (_loggedIn)
     {
         _userName = AccountHelper.GetUserName(Context);
         _userLevel = AccountHelper.GetEAccessLevel(Context);
+        _homeLink = "/Account/Dashboard";
     }
 
 }
@@ -28,48 +30,77 @@
 </head>
 <body>
     <header>
+
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">control</a>
+                <a class="navbar-brand" asp-area="" asp-page="@_homeLink">Room Access System</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+               
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav flex-grow-1 ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="@_homeLink">Home</a>
                         </li>
-
                         @if (_userLevel >= EAccessLevel.kAdmin)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/DoorManagment">Door Managment</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Door Managment
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-page="/Managment/Door/Register">Register</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Managment/Door/List">List</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Managment/Door/Manage">Manage</a></li>
+                                </ul>
                             </li>
+
                         }
                         @if (_userLevel >= EAccessLevel.kModerator)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/UserManagment">User Managment</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    User Managment
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-page="/Managment/User/Unlock">Register</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Managment/User/Edit">List</a></li>
+                                </ul>
                             </li>
                         }
+                       
+                    </ul>
+
+                     <ul class="navbar-nav me-auto">
                         @if (_loggedIn)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Logout</a>
                             </li>
                         }
-
                         @if (!_loggedIn)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>
                             </li>
                         }
+
                     </ul>
+
+
+
+
+
                 </div>
             </div>
         </nav>
+
+
+
+
+
     </header>
 
     <div>@Html.Raw(@AlertGenerator.GetAlertsFromSession(Context))</div>
