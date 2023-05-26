@@ -73,6 +73,11 @@ namespace control.Helper
             {
                 return EAccessReturnValue.kAccountEulaNotAccepted;
             }
+
+            if (!user.CompletedRegistration)
+            {
+                return EAccessReturnValue.kAccountRegistrationNotCompleted;
+            }
             if (doorToOpen is not null)
             {
                 //Check for regular Access right
@@ -108,7 +113,7 @@ namespace control.Helper
         {
             EAccessReturnValue perm = CheckUserPermission(dataContext, context, requiredAccessLevel, doorToOpen);
 
-            if (perm == EAccessReturnValue.kAccountEulaNotAccepted)
+            if (perm == EAccessReturnValue.kAccountEulaNotAccepted || perm == EAccessReturnValue.kAccountRegistrationNotCompleted)
             {
                 AlertGenerator.AddAlertToSession(context, AlertGenerator.EAlertLevel.kWarning, "Please accept the EULA");
                
