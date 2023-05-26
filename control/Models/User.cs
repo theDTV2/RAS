@@ -26,7 +26,8 @@ namespace control.Models
         kPermissionDenied,
         kAccountExpired,
         kAccountLocked,
-        kAccountEulaNotAccepted
+        kAccountEulaNotAccepted,
+        kAccountRegistrationNotCompleted
     }
 
     public class User
@@ -54,6 +55,8 @@ namespace control.Models
         public List<Door> AdminDoors = new List<Door>();
 
         public bool AcceptedEula { get; set; } = false;
+
+        public bool CompletedRegistration { get; set; } = false;
 
         public string SecretCode { get; set; } = "";
 
