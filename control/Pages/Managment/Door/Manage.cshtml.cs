@@ -20,28 +20,12 @@ namespace control.Pages.Managment.Door
             _context = context;
         }
 
-      public control.Models.Door Door { get; set; } = default!; 
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync()
         {
             if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kAdmin))
                 return Unauthorized();
 
-
-            if (id == null || _context.Door == null)
-            {
-                return NotFound();
-            }
-
-            var door = await _context.Door.FirstOrDefaultAsync(m => m.Id == id);
-            if (door == null)
-            {
-                return NotFound();
-            }
-            else 
-            {
-                Door = door;
-            }
             return Page();
         }
     }
