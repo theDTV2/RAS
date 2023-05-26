@@ -1,4 +1,5 @@
 ﻿using control.Models;
+using Microsoft.AspNetCore.Mvc;
 using static control.Helper.AccessHelper;
 
 namespace control.Helper
@@ -62,11 +63,9 @@ namespace control.Helper
             string userName = AccountHelper.GetUserName(context);
             User user = GetUserAsync(dataContext, userName).Result!;
 
-
             //Check for Account expiry
             if (user.ExpiryDate < DateTime.Now)
                 return EAccessReturnValue.kAccountExpired;
-
 
             //Agressively redirect users to the privacy page
             if (!user.AcceptedEula)
@@ -85,10 +84,8 @@ namespace control.Helper
 
             }
 
-
             if (user!.AccessLevel < requiredAccessLevel)
                 return EAccessReturnValue.kPermissionDenied;
-
 
             // If we reach this point, the user can access
             return EAccessReturnValue.kAccessGranted;
@@ -105,16 +102,24 @@ namespace control.Helper
         }
 
         //Works same as CheckUserPermission(..), but retirects users, when they have no permission to open a specific page
-        public static void CheckUserAccessWithRedirect(control.Data.controlContext dataContext, HttpContext context, EAccessLevel requiredAccessLevel = EAccessLevel.kUser, Door? doorToOpen = null)
+
+        public static bool CheckUserAccessWithRedirect(control.Data.controlContext dataContext, HttpContext context, EAccessLevel requiredAccessLevel = EAccessLevel.kUser, Door? doorToOpen = null)
         {
             EAccessReturnValue perm = CheckUserPermission(dataContext, context, requiredAccessLevel, doorToOpen);
 
             if (perm == EAccessReturnValue.kAccountEulaNotAccepted)
-                context.Response.Redirect("/Account/Privacy");
+            {
+                context.Response.Redirect("/Account/Privacy", true);
+                return false;
+            }
 
             if (perm != EAccessReturnValue.kAccessGranted && perm != EAccessReturnValue.kAdminGranted)
+            {
                 //TODO: Redirect to proper Error page
                 context.Response.Redirect("/Index");
+                return false;
+            }
+            return true;
         }
 
         
