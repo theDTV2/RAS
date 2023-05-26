@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using control.Data;
 using control.Models;
+using control.Helper;
 
 namespace control.Pages.Account
 {
@@ -20,44 +21,40 @@ namespace control.Pages.Account
             _context = context;
         }
 
-        [BindProperty]
-        public User User { get; set; } = default!;
-
         public async Task<IActionResult> OnGetAsync()
         {
-            
-            return Page();
-        }
+			EAccessReturnValue _val = AuthHelper.CheckUserPermission(_context, HttpContext);
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+			if (_val != EAccessReturnValue.kAccountRegistrationNotCompleted)
+				return Unauthorized();
+
+			return Page();
+		}
+
+
+        [BindProperty]
+        public string firstName { get; set; }
+
+		[BindProperty]
+		public string lastName { get; set; }
+
+		[BindProperty]
+		public bool AreYouSure { get; set; }
+		public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+			EAccessReturnValue _val = AuthHelper.CheckUserPermission(_context, HttpContext);
 
-            _context.Attach(User).State = EntityState.Modified;
-
-            try
+            if (AreYouSure && _val == EAccessReturnValue.kAccountRegistrationNotCompleted)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(User.UserName))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+				User _user = AccountHelper.GetLoggedInUser(_context, HttpContext);
 
-            return RedirectToPage("./Index");
-        }
+				_user.CompletedRegistration = true;
+				_context.SaveChanges();
+				return RedirectToPage("Dashboard");
+			}
+
+            return Page(); ;
+		}
 
         private bool UserExists(string id)
         {
