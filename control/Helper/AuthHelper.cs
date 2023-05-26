@@ -109,8 +109,11 @@ namespace control.Helper
 
             if (perm == EAccessReturnValue.kAccountEulaNotAccepted)
             {
-                context.Response.Redirect("/Account/Privacy", true);
-                return false;
+                context.Response.Redirect("/Account/Privacy");
+
+                //Abort thread execution, as a redirect is already on the way.
+                Thread.CurrentThread.Interrupt();
+                return true;
             }
 
             if (perm != EAccessReturnValue.kAccessGranted && perm != EAccessReturnValue.kAdminGranted)
