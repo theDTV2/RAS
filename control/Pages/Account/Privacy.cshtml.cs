@@ -47,6 +47,10 @@ namespace control.Pages.Account
                 _context.SaveChanges();
 
                 //TODO: Add Redirect Alert
+
+                if (!_user.CompletedRegistration)
+                    return RedirectToPage("Registration");
+
                 return RedirectToPage("Dashboard");
             }
             return Page();
