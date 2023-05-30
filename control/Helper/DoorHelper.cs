@@ -165,7 +165,7 @@ namespace control.Helper
             if (timeOut is null)
                 timeOut = TimeSpan.FromSeconds(5);
 
-            return (DateTime.Now - timeStamp) < timeOut;
+            return !((DateTime.Now - timeStamp) < timeOut);
         }
 
         private static bool CheckIfExpired(DateTime timeStamp)
