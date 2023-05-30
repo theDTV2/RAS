@@ -11,11 +11,11 @@ using control.Models;
 
 namespace control.Pages.Managment.User
 {
-    public class EditModel : PageModel
+    public class ManageModel : PageModel
     {
         private readonly control.Data.controlContext _context;
 
-        public EditModel(control.Data.controlContext context)
+        public ManageModel(control.Data.controlContext context)
         {
             _context = context;
         }

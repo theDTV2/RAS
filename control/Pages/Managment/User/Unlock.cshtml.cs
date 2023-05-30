@@ -20,53 +20,44 @@ namespace control.Pages.Managment.User
             _context = context;
         }
 
+
+
+        [BindProperty(SupportsGet = true)]
+        public string? UserIdentifier { get; set; } = "";
+
+        [BindProperty(SupportsGet = true)]
+        public bool FoundElement { get; set; } = false;
+
+
+
         [BindProperty]
-        public control.Models.User User { get; set; } = default!;
+        public string LastName { get; set; }
+        [BindProperty]
+        public string Name { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public void OnGet()
         {
-            if (id == null || _context.User == null)
+
+            return;
+        }
+        public void OnGetSearch()
+        {
+            if (UserIdentifier is not null)
             {
-                return NotFound();
+
             }
 
-            var user =  await _context.User.FirstOrDefaultAsync(m => m.UserName == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            User = user;
-            return Page();
+
+            return ;
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+
+
+        public IActionResult OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
-            _context.Attach(User).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(User.UserName))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
+            return Page();
         }
 
         private bool UserExists(string id)
