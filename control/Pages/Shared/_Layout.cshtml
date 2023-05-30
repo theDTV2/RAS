@@ -87,11 +87,16 @@
                         @if (_loggedIn)
                         {
                             <li class="nav-item">
+                                <a class="nav-link disabled text-dark" asp-area="" asp-page="">Rolle: @AccountHelper.GetAccessLevelAsString(Context)</a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Logout</a>
                             </li>
                         }
                         @if (!_loggedIn)
                         {
+       
                             <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>
                             </li>
@@ -100,16 +105,9 @@
                     </ul>
 
 
-
-
-
                 </div>
             </div>
         </nav>
-
-
-
-
 
     </header>
 
