@@ -72,6 +72,12 @@ namespace control.Helper
                 return (EAccessLevel)userRoleRaw;
 
             return EAccessLevel.kNone;
+        }  
+
+        public static string GetAccessLevelAsString(HttpContext context)
+        {
+            //As GetEAccessLevel already checks for null, we can ignore the warning with !
+            return Enum.GetName(typeof(EAccessLevel), GetEAccessLevel(context))!;
         }
 
         public static User GetLoggedInUser(control.Data.controlContext dataContext, HttpContext context)
