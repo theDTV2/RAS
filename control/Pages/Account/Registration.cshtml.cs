@@ -49,6 +49,7 @@ namespace control.Pages.Account
 				User _user = AccountHelper.GetLoggedInUser(_context, HttpContext);
 
 				_user.CompletedRegistration = true;
+                _user.AccessLevel = EAccessLevel.kUser;
 				_context.SaveChanges();
 				return RedirectToPage("Dashboard");
 			}
