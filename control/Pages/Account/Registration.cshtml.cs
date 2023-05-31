@@ -44,12 +44,16 @@ namespace control.Pages.Account
         {
 			EAccessReturnValue _val = AuthHelper.CheckUserPermission(_context, HttpContext);
 
+            //TODO: Handle First/Last name empty
+
             if (AreYouSure && _val == EAccessReturnValue.kAccountRegistrationNotCompleted)
             {
 				User _user = AccountHelper.GetLoggedInUser(_context, HttpContext);
 
 				_user.CompletedRegistration = true;
                 _user.AccessLevel = EAccessLevel.kUser;
+                _user.FirstName = firstName;
+                _user.LastName = lastName;
 				_context.SaveChanges();
 				return RedirectToPage("Dashboard");
 			}
