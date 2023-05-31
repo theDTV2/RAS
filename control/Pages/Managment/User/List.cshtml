@@ -1,0 +1,86 @@
+﻿@page "{handler?}"
+@model control.Pages.Managment.User.ListModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List</title>
+</head>
+<body>
+    <form method="get" asp-page-handler="Search">
+        <div class="row">
+            <div class="d-flex flex-row-reverse">
+                <div class="p-2">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+                <div class="p-2">
+                    <input asp-for="SearchTerm" class="form-control" />
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+<table class="table">
+    <thead>
+        <tr> 
+            <th>    
+                <a> Email</a>
+            </th>
+            <th>
+                <a> First Name</a>
+            </th>
+            <th>
+                <a> Last Name</a>
+            </th>
+            <th>
+                <a> Access Level</a>
+            </th>
+            <th>
+                <a> Expiry Date</a>
+            </th>
+            <th>
+                <a> Last Login</a>
+            </th>
+            <th>
+                <a> Completed Registration</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.User) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccessLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpiryDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastLogin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompletedRegistration)
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-page="./Unlock" asp-route-id="@item.UserName">Unlock</a> |
+                <a class="btn btn-primary"  asp-page="./Details" asp-route-id="@item.UserName">Manage</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>
