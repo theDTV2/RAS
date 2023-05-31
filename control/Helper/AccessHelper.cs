@@ -68,6 +68,7 @@ namespace control.Helper
                 //Remove Access Code after login
                 userToCheck.AccessCode = String.Empty;
                 userToCheck.AccessCodeGenerationTime = DateTime.MinValue;
+                user.LastLogin = DateTime.Now;
 
                 dataContext.SaveChanges();
 
@@ -93,6 +94,8 @@ namespace control.Helper
                 //Remove Access Code after login
                 user.AccessCode = String.Empty;
                 user.AccessCodeGenerationTime = DateTime.MinValue;
+                user.LastLogin = DateTime.Now;
+
                 dataContext.SaveChanges();
             }
             return rval;
