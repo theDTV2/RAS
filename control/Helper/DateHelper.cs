@@ -16,7 +16,7 @@ namespace control.Helper
             if (_now < _wsSemester && (_wsSemester - _now) < TimeSpan.FromDays(31))
                 return true;
 
-            return true;
+            return false;
         }
 
         public static DateTime GenerateNextSemesterEnd()
