@@ -16,10 +16,14 @@ namespace control.Pages.Account
             _context = context;
         }
 
+        [BindProperty]
+        public string ExpiryDate { get; set; }
         public IActionResult OnGet()
         {
             if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kUser))
                 return Unauthorized();
+
+            ExpiryDate = AccountHelper.GetExpiryDate(_context, HttpContext);
 
             return Page();
         }
