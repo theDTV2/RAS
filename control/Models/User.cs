@@ -56,8 +56,11 @@ namespace control.Models
         public DateTime? AccessCodeGenerationTime { get; set; }
         public DateTime? LastLogin {get;set;}
 
-        public List<Door> AccessDoors { get; set; } = new List<Door>();
-        public List<Door> AdminDoors { get; set; } = new List<Door>();
+        [ForeignKey("AccessUsers")]
+        public virtual ICollection<Door> AccessDoors { get; set; } = new List<Door>();
+
+        [ForeignKey("AdminUsers")]
+        public virtual ICollection<Door> AdminDoors { get; set; } = new List<Door>();
 
         public bool AcceptedEula { get; set; } = false;
 

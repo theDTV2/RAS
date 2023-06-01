@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace control.Models
 {
@@ -31,6 +31,14 @@ namespace control.Models
         public string DisplayName { get; set; } = "";
 
         public bool SelfRegisterAllowed { get; set; } = false;
+
+
+        [InverseProperty("AccessDoors")]
+        public virtual ICollection<User> AccessUsers { get; set; }  = new List<User>();
+
+        [InverseProperty("AdminDoors")]
+        public virtual ICollection<User> AdminUsers { get; set; } = new List<User>();
+
 
 
     }
