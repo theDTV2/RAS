@@ -46,7 +46,7 @@ namespace control.Pages.Managment.User
         {
             if (_context.User.Where(u => u.UserName == UserIdentifier).Count() != 1)
             {
-                return new RedirectResult("List");
+                return RedirectToPage("List");
             }
 
             User = _context.User.Where(u => u.UserName == UserIdentifier).First();
@@ -56,7 +56,7 @@ namespace control.Pages.Managment.User
             {
                 AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "User missing or invalid");
 
-                return new RedirectResult("List");
+                return RedirectToPage("List");
             }
 
             LastName = User.LastName;
@@ -66,7 +66,7 @@ namespace control.Pages.Managment.User
             return Page();
         }
 
-        public IActionResult OnPostAsync()
+        public IActionResult OnPost()
         {
             User = _context.User.Where(u => u.UserName == UserIdentifier).First();
 
@@ -76,15 +76,16 @@ namespace control.Pages.Managment.User
             User.SecretCode = Secret;
 
             try { _context.SaveChanges(); }
-            catch {
+            catch
+            {
                 AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Error while saving data");
-            
+
             }
             //TODO: Proper Error catching
 
             AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Saving successfull");
 
-            return new RedirectResult("List");
+            return RedirectToPage("List");
         }
 
     }

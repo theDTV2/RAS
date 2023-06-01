@@ -43,12 +43,9 @@ namespace control.Pages.Managment.User
 
             SearchedSomething = true;
             User = SearchHelper.SearchUser(_context, SearchTerm).ToList();
-
-
-
+            //TODO: Make this better
 
         }
-
 
 
         }
