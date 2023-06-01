@@ -1,7 +1,10 @@
-﻿@page
+﻿@page "{UserIdentifier?}"
 @model control.Pages.Managment.User.UnlockModel
 
+@{
+    bool _editUserElements = Model.FoundElement;
 
+}
 <!DOCTYPE html>
 
 <html>
@@ -13,15 +16,11 @@
 
     <h4>User</h4>
     <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="FirstName" class="control-label"></label>
-                    <input asp-for="FirstName" class="form-control" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
+    <form asp-page-handler="edit" method="post">
+        <div class="row">
+            <div class="col-sm-6">
+                <a>Ausgewählter Nutzer: @Model.UserIdentifier</a>
+
                 <div class="form-group">
                     <label asp-for="LastName" class="control-label"></label>
                     <input asp-for="LastName" class="form-control" />
@@ -29,21 +28,33 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="SecretCode" class="control-label"></label>
-                    <input asp-for="SecretCode" class="form-control" />
-                    <span asp-validation-for="SecretCode" class="text-danger"></span>
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
 
+                <br />
+                <a class="btn btn-primary" asp-page="List">Back</a>
+            </div>
+
+            <div class="col-sm-4 offset-lg-1">
+
+                
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <label asp-for="Secret" class="control-label"></label>
+                    <input asp-for="Secret" class="form-control" />
+                    <span asp-validation-for="Secret" class="text-danger"></span>
                 </div>
-            </form>
-        </div>
-    </div>
+                <br />
+                <button class="btn btn-secondary">Update</button>
 
-    <div>
-        <a asp-page="./List">Back to List</a>
-    </div>
+   
+
+
+            </div>
+        </div>
+
+    </form>
 
     @section Scripts {
         @{

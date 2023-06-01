@@ -8,8 +8,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using control.Data;
 using control.Models;
-using System.Drawing.Printing;
 using control.Generator;
+using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 
 namespace control.Pages.Managment.User
 {
@@ -22,79 +23,69 @@ namespace control.Pages.Managment.User
             _context = context;
         }
 
-        [BindProperty]
-        public new Models.User User { get; set; } = default!;
-
-        [BindProperty]
-        public string FirstName { get; set; } = default!;
-        [BindProperty]
-        public string LastName { get; set; } = default!;
-        [BindProperty]
-        public string SecretCode { get; set; } = default!;
 
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        [BindProperty(SupportsGet = true)]
+        public string? UserIdentifier { get; set; } = "";
+
+        [BindProperty(SupportsGet = true)]
+        public bool FoundElement { get; set; } = false;
+
+
+
+        [BindProperty]
+        public string LastName { get; set; }
+        [BindProperty]
+        public string FirstName { get; set; }
+        [BindProperty]
+        public string Secret { get; set; }
+
+        public new Models.User User { get; set; }
+
+        public IActionResult OnGet()
         {
-            if (id == null || _context.User == null)
+            if (_context.User.Where(u => u.UserName == UserIdentifier).Count() != 1)
             {
-                return NotFound();
-            }
-
-            var _user =  await _context.User.FirstOrDefaultAsync(m => m.UserName == id);
-            if (_user == null)
-            {
-                return NotFound();
-            }
-
-            if (!_user.CompletedRegistration)
-            {
-                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "User has not completed registration!");
                 return new RedirectResult("List");
             }
 
-            FirstName = _user.FirstName;
-            LastName = _user.LastName;
-            SecretCode = _user.SecretCode;
+            User = _context.User.Where(u => u.UserName == UserIdentifier).First();
 
+
+            if ((UserIdentifier is null) || (User is null))
+            {
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "User missing or invalid");
+
+                return new RedirectResult("List");
+            }
+
+            LastName = User.LastName;
+            FirstName = User.FirstName;
+            Secret = User.SecretCode;
 
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPostAsync()
         {
-            //TODO: Guard against false input
-            //TODO: Add alerts for all possible problems
-            User.LastName = LastName;
-            User.FirstName = FirstName;
-    
-            User.SecretCode = SecretCode;
+            User = _context.User.Where(u => u.UserName == UserIdentifier).First();
 
             _context.Attach(User).State = EntityState.Modified;
+            User.LastName = LastName;
+            User.FirstName = FirstName;
+            User.SecretCode = Secret;
 
-            try
-            {
-                await _context.SaveChangesAsync();
+            try { _context.SaveChanges(); }
+            catch {
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Error while saving data");
+            
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(User.UserName))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            //TODO: Proper Error catching
 
-            return RedirectToPage("./List");
+            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Saving successfull");
+
+            return new RedirectResult("List");
         }
 
-        private bool UserExists(string id)
-        {
-          return (_context.User?.Any(e => e.UserName == id)).GetValueOrDefault();
-        }
     }
 }
