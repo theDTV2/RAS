@@ -10,31 +10,42 @@
     <title>List</title>
 </head>
 <body>
-<p>
-    <a asp-page="Register">Register new </a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Door[0].LastCheckInTime)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Door) {
-        <tr>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.LastCheckInTime)
-            </td>
-            <td>
-
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p>
+        <a class="btn btn-primary" asp-page="Register">Register new </a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Door[0].DisplayName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Door[0].Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Door[0].LastCheckInTime)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Door)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DisplayName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastCheckInTime)
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </body>
 </html>
