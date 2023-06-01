@@ -104,5 +104,13 @@ namespace control.Helper
             return dataContext.User.Where(e => e.UserName == _userName).FirstOrDefault()!;
         }
 
+        public static string GetExpiryDate(control.Data.controlContext dataContext, HttpContext context)
+        {
+            if (!GetLoggedIn(context))
+                return "";
+
+            return GetLoggedInUser(dataContext, context).ExpiryDate.ToShortDateString();
+        }
+
     }
 }
