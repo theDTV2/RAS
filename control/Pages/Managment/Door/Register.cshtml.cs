@@ -41,7 +41,7 @@ namespace control.Pages.Managment.Door
             _context.Door.Add(Door);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("List");
         }
     }
 }

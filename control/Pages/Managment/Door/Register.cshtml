@@ -21,6 +21,11 @@
                 <input asp-for="Door.Id" class="form-control" />
                 <span asp-validation-for="Door.Id" class="text-danger"></span>
             </div>
+                <div class="form-group">
+                    <label asp-for="Door.DisplayName" class="control-label"></label>
+                    <input asp-for="Door.DisplayName" class="form-control" />
+                    <span asp-validation-for="Door.DisplayName" class="text-danger"></span>
+                </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -29,7 +34,7 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="List">Back</a>
 </div>
 
 @section Scripts {
