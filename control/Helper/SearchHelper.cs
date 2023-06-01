@@ -1,18 +1,23 @@
 ﻿using control.Data;
 using control.Models;
+using Microsoft.IdentityModel.Tokens;
+using System.Collections.Generic;
 
 namespace control.Helper
 {
     public static class SearchHelper
     {
 
-        public static IEnumerable<User> SearchUser(controlContext context,  string searchTerm)
+        public static IEnumerable<User> SearchUser(controlContext dataContext,  string searchTerm)
         {
-            var _user = context.User.Where(e =>
+            IList<User> _user = dataContext.User.Where(e =>
             e.UserName.Contains(searchTerm) ||
             e.AccessCode.Contains(searchTerm) ||
             e.FirstName.Contains(searchTerm) ||
             e.LastName.Contains(searchTerm)).ToList();
+
+            if (_user.IsNullOrEmpty() ) 
+                return new List<User>();
 
             return _user;
 
