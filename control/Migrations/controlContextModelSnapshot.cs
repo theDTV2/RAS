@@ -17,15 +17,39 @@ namespace control.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
 
+            modelBuilder.Entity("DoorUser", b =>
+                {
+                    b.Property<string>("AccessDoorsId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AccessUsers")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AccessDoorsId", "AccessUsers");
+
+                    b.HasIndex("AccessUsers");
+
+                    b.ToTable("DoorUser");
+                });
+
+            modelBuilder.Entity("DoorUser1", b =>
+                {
+                    b.Property<string>("AdminDoorsId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AdminUsers")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AdminDoorsId", "AdminUsers");
+
+                    b.HasIndex("AdminUsers");
+
+                    b.ToTable("DoorUser1");
+                });
+
             modelBuilder.Entity("control.Models.Door", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AccessDoorIds")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AdminDoorIds")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("DisplayName")
@@ -49,10 +73,6 @@ namespace control.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccessDoorIds");
-
-                    b.HasIndex("AdminDoorIds");
 
                     b.ToTable("Door");
                 });
@@ -139,22 +159,34 @@ namespace control.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("control.Models.Door", b =>
+            modelBuilder.Entity("DoorUser", b =>
                 {
-                    b.HasOne("control.Models.User", null)
-                        .WithMany("AccessDoors")
-                        .HasForeignKey("AccessDoorIds");
+                    b.HasOne("control.Models.Door", null)
+                        .WithMany()
+                        .HasForeignKey("AccessDoorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("control.Models.User", null)
-                        .WithMany("AdminDoors")
-                        .HasForeignKey("AdminDoorIds");
+                        .WithMany()
+                        .HasForeignKey("AccessUsers")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("control.Models.User", b =>
+            modelBuilder.Entity("DoorUser1", b =>
                 {
-                    b.Navigation("AccessDoors");
+                    b.HasOne("control.Models.Door", null)
+                        .WithMany()
+                        .HasForeignKey("AdminDoorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("AdminDoors");
+                    b.HasOne("control.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("AdminUsers")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -12,6 +12,23 @@ namespace control.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Door",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    EntryStatus = table.Column<int>(type: "INTEGER", nullable: false),
+                    Registered = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Secret = table.Column<string>(type: "TEXT", nullable: false),
+                    LastCheckInTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DisplayName = table.Column<string>(type: "TEXT", nullable: false),
+                    SelfRegisterAllowed = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Door", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Log",
                 columns: table => new
                 {
@@ -60,56 +77,81 @@ namespace control.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Door",
+                name: "DoorUser",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    EntryStatus = table.Column<int>(type: "INTEGER", nullable: false),
-                    Registered = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Secret = table.Column<string>(type: "TEXT", nullable: false),
-                    LastCheckInTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DisplayName = table.Column<string>(type: "TEXT", nullable: false),
-                    SelfRegisterAllowed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AccessDoorIds = table.Column<string>(type: "TEXT", nullable: true),
-                    AdminDoorIds = table.Column<string>(type: "TEXT", nullable: true)
+                    AccessDoorsId = table.Column<string>(type: "TEXT", nullable: false),
+                    AccessUsers = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Door", x => x.Id);
+                    table.PrimaryKey("PK_DoorUser", x => new { x.AccessDoorsId, x.AccessUsers });
                     table.ForeignKey(
-                        name: "FK_Door_User_AccessDoorIds",
-                        column: x => x.AccessDoorIds,
-                        principalTable: "User",
-                        principalColumn: "UserName");
+                        name: "FK_DoorUser_Door_AccessDoorsId",
+                        column: x => x.AccessDoorsId,
+                        principalTable: "Door",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Door_User_AdminDoorIds",
-                        column: x => x.AdminDoorIds,
+                        name: "FK_DoorUser_User_AccessUsers",
+                        column: x => x.AccessUsers,
                         principalTable: "User",
-                        principalColumn: "UserName");
+                        principalColumn: "UserName",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DoorUser1",
+                columns: table => new
+                {
+                    AdminDoorsId = table.Column<string>(type: "TEXT", nullable: false),
+                    AdminUsers = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DoorUser1", x => new { x.AdminDoorsId, x.AdminUsers });
+                    table.ForeignKey(
+                        name: "FK_DoorUser1_Door_AdminDoorsId",
+                        column: x => x.AdminDoorsId,
+                        principalTable: "Door",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DoorUser1_User_AdminUsers",
+                        column: x => x.AdminUsers,
+                        principalTable: "User",
+                        principalColumn: "UserName",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Door_AccessDoorIds",
-                table: "Door",
-                column: "AccessDoorIds");
+                name: "IX_DoorUser_AccessUsers",
+                table: "DoorUser",
+                column: "AccessUsers");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Door_AdminDoorIds",
-                table: "Door",
-                column: "AdminDoorIds");
+                name: "IX_DoorUser1_AdminUsers",
+                table: "DoorUser1",
+                column: "AdminUsers");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Door");
+                name: "DoorUser");
+
+            migrationBuilder.DropTable(
+                name: "DoorUser1");
 
             migrationBuilder.DropTable(
                 name: "Log");
 
             migrationBuilder.DropTable(
                 name: "LoginLink");
+
+            migrationBuilder.DropTable(
+                name: "Door");
 
             migrationBuilder.DropTable(
                 name: "User");
