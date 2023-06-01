@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using control.Data;
 using control.Models;
+using control.Helper;
 
 namespace control.Pages.Managment.User
 {
@@ -21,17 +22,34 @@ namespace control.Pages.Managment.User
 
         public new IList<Models.User> User { get;set; } = default!;
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
+
+        public bool SearchedSomething { get; set; } = false;
 
         public async Task OnGetAsync()
         {
+
+            SearchedSomething = false;
+
             if (_context.User != null)
             {
                 User = await _context.User.ToListAsync();
             }
         }
 
+        public void OnGetSearch()
+        {
 
-    }
+            SearchedSomething = true;
+            User = SearchHelper.SearchUser(_context, SearchTerm).ToList();
+
+
+
+
+        }
+
+
+
+        }
 }
