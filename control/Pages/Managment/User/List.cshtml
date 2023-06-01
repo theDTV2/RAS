@@ -81,8 +81,8 @@
                         @Html.DisplayFor(modelItem => item.CompletedRegistration)
                     </td>
                     <td>
-                        <a class="btn btn-primary" asp-page="./Unlock" asp-route-id="@item.UserName">Unlock</a> |
-                        <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.UserName">Manage</a>
+                        <a class="btn btn-primary" asp-page="./Unlock" asp-route-UserIdentifier="@item.UserName">Unlock</a> |
+                        <a class="btn btn-primary disabled" asp-page="./Details" asp-route-id="@item.UserName">Manage</a>
                     </td>
                 </tr>
             }
