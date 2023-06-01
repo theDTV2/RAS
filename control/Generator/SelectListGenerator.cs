@@ -10,12 +10,21 @@ namespace control.Generator
     public static class SelectListGenerator
     {
 
-        public static SelectList GenerateSelectListForDoor(control.Data.controlContext dataContext, HttpContext httpContext, User userToGenerateFor)
+        public static MultiSelectList GenerateSelectListForDoor(control.Data.controlContext dataContext, HttpContext httpContext, User userToGenerateFor)
         {
             User _admin = AccountHelper.GetLoggedInUser(dataContext, httpContext);
             IList<Door> _doors = GetDoorListByUserAccess(dataContext, _admin);
 
             List<SelectListItem> _outputList = new();
+            List<string> _selectedList = new();
+
+            //TODO: find a better way for this workaround
+            _outputList.Add(new SelectListItem
+            {
+                Text = "None",
+                Value = "",
+                Selected = true
+            });
 
             foreach (var item in _doors)
             {
@@ -23,11 +32,12 @@ namespace control.Generator
                 {
                     Text = item.DisplayName,
                     Value = item.Id,
-                    Selected = userToGenerateFor.AccessDoors.Contains(item)
                 });
 
+                if (userToGenerateFor.AccessDoors.Contains(item))
+                    _selectedList.Add(item.Id);
             }
-            return new SelectList(_outputList, "Value", "Text", "Selected");
+            return new MultiSelectList(_outputList, "Value", "Text", _selectedList);
         }
 
 
