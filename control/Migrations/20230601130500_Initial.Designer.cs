@@ -11,8 +11,8 @@ using control.Data;
 namespace control.Migrations
 {
     [DbContext(typeof(controlContext))]
-    [Migration("20230526101816_Update3")]
-    partial class Update3
+    [Migration("20230601130500_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,12 @@ namespace control.Migrations
             modelBuilder.Entity("control.Models.Door", b =>
                 {
                     b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AccessDoorIds")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AdminDoorIds")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("DisplayName")
@@ -47,7 +53,32 @@ namespace control.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AccessDoorIds");
+
+                    b.HasIndex("AdminDoorIds");
+
                     b.ToTable("Door");
+                });
+
+            modelBuilder.Entity("control.Models.Log", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Log");
                 });
 
             modelBuilder.Entity("control.Models.LoginLink", b =>
@@ -109,6 +140,24 @@ namespace control.Migrations
                     b.HasKey("UserName");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("control.Models.Door", b =>
+                {
+                    b.HasOne("control.Models.User", null)
+                        .WithMany("AccessDoors")
+                        .HasForeignKey("AccessDoorIds");
+
+                    b.HasOne("control.Models.User", null)
+                        .WithMany("AdminDoors")
+                        .HasForeignKey("AdminDoorIds");
+                });
+
+            modelBuilder.Entity("control.Models.User", b =>
+                {
+                    b.Navigation("AccessDoors");
+
+                    b.Navigation("AdminDoors");
                 });
 #pragma warning restore 612, 618
         }
