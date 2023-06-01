@@ -128,7 +128,8 @@ namespace control.Helper
             User newUser = new()
             {
                 UserName = userName,
-                AccessLevel = EAccessLevel.kNone
+                AccessLevel = EAccessLevel.kNone,
+                ExpiryDate  = DateHelper.GenerateCurrentSemesterEnd()
 
             };
             dataContext.User.Add(newUser);
