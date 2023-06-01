@@ -11,6 +11,7 @@ using control.Models;
 using control.Generator;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
+using control.Helper;
 
 namespace control.Pages.Managment.User
 {
@@ -39,6 +40,9 @@ namespace control.Pages.Managment.User
         public string FirstName { get; set; }
         [BindProperty]
         public string Secret { get; set; }
+        [BindProperty]
+        public string[] DoorsToGiveAccessTo { get; set; }
+
 
         public new Models.User User { get; set; }
 
@@ -49,7 +53,7 @@ namespace control.Pages.Managment.User
                 return RedirectToPage("List");
             }
 
-            User = _context.User.Where(u => u.UserName == UserIdentifier).First();
+            User = _context.User.Where(u => u.UserName == UserIdentifier).Include(u => u.AccessDoors).Include(u => u.AdminDoors).First();
 
 
             if ((UserIdentifier is null) || (User is null))
@@ -62,25 +66,24 @@ namespace control.Pages.Managment.User
             LastName = User.LastName;
             FirstName = User.FirstName;
             Secret = User.SecretCode;
+            ViewData["Test"] = SelectListGenerator.GenerateSelectListForDoor(_context, HttpContext, User);
+
 
             return Page();
         }
 
         public IActionResult OnPost()
         {
-            User = _context.User.Where(u => u.UserName == UserIdentifier).First();
+            User = _context.User.Where(u => u.UserName == UserIdentifier).Include(u => u.AccessDoors).Include(u => u.AdminDoors).First();
 
-            _context.Attach(User).State = EntityState.Modified;
             User.LastName = LastName;
             User.FirstName = FirstName;
             User.SecretCode = Secret;
 
-            try { _context.SaveChanges(); }
-            catch
-            {
-                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Error while saving data");
+            User.AccessDoors =  SelectListHelper.ConvertDoorIdStringsToReferences(_context, DoorsToGiveAccessTo).ToList();
 
-            }
+            _context.SaveChanges();
+ 
             //TODO: Proper Error catching
 
             AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Saving successfull");

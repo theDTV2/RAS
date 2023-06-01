@@ -20,7 +20,7 @@ namespace control.Pages.Managment.User
             _context = context;
         }
 
-        public new IList<Models.User> User { get;set; } = default!;
+        public new IList<Models.User> User { get; set; } = default!;
 
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
@@ -48,5 +48,5 @@ namespace control.Pages.Managment.User
         }
 
 
-        }
+    }
 }
