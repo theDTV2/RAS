@@ -42,7 +42,7 @@ namespace control.Generator
 
 
 
-        private static IList<Door> GetDoorListByUserAccess(control.Data.controlContext dataContext,User admin)
+        private static IList<Door> GetDoorListByUserAccess(control.Data.controlContext dataContext, User admin)
         {
 
             if (admin.AccessLevel >= EAccessLevel.kAdmin)
@@ -50,6 +50,30 @@ namespace control.Generator
 
             //Moderators are only allowed to administrate their own doors, 
             return dataContext.Door.Where(e => admin.AdminDoors.Contains(e)).ToList();
+
+        }
+
+
+        public static SelectList GetAccessListByUserAccess(control.Data.controlContext context, HttpContext httpContext)
+        {
+            EAccessLevel _accessLevel = AccountHelper.GetEAccessLevel(httpContext);
+
+            List<SelectListItem> _outputList = new(){
+                 new SelectListItem{Text = "None",Value = "0" },
+                  new SelectListItem{Text="User",Value = "1"},
+                  new SelectListItem{Text="Moderator",Value = "2"}
+                  };
+
+            if (_accessLevel == EAccessLevel.kAdmin)
+                _outputList.Add(new SelectListItem { Text = "User", Value = "3" });
+
+
+
+
+
+            return new SelectList(_outputList, "Value", "Text");
+
+
 
         }
     }
