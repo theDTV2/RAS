@@ -39,7 +39,37 @@ namespace control.Generator
             }
             return new MultiSelectList(_outputList, "Value", "Text", _selectedList);
         }
+        public static MultiSelectList GenerateSelectListForUser(control.Data.controlContext dataContext, HttpContext httpContext, Door doorToGenerateFor)
+        {
+            User _admin = AccountHelper.GetLoggedInUser(dataContext, httpContext);
 
+            //TODO: Move this into another function
+            IList<User> _users = dataContext.User.ToList();
+
+            List<SelectListItem> _outputList = new();
+            List<string> _selectedList = new();
+
+            //TODO: find a better way for this workaround
+            _outputList.Add(new SelectListItem
+            {
+                Text = "None",
+                Value = "",
+                Selected = true
+            });
+
+            foreach (var item in _users)
+            {
+                _outputList.Add(new SelectListItem
+                {
+                    Text = item.FirstName + " " + item.LastName,
+                    Value = item.UserName,
+                });
+
+                if (doorToGenerateFor.AdminUsers.Contains(item))
+                    _selectedList.Add(item.UserName);
+            }
+            return new MultiSelectList(_outputList, "Value", "Text", _selectedList);
+        }
 
 
         private static IList<Door> GetDoorListByUserAccess(control.Data.controlContext dataContext, User admin)

@@ -9,5 +9,10 @@ namespace control.Helper
             return dataContext.Door.Where(e => doors.Contains(e.Id)).ToList();
         }
 
+        public static IList<User> ConvertUserIdStringsToReferences(control.Data.controlContext dataContext, string[] users)
+        {
+            return dataContext.User.Where(e => users.Contains(e.UserName)).ToList();
+        }
+
     }
 }
