@@ -2,6 +2,7 @@
 using control.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -11,8 +12,12 @@ namespace control.Generator
     {
 
         public static MultiSelectList GenerateSelectListForDoor(control.Data.controlContext dataContext, HttpContext httpContext, User userToGenerateFor)
-        {
-            User _admin = AccountHelper.GetLoggedInUser(dataContext, httpContext);
+        {       
+            //TODO: Move this into another function
+             var _username = AccountHelper.GetUserName(httpContext);
+
+            User _admin = dataContext.User.Where(u => u.UserName == _username).Include(u => u.AdminDoors).FirstOrDefault()!;
+
             IList<Door> _doors = GetDoorListByUserAccess(dataContext, _admin);
 
             List<SelectListItem> _outputList = new();
@@ -41,8 +46,6 @@ namespace control.Generator
         }
         public static MultiSelectList GenerateSelectListForUser(control.Data.controlContext dataContext, HttpContext httpContext, Door doorToGenerateFor)
         {
-            User _admin = AccountHelper.GetLoggedInUser(dataContext, httpContext);
-
             //TODO: Move this into another function
             IList<User> _users = dataContext.User.ToList();
 

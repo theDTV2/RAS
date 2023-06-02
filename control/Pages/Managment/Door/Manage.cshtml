@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{DoorIdentifier}"
 @model control.Pages.Managment.Door.ManageModel
 
 
@@ -16,6 +16,14 @@
     - Verlauf
     - Moderatoren hinzufügen/entfernen
 
+    <form method="post">
+        <label asp-for="DoorAdminToGiveAccessTo" class="control-label"></label>
+        <select class="selectpicker" asp-for="DoorAdminToGiveAccessTo" data-live-search="true" asp-items="(MultiSelectList)@ViewData["SelectBox"]!"></select>
+        
+        <br /> <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </div>
 
+    </form>
 </body>
 </html>

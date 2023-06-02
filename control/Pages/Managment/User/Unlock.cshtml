@@ -33,33 +33,25 @@
                     <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
 
-
-
                 <br />
                 <a class="btn btn-primary" asp-page="List">Back</a>
             </div>
 
             <div class="col-sm-4 offset-lg-1">
 
-                
                 <div class="form-group">
                     <label asp-for="Secret" class="control-label"></label>
                     <input asp-for="Secret" class="form-control" />
                     <span asp-validation-for="Secret" class="text-danger"></span>
                 </div>
 
-                
                     <label asp-for="DoorsToGiveAccessTo" class="control-label"></label>
-                    <select class="selectpicker" asp-for="DoorsToGiveAccessTo" asp-items="(MultiSelectList)@ViewData["Test"]!"></select>
+                    <select class="selectpicker" asp-for="DoorsToGiveAccessTo" asp-items="(MultiSelectList)@ViewData["SelectBox"]!"></select>
 
-                
                 <br /> <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-primary" />
                 </div>
                
-   
-
-
             </div>
         </div>
 

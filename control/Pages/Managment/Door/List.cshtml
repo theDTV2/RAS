@@ -25,6 +25,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Door[0].LastCheckInTime)
                 </th>
+                <th>
+
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -42,6 +45,7 @@
                         @Html.DisplayFor(modelItem => item.LastCheckInTime)
                     </td>
                     <td>
+                        <a class="btn btn-primary" asp-page="Manage" asp-route-DoorIdentifier="@item.Id">Manage</a>
                     </td>
                 </tr>
             }
