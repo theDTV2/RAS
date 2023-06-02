@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using control.Data;
 using control.Models;
+using control.Helper;
 
 namespace control.Pages.Managment.User
 {
@@ -35,6 +36,13 @@ namespace control.Pages.Managment.User
             {
                 return NotFound();
             }
+
+            var _userEAccessLevel = AccountHelper.GetEAccessLevel(HttpContext);
+            if (user.AccessLevel >= _userEAccessLevel && _userEAccessLevel !=EAccessLevel.kSuperAdmin )
+                return NotFound();
+
+
+
             User = user;
             return Page();
         }
@@ -43,6 +51,11 @@ namespace control.Pages.Managment.User
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            var _userEAccessLevel = AccountHelper.GetEAccessLevel(HttpContext);
+            if (User.AccessLevel >= _userEAccessLevel && _userEAccessLevel != EAccessLevel.kSuperAdmin)
+                return NotFound();
+
+
             if (!ModelState.IsValid)
             {
                 return Page();
