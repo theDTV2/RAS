@@ -1,5 +1,7 @@
 ﻿@page "{handler?}"
 @model control.Pages.Managment.User.ListModel
+@using control.Helper;
+@using control.Models;
 
 <!DOCTYPE html>
 
@@ -81,8 +83,15 @@
                         @Html.DisplayFor(modelItem => item.CompletedRegistration)
                     </td>
                     <td>
-                        <a class="btn btn-primary" asp-page="./Unlock" asp-route-UserIdentifier="@item.UserName">Unlock</a> |
-                        <a class="btn btn-primary" asp-page="./Manage" asp-route-id="@item.UserName">Manage</a>
+                        <a class="btn btn-primary" asp-page="./Unlock" asp-route-UserIdentifier="@item.UserName">Unlock</a>
+
+
+                        @if (AccountHelper.GetEAccessLevel(HttpContext) >= item.AccessLevel || AccountHelper.GetEAccessLevel(HttpContext) == EAccessLevel.kSuperAdmin)
+                        {
+                            @Html.Raw("|");
+                            <a class="btn btn-primary" asp-page="./Manage" asp-route-id="@item.UserName">Manage</a>
+                        }
+
                     </td>
                 </tr>
             }
