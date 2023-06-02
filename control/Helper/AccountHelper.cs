@@ -1,4 +1,5 @@
 ﻿using control.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace control.Helper
 {
@@ -110,6 +111,22 @@ namespace control.Helper
                 return "";
 
             return GetLoggedInUser(dataContext, context).ExpiryDate.ToShortDateString();
+        }
+
+        public static IList<Door> GetAdminDoorList(control.Data.controlContext dataContext, HttpContext context)
+        {   
+            string _username = GetUserName(context);
+            
+            //Admins and Super Admins get all doors
+            if (GetEAccessLevel(context) >= EAccessLevel.kAdmin)
+                return dataContext.Door.ToList();
+
+
+            //We need to get the user in another way here, otherwise the foreign list will not be loaded
+            var _user = dataContext.User.Where(u => u.UserName == _username).Include(u => u.AdminDoors).First();
+                return dataContext.Door.Where(d => _user.AdminDoors.Contains(d)).ToList();
+
+
         }
 
     }
