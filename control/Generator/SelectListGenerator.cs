@@ -100,13 +100,7 @@ namespace control.Generator
             if (_accessLevel == EAccessLevel.kAdmin)
                 _outputList.Add(new SelectListItem { Text = "User", Value = "3" });
 
-
-
-
-
             return new SelectList(_outputList, "Value", "Text");
-
-
 
         }
     }

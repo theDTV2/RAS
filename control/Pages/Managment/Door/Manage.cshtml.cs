@@ -9,6 +9,7 @@ using control.Data;
 using control.Models;
 using control.Helper;
 using control.Generator;
+using System.ComponentModel.DataAnnotations;
 
 namespace control.Pages.Managment.Door
 {
@@ -27,6 +28,15 @@ namespace control.Pages.Managment.Door
         [BindProperty(SupportsGet = true)]
         public string DoorIdentifier { get; set; } = "";
 
+        public string DoorID { get; set; }
+
+        [BindProperty]
+        [Display(Name = "Name des Displays:")]
+        public string DoorDisplayName { get; set; }
+
+        [Display(Name = "Tür Eintrittsmodus:")]
+        public EDoorEntryMode DoorEntryMode { get; set; }
+
         public IActionResult OnGet()
         {
             if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kAdmin))
@@ -38,6 +48,10 @@ namespace control.Pages.Managment.Door
                 return NotFound();
 
 
+            DoorID = _door.Id;
+            DoorDisplayName = _door.DisplayName;
+            DoorEntryMode = _door.EntryStatus;
+
             ViewData["SelectBox"] = SelectListGenerator.GenerateSelectListForUser(_context, HttpContext, _door);
 
             return Page();
@@ -48,6 +62,13 @@ namespace control.Pages.Managment.Door
             control.Models.Door? _door = _context.Door.Where(d => d.Id == DoorIdentifier).Include(d => d.AdminUsers).FirstOrDefault();
 
             _door.AdminUsers = SelectListHelper.ConvertUserIdStringsToReferences(_context, DoorAdminToGiveAccessTo);
+
+            if (_door == null)
+                return NotFound();
+
+            _door.Id = DoorID;
+            _door.DisplayName = DoorDisplayName;
+            _door.EntryStatus = DoorEntryMode;
 
             _context.SaveChanges();
 

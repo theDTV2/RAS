@@ -11,19 +11,56 @@
 </head>
 <body>
 
-    TODO: <br />
+    TODO:
+    <br />
     - Tür sperren/öffnen
     - Verlauf
     - Moderatoren hinzufügen/entfernen
 
-    <form method="post">
-        <label asp-for="DoorAdminToGiveAccessTo" class="control-label"></label>
-        <select class="selectpicker" asp-for="DoorAdminToGiveAccessTo" data-live-search="true" asp-items="(MultiSelectList)@ViewData["SelectBox"]!"></select>
-        
-        <br /> <div class="form-group">
-            <input type="submit" value="Update" class="btn btn-primary" />
-        </div>
 
+    <form method="post">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    Moderatoren hinzufügen/entfernen
+
+                    <div class="form-group">
+                        <label class="form-label" asp-for="DoorDisplayName"> </label>
+                        <select class="selectpicker" asp-for="DoorAdminToGiveAccessTo" data-live-search="true" asp-items="(MultiSelectList)@ViewData["SelectBox"]!"></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="DoorEntryMode"> </label>
+                        <select class="selectpicker" asp-for="DoorEntryMode" asp-items="@Html.GetEnumSelectList(typeof(control.Models.EDoorEntryMode))" class="form-control"></select>
+                    </div>
+                    <br />
+
+                </div>
+                <div class="col-sm">
+                    <a>Door ID: @Model.DoorID</a>
+
+                    <div class="form-group">
+                        <label class="form-label" asp-for="DoorDisplayName"> </label>
+                        <input class="form-control" asp-for="DoorDisplayName">
+                    </div>
+
+                </div>
+                <div class="col-sm">
+                    TODO - PLACEHOLDER - TODO <br />
+                    Hier kommt ein Log hin
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-4 text-center">
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
+
+
+
 </body>
 </html>
