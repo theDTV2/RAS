@@ -1,6 +1,7 @@
 ﻿using control.Data;
 using control.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using NuGet.Common;
 using System.ComponentModel;
 using System.Net.Cache;
@@ -14,7 +15,7 @@ namespace control.Helper
     {
 
         //TODO: Better way then to use system time?
-        static System.Random random  = new System.Random();
+        static System.Random random = new System.Random();
 
 
         public static async Task<User> GetOrCreateUserAsync(control.Data.controlContext dataContext, string email)
@@ -37,7 +38,7 @@ namespace control.Helper
             User? user = await GetOrCreateUserAsync(dataContext, email);
 
 
-            string accessCode =  user.AccessCode = GenerateAccessCode();
+            string accessCode = user.AccessCode = GenerateAccessCode();
             user.AccessCodeGenerationTime = DateTime.Now;
 
             await dataContext.SaveChangesAsync();
@@ -129,13 +130,50 @@ namespace control.Helper
             {
                 UserName = userName,
                 AccessLevel = EAccessLevel.kNone,
-                ExpiryDate  = DateHelper.GenerateCurrentSemesterEnd()
+                ExpiryDate = DateHelper.GenerateCurrentSemesterEnd()
 
             };
             dataContext.User.Add(newUser);
             await dataContext.SaveChangesAsync();
 
             return newUser;
+        }
+
+        public static void UpdateModeratorStatus(control.Data.controlContext dataContext, string[] userNames, string[] oldDoorAdminList)
+        {
+            User? _user;
+            bool _editedSomething = false;
+
+
+            //Only when a username was added/removed, we need to operate over it
+            string[] _userNamesToIterateOver = userNames.Intersect(oldDoorAdminList).ToArray();
+
+            foreach (string name in _userNamesToIterateOver)
+            {
+                _user = dataContext.User.Where(u => u.UserName == name).Include(u => u.AdminDoors).FirstOrDefault();
+
+                if (_user is not null)
+                {
+                    if (_user.AdminDoors.IsNullOrEmpty() && _user.AccessLevel == EAccessLevel.kModerator)
+                    {
+                        _user.AccessLevel = EAccessLevel.kUser;
+                        _editedSomething = true;
+                    }
+
+                    if (!_user.AdminDoors.IsNullOrEmpty() && _user.AccessLevel == EAccessLevel.kUser)
+                    {
+                        _user.AccessLevel = EAccessLevel.kModerator;
+                        _editedSomething = true;
+                    }
+                }
+            }
+
+            if (!_editedSomething)
+                return;
+
+            dataContext.SaveChanges();
+
+            return;
         }
 
         private static string GenerateAccessCode(int lenght = 9)
@@ -145,7 +183,6 @@ namespace control.Helper
 
             return Convert.ToString(new_code);
         }
-
 
     }
 

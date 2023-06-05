@@ -31,7 +31,7 @@ namespace control.Helper
         {
             EAccessReturnValue result = AccessHelper.TryToAuthUserWithLoginCode(dataContext, email, loginCode, out User? user);
 
-            //TODO: Move this somewhere else
+          
             if (result  == EAccessReturnValue.kAccessGranted)
             {
                 AccountHelper.LoginUser(context, email, user!.AccessLevel);
@@ -45,7 +45,7 @@ namespace control.Helper
         {
             EAccessReturnValue result = AccessHelper.TryToAuthUserWithLoginKey(dataContext, loginKey, out User? user);
 
-            //TODO: Move this somewhere else
+            
             if (result == EAccessReturnValue.kAccessGranted)
             {
                 AccountHelper.LoginUser(context, user!.UserName, user!.AccessLevel);
