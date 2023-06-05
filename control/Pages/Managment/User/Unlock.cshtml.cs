@@ -68,7 +68,6 @@ namespace control.Pages.Managment.User
             Secret = User.SecretCode;
             ViewData["SelectBox"] = SelectListGenerator.GenerateSelectListForDoor(_context, HttpContext, User);
 
-
             return Page();
         }
 

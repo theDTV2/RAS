@@ -27,15 +27,11 @@ namespace control.Pages.Managment.User
         public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null || _context.User == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
 
             var user =  await _context.User.FirstOrDefaultAsync(m => m.UserName == id);
             if (user == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
 
             var _userEAccessLevel = AccountHelper.GetEAccessLevel(HttpContext);
             if (user.AccessLevel >= _userEAccessLevel && _userEAccessLevel !=EAccessLevel.kSuperAdmin )
@@ -56,9 +52,7 @@ namespace control.Pages.Managment.User
             //TODO: Log Manipulation attempt
 
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
 
               //We use TryUpdateModelAsync to prevent data manipulation
             if (await TryUpdateModelAsync<control.Models.User>(
@@ -67,27 +61,16 @@ namespace control.Pages.Managment.User
                 u => u.FirstName, u => u.LastName, u => u.AccessLevel,
                 u => u.ExpiryDate, u => u.SecretCode
                 ))
-            {
-
-                try
+            try
                 {
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException) 
                 {
-                    if (!UserExists(User.UserName))
-                        return NotFound();
-                    else
-                        throw;
+                    return NotFound();
                 }
-
-            }
             return RedirectToPage("./List");
         }
 
-        private bool UserExists(string id)
-        {
-          return (_context.User?.Any(e => e.UserName == id)).GetValueOrDefault();
-        }
     }
 }
