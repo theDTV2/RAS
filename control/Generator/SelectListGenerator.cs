@@ -64,7 +64,7 @@ namespace control.Generator
             {
                 _outputList.Add(new SelectListItem
                 {
-                    Text = item.FirstName + " " + item.LastName,
+                    Text = item.FirstName + " " + item.LastName + " (" + item.UserName + ")",
                     Value = item.UserName,
                 });
 
