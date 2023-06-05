@@ -41,8 +41,6 @@ namespace control.Pages.Managment.User
             if (user.AccessLevel >= _userEAccessLevel && _userEAccessLevel !=EAccessLevel.kSuperAdmin )
                 return NotFound();
 
-
-
             User = user;
             return Page();
         }
@@ -79,7 +77,7 @@ namespace control.Pages.Managment.User
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./List");
         }
 
         private bool UserExists(string id)

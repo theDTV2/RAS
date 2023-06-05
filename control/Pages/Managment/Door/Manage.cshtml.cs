@@ -25,7 +25,7 @@ namespace control.Pages.Managment.Door
         [BindProperty]
         [Display(Name = "Tür Moderatoren:")]
         public string[] DoorAdminToGiveAccessTo { get; set; }
-        public string[] OldDoorAdminList { get; set; }
+  
 
         [BindProperty(SupportsGet = true)]
         public string DoorIdentifier { get; set; } = "";
@@ -46,7 +46,7 @@ namespace control.Pages.Managment.Door
 
             control.Models.Door? _door = _context.Door.Where(d => d.Id == DoorIdentifier).Include(d => d.AdminUsers).FirstOrDefault();
 
-            if (_door == null)
+            if (_door is null)
                 return NotFound();
 
 
@@ -54,9 +54,9 @@ namespace control.Pages.Managment.Door
             DoorDisplayName = _door.DisplayName;
             DoorEntryMode = _door.EntryStatus;
 
-            OldDoorAdminList = _door.AdminUsers.Select(s => s.UserName).ToArray();
-
-            ViewData["SelectBox"] = OldDoorAdminList;
+            TempData["OldDoorAdminList"] = _door.AdminUsers.Select(s => s.UserName).ToArray();
+            
+            ViewData["SelectBox"] = SelectListGenerator.GenerateSelectListForUser(_context, HttpContext, _door);
 
             return Page();
         }
@@ -68,6 +68,11 @@ namespace control.Pages.Managment.Door
                 return NotFound();
 
             _door.AdminUsers = SelectListHelper.ConvertUserIdStringsToReferences(_context, DoorAdminToGiveAccessTo);
+
+            string[]? OldDoorAdminList = (string[]?)TempData["OldDoorAdminList"];
+
+            if (OldDoorAdminList is null)
+                OldDoorAdminList = new string[0];
 
             AccessHelper.UpdateModeratorStatus(_context, DoorAdminToGiveAccessTo, OldDoorAdminList);
 
