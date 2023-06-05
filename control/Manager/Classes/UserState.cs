@@ -19,5 +19,10 @@
         {
             Valid = false;
         }
+        public void UpdateActionTime()
+        {
+           LastAction = DateTime.Now;
+        }
+
     }
 }

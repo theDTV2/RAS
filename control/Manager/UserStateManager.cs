@@ -9,16 +9,17 @@ namespace control.Manager
 {
     public static class UserStateManager
     {
-        private static IDictionary<string,UserState> UserStates { get; set; } = new Dictionary<string, UserState>();
+        private static IDictionary<string, UserState> UserStates { get; set; } = new Dictionary<string, UserState>();
 
         public static bool AddUserState(string sessionid, string userName)
         {
+            //If the user previously was logged in, we return true;
             bool _previouslyLoggedIn = false;
             //If we find a session, that has the same username, we invalidate 
-            KeyValuePair<string, UserState>? _previousSession = UserStates.FirstOrDefault(e => e.Value.UserName == userName);
-            if (_previousSession is not null)
+            KeyValuePair<string, UserState> _previousState = UserStates.FirstOrDefault(e => e.Value.UserName == userName);
+            if (_previousState.Value is not null)
             {
-                _previousSession.Value.Value.SetInvalid();
+                _previousState.Value.SetInvalid();
                 _previouslyLoggedIn = true;
             }
             UserStates.Add(sessionid, new(userName));
@@ -26,20 +27,25 @@ namespace control.Manager
             return _previouslyLoggedIn;
         }
 
-        public static bool CheckUserState(string sessionid, string userName)
+        public static bool CheckUserState(string sessionid)
         {
-            UserState? _session;
+            UserState? _userState;
 
-            if (!UserStates.TryGetValue(sessionid, out _session))
+            if (!UserStates.TryGetValue(sessionid, out _userState))
                 return false;
 
-            if (!_session.Valid)
+            if (!_userState.Valid)
+            {
+                RemoveState(sessionid);
                 return false;
+            }
+
+            _userState.UpdateActionTime();
 
             return true;
         }
 
-        public static bool RemoveState(string sessionid, string userName)
+        public static bool RemoveState(string sessionid, string userName = "")
         {
             return UserStates.Remove(sessionid);
         }

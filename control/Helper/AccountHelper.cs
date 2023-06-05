@@ -1,4 +1,6 @@
-﻿using control.Models;
+﻿using control.Generator;
+using control.Manager;
+using control.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace control.Helper
@@ -8,6 +10,9 @@ namespace control.Helper
 
         public static bool LoginUser(HttpContext httpContext, string username, EAccessLevel level)
         {
+            if (UserStateManager.AddUserState(httpContext.Session.Id, GetUserName(httpContext)))
+                AlertGenerator.AddAlertToSession(httpContext, AlertGenerator.EAlertLevel.kWarning, "The previous session was terminated");
+
             SetLoggedInStatus(httpContext);
             SetUserName(httpContext, username);
             SetUserRole(httpContext, level);
@@ -20,6 +25,8 @@ namespace control.Helper
         public static bool LogoutUser(HttpContext httpContext)
         {
             //TODO: Make this better
+
+            UserStateManager.RemoveState(httpContext.Session.Id);
 
             httpContext.Session.Clear();
 

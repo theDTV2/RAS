@@ -1,5 +1,7 @@
 ﻿using control.Generator;
+using control.Manager;
 using control.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static control.Helper.AccessHelper;
 
@@ -63,6 +65,19 @@ namespace control.Helper
 
             string userName = AccountHelper.GetUserName(context);
             User user = GetUserAsync(dataContext, userName).Result!;
+
+            //User State is not valid anymore (Somebody logged in with the same username)
+            if (!UserStateManager.CheckUserState(context.Session.Id))
+            {
+                AccountHelper.LogoutUser(context);
+                UserStateManager.RemoveState(context.Session.Id);
+
+
+                AlertGenerator.AddAlertToSession(context, AlertGenerator.EAlertLevel.kError, "Invalid User State. You have been logged out!");
+
+                return EAccessReturnValue.kAccessDenied;
+            }
+
 
             //Check for Account expiry
             if (user.ExpiryDate < DateTime.Now)
