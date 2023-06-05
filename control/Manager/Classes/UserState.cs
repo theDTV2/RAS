@@ -1,6 +1,6 @@
 ﻿namespace control.Manager.Classes
 {
-    public class UserSession
+    public class UserState
     {
         public string UserName { get; private set; }
 
@@ -10,7 +10,7 @@
 
         public bool Valid { get; private set; } = true;
 
-        public UserSession(string username)
+        public UserState(string username)
         {
             UserName = username;
         }

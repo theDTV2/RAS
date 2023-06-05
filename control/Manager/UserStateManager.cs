@@ -7,30 +7,30 @@ using System.Drawing.Text;
 
 namespace control.Manager
 {
-    public static class SessionManager
+    public static class UserStateManager
     {
-        private static IDictionary<string,UserSession> UserSessions { get; set; } = new Dictionary<string, UserSession>();
+        private static IDictionary<string,UserState> UserStates { get; set; } = new Dictionary<string, UserState>();
 
-        public static bool AddUserSession(string sessionid, string userName)
+        public static bool AddUserState(string sessionid, string userName)
         {
             bool _previouslyLoggedIn = false;
             //If we find a session, that has the same username, we invalidate 
-            KeyValuePair<string, UserSession>? _previousSession = UserSessions.FirstOrDefault(e => e.Value.UserName == userName);
+            KeyValuePair<string, UserState>? _previousSession = UserStates.FirstOrDefault(e => e.Value.UserName == userName);
             if (_previousSession is not null)
             {
                 _previousSession.Value.Value.SetInvalid();
                 _previouslyLoggedIn = true;
             }
-            UserSessions.Add(sessionid, new(userName));
+            UserStates.Add(sessionid, new(userName));
 
             return _previouslyLoggedIn;
         }
 
-        public static bool CheckUserSession(string sessionid, string userName)
+        public static bool CheckUserState(string sessionid, string userName)
         {
-            UserSession? _session;
+            UserState? _session;
 
-            if (!UserSessions.TryGetValue(sessionid, out _session))
+            if (!UserStates.TryGetValue(sessionid, out _session))
                 return false;
 
             if (!_session.Valid)
@@ -39,7 +39,12 @@ namespace control.Manager
             return true;
         }
 
-        public static async Task<int> DeleteOldSessionAsync()
+        public static bool RemoveState(string sessionid, string userName)
+        {
+            return UserStates.Remove(sessionid);
+        }
+
+        public static async Task<int> DeleteOldStatesAsync()
         {
             //TODO: Implement this
             return 5;
