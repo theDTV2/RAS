@@ -74,12 +74,13 @@ namespace control.Pages.Managment.Door
             if (OldDoorAdminList is null)
                 OldDoorAdminList = new string[0];
 
-            AccessHelper.UpdateModeratorStatus(_context, DoorAdminToGiveAccessTo, OldDoorAdminList);
-
             _door.DisplayName = DoorDisplayName;
             _door.EntryStatus = DoorEntryMode;
 
             _context.SaveChanges();
+
+            //This must run after the SaveChanges
+            AccessHelper.UpdateModeratorStatus(_context, DoorAdminToGiveAccessTo, OldDoorAdminList);
 
             return RedirectToPage("List");
         }
