@@ -39,16 +39,6 @@
                 <span asp-validation-for="User.ExpiryDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.LastLogin" class="control-label"></label>
-                <input asp-for="User.LastLogin" class="form-control" />
-                <span asp-validation-for="User.LastLogin" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="User.AcceptedEula" /> @Html.DisplayNameFor(model => model.User.AcceptedEula)
-                </label>
-            </div>
-            <div class="form-group">
                 <label asp-for="User.SecretCode" class="control-label"></label>
                 <input asp-for="User.SecretCode" class="form-control" />
                 <span asp-validation-for="User.SecretCode" class="text-danger"></span>

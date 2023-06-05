@@ -45,38 +45,43 @@ namespace control.Pages.Managment.User
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             var _userEAccessLevel = AccountHelper.GetEAccessLevel(HttpContext);
             if (User.AccessLevel >= _userEAccessLevel && _userEAccessLevel != EAccessLevel.kSuperAdmin)
                 return NotFound();
 
+            if (User.AccessLevel == EAccessLevel.kModerator)
+                return NotFound();
+            //TODO: Log Manipulation attempt
 
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(User).State = EntityState.Modified;
-
-            try
+              //We use TryUpdateModelAsync to prevent data manipulation
+            if (await TryUpdateModelAsync<control.Models.User>(
+                User,
+                "User",
+                u => u.FirstName, u => u.LastName, u => u.AccessLevel,
+                u => u.ExpiryDate, u => u.SecretCode
+                ))
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(User.UserName))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
 
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UserExists(User.UserName))
+                        return NotFound();
+                    else
+                        throw;
+                }
+
+            }
             return RedirectToPage("./List");
         }
 
