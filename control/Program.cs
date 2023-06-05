@@ -5,11 +5,15 @@ using control.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages()
+    .AddSessionStateTempDataProvider();
+
 builder.Services.AddDbContext<controlContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("controlContext") ?? throw new InvalidOperationException("Connection string 'controlContext' not found.")));
 
 builder.Services.AddDistributedMemoryCache();
+
+
 
 builder.Services.AddSession(options =>
 {
