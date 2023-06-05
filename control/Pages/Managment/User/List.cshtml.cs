@@ -29,6 +29,8 @@ namespace control.Pages.Managment.User
 
         public async Task OnGetAsync()
         {
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kModerator))
+                return Unauthorized();
 
             SearchedSomething = false;
 
@@ -40,7 +42,8 @@ namespace control.Pages.Managment.User
 
         public void OnGetSearch()
         {
-
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kModerator))
+                return Unauthorized();
             SearchedSomething = true;
             User = SearchHelper.SearchUser(_context, SearchTerm).ToList();
             //TODO: Make this better
