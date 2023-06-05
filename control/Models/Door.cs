@@ -9,8 +9,11 @@ namespace control.Models
 {
     public enum EDoorEntryMode
     {
+        [Display(Name = "registrierte Moderatoren/Administratoren")]
         kNoAccess,
+        [Display(Name = "freigeschaltete Nutzer")]
         kCardAccess,
+        [Display(Name = "registrierten Nutzer")]
         kUniversalAccess
     }
 
