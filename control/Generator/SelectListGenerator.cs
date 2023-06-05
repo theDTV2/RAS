@@ -92,13 +92,13 @@ namespace control.Generator
             EAccessLevel _accessLevel = AccountHelper.GetEAccessLevel(httpContext);
 
             List<SelectListItem> _outputList = new(){
-                 new SelectListItem{Text = "None",Value = "0" },
-                  new SelectListItem{Text="User",Value = "1"},
-                  new SelectListItem{Text="Moderator",Value = "2"}
+                 new SelectListItem{Text = "Locked",Value = "0" },
+                  new SelectListItem{Text="User",Value = "1"}
                   };
 
-            if (_accessLevel == EAccessLevel.kAdmin)
-                _outputList.Add(new SelectListItem { Text = "User", Value = "3" });
+            if (_accessLevel >= EAccessLevel.kSuperAdmin)
+                _outputList.Add(new SelectListItem { Text = "Admin", Value = "3" });
+                _outputList.Add(new SelectListItem { Text = "Super Admin", Value = "4" });
 
             return new SelectList(_outputList, "Value", "Text");
 
