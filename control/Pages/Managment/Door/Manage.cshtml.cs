@@ -23,6 +23,7 @@ namespace control.Pages.Managment.Door
         }
 
         [BindProperty]
+        [Display(Name = "Tür Moderatoren:")]
         public string[] DoorAdminToGiveAccessTo { get; set; }
 
         [BindProperty(SupportsGet = true)]
