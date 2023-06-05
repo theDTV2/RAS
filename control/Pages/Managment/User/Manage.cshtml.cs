@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using control.Data;
 using control.Models;
 using control.Helper;
+using control.Generator;
 
 namespace control.Pages.Managment.User
 {
@@ -27,15 +28,17 @@ namespace control.Pages.Managment.User
         public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null || _context.User == null)
-            return NotFound();
+                return NotFound();
 
             var user =  await _context.User.FirstOrDefaultAsync(m => m.UserName == id);
             if (user == null)
-            return NotFound();
+                return NotFound();
 
             var _userEAccessLevel = AccountHelper.GetEAccessLevel(HttpContext);
             if (user.AccessLevel >= _userEAccessLevel && _userEAccessLevel !=EAccessLevel.kSuperAdmin )
                 return NotFound();
+
+            ViewData["AccessLevelSelectList"] = SelectListGenerator.GetAccessListByUserAccess(_context, HttpContext);
 
             User = user;
             return Page();
