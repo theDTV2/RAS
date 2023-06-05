@@ -27,7 +27,7 @@ namespace control.Pages.Managment.User
 
         public bool SearchedSomething { get; set; } = false;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kModerator))
                 return Unauthorized();
@@ -38,16 +38,19 @@ namespace control.Pages.Managment.User
             {
                 User = await _context.User.ToListAsync();
             }
+            return Page();
         }
 
-        public void OnGetSearch()
+        public IActionResult OnGetSearch()
         {
             if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kModerator))
                 return Unauthorized();
+
             SearchedSomething = true;
             User = SearchHelper.SearchUser(_context, SearchTerm).ToList();
             //TODO: Make this better
 
+            return Page();
         }
 
 
