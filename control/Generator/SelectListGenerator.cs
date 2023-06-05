@@ -97,8 +97,11 @@ namespace control.Generator
                   };
 
             if (_accessLevel >= EAccessLevel.kSuperAdmin)
+            {
                 _outputList.Add(new SelectListItem { Text = "Admin", Value = "3" });
                 _outputList.Add(new SelectListItem { Text = "Super Admin", Value = "4" });
+            }
+            
 
             return new SelectList(_outputList, "Value", "Text");
 
