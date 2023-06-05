@@ -66,7 +66,7 @@ namespace control.Pages.Managment.Door
             if (_door == null)
                 return NotFound();
 
-            _door.Id = DoorID;
+       
             _door.DisplayName = DoorDisplayName;
             _door.EntryStatus = DoorEntryMode;
 
