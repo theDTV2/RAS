@@ -81,7 +81,21 @@
                                 </ul>
                             </li>
                         }
-                       
+
+                          @if (_userLevel >= EAccessLevel.kSuperAdmin)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    System Managment
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item disabled" asp-page="/Managment/Settings/General">General Settings</a></li>
+                                    <li><a class="dropdown-item disabled" asp-page="/Managment/Settings/MailSettings">Mail Settings</a></li>
+
+                                </ul>
+                            </li>
+                        }
+
                     </ul>
 
                      <ul class="navbar-nav me-auto">
