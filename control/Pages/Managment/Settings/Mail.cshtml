@@ -1,4 +1,54 @@
 ﻿@page
 @model control.Pages.Managment.Site.MailModel
 @{
+
+
+
+
+
 }
+
+<form method="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                EMail Einstellungen anpassen
+                <br />
+                <div class="form-group">
+                    <label class="form-label" asp-for="UserName"> </label>
+                    <input class="form-control" asp-for="UserName">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" asp-for="Password"> </label>
+                    <input type="password" class="form-control " asp-for="Password">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" asp-for="SMTPServer"> </label>
+                    <input class="form-control" asp-for="SMTPServer">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" asp-for="Port"> </label>
+                    <input class="form-control" asp-for="Port">
+                </div>
+            </div>
+            <div class="col-sm">
+               
+
+            </div>
+            <div class="col-sm">
+                TODO - PLACEHOLDER - TODO <br />
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-4 text-center">
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-secondary" asp-page="List">Back</a>
+        </div>
+    </div>
+</form>

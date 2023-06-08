@@ -82,6 +82,7 @@
                             </li>
                         }
 
+
                           @if (_userLevel >= EAccessLevel.kSuperAdmin)
                         {
                             <li class="nav-item dropdown">
@@ -90,7 +91,7 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item disabled" asp-page="/Managment/Settings/General">General Settings</a></li>
-                                    <li><a class="dropdown-item disabled" asp-page="/Managment/Settings/MailSettings">Mail Settings</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Managment/Settings/Mail">Mail Settings</a></li>
 
                                 </ul>
                             </li>
