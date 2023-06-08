@@ -148,11 +148,6 @@ namespace control.Helper
             //Only when a username was added/removed, we need to operate over it
             string[] _userNamesToIterateOver = userNames.Except(oldDoorAdminList).Union(oldDoorAdminList.Except(userNames)).ToArray();
 
-            var a = userNames.Except(oldDoorAdminList);
-
-            var b = oldDoorAdminList.Except(userNames);
-
-
             if (_userNamesToIterateOver.IsNullOrEmpty())
                 return;
 
