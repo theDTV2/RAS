@@ -9,8 +9,8 @@ namespace control.Manager
     {
         public static EMailSettings EMailSettings { get; private set; } = new EMailSettings();
 
-        private static List<Email> EmailQueueNormal { get; set; } = new List<Email>();
-        private static List<Email> EmailQueueHighPriority { get; set; } = new List<Email>();
+        private static ConcurrentStack<Email> EmailQueueNormal { get; set; } = new ConcurrentStack<Email>();
+        private static ConcurrentStack<Email> EmailQueueHighPriority { get; set; } = new ConcurrentStack<Email>();
 
 
         public static bool LoadMailSettingsFromConfig()
