@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Concurrent;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using control.Manager.Classes;
@@ -53,6 +54,16 @@ namespace control.Manager
             EMailSettings.MailPassword = newMailPassword;
 
             return SaveMailSettingsToConfig();
+        }
+
+        public static void AddLoginMailToQueue(HttpContext context, string adressToSendTo, int loginKey, string loginCode)
+        {
+            string message = @"Click the link or use the login code:
+" + loginCode + @"
+" + context.Request.Host + @"/Account/LoginCode/" + loginKey + @"
+If you did not request this message, you can ignore this message";
+
+            EmailQueueHighPriority.Push(new Email(adressToSendTo, message));
         }
 
     }
