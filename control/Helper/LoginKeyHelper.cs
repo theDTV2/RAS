@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System.ComponentModel;
 using System.Security.Cryptography;
+using System.Web;
 
 namespace control.Helper
 {
@@ -79,7 +80,8 @@ namespace control.Helper
         private static string GenerateLoginCode(int Lenght = 64)
         {
             byte[] code = RandomNumberGenerator.GetBytes(Lenght);
-            return Convert.ToBase64String(code);
+            //We replace /, =, + to prevent issues with the url
+            return Convert.ToBase64String(code).Replace('/','0').Replace('=','1').Replace('+','2');
         }
 
 

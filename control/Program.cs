@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using control.Data;
+using control.Helper;
+using control.Manager;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,4 +45,14 @@ app.UseSession();
 
 app.MapRazorPages();
 
+
+
+
+Task _emailTaskResult = EMailManager.SendQueuedMailsAsync();
+
 app.Run();
+
+await _emailTaskResult;
+
+
+

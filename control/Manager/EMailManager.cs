@@ -2,9 +2,11 @@
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Web;
 using control.Manager.Classes;
 using MailKit.Net.Smtp;
 using MimeKit;
+using static System.Net.WebRequestMethods;
 using static control.Manager.EMailManager;
 
 namespace control.Manager
@@ -13,7 +15,7 @@ namespace control.Manager
     {
         public static EMailSettings EMailSettingObj { get; private set; } = new EMailSettings();
 
-        private static bool Tested { get; set; } = false;
+        private static SmtpClient EmailClient { get; set; } = new();
 
         private static ConcurrentStack<Email> EmailQueueNormal { get; set; } = new ConcurrentStack<Email>();
         private static ConcurrentStack<Email> EmailQueueHighPriority { get; set; } = new ConcurrentStack<Email>();
@@ -57,17 +59,18 @@ namespace control.Manager
             EMailSettingObj.MailUserName = newMailUserName;
             EMailSettingObj.MailPassword = newMailPassword;
 
-            return SaveMailSettingsToConfig();
+            SaveMailSettingsToConfig();
+
+            return LoadMailSettingsFromConfig();
         }
 
-        public static void AddLoginMailToQueue(HttpContext context, string adressToSendTo, int loginKey, string loginCode)
+        public static void AddLoginMailToQueue(HttpContext context, string adressToSendTo, string loginCode, string loginKey)
         {
-            string message = @"Click the link or use the login code:
-" + loginCode + @"
-" + context.Request.Host + @"/Account/LoginCode/" + loginKey + @"
-If you did not request this message, you can ignore this message";
+            string _message = "<p>Click the following link or use the login code to sign in.</p>"
++ "<a href = https://" + context.Request.Host + @"/Account/LoginCode/" + HttpUtility.UrlEncode(loginKey) + ">Click here</a> <br> "
++ loginCode + "<br> If you did not request this message, you can ignore it.";
 
-            EmailQueueHighPriority.Push(new Email(adressToSendTo, message));
+            EmailQueueHighPriority.Push(new Email(adressToSendTo, "RAS Login", _message));
         }
 
         public static bool TestMailSettings()
@@ -77,67 +80,115 @@ If you did not request this message, you can ignore this message";
             if (EMailSettingObj.IsAnyEmpty())
                 return false;
 
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("RAS System", EMailSettingObj.MailUserName + "@htw-berlin.de"));
-            message.To.Add(new MailboxAddress("RAS System", EMailSettingObj.MailUserName + "@htw-berlin.de"));
-            message.Subject = "Hello World";
-
-            message.Body = new TextPart("plain")
+            //Due to this being a test function, we ignore the Async properties of the function
+            if (ConnectToMailServer())
             {
-                Text = @"Test Message, Hello."
-            };
-
-            using (var client = new SmtpClient())
-            {
-             
-                try
-                {
-                    client.Connect(EMailSettingObj.MailSMTPAdress, EMailSettingObj.MailPort, true);
-                    client.Authenticate(EMailSettingObj.MailUserName, EMailSettingObj.MailPassword);
-                    client.Send(message);
-
-                }
-                catch (Exception)
-                {
-                    client.Disconnect(true);
-                    return false;
-                }
-
-                client.Disconnect(true);
                 EMailSettingObj.Tested = true;
                 return true;
-
             }
+            return false;
         }
 
 
-        public static async void SendMailsAsync()
+        public static async Task SendQueuedMailsAsync()
         {
             //We wait, until an config file is written
             while (EMailSettingObj.IsAnyEmpty() || !EMailSettingObj.Tested)
             {
-                Thread.Sleep(10000);
+                await Task.Delay(10000);
                 LoadMailSettingsFromConfig();
+                TestMailSettings();
             }
 
             while (true)
             {
                 //Retreive Email from List
 
+                if (!EmailClient.IsConnected)
+                {
+                    if (ConnectToMailServer())
+                    {
+                        //TODO: Log error
+                        await Task.Delay(10000);
+                        continue;
+                    }
+                }
 
+                Email? _nextMail = GetNextEmail();
 
+                while (_nextMail is not null)
+                {
+                    MimeMessage _message = CreateMailObject(_nextMail);
 
-                if (EmailQueueHighPriority.IsEmpty && EmailQueueNormal.IsEmpty)
-                    Thread.Sleep(3000);
+                    await SendMailAsync(_message);
+                    _nextMail = GetNextEmail();
+
+                }
+                if (EmailClient.IsConnected)
+                    DisconnectFromMailServer();
+
             }
+
+
+        }
 
         private static Email? GetNextEmail()
         {
             Email? _email;
-            if (!EmailQueueHighPriority.TryPeek(out _email))
-                if (!EmailQueueNormal.TryPeek(out _email))
+            if (!EmailQueueHighPriority.TryPop(out _email))
+                if (!EmailQueueNormal.TryPop(out _email))
                     return null;
             return _email;
+        }
+
+        private static bool ConnectToMailServer()
+        {
+            try
+            {
+                EmailClient.Connect(EMailSettingObj.MailSMTPAdress, EMailSettingObj.MailPort, true);
+                EmailClient.Authenticate(EMailSettingObj.MailUserName, EMailSettingObj.MailPassword);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+
+        }
+
+        private static void DisconnectFromMailServer()
+        {
+            EmailClient.Disconnect(true);
+            return;
+        }
+
+        private static MimeMessage CreateMailObject(Email email)
+        {
+            var name = email.DestinationAdress.Split("@")[0];
+
+            MimeMessage _message = new MimeMessage();
+            _message.From.Add(new MailboxAddress("RAS System", EMailSettingObj.MailUserName + "@htw-berlin.de"));
+            _message.To.Add(new MailboxAddress(name, email.DestinationAdress));
+            _message.Subject = email.Title;
+            _message.Body = new TextPart("html")
+            {
+                Text = email.Text
+            };
+            return _message;
+        }
+
+        private static async Task<bool> SendMailAsync(MimeMessage emailObject)
+        {
+            try
+            {
+                await EmailClient.SendAsync(emailObject);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return false;
         }
     }
 

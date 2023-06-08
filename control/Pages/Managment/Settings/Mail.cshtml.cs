@@ -56,7 +56,6 @@ namespace control.Pages.Managment.Site
 
             if (!EMailManager.TestMailSettings())
             {
-
                 AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Error. Check Mail settings");
                 return Page();
             }
