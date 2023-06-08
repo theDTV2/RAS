@@ -23,7 +23,7 @@ namespace control.Helper
             await loginCode;
             await loginKey;
 
-            EmailHelper.AddAccessMailToBeSent(loginCode.Result,loginKey.Result,  email);
+            EmailHelper.AddAccessMailToBeSent(context, email, Convert.ToInt32(loginCode.Result), loginKey.Result);
 
             return true;
         }
