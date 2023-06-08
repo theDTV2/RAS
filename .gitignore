@@ -482,3 +482,6 @@ $RECYCLE.BIN/
 #SQLite Browser Working Files
 *.db-wal
 *.db-shm
+
+#Website config files
+*.cfg
