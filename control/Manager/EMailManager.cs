@@ -131,7 +131,13 @@ If you did not request this message, you can ignore this message";
                     Thread.Sleep(3000);
             }
 
-
+        private static Email? GetNextEmail()
+        {
+            Email? _email;
+            if (!EmailQueueHighPriority.TryPeek(out _email))
+                if (!EmailQueueNormal.TryPeek(out _email))
+                    return null;
+            return _email;
         }
     }
 
