@@ -49,13 +49,13 @@ namespace control.Helper
         public static EAccessReturnValue TryToAuthUserWithLoginCode(control.Data.controlContext dataContext, string userName, string loginCode, out User? user)
         {
             User? userToCheck = GetUserAsync(dataContext, userName).Result;
-            user = userToCheck;
+            user = null;
             //TODO: Add timeout to key check
             if (userToCheck is null)
             {
                 return EAccessReturnValue.kAccessDenied;
             }
-
+            user = userToCheck;
             if (userToCheck.AccessCode is null)
             {
                 return EAccessReturnValue.kAccessDenied;
