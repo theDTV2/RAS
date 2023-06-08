@@ -13,10 +13,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using control.Helper;
 using control.Generator;
+using System.Web;
 
 namespace control.Pages.Account
 {
-           
 
     public class LoginCodeModel : PageModel
     {
@@ -26,16 +26,14 @@ namespace control.Pages.Account
         {
             _context = context;
         }
-  
+
         [BindProperty]
         [DataType(DataType.Text)]
         public string LoginCode { get; set; }
 
 
-
         [BindProperty(SupportsGet = true)]
         public string? SecretLoginCode { get; set; }
-
 
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
@@ -44,7 +42,7 @@ namespace control.Pages.Account
             if (AccountHelper.GetLoggedIn(HttpContext))
                 Redirect("Account/Dashboard");
 
-            EAccessReturnValue res = AuthHelper.ChallengeLoginRequestWithLoginCode(_context,HttpContext, AccountHelper.GetUserName(HttpContext), LoginCode);
+            EAccessReturnValue res = AuthHelper.ChallengeLoginRequestWithLoginCode(_context, HttpContext, AccountHelper.GetUserName(HttpContext), LoginCode);
 
             if (res == EAccessReturnValue.kAccessGranted)
             {
@@ -53,15 +51,15 @@ namespace control.Pages.Account
                 res = AuthHelper.CheckUserPermission(_context, HttpContext);
 
                 if (res == EAccessReturnValue.kAccountEulaNotAccepted)
-                    return Redirect("Privacy");
+                    return RedirectToPage("Privacy");
 
                 if (res == EAccessReturnValue.kAccountRegistrationNotCompleted)
                 {
-                    return Redirect("Registration");
+                    return RedirectToPage("Registration");
                 }
 
 
-                return Redirect("Dashboard");
+                return RedirectToPage("Dashboard");
             }
             AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Login failed");
             return Page();
@@ -76,22 +74,26 @@ namespace control.Pages.Account
             if (SecretLoginCode is not null)
             {
 
-                EAccessReturnValue res = AuthHelper.ChallengeLoginRequestWithLoginKey(_context,HttpContext, SecretLoginCode);
-
+                EAccessReturnValue res = AuthHelper.ChallengeLoginRequestWithLoginKey(_context, HttpContext, SecretLoginCode);
                 if (res == EAccessReturnValue.kAccessGranted)
                 {
-                    return Redirect("Dashboard");
-                }
+                    AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Logged in successfully");
+                    res = AuthHelper.CheckUserPermission(_context, HttpContext);
 
+
+                    if (res == EAccessReturnValue.kAccountEulaNotAccepted)
+                        return RedirectToPage("Privacy");
+
+                    if (res == EAccessReturnValue.kAccountRegistrationNotCompleted)
+
+                        return RedirectToPage("Registration");
+                    return RedirectToPage("Dashboard");
+                }
                 //If we do not find the login key, redirect to 404
                 return NotFound();
             }
 
-
             return Page();
         }
-
-
-
     }
 }

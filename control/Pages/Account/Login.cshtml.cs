@@ -11,6 +11,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using control.Helper;
+using control.Generator;
 
 namespace control.Pages.Account
 {
@@ -43,7 +44,18 @@ namespace control.Pages.Account
             if (AccountHelper.GetLoggedIn(HttpContext))
                 Redirect("Account/Dashboard");
 
-            await AuthHelper.CreateLoginRequest(_context,HttpContext, UserEmail.ToLower());
+
+
+            string _userMail = UserEmail.ToLower();
+
+            if (_userMail.Split("@")[1] != "htw-berlin.de")
+            {
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Nur htw-berlin.de Adressen werden unterstütz");
+                return Page();
+            }
+
+
+            await AuthHelper.CreateLoginRequest(_context,HttpContext, _userMail);
             return Redirect("LoginCode");
         }
     }
