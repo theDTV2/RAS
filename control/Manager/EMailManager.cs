@@ -74,6 +74,8 @@ If you did not request this message, you can ignore this message";
         {
             if (EMailSettingObj.Tested)
                 return true;
+            if (EMailSettingObj.IsAnyEmpty())
+                return false;
 
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("RAS System", EMailSettingObj.MailUserName + "@htw-berlin.de"));
