@@ -1,3 +1,4 @@
+using control.Generator;
 using control.Helper;
 using control.Manager;
 using control.Models;
@@ -53,6 +54,14 @@ namespace control.Pages.Managment.Site
                 return Unauthorized();
             EMailManager.SetMailParameters(SMTPServer, Port, UserName, Password);
 
+            if (!EMailManager.TestMailSettings())
+            {
+
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Error. Check Mail settings");
+                return Page();
+            }
+
+            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Mail Settings correct");
             return Page();
         }
 
