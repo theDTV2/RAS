@@ -1,13 +1,14 @@
-﻿namespace control.Helper
+﻿using control.Manager;
+
+namespace control.Helper
 {
     public class EmailHelper
     {
-       //TODO: Mail handling
-
         //This function adds an mail, that the email routine will send
-        public static void AddAccessMailToBeSent(string loginCode, string loginKey, string emailAdress)
+        public static void AddAccessMailToBeSent(HttpContext context, string emailAdress,int loginKey, string loginCode)
         {
-            //TODO: Everything
+            EMailManager.AddLoginMailToQueue(context, emailAdress, loginKey, loginCode);
+
             Console.WriteLine(emailAdress + Environment.NewLine + loginCode + Environment.NewLine);
             Console.WriteLine(loginKey + Environment.NewLine);
         }
@@ -17,14 +18,6 @@
         {
             throw new NotImplementedException();
         }
-
-
-        //This function perdiodically sends out any pending reminder emails (sometime in the night)
-        public static void SendAllPendingReminderMails()
-        {
-            throw new NotImplementedException();
-        }
-
 
         //This mail sends a specific mail
         //TODO
