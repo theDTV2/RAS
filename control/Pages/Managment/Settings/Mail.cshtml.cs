@@ -37,9 +37,9 @@ namespace control.Pages.Managment.Site
             if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kSuperAdmin))
                 return Unauthorized();
 
-            UserName = EMailManager.MailUserName;
-            SMTPServer = EMailManager.MailSMTPAdress;
-            Port = EMailManager.MailPort;
+            UserName = EMailManager.EMailSettings.MailUserName;
+            SMTPServer = EMailManager.EMailSettings.MailSMTPAdress;
+            Port = EMailManager.EMailSettings.MailPort;
 
 
             return Page();
