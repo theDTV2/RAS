@@ -47,12 +47,17 @@ app.MapRazorPages();
 
 
 
+#if !DEBUG
+    Task _emailTaskResult = EMailManager.SendQueuedMailsAsync();
 
-Task _emailTaskResult = EMailManager.SendQueuedMailsAsync();
+#endif
+
 
 app.Run();
 
-await _emailTaskResult;
 
+#if !DEBUG
+    await _emailTaskResult;
+#endif
 
 
