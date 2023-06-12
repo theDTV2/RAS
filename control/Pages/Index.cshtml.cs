@@ -1,7 +1,9 @@
 ﻿using control.Manager;
 using control.Models;
+using control.Pages.Account;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using NuGet.Packaging.Signing;
 using System.Text.Json.Nodes;
 
@@ -9,11 +11,11 @@ namespace control.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly control.Data.controlContext _context;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(control.Data.controlContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult OnGet()
