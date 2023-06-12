@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Session;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing.Text;
+using System.Linq;
 
 namespace control.Manager
 {
@@ -50,10 +51,26 @@ namespace control.Manager
             return UserStates.Remove(sessionid);
         }
 
-        public static async Task<int> DeleteOldStatesAsync()
+        public static async Task DeleteOldStatesAsync()
         {
-            //TODO: Implement this
-            return 5;
+            while (true)
+            {
+                /*We can use a rather large delay here to save performance
+                Doesnt really matter, if we remove a inactive user after 10 Minutes and 1 second or 10 minutes and 28 seconds, as
+                 the user session will invalidate itself after 10 minutes regardless */
+                await Task.Delay(550000);
+
+                //Use intermediary variabels to save performance
+                DateTime _now = DateTime.Now;
+                TimeSpan _timeOut = TimeSpan.FromMinutes(10);
+
+                //TODO: Make this faster, if possible/necessary
+                UserStates = UserStates
+                    .Where(u => (_now - u.Value.LastAction) < _timeOut)
+                    .ToDictionary(u => u.Key, u => u.Value);
+
+
+            }
         }
 
 
