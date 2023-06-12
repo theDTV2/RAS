@@ -12,7 +12,7 @@ namespace control.Helper
         {
             IList<User> _user = dataContext.User.Where(e =>
             e.UserName.Contains(searchTerm) ||
-            e.AccessCode.Contains(searchTerm) ||
+            e.SecretCode.Contains(searchTerm) ||
             e.FirstName.Contains(searchTerm) ||
             e.LastName.Contains(searchTerm)).ToList();
 
