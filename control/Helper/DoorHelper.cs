@@ -10,7 +10,7 @@ namespace control.Helper
     public static class DoorHelper
     {
 
-        public static bool AttemptToRegisterDoor(control.Data.controlContext dataContext, string doorID, DateTime timeStamp, ref JsonResult returnValue)
+        public static bool AttemptToRegisterDoor(control.Data.controlContext dataContext, string doorID, string timeStamp, ref JsonResult returnValue)
         {
             Door? _door = GetDoor(dataContext, doorID);
 
@@ -22,8 +22,11 @@ namespace control.Helper
             if (_door.Registered)
                 return false;
 
+            if (!DateTime.TryParse(timeStamp, out DateTime _timeStamp))
+                return false;
+
             //Request timed out
-            if (CheckIfTimedOut(timeStamp))
+            if (CheckIfTimedOut(_timeStamp))
                 return false;
 
             string _newToken = HashHelper.GenerateRandomBase64String(128);
@@ -66,8 +69,7 @@ namespace control.Helper
                 return false;
 
 
-
-            if (CheckForDoorRestrictions(_door, secret, _timeStamp) && CheckForUserAccessRestrictions(_user, _door!, _timeStamp))
+            if (CheckForDoorRestrictions(_door, secret, _timeStamp) && CheckForUserAccessRestrictions(_user, _door!))
             {
                 _toReturnJsonRaw = new JsonObject()
                 {
@@ -79,6 +81,8 @@ namespace control.Helper
                 return true;
             }
 
+
+            //If we reached until here, the device is NOT allowed
             _toReturnJsonRaw = new JsonObject()
             {
                 { "doorResponse" , false},
@@ -87,14 +91,17 @@ namespace control.Helper
                 { "timeStamp",  DateTime.Now}
             };
 
-            //If we reached until here, the device is NOT allowed
             returnValue = new JsonResult(_toReturnJsonRaw);
             return false;
         }
 
-        public static bool RegisterHeartBeat(control.Data.controlContext dataContext, EDoorEntryMode mode, string doorId, string displayText, string token, DateTime timeStamp, ref JsonResult returnValue)
+        public static bool RegisterHeartBeat(control.Data.controlContext dataContext, string doorId, string token, string timeStamp, ref JsonResult returnValue)
         {
-            if (CheckIfTimedOut(timeStamp))
+            if (!DateTime.TryParse(timeStamp, out DateTime _timeStamp))
+                return false;
+
+            //Request timed out
+            if (CheckIfTimedOut(_timeStamp))
                 return false;
 
             Door? _door = GetDoor(dataContext, doorId);
@@ -108,16 +115,19 @@ namespace control.Helper
             if (_door.Secret != token)
                 return false;
 
+
+            //Update checkin Time
+            _door.LastCheckInTime = DateTime.Now;
+            dataContext.SaveChanges();
+
             _toReturnJsonRaw = new JsonObject()
             {
-                { "entryMode" , false},
-                { "displayText" , displayText},
+                { "entryMode" , _door.EntryStatus.ToString()},
+                { "displayText" , _door.DisplayName},
                 { "timeStamp",  DateTime.Now}
             };
 
-            //If we reached until here, access is NOT allowed
             returnValue = new JsonResult(_toReturnJsonRaw);
-
             return true;
         }
 
@@ -144,7 +154,7 @@ namespace control.Helper
 
             return true;
         }
-        private static bool CheckForUserAccessRestrictions(User? user, Door door, DateTime timeStamp)
+        private static bool CheckForUserAccessRestrictions(User? user, Door door)
         {
             //No user exists with this access code
             if (user is null)

@@ -1,4 +1,5 @@
 using control.Helper;
+using control.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NuGet.Protocol;
@@ -20,7 +21,7 @@ namespace control.Pages.API
         {
             JsonResult _returnVal = new("");
 
-            if (DoorHelper.AttemptToRegisterDoor(_context, doorID, DateTime.Parse(timeStamp), ref _returnVal))
+            if (DoorHelper.AttemptToRegisterDoor(_context, doorID, timeStamp, ref _returnVal))
                 return _returnVal;
             return StatusCode(500);
         }
@@ -36,10 +37,13 @@ namespace control.Pages.API
 
         }
 
-        public IActionResult OnPostHearbeat(string timeStamp, string secret)
+        public IActionResult OnPostHearbeat(string doorID, string timeStamp, string secret)
         {
             JsonResult _returnVal = new("");
 
+
+            if (DoorHelper.RegisterHeartBeat(_context, doorID, secret, timeStamp, ref _returnVal))
+                return _returnVal;
 
             return StatusCode(500);
         }
