@@ -3,6 +3,7 @@ using control.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -12,9 +13,9 @@ namespace control.Generator
     {
 
         public static MultiSelectList GenerateSelectListForDoor(control.Data.controlContext dataContext, HttpContext httpContext, User userToGenerateFor)
-        {       
+        {
             //TODO: Move this into another function
-             var _username = AccountHelper.GetUserName(httpContext);
+            var _username = AccountHelper.GetUserName(httpContext);
 
             User _admin = dataContext.User.Where(u => u.UserName == _username).Include(u => u.AdminDoors).FirstOrDefault()!;
 
@@ -87,24 +88,30 @@ namespace control.Generator
         }
 
 
-        public static SelectList GetAccessListByUserAccess(control.Data.controlContext context, HttpContext httpContext)
+        public static SelectList GetAccessListByUserAccess(control.Data.controlContext context, HttpContext httpContext, User userToGenerateFor)
         {
             EAccessLevel _accessLevel = AccountHelper.GetEAccessLevel(httpContext);
 
             List<SelectListItem> _outputList = new(){
-                 new SelectListItem{Text = "Locked",Value = "0" },
-                  new SelectListItem{Text="User",Value = "1"}
+                new SelectListItem{Text = "Locked",Value = "0" }
                   };
 
-            if (_accessLevel >= EAccessLevel.kSuperAdmin)
+            if (userToGenerateFor.AdminDoors.IsNullOrEmpty())
             {
-                _outputList.Add(new SelectListItem { Text = "Admin", Value = "3" });
-                _outputList.Add(new SelectListItem { Text = "Super Admin", Value = "4" });
+                _outputList.Add(new SelectListItem { Text = "User", Value = "1" });
+
+                if (_accessLevel >= EAccessLevel.kSuperAdmin)
+                {
+                    _outputList.Add(new SelectListItem { Text = "Admin", Value = "3" });
+                    _outputList.Add(new SelectListItem { Text = "Super Admin", Value = "4" });
+                }
+                return new SelectList(_outputList, "Value", "Text");
             }
-            
+
+            //If we end up here, the user is an moderator
+            _outputList.Add(new SelectListItem { Text = "Moderator", Value = "2" });
 
             return new SelectList(_outputList, "Value", "Text");
-
         }
     }
 }
