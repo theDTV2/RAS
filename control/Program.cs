@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using control.Data;
 using control.Helper;
 using control.Manager;
+using System;
+using control.Manager.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,7 @@ builder.Services.AddDbContext<controlContext>(options =>
 
 builder.Services.AddDistributedMemoryCache();
 
+builder.Services.AddScoped<IDataBaseManager, DataBaseManager>();
 
 
 builder.Services.AddSession(options =>
@@ -48,17 +51,22 @@ app.MapRazorPages();
 
 
 
-#if !DEBUG
+//#if !DEBUG
     Task _emailTaskResult = EMailManager.SendQueuedMailsAsync();
     Task _userCleanupResult =  UserStateManager.DeleteOldStatesAsync();
 
-#endif
 
-app.Run();
+    var _dataBaseManager = app.Services.CreateScope().ServiceProvider.GetRequiredService<IDataBaseManager>();
 
-#if !DEBUG
+    Task _dataBaseManagerResult = _dataBaseManager.DeleteOldLoginLinksAsync();
+//#endif
+
+
+    app.Run();
+
+//#if !DEBUG
     await _emailTaskResult;
     await _userCleanupResult;
-#endif
+//#endif
 
 

@@ -1,6 +1,11 @@
-﻿using control.Manager.Classes;
+﻿using control.Data;
+using control.Manager.Classes;
+using control.Manager.Interfaces;
+using control.Models;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Session;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing.Text;
@@ -8,8 +13,9 @@ using System.Linq;
 
 namespace control.Manager
 {
-    public static class UserStateManager
+    public class UserStateManager
     {
+       
         private static IDictionary<string, UserState> UserStates { get; set; } = new Dictionary<string, UserState>();
 
         public static bool AddUserState(string sessionid, string userName)
@@ -67,12 +73,11 @@ namespace control.Manager
                 //TODO: Make this faster, if possible/necessary
                 UserStates = UserStates
                     .Where(u => (_now - u.Value.LastAction) < _timeOut)
-                    .ToDictionary(u => u.Key, u => u.Value);
+                .ToDictionary(u => u.Key, u => u.Value);
 
-
+               
             }
         }
-
 
 
     }
