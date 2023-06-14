@@ -25,14 +25,23 @@ namespace control.Pages.API
             return StatusCode(500);
         }
 
-        public JsonResult OnPostAccess(string cardCode, string timeStamp, string secret)
+        public IActionResult OnPostAccess(string doorID, string cardCode, string timeStamp, string secret)
         {
-            return new JsonResult("");
+            JsonResult _returnVal = new("");
+
+            if (DoorHelper.RequestDoorAccess(_context, doorID, secret, cardCode, timeStamp, ref _returnVal))
+                return _returnVal;
+
+            return StatusCode(500);
+
         }
 
-        public JsonResult OnPostHearbeat(string timeStamp, string secret)
+        public IActionResult OnPostHearbeat(string timeStamp, string secret)
         {
-            return new JsonResult("");
+            JsonResult _returnVal = new("");
+
+
+            return StatusCode(500);
         }
 
         public ActionResult OnGet()
@@ -41,6 +50,6 @@ namespace control.Pages.API
             return NotFound();
         }
 
-                    
+
     }
 }

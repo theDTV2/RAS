@@ -49,14 +49,25 @@ namespace control.Helper
 
         }
 
-        public static bool RequestDoorAccess(control.Data.controlContext dataContext, string doorId,string token, string accessCode, DateTime timeStamp, ref JsonResult returnValue)
+        public static bool RequestDoorAccess(control.Data.controlContext dataContext, string doorId, string secret, string cardCode, string timeStamp, ref JsonResult returnValue)
         {
             Door? _door = GetDoor(dataContext, doorId);
-            User? _user = dataContext.User.Where(u => u.SecretCode == accessCode).FirstOrDefault();
+            User? _user = dataContext.User.Where(u => u.SecretCode == cardCode).FirstOrDefault();
+
+            if (_door is null) 
+                return false;
+            if (_user is null) 
+                return false;
+
 
             JsonObject _toReturnJsonRaw;
 
-            if (CheckForDoorRestrictions(_door,token, timeStamp) && CheckForUserAccessRestrictions(_user, _door!, timeStamp))
+            if (!DateTime.TryParse(timeStamp, out DateTime _timeStamp))
+                return false;
+
+
+
+            if (CheckForDoorRestrictions(_door, secret, _timeStamp) && CheckForUserAccessRestrictions(_user, _door!, _timeStamp))
             {
                 _toReturnJsonRaw = new JsonObject()
                 {
@@ -76,7 +87,7 @@ namespace control.Helper
                 { "timeStamp",  DateTime.Now}
             };
 
-            //If we reached until here, access is NOT allowed
+            //If we reached until here, the device is NOT allowed
             returnValue = new JsonResult(_toReturnJsonRaw);
             return false;
         }
