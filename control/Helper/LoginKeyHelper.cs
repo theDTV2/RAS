@@ -42,7 +42,7 @@ namespace control.Helper
                 return EAccessReturnValue.kAccessDenied;
 
             //TODO: Add customizable timeout 
-            if ((loginLink.GenerationTime - DateTime.Now) > TimeSpan.FromMinutes(60))
+            if ((loginLink.GenerationTime - DateTime.Now) > TimeSpan.FromMinutes(15))
                 return EAccessReturnValue.kCodeExpired;
 
             return EAccessReturnValue.kAccessGranted;
