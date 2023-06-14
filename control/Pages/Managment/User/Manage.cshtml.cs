@@ -30,7 +30,7 @@ namespace control.Pages.Managment.User
             if (id == null || _context.User == null)
                 return NotFound();
 
-            var user =  await _context.User.FirstOrDefaultAsync(m => m.UserName == id);
+            var user =  await _context.User.Include(m => m.AdminDoors).FirstOrDefaultAsync(m => m.UserName == id);
             if (user == null)
                 return NotFound();
 
@@ -38,7 +38,7 @@ namespace control.Pages.Managment.User
             if (user.AccessLevel >= _userEAccessLevel && _userEAccessLevel !=EAccessLevel.kSuperAdmin )
                 return NotFound();
 
-            ViewData["AccessLevelSelectList"] = SelectListGenerator.GetAccessListByUserAccess(_context, HttpContext);
+            ViewData["AccessLevelSelectList"] = SelectListGenerator.GetAccessListByUserAccess(_context, HttpContext, user);
 
             User = user;
             return Page();
@@ -50,14 +50,14 @@ namespace control.Pages.Managment.User
             if (User.AccessLevel >= _userEAccessLevel && _userEAccessLevel != EAccessLevel.kSuperAdmin)
                 return NotFound();
 
-            if (User.AccessLevel == EAccessLevel.kModerator)
-                return NotFound();
-            //TODO: Log Manipulation attempt
+
+
+            //TODO: Detect manipulation of user rights
 
             if (!ModelState.IsValid)
                 return Page();
 
-              //We use TryUpdateModelAsync to prevent data manipulation
+              //Use TryUpdateModelAsync to prevent data manipulation
             if (await TryUpdateModelAsync<control.Models.User>(
                 User,
                 "User",
