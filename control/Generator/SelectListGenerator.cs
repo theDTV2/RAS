@@ -63,12 +63,16 @@ namespace control.Generator
 
             foreach (var item in _users)
             {
-                _outputList.Add(new SelectListItem
+                //Do not display locked users, except when they already are selected
+                if (item.AccessLevel != EAccessLevel.kNone || doorToGenerateFor.AdminUsers.Contains(item))
                 {
-                    Text = item.FirstName + " " + item.LastName + " (" + item.UserName + ")",
-                    Value = item.UserName,
-                });
+                    _outputList.Add(new SelectListItem
+                    {
+                        Text = item.FirstName + " " + item.LastName + " (" + item.UserName + ")",
+                        Value = item.UserName,
+                    });
 
+                }
                 if (doorToGenerateFor.AdminUsers.Contains(item))
                     _selectedList.Add(item.UserName);
             }
