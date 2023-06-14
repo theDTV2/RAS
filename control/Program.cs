@@ -51,7 +51,7 @@ app.MapRazorPages();
 
 
 
-//#if !DEBUG
+#if !DEBUG
     Task _emailTaskResult = EMailManager.SendQueuedMailsAsync();
     Task _userCleanupResult =  UserStateManager.DeleteOldStatesAsync();
 
@@ -59,14 +59,14 @@ app.MapRazorPages();
     var _dataBaseManager = app.Services.CreateScope().ServiceProvider.GetRequiredService<IDataBaseManager>();
 
     Task _dataBaseManagerResult = _dataBaseManager.DeleteOldLoginLinksAsync();
-//#endif
+#endif
 
 
     app.Run();
 
-//#if !DEBUG
+#if !DEBUG
     await _emailTaskResult;
     await _userCleanupResult;
-//#endif
+#endif
 
 

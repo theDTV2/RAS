@@ -1,4 +1,5 @@
 ﻿using control.Data;
+using control.Manager;
 using control.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -139,12 +140,14 @@ namespace control.Helper
                     if (_user.AdminDoors.IsNullOrEmpty() && _user.AccessLevel == EAccessLevel.kModerator)
                     {
                         _user.AccessLevel = EAccessLevel.kUser;
+                        UserStateManager.SetUpdatePermissionsRequired(_user.UserName);
                         _editedSomething = true;
                     }
 
                     if (!_user.AdminDoors.IsNullOrEmpty() && _user.AccessLevel == EAccessLevel.kUser)
                     {
                         _user.AccessLevel = EAccessLevel.kModerator;
+                        UserStateManager.SetUpdatePermissionsRequired(_user.UserName);
                         _editedSomething = true;
                     }
                 }

@@ -59,6 +59,7 @@ namespace control.Helper
 
        public static EAccessReturnValue CheckUserPermission(control.Data.controlContext dataContext, HttpContext context, EAccessLevel requiredAccessLevel = EAccessLevel.kUser, Door? doorToOpen = null)
         {
+        
             //No User logged in
             if (!AccountHelper.GetLoggedIn(context))
                 return EAccessReturnValue.kAccessDenied;
@@ -66,12 +67,18 @@ namespace control.Helper
             string userName = AccountHelper.GetUserName(context);
             User user = GetUserAsync(dataContext, userName).Result!;
 
+            //Check, if user permissions need to be refreshed
+
+            if (UserStateManager.UpdatePermissionsRequired(context.Session.Id))
+            {
+                AccountHelper.RefreshUser(context, userName, user!.AccessLevel);
+            }
+
             //User State is not valid anymore (Somebody logged in with the same username)
             if (!UserStateManager.CheckUserState(context.Session.Id))
             {
                 AccountHelper.LogoutUser(context);
                 UserStateManager.RemoveState(context.Session.Id);
-
 
                 AlertGenerator.AddAlertToSession(context, AlertGenerator.EAlertLevel.kError, "Invalid User State. You have been logged out!");
 
@@ -93,6 +100,9 @@ namespace control.Helper
             {
                 return EAccessReturnValue.kAccountRegistrationNotCompleted;
             }
+
+            if (user.CompletedRegistration == true && user.AccessLevel == EAccessLevel.kNone)
+                return EAccessReturnValue.kAccountLocked;
             if (doorToOpen is not null)
             {
                 //Check for regular Access right
@@ -118,6 +128,7 @@ namespace control.Helper
             EAccessReturnValue perm = CheckUserPermission(dataContext, context, requiredAccessLevel, doorToOpen);
             if (perm != EAccessReturnValue.kAccessGranted && perm != EAccessReturnValue.kAdminGranted)
                 return false;
+
             return true;
 
         }
@@ -136,6 +147,7 @@ namespace control.Helper
                 AccountHelper.LogoutUser(context);
                 return false;
             }
+          
 
             if (perm != EAccessReturnValue.kAccessGranted && perm != EAccessReturnValue.kAdminGranted)
             {

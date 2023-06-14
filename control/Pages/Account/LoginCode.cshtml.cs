@@ -58,6 +58,14 @@ namespace control.Pages.Account
                     return RedirectToPage("Registration");
                 }
 
+                if (res == EAccessReturnValue.kAccountLocked)
+                {
+                    
+                    AccountHelper.LogoutUser(HttpContext);
+                    AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Account locked");
+                    return RedirectToPage("Login");
+
+                }
 
                 return RedirectToPage("Dashboard");
             }
@@ -85,8 +93,9 @@ namespace control.Pages.Account
                         return RedirectToPage("Privacy");
 
                     if (res == EAccessReturnValue.kAccountRegistrationNotCompleted)
-
                         return RedirectToPage("Registration");
+
+
                     return RedirectToPage("Dashboard");
                 }
                 //If we do not find the login key, redirect to 404

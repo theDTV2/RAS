@@ -52,6 +52,42 @@ namespace control.Manager
             return true;
         }
 
+        public static bool UpdatePermissionsRequired(string sessionid)
+        {
+            UserState? _userState;
+
+            if (!UserStates.TryGetValue(sessionid, out _userState))
+                return false;
+
+            if (!_userState.Valid)
+                return false;
+
+            if (_userState.UpdatePermissionsRequired)
+            {
+                _userState.UpdatePermissionsRequired = false;
+                return true;
+            }
+            return false;
+        }
+        public static void SetUpdatePermissionsRequired(string userName, EAccessLevel _levelToSetTo = EAccessLevel.kUser)
+        {
+            var _user = UserStates.Where(u => u.Value.UserName == userName).FirstOrDefault();
+
+            if (_user.Value is null)
+                return;
+
+                
+            _user.Value.UpdatePermissionsRequired = true;
+
+            //If a User is locked, invalidate his session
+            if (_levelToSetTo == EAccessLevel.kNone)
+                _user.Value.SetInvalid();
+
+
+            return;
+        }
+
+
         public static bool RemoveState(string sessionid, string userName = "")
         {
             return UserStates.Remove(sessionid);

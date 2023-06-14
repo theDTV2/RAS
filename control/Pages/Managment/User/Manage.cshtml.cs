@@ -10,6 +10,7 @@ using control.Data;
 using control.Models;
 using control.Helper;
 using control.Generator;
+using control.Manager;
 
 namespace control.Pages.Managment.User
 {
@@ -23,7 +24,7 @@ namespace control.Pages.Managment.User
         }
 
         [BindProperty]
-        public control.Models.User User { get; set; } = default!;
+        public new control.Models.User User { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -46,10 +47,16 @@ namespace control.Pages.Managment.User
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var _userEAccessLevel = AccountHelper.GetEAccessLevel(HttpContext);
-            if (User.AccessLevel >= _userEAccessLevel && _userEAccessLevel != EAccessLevel.kSuperAdmin)
+            var _user = await _context.User.FirstOrDefaultAsync(m => m.UserName == User.UserName);
+
+            if (_user == null) 
                 return NotFound();
 
+            var _userEAccessLevel = AccountHelper.GetEAccessLevel(HttpContext);
+            if (_user.AccessLevel >= _userEAccessLevel && _userEAccessLevel != EAccessLevel.kSuperAdmin)
+                return NotFound();
+
+            
 
             //TODO: Check for unique access card code
             //TODO: Detect manipulation of user rights
@@ -58,12 +65,14 @@ namespace control.Pages.Managment.User
                 return Page();
 
               //Use TryUpdateModelAsync to prevent data manipulation
-            if (await TryUpdateModelAsync<control.Models.User>(
-                User,
-                "User",
-                u => u.FirstName, u => u.LastName, u => u.AccessLevel,
-                u => u.ExpiryDate, u => u.SecretCode
-                ))
+            
+            _user.FirstName = User.FirstName;
+            _user.LastName = User.LastName;
+            _user.AccessLevel = User.AccessLevel;
+            _user.ExpiryDate = User.ExpiryDate;
+            _user.SecretCode = User.SecretCode;
+
+
             try
                 {
                     await _context.SaveChangesAsync();
@@ -72,6 +81,12 @@ namespace control.Pages.Managment.User
                 {
                     return NotFound();
                 }
+
+            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Saving successfull");
+
+            UserStateManager.SetUpdatePermissionsRequired(User.UserName, User.AccessLevel);
+
+
             return RedirectToPage("./List");
         }
 

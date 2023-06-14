@@ -10,6 +10,8 @@
 
         public bool Valid { get; private set; } = true;
 
+        public bool UpdatePermissionsRequired { get;  set; } = false;
+
         public UserState(string username)
         {
             UserName = username;

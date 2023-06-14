@@ -9,7 +9,7 @@ namespace control.Helper
             DateTime _now = DateTime.Now;
             DateTime _ssSemester = new DateTime(DateTime.Now.Year, 08, 31);
             DateTime _wsSemester = new DateTime(DateTime.Now.Year, 03, 31);
-             
+
             if (_now < _ssSemester && (_ssSemester - _now) < TimeSpan.FromDays(31))
                 return true;
 
@@ -32,7 +32,7 @@ namespace control.Helper
             }
             if (_now > _wsSemester && _now < _ssSemester)
             {
-                return new DateTime(DateTime.Now.Year+1, 03, 31);
+                return new DateTime(DateTime.Now.Year + 1, 03, 31);
             }
 
             return new DateTime(DateTime.Now.Year + 1, 09, 30);

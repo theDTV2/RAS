@@ -13,13 +13,7 @@ namespace control.Helper
             if (UserStateManager.AddUserState(httpContext.Session.Id, GetUserName(httpContext)))
                 AlertGenerator.AddAlertToSession(httpContext, AlertGenerator.EAlertLevel.kWarning, "The previous session was terminated");
 
-            SetLoggedInStatus(httpContext);
-            SetUserName(httpContext, username);
-            SetUserRole(httpContext, level);
-
-
-            //TODO: Think, if anything needs to be caught here
-            return true;
+            return RefreshUser(httpContext, username, level);
         }
 
         public static bool LogoutUser(HttpContext httpContext)
@@ -35,7 +29,18 @@ namespace control.Helper
             //return false;
         }
 
-        private static void SetLoggedInStatus(HttpContext context, bool statusToSetTo = true)
+        public static bool RefreshUser(HttpContext httpContext, string username, EAccessLevel level)
+        {
+            SetLoggedInStatus(httpContext);
+            SetUserName(httpContext, username);
+            SetUserRole(httpContext, level);
+
+            //TODO: Think, if anything needs to be caught here
+            return true;
+        }
+
+
+            private static void SetLoggedInStatus(HttpContext context, bool statusToSetTo = true)
         {
             SessionHelper.SaveStringInSession(context,"loggedInStatus", statusToSetTo.ToString());
         }
@@ -44,14 +49,13 @@ namespace control.Helper
         {
             SessionHelper.SaveStringInSession(context, "userName", userName);
 
-            //TODO: What to do when a User Name is already set?
             return true;
         }
 
         private static bool SetUserRole(HttpContext context, EAccessLevel role)
         {
             SessionHelper.SaveIntInSession(context, "userRole", Convert.ToInt32(role));
-            //TODO: What to do when a User Role is already set?
+
             return true;
         }
 

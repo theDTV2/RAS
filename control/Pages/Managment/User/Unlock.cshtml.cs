@@ -12,6 +12,7 @@ using control.Generator;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 using control.Helper;
+using control.Manager;
 
 namespace control.Pages.Managment.User
 {
@@ -87,6 +88,9 @@ namespace control.Pages.Managment.User
 
             //TODO: Check for unique access card code
             AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Saving successfull");
+
+            UserStateManager.SetUpdatePermissionsRequired(User.UserName, User.AccessLevel);
+
 
             return RedirectToPage("List");
         }
