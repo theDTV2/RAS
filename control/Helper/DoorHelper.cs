@@ -29,9 +29,9 @@ namespace control.Helper
             if (CheckIfTimedOut(_timeStamp))
                 return false;
 
-            string _newToken = HashHelper.GenerateRandomBase64String(128);
+            string _newSecret = HashHelper.GenerateRandomBase64String(128);
 
-            _door.Secret = _newToken;
+            _door.Secret = _newSecret;
             _door.Registered = true;
             _door.LastCheckInTime = DateTime.Now;
 
@@ -40,7 +40,7 @@ namespace control.Helper
             JsonObject _toReturnJsonRaw = new JsonObject()
             {
                 { "doorID" , doorID},
-                { "token" , _newToken},
+                { "secret" , _newSecret},
                 { "timeStamp" , DateTime.Now},
                 { "displayText", _door.DisplayName}
 
