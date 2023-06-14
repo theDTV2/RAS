@@ -85,6 +85,7 @@ namespace control.Pages.Managment.User
  
             //TODO: Proper Error catching
 
+            //TODO: Check for unique access card code
             AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Saving successfull");
 
             return RedirectToPage("List");
