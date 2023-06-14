@@ -102,27 +102,6 @@ namespace control.Helper
             return rval;
 
         }
-        [Obsolete("Not needed, we do not hash the access code anymore")]
-        public static EAccessReturnValue TryToVerifyUserWithHash(control.Data.controlContext dataContext, string email, string AccessCode, out User? user)
-        {
-            User? userToCheck = GetUserAsync(dataContext, email.ToLower()).Result;
-            user = userToCheck;
-            if (userToCheck is null)
-            {
-                return EAccessReturnValue.kAccessDenied;
-            }
-            if (userToCheck.AccessCode is null)
-            {
-                return EAccessReturnValue.kAccessDenied;
-            }
-
-            if (HashHelper.CompareStringToHashString(userToCheck.AccessCode, AccessCode))
-                return EAccessReturnValue.kAccessGranted;
-
-            return EAccessReturnValue.kAccessDenied;
-
-
-        }
 
         private static async Task<User> CreateUserAsync(control.Data.controlContext dataContext, string userName)
         {
