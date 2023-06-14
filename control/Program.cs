@@ -53,9 +53,7 @@ app.MapRazorPages();
 
 #endif
 
-
 app.Run();
-
 
 #if !DEBUG
     await _emailTaskResult;

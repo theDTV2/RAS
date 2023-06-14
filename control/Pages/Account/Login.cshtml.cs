@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using control.Data;
 using control.Models;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using control.Helper;
 using control.Generator;
 
@@ -48,9 +46,13 @@ namespace control.Pages.Account
 
             string _userMail = UserEmail.ToLower();
 
-            if (_userMail.Split("@")[1] != "htw-berlin.de")
+            string[] _userMailElements = _userMail.Split("@");
+
+            //Only reject non-htw adresses when we are not debugging
+
+            if (_userMailElements[1] != "htw-berlin.de" || _userMailElements[0].Contains('.'))
             {
-                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Nur htw-berlin.de Adressen werden unterstütz");
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Nur login@htw-berlin.de Adressen werden unterstützt");
                 return Page();
             }
 
