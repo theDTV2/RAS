@@ -55,19 +55,28 @@ namespace control.Helper
         public static bool RequestDoorAccess(control.Data.controlContext dataContext, string doorId, string secret, string cardCode, string timeStamp, ref JsonResult returnValue)
         {
             Door? _door = GetDoor(dataContext, doorId);
-            User? _user = dataContext.User.Where(u => u.SecretCode == cardCode).FirstOrDefault();
 
-            if (_door is null) 
+            //If the door does not exist, it doesnt get a proper access response, only a 500
+            if (_door is null)
                 return false;
-            if (_user is null) 
-                return false;
-
 
             JsonObject _toReturnJsonRaw;
+            User? _user = dataContext.User.Where(u => u.SecretCode == cardCode).FirstOrDefault();
+            if (_user is null)
+            {
+                //If we reached until here, the device is NOT allowed
+                _toReturnJsonRaw = new JsonObject()
+                {
+                    { "doorResponse" , false},
+                    { "doorStatus" , ""},
+                    { "displayText" ,"User not found"},
+                    { "timeStamp",  DateTime.Now}
+                };
+                return false;
+            }
 
             if (!DateTime.TryParse(timeStamp, out DateTime _timeStamp))
                 return false;
-
 
             if (CheckForDoorRestrictions(_door, secret, _timeStamp) && CheckForUserAccessRestrictions(_user, _door!))
             {
@@ -80,7 +89,6 @@ namespace control.Helper
                 returnValue = new JsonResult(_toReturnJsonRaw);
                 return true;
             }
-
 
             //If we reached until here, the device is NOT allowed
             _toReturnJsonRaw = new JsonObject()
@@ -131,7 +139,7 @@ namespace control.Helper
             return true;
         }
 
-        private static bool CheckForDoorRestrictions(Door? door,string token, DateTime timeStamp)
+        private static bool CheckForDoorRestrictions(Door? door, string token, DateTime timeStamp)
         {
             //No door with this name found
             if (door is null)
@@ -146,7 +154,7 @@ namespace control.Helper
                 return false;
 
             //This door is set to accept all entries
-            if (door.EntryStatus == EDoorEntryMode.kUniversalAccess) 
+            if (door.EntryStatus == EDoorEntryMode.kUniversalAccess)
                 return true;
 
             if (CheckIfTimedOut(timeStamp))
