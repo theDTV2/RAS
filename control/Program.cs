@@ -50,6 +50,7 @@ app.MapRazorPages();
 
 #if !DEBUG
     Task _emailTaskResult = EMailManager.SendQueuedMailsAsync();
+    Task _userCleanupResult =  UserStateManager.DeleteOldStatesAsync();
 
 #endif
 
@@ -57,6 +58,7 @@ app.Run();
 
 #if !DEBUG
     await _emailTaskResult;
+    await _userCleanupResult;
 #endif
 
 

@@ -34,7 +34,6 @@ namespace control.Pages.API
                 return _returnVal;
 
             return StatusCode(500);
-
         }
 
         public IActionResult OnPostHearbeat(string doorID, string timeStamp, string secret)
