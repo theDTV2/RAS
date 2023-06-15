@@ -161,12 +161,16 @@ namespace control.Helper
                 return false;
 
             //User is locked
-            if (user.AccessLevel > EAccessLevel.kNone)
+            if (user.AccessLevel == EAccessLevel.kNone)
                 return false;
 
             //User is expired
             if (CheckIfExpired(user.ExpiryDate))
                 return false;
+
+            //Admins are always allowed
+            if (user.AccessLevel >= EAccessLevel.kAdmin)
+                return true;
 
             //User is not allowed to access door
             if (!user.AccessDoors.Contains(door))
