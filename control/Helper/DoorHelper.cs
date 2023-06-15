@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 using NuGet.Common;
 using NuGet.Packaging;
 using NuGet.Packaging.Signing;
@@ -67,7 +68,7 @@ namespace control.Helper
                 return false;
 
             JsonObject _toReturnJsonRaw;
-            User? _user = dataContext.User.Where(u => u.SecretCode == cardCode).FirstOrDefault();
+            User? _user = dataContext.User.Where(u => u.SecretCode == cardCode).Include(u => u.AccessDoors).FirstOrDefault();
 
             _toReturnJsonRaw = new JsonObject()
             {
