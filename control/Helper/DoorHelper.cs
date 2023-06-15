@@ -1,7 +1,12 @@
 ﻿using control.Models;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using NuGet.Common;
+using NuGet.Packaging;
 using NuGet.Packaging.Signing;
+using System.Linq;
+using System.Net.Sockets;
 using System.Text.Json.Nodes;
 using System.Threading;
 
@@ -9,7 +14,6 @@ namespace control.Helper
 {
     public static class DoorHelper
     {
-
         public static bool AttemptToRegisterDoor(control.Data.controlContext dataContext, string doorID, string timeStamp, ref JsonResult returnValue)
         {
             Door? _door = GetDoor(dataContext, doorID);
@@ -25,8 +29,7 @@ namespace control.Helper
             if (!DateTime.TryParse(timeStamp, out DateTime _timeStamp))
                 return false;
 
-            //Request timed out
-            if (CheckIfTimedOut(_timeStamp))
+             if (CheckIfTimedOut(_timeStamp))
                 return false;
 
             string _newSecret = HashHelper.GenerateRandomBase64String(128);
@@ -60,59 +63,55 @@ namespace control.Helper
             if (_door is null)
                 return false;
 
+            if (!CheckDoorParameters(_door, secret, timeStamp, out DateTime _timeStamp))
+                return false;
+
             JsonObject _toReturnJsonRaw;
             User? _user = dataContext.User.Where(u => u.SecretCode == cardCode).FirstOrDefault();
+
+            _toReturnJsonRaw = new JsonObject()
+            {
+               { "timeStamp",  DateTime.Now},
+            };
+
             if (_user is null)
             {
-                //If we reached until here, the device is NOT allowed
-                _toReturnJsonRaw = new JsonObject()
-                {
-                    { "doorResponse" , false},
-                    { "doorStatus" , ""},
-                    { "displayText" ,"User not found"},
-                    { "timeStamp",  DateTime.Now}
-                };
-                return false;
+                _toReturnJsonRaw["doorResponse"] = false;
+                _toReturnJsonRaw["doorStatus"] = _door.EntryStatus.ToString();
+                _toReturnJsonRaw["displayText"] = _door.DisplayName;
+                _toReturnJsonRaw["responseText"] = "Access denied";
+
+                return true;
             }
 
-            if (!DateTime.TryParse(timeStamp, out DateTime _timeStamp))
-                return false;
-
-            if (CheckForDoorRestrictions(_door, secret, _timeStamp) && CheckForUserAccessRestrictions(_user, _door!))
+            if (CheckForDoorRestrictions(_door) && CheckForUserAccessRestrictions(_user, _door!))
             {
-                _toReturnJsonRaw = new JsonObject()
-                {
-                    { "doorResponse" , true},
-                    { "displayText" ,""},
-                    { "timeStamp",  DateTime.Now}
-                };
+                _toReturnJsonRaw["doorResponse"] = true;
+                _toReturnJsonRaw["doorStatus"] = _door.EntryStatus.ToString();
+                _toReturnJsonRaw["displayText"] = _door.DisplayName;
+                _toReturnJsonRaw["responseText"] = "Access granted";
+
                 returnValue = new JsonResult(_toReturnJsonRaw);
                 return true;
             }
 
-            //If we reached until here, the device is NOT allowed
-            _toReturnJsonRaw = new JsonObject()
-            {
-                { "doorResponse" , false},
-                { "doorStatus" , ""},
-                { "displayText" ,""},
-                { "timeStamp",  DateTime.Now}
-            };
-
+            _toReturnJsonRaw["doorResponse"] = true;
+            _toReturnJsonRaw["doorStatus"] = _door.EntryStatus.ToString();
+            _toReturnJsonRaw["displayText"] = _door.DisplayName;
+            _toReturnJsonRaw["responseText"] = "Access denied";
             returnValue = new JsonResult(_toReturnJsonRaw);
-            return false;
+            return true;
         }
 
-        public static bool RegisterHeartBeat(control.Data.controlContext dataContext, string doorId, string token, string timeStamp, ref JsonResult returnValue)
+        public static bool RegisterHeartBeat(control.Data.controlContext dataContext, string doorId, string secret, string timeStamp, ref JsonResult returnValue)
         {
-            if (!DateTime.TryParse(timeStamp, out DateTime _timeStamp))
-                return false;
-
-            //Request timed out
-            if (CheckIfTimedOut(_timeStamp))
-                return false;
-
             Door? _door = GetDoor(dataContext, doorId);
+
+            if (_door == null)
+                return false;
+            if (!CheckDoorParameters(_door, secret, timeStamp, out _))
+                return false;
+
             JsonObject _toReturnJsonRaw;
 
             //No door with this name found
@@ -120,7 +119,7 @@ namespace control.Helper
                 return false;
 
             //Wrong token
-            if (_door.Secret != token)
+            if (_door.Secret != secret)
                 return false;
 
 
@@ -139,14 +138,10 @@ namespace control.Helper
             return true;
         }
 
-        private static bool CheckForDoorRestrictions(Door? door, string token, DateTime timeStamp)
+        private static bool CheckForDoorRestrictions(Door? door)
         {
             //No door with this name found
             if (door is null)
-                return false;
-
-            //Check, if token is the same as provided
-            if (token != door.Secret)
                 return false;
 
             //This door not registered yet or locked
@@ -156,9 +151,6 @@ namespace control.Helper
             //This door is set to accept all entries
             if (door.EntryStatus == EDoorEntryMode.kUniversalAccess)
                 return true;
-
-            if (CheckIfTimedOut(timeStamp))
-                return false;
 
             return true;
         }
@@ -200,6 +192,30 @@ namespace control.Helper
         private static bool CheckIfExpired(DateTime timeStamp)
         {
             return CheckIfTimedOut(timeStamp, TimeSpan.Zero);
+        }
+
+        private static bool CheckDoorParameters(Door door, string secret, string timeStampStr, out DateTime timeStamp)
+        {
+            timeStamp = DateTime.MinValue;
+
+            //If the door is not registered, also 500
+            if (!door.Registered)
+                return false;
+
+            //If secret is not same as provided? 500 time
+            if (secret != door.Secret)
+                return false;
+
+            //If a faulty time is passed, guess what? 500
+            if (!DateTime.TryParse(timeStampStr, out timeStamp))
+                return false;
+
+            //if Request timed out
+            if (CheckIfTimedOut(timeStamp))
+                return false;
+
+            return true;
+
         }
     }
 }
