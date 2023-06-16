@@ -1,4 +1,5 @@
-﻿using control.Models;
+﻿using control.Manager;
+using control.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System.ComponentModel;
@@ -41,8 +42,7 @@ namespace control.Helper
             if (loginLink is null)
                 return EAccessReturnValue.kAccessDenied;
 
-            //TODO: Add customizable timeout 
-            if ((loginLink.GenerationTime - DateTime.Now) > TimeSpan.FromMinutes(15))
+            if ((loginLink.GenerationTime - DateTime.Now) > GeneralSettingsManager.GetUserLoginTimeout())
                 return EAccessReturnValue.kCodeExpired;
 
             return EAccessReturnValue.kAccessGranted;
