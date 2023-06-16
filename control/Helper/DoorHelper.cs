@@ -97,7 +97,7 @@ namespace control.Helper
                 return true;
             }
 
-            _toReturnJsonRaw["doorResponse"] = true;
+            _toReturnJsonRaw["doorResponse"] = false;
             _toReturnJsonRaw["doorStatus"] = _door.EntryStatus.ToString();
             _toReturnJsonRaw["displayText"] = _door.DisplayName;
             _toReturnJsonRaw["responseText"] = "Access denied";
