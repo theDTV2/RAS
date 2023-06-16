@@ -21,7 +21,7 @@ namespace control.Manager
                 IList<LoginLink>? _loginLinks = _context.LoginLink.ToList();
 
                 //CutoffTime is longer than actual login timeout, just to be sure
-                DateTime _cutOffTime = DateTime.Now.AddMinutes(-16);
+                DateTime _cutOffTime = DateTime.Now - TimeSpan.FromMinutes(1) - GeneralSettingsManager.GetUserLoginTimeout();
                 if (!_loginLinks.IsNullOrEmpty())
                 {
                     _loginLinks = _loginLinks.Where(l => l.GenerationTime > _cutOffTime).ToList();
