@@ -57,8 +57,6 @@ namespace control.Pages.Managment.User
                 return NotFound();
 
             
-
-            //TODO: Check for unique access card code
             //TODO: Detect manipulation of user rights
 
             if (!ModelState.IsValid)
