@@ -13,6 +13,7 @@ cardCode = "12345623"
 # print(ret_r.json())
 
 # secret = ret_r.json()['secret']
+# TEST SECRET, don't bother bots/GitHub scrapers
 secret = '+cNv/W3ckoI4h9Bm00ijw/yU+rIN9FxaMg8UiR0lURIWw2FJRJocdYPniccfjxnEEtB7qvYFm' \
          'NNnT98iboEki8wJ9nzUpmRN8YMHXuZ+GT1296dlpxEobALJwoKKAK1mScJCJs7tpOC2uZxNCpiBnd+p1NKoko5ywBzgJIp6U68='
 # Register first door
