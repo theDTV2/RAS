@@ -20,9 +20,17 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddScoped<IDataBaseManager, DataBaseManager>();
 
 
+//If load fails, we save the default values to a new file
+if (!EMailManager.LoadMailSettingsFromConfig())
+    EMailManager.SaveMailSettingsToConfig();
+
+if (!GeneralSettingsManager.LoadGeneralSettingsFromConfig())
+    GeneralSettingsManager.SaveGeneralSettingsToConfig();
+
+
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(10);
+    options.IdleTimeout = GeneralSettingsManager.GetUserLoginTimeout();
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
