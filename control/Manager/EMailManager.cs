@@ -23,6 +23,8 @@ namespace control.Manager
 
         public static bool LoadMailSettingsFromConfig()
         {
+            if (!System.IO.File.Exists("MailSettings.cfg"))
+                return false;
             //TODO: Make Config location changable
             //TODO: Catch errors
             string read = System.IO.File.ReadAllText("MailSettings.cfg");

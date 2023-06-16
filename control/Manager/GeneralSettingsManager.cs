@@ -11,9 +11,12 @@ namespace control.Manager
 
         public static bool LoadGeneralSettingsFromConfig()
         {
+            if (!System.IO.File.Exists("GeneralSettings.cfg"))
+                return false;
+
             //TODO: Make Config location changable
             //TODO: Catch errors
-            string read = System.IO.File.ReadAllText("MailSettings.cfg");
+            string read = System.IO.File.ReadAllText("GeneralSettings.cfg");
 
             if (read is null)
                 return false;
