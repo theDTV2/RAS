@@ -1,6 +1,6 @@
 ﻿@page
 @model control.Pages.Managment.Door.ListModel
-
+@using control.Helper
 
 <!DOCTYPE html>
 
@@ -46,6 +46,13 @@
                     </td>
                     <td>
                         <a class="btn btn-primary" asp-page="Manage" asp-route-DoorIdentifier="@item.Id">Manage</a>
+                   
+                    @if(AccountHelper.GetEAccessLevel(HttpContext) >= Models.EAccessLevel.kAdmin)
+                    {
+            
+                            <a class="btn btn-danger" asp-page="Delete" asp-route-DoorIdentifier="@item.Id">Delete</a>
+
+                    }
                     </td>
                 </tr>
             }
