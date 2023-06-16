@@ -45,7 +45,7 @@ namespace control.Helper
             {
                 { "doorID" , doorID},
                 { "secret" , _newSecret},
-                { "timeStamp" , DateTime.Now},
+                { "timeStamp" , DateTime.Now.ToString()},
                 { "displayName", _door.DisplayName}
 
             };
@@ -72,7 +72,7 @@ namespace control.Helper
 
             _toReturnJsonRaw = new JsonObject()
             {
-               { "timeStamp",  DateTime.Now},
+               { "timeStamp",  DateTime.Now.ToString()},
             };
 
             if (_user is null)
@@ -132,7 +132,7 @@ namespace control.Helper
             {
                 { "entryMode" , _door.EntryStatus.ToString()},
                 { "displayText" , _door.DisplayName},
-                { "timeStamp",  DateTime.Now}
+                { "timeStamp",  DateTime.Now.ToString()}
             };
 
             returnValue = new JsonResult(_toReturnJsonRaw);
