@@ -36,7 +36,7 @@ namespace control.Pages.API
             return StatusCode(500);
         }
 
-        public IActionResult OnPostHearbeat(string doorID, string timeStamp, string secret)
+        public IActionResult OnPostHeartbeat(string doorID, string timeStamp, string secret)
         {
             JsonResult _returnVal = new("");
 
