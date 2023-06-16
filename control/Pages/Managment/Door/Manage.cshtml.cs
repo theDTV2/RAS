@@ -63,6 +63,9 @@ namespace control.Pages.Managment.Door
 
         public IActionResult OnPost()
         {
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kAdmin))
+                return Unauthorized();
+
             control.Models.Door? _door = _context.Door.Where(d => d.Id == DoorIdentifier).Include(d => d.AdminUsers).FirstOrDefault();
             if (_door == null)
                 return NotFound();

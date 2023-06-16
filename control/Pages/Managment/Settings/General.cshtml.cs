@@ -7,7 +7,7 @@ namespace control.Pages.Managment.Site
     {
         public IActionResult OnGet()
         {
-            //TODO: Everything
+            //TODO: General Settings Managment Page
 
             return NotFound();
         }

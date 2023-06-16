@@ -51,7 +51,10 @@ namespace control.Pages.Account
 				User _user = AccountHelper.GetLoggedInUser(_context, HttpContext);
 
 				_user.CompletedRegistration = true;
-                _user.AccessLevel = EAccessLevel.kUser;
+
+                if (_user.AccessLevel == EAccessLevel.kNone)
+                    _user.AccessLevel = EAccessLevel.kUser;
+
                 _user.FirstName = firstName;
                 _user.LastName = lastName;
 				_context.SaveChanges();
