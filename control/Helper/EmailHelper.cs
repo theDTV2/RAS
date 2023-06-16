@@ -19,7 +19,7 @@ namespace control.Helper
             throw new NotImplementedException();
         }
 
-        //This mail sends a specific mail
+        //This function sends a specific mail
         //TODO
 
     }
