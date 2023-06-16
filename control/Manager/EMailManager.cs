@@ -46,6 +46,10 @@ namespace control.Manager
 
             //TODO: Make Config location changable
             //TODO: Catch errors
+
+            if (System.IO.File.Exists("MailSettings.cfg"))
+                System.IO.File.Delete("MailSettings.cfg");
+
             System.IO.File.WriteAllText("MailSettings.cfg", _toWrite);
 
             return true;
