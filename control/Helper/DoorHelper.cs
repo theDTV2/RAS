@@ -82,6 +82,7 @@ namespace control.Helper
                 _toReturnJsonRaw["displayText"] = _door.DisplayName;
                 _toReturnJsonRaw["responseText"] = "Access denied";
 
+                returnValue = new JsonResult(_toReturnJsonRaw);
                 return true;
             }
 
