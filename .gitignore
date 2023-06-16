@@ -485,3 +485,6 @@ $RECYCLE.BIN/
 
 #Website config files
 *.cfg
+
+#still add default config file for client
+!config _default.cfg
