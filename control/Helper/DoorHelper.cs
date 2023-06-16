@@ -46,7 +46,7 @@ namespace control.Helper
                 { "doorID" , doorID},
                 { "secret" , _newSecret},
                 { "timeStamp" , DateTime.Now},
-                { "displayText", _door.DisplayName}
+                { "displayName", _door.DisplayName}
 
             };
 
