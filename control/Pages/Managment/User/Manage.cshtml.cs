@@ -70,7 +70,6 @@ namespace control.Pages.Managment.User
             _user.LastName = User.LastName;
             _user.AccessLevel = User.AccessLevel;
             _user.ExpiryDate = User.ExpiryDate;
-            _user.SecretCode = User.SecretCode;
 
 
             try
