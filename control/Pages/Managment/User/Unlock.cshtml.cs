@@ -76,17 +76,24 @@ namespace control.Pages.Managment.User
         {
             User = _context.User.Where(u => u.UserName == UserIdentifier).Include(u => u.AccessDoors).Include(u => u.AdminDoors).First();
 
+            //Check, if secret code is unique
+            if (_context.User.Where(u => u.SecretCode == Secret&& u.UserName != User.UserName).Any())
+            {
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Card code is already being used");
+                return Page();
+            }
+
+
             User.LastName = LastName;
             User.FirstName = FirstName;
             User.SecretCode = Secret;
 
-            User.AccessDoors =  SelectListHelper.ConvertDoorIdStringsToReferences(_context, DoorsToGiveAccessTo).ToList();
+            User.AccessDoors = SelectListHelper.ConvertDoorIdStringsToReferences(_context, DoorsToGiveAccessTo).ToList();
 
             _context.SaveChanges();
- 
+
             //TODO: Proper Error catching
 
-            //TODO: Check for unique access card code
             AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Saving successfull");
 
             UserStateManager.SetUpdatePermissionsRequired(User.UserName, User.AccessLevel);
