@@ -50,7 +50,7 @@ namespace control.Pages.API
         public ActionResult OnGet()
         {
             //Browsing this page is not intended
-            return NotFound();
+            return Page();
         }
 
 
