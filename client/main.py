@@ -8,12 +8,6 @@ from time import sleep
 import requests
 from datetime import datetime, timedelta
 
-
-# function, that will be run async to await input
-def get_input():
-    return input()
-
-
 verify_ssl_cert = False
 # In Debug mode we don't check for the ssl certificate
 if __debug__:
