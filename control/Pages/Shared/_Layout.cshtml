@@ -103,7 +103,7 @@
                         @if (_loggedIn)
                         {
                             <li class="nav-item">
-                                <a class="nav-link disabled text-dark" asp-area="" asp-page="">Rolle: @AccountHelper.GetAccessLevelAsString(Context)</a>
+                                <a class="nav-link disabled text-dark" asp-area="" asp-page="">@AccountHelper.GetUserName(Context) <br />  @AccountHelper.GetAccessLevelAsString(Context)</a>
                             </li>
 
                             <li class="nav-item">
