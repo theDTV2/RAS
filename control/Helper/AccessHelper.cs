@@ -51,12 +51,18 @@ namespace control.Helper
         {
             User? userToCheck = GetUserAsync(dataContext, userName).Result;
             user = null;
-            //TODO: Add timeout to key check
+
             if (userToCheck is null)
             {
                 return EAccessReturnValue.kAccessDenied;
             }
             user = userToCheck;
+
+            if (user.AccessCodeGenerationTime < DateTime.Now - GeneralSettingsManager.GetUserLoginTimeout())
+            {
+                return EAccessReturnValue.kAccessDenied;
+            }
+
             if (userToCheck.AccessCode is null)
             {
                 return EAccessReturnValue.kAccessDenied;
