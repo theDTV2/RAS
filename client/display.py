@@ -1,4 +1,5 @@
 import queue
+import string
 import typing
 import datetime
 from os.path import exists
@@ -59,7 +60,9 @@ def display_task():
     pygame.init()
 
     screen = pygame.display.set_mode((512, 384))
-    font = pygame.font.Font(None, 24)
+    [_w_screen, _h_screen] = screen.get_size()
+
+    font = pygame.font.Font(None, 48)
 
     cutoff_time = datetime.datetime.now()
 
@@ -77,16 +80,34 @@ def display_task():
             # If we show the default message, we display it here
             if not __keep_last_value and __message_queue.empty() and not _displaying_default_message:
                 screen.fill([0, 0, 0])
-                text = font.render(__default_message, True, __default_color)
-                screen.blit(text, [30, 20])
+                _default_text = font.render(__default_message, True, __default_color)
+                _width_line_d = _default_text.get_width()
+                screen.blit(_default_text,  [(0.5 * _w_screen) - (0.5 * _width_line_d), (0.3 * _h_screen)])
                 _displaying_default_message = True
 
         if not __message_queue.empty():
             screen.fill([0, 0, 0])
             (_message, _duration, _color) = __message_queue.get_nowait()
             cutoff_time = _time_now + datetime.timedelta(seconds=_duration)
-            text = font.render(_message, True, _color)
-            screen.blit(text, [30, 20])
+
+            # If the message contains a newline, we create a second line
+            if '\n' in _message:
+                _pos = _message.find('\n')
+
+                _text_second_line = font.render("Reason: " + _message[_pos+1:], True, _color)
+
+                [_width_line_2, _height_line_2] = _text_second_line.get_size()
+                screen.blit(_text_second_line,
+                            [(0.5 * _w_screen) - (0.5 * _width_line_2), (0.3 * _h_screen) + (_height_line_2*2)])
+                # If we used the second line, we modify the message for the first line
+                _message = _message[0:_pos]
+
+            _text_first_line = font.render(_message, True, _color)
+
+            _width_line_1 = _text_first_line.get_width()
+            screen.blit(_text_first_line,
+                        [(0.5 * _w_screen) - (0.5 * _width_line_1), (0.3 * _h_screen)])
+
             _displaying_default_message = False
 
         pygame.display.update()
