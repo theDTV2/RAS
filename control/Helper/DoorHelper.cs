@@ -75,18 +75,7 @@ namespace control.Helper
                { "timeStamp",  DateTime.Now.ToString()},
             };
 
-            if (_user is null)
-            {
-                _toReturnJsonRaw["doorResponse"] = false;
-                _toReturnJsonRaw["doorStatus"] = _door.EntryStatus.ToString();
-                _toReturnJsonRaw["displayText"] = _door.DisplayName;
-                _toReturnJsonRaw["responseText"] = "Access denied";
-
-                returnValue = new JsonResult(_toReturnJsonRaw);
-                return true;
-            }
-
-            if (CheckForDoorRestrictions(_door) && CheckForUserAccessRestrictions(_user, _door!))
+            if (_user is not null && CheckForDoorRestrictions(_door) && CheckForUserAccessRestrictions(_user, _door!))
             {
                 _toReturnJsonRaw["doorResponse"] = true;
                 _toReturnJsonRaw["doorStatus"] = _door.EntryStatus.ToString();
@@ -96,11 +85,13 @@ namespace control.Helper
                 returnValue = new JsonResult(_toReturnJsonRaw);
                 return true;
             }
+            EAccessReturnValue _return_val = CheckForUserAccessRestrictionsEAccessReturn(_user, _door);
+
 
             _toReturnJsonRaw["doorResponse"] = false;
             _toReturnJsonRaw["doorStatus"] = _door.EntryStatus.ToString();
             _toReturnJsonRaw["displayText"] = _door.DisplayName;
-            _toReturnJsonRaw["responseText"] = "Access denied";
+            _toReturnJsonRaw["responseText"] = EnumHelper.ConvertEAccessReturnValueToString(_return_val);
             returnValue = new JsonResult(_toReturnJsonRaw);
             return true;
         }
@@ -171,6 +162,7 @@ namespace control.Helper
             if (user is null)
                 return EAccessReturnValue.kAccountNotFound;
 
+            //User has not completed registration yet
             if (!user.CompletedRegistration)
                 return EAccessReturnValue.kAccountRegistrationNotCompleted;
 
@@ -192,10 +184,6 @@ namespace control.Helper
 
             return EAccessReturnValue.kAccessGranted;
 
-            /*
-        kAccessDenied,
-             * 
-             */
         }
 
         private static Door? GetDoor(control.Data.controlContext dataContext, string doorID)
