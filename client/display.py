@@ -53,6 +53,7 @@ def __write_message(message, duration, color):
 
 
 def display_task():
+    global __run
     print("Hello from display")
     pygame.init()
 
@@ -64,7 +65,6 @@ def display_task():
     _displaying_default_message = False
 
     while __run:
-        pygame.event.get()
 
         # cache current time to prevent repeated recalculation
         _time_now = datetime.datetime.now()
@@ -88,6 +88,10 @@ def display_task():
             screen.blit(text, [30, 20])
             _displaying_default_message = False
 
-
         pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                __run = False
+
         sleep(0.2)
