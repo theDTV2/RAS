@@ -10,6 +10,7 @@ import requests
 from datetime import datetime, timedelta
 
 import display
+import door_communicator
 
 verify_ssl_cert = False
 # In Debug mode we don't check for the ssl certificate
@@ -123,6 +124,9 @@ else:
 last_check_in = datetime.now()
 heartbeat_frequency_seconds = 60
 
+door_task = threading.Thread(target=door_communicator.door_task)
+door_task.start()
+
 display.set_keep_last_message(False)
 display.set_default_message(message="System ready", color=(0,255,0))
 
@@ -174,12 +178,14 @@ while True:
         if time_stamp + timedelta(seconds=timeout) < datetime.now():
             print("Register operation too old, check connection or check for manipulation")
         if door_response:
-            display.write_success_message("Access Granted", 4)
+            display.write_success_message("Access Granted", 5)
             print("doorResponse Access Granted")
+            door_communicator.request_open_door(duration=10)
         else:
-            display.write_error_message("Access Denied", 4)
+            _return_text = return_access_request.json()['responseText']
+            display.write_error_message(_return_text, 3)
             print("doorResponse Access denied")
-        print("ResponseText: " + return_access_request.json()['responseText'])
+
 
     # TODO: Send Response Text to Display
     input_handle.close()
