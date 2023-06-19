@@ -82,9 +82,9 @@ def display_task():
 
         if not __message_queue.empty():
             screen.fill([0, 0, 0])
-            (message, duration, color) = __message_queue.get_nowait()
-            cutoff_time = _time_now + datetime.timedelta(seconds=duration)
-            text = font.render(message, True, color)
+            (_message, _duration, _color) = __message_queue.get_nowait()
+            cutoff_time = _time_now + datetime.timedelta(seconds=_duration)
+            text = font.render(_message, True, _color)
             screen.blit(text, [30, 20])
             _displaying_default_message = False
 
