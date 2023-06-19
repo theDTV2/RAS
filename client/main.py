@@ -1,3 +1,4 @@
+import asyncio
 import fileinput
 import json
 from os.path import exists
@@ -7,6 +8,8 @@ import sys
 from time import sleep
 import requests
 from datetime import datetime, timedelta
+
+import display
 
 verify_ssl_cert = False
 # In Debug mode we don't check for the ssl certificate
@@ -25,6 +28,11 @@ RETURN_PARSE_ERROR = 4
 RETURN_API_REGISTER_ERROR = 5
 RETURN_API_ACCESS_ERROR = 6
 RETURN_API_HEARTBEAT_ERROR = 7
+
+display_task = threading.Thread(target=display.display_task)
+display_task.start()
+display.set_keep_last_message(True)
+display.write_info_message("System starting up...", 1)
 
 print("Trying to open config.cfg...")
 # If there is no config.cfg-file, we cannot continue
@@ -115,9 +123,12 @@ else:
 last_check_in = datetime.now()
 heartbeat_frequency_seconds = 60
 
-print("starting main loop")
+display.set_keep_last_message(False)
+display.set_default_message(message="System ready", color=(0,255,0))
+
 while True:
     sleep(1)
+
     # Send Heartbeat to api
     if last_check_in + timedelta(seconds=heartbeat_frequency_seconds) < datetime.now():
 
@@ -136,6 +147,7 @@ while True:
 
     # If there is input, send request to api
     input_handle = fileinput.input()
+
     input_str = input_handle.readline()
     if input_str != "":
         cardCode = input_str.strip()
@@ -162,12 +174,12 @@ while True:
         if time_stamp + timedelta(seconds=timeout) < datetime.now():
             print("Register operation too old, check connection or check for manipulation")
         if door_response:
+            display.write_success_message("Access Granted", 4)
             print("doorResponse Access Granted")
         else:
+            display.write_error_message("Access Denied", 4)
             print("doorResponse Access denied")
         print("ResponseText: " + return_access_request.json()['responseText'])
 
     # TODO: Send Response Text to Display
     input_handle.close()
-
-
