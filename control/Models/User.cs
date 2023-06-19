@@ -27,12 +27,12 @@ namespace control.Models
         kAccessGranted,
         kAdminGranted,
         kAccessDenied,
-        kCodeExpired,
         kPermissionDenied,
         kAccountExpired,
         kAccountLocked,
         kAccountEulaNotAccepted,
-        kAccountRegistrationNotCompleted
+        kAccountRegistrationNotCompleted,
+        kAccountNotFound
     }
 
     public class User

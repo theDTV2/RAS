@@ -43,7 +43,7 @@ namespace control.Helper
                 return EAccessReturnValue.kAccessDenied;
 
             if ((loginLink.GenerationTime - DateTime.Now) > GeneralSettingsManager.GetUserLoginTimeout())
-                return EAccessReturnValue.kCodeExpired;
+                return EAccessReturnValue.kAccessDenied;
 
             return EAccessReturnValue.kAccessGranted;
         }
