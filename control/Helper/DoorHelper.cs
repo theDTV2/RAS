@@ -158,29 +158,45 @@ namespace control.Helper
         }
         private static bool CheckForUserAccessRestrictions(User? user, Door door)
         {
+            EAccessReturnValue _return_val = CheckForUserAccessRestrictionsEAccessReturn(user, door);
+
+           if (_return_val == EAccessReturnValue.kAccessGranted || _return_val == EAccessReturnValue.kAdminGranted)
+                return true;
+
+            return false;
+        }
+        private static EAccessReturnValue CheckForUserAccessRestrictionsEAccessReturn(User? user, Door door)
+        {
             //No user exists with this access code
             if (user is null)
-                return false;
+                return EAccessReturnValue.kAccountNotFound;
+
+            if (!user.CompletedRegistration)
+                return EAccessReturnValue.kAccountRegistrationNotCompleted;
 
             //User is locked
             if (user.AccessLevel == EAccessLevel.kNone)
-                return false;
+                return EAccessReturnValue.kAccountLocked;
 
             //User is expired
             if (CheckIfExpired(user.ExpiryDate))
-                return false;
+                return EAccessReturnValue.kAccountExpired;
 
             //Admins are always allowed
             if (user.AccessLevel >= EAccessLevel.kAdmin)
-                return true;
+                return EAccessReturnValue.kAdminGranted;
 
             //User is not allowed to access door
             if (!user.AccessDoors.Contains(door))
-                return false;
+                return EAccessReturnValue.kAccessDenied;
 
-            return true;
+            return EAccessReturnValue.kAccessGranted;
+
+            /*
+        kAccessDenied,
+             * 
+             */
         }
-
 
         private static Door? GetDoor(control.Data.controlContext dataContext, string doorID)
         {
