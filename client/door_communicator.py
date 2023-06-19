@@ -44,5 +44,3 @@ def door_task():
             _door_is_open = False
 
         sleep(0.1)
-
-

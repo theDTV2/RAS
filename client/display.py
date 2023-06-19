@@ -12,6 +12,7 @@ __default_color = [255, 255, 255]
 __keep_last_value = False
 __run = True
 
+
 def write_success_message(message, duration):
     __write_message(message, duration, (0, 255, 0))
     return
@@ -57,7 +58,7 @@ def display_task():
     print("Hello from display")
     pygame.init()
 
-    screen = pygame.display.set_mode((256, 256))
+    screen = pygame.display.set_mode((512, 384))
     font = pygame.font.Font(None, 24)
 
     cutoff_time = datetime.datetime.now()
