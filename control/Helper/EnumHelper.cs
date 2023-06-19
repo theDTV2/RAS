@@ -16,17 +16,17 @@ namespace control.Helper
                 case EAccessReturnValue.kAccessDenied:
                     return "Access denied";
                 case EAccessReturnValue.kPermissionDenied:
-                    return "Access denied: No permission";
+                    return "Access denied\nNo permission";
                 case EAccessReturnValue.kAccountExpired:
-                    return "Access denied: Account expired";
+                    return "Access denied\nAccount expired";
                 case EAccessReturnValue.kAccountLocked:
-                    return "Access denied: Account locked";
+                    return "Access denied\nAccount locked";
                 case EAccessReturnValue.kAccountEulaNotAccepted:
-                    return "Access denied: Eula not accepted";
+                    return "Access denied\nEula not accepted";
                 case EAccessReturnValue.kAccountRegistrationNotCompleted:
-                    return "Access denied: Registration not completed";
+                    return "Access denied\nRegistration not completed";
                 case EAccessReturnValue.kAccountNotFound:
-                    return "Access denied: Account not found";
+                    return "Access denied\nAccount not found";
                 default:
                     return "error";
             }
