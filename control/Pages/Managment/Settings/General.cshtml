@@ -2,3 +2,35 @@
 @model control.Pages.Managment.Site.GeneralModel
 @{
 }
+<form method="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                Generelle Einstellungen anpassen
+                <br />
+                <div class="form-group">
+                    <label class="form-label" asp-for="UserLoginTimeout"> </label>
+                    <input class="form-control" asp-for="UserLoginTimeout" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                </div>
+
+            </div>
+
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+                TODO - PLACEHOLDER - TODO <br />
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-4 text-center">
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-secondary" asp-page="List">Back</a>
+        </div>
+    </div>
+</form>
