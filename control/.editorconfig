@@ -1,0 +1,4 @@
+﻿[*.{cs,vb}]
+
+# IDE0074: Verbundzuweisung verwenden
+dotnet_style_prefer_compound_assignment = false
