@@ -33,10 +33,10 @@ namespace control.Pages.Managment.Door
         public string DoorID { get; set; }
 
         [BindProperty]
-        [Display(Name = "Name des Displays:")]
-        public string DoorDisplayName { get; set; }
+        [Display(Name = "Text to be displayed on door:")]
+        public string DoorDisplayText { get; set; }
 
-        [Display(Name = "Tür Eintrittsmodus:")]
+        [Display(Name = "Tür Entry Mode:")]
         public EDoorEntryMode DoorEntryMode { get; set; }
 
         public IActionResult OnGet()
@@ -51,7 +51,7 @@ namespace control.Pages.Managment.Door
 
 
             DoorID = _door.Id;
-            DoorDisplayName = _door.DisplayText;
+            DoorDisplayText = _door.DisplayText;
             DoorEntryMode = _door.EntryStatus;
 
             TempData["OldDoorAdminList"] = _door.AdminUsers.Select(s => s.UserName).ToArray();
@@ -77,7 +77,7 @@ namespace control.Pages.Managment.Door
             if (OldDoorAdminList is null)
                 OldDoorAdminList = new string[0];
 
-            _door.DisplayText = DoorDisplayName;
+            _door.DisplayText = DoorDisplayText;
             _door.EntryStatus = DoorEntryMode;
 
             _context.SaveChanges();

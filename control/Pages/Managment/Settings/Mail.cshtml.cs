@@ -19,13 +19,13 @@ namespace control.Pages.Managment.Site
             _context = context;
         }
 
-        [Display(Name = "Nutzername:")]
+        [Display(Name = "STMP User name:")]
         public string UserName { get; set; } = string.Empty;
 
-        [Display(Name = "Passwort:")]
+        [Display(Name = "Password:")]
         public string Password { get; set; } = string.Empty;
 
-        [Display(Name = "SMTP Adresse:")]
+        [Display(Name = "SMTP Adress:")]
         public string SMTPServer { get; set; } = string.Empty;
 
         [Display(Name = "Port:")]
