@@ -36,7 +36,7 @@ namespace control.Generator
             {
                 _outputList.Add(new SelectListItem
                 {
-                    Text = item.DisplayName,
+                    Text = item.DisplayText,
                     Value = item.Id,
                 });
 

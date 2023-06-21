@@ -46,7 +46,7 @@ namespace control.Helper
                 { "doorID" , doorID},
                 { "secret" , _newSecret},
                 { "timeStamp" , DateTime.Now.ToString()},
-                { "displayName", _door.DisplayName}
+                { "displayName", _door.DisplayText}
 
             };
 
@@ -79,7 +79,7 @@ namespace control.Helper
             {
                 _toReturnJsonRaw["doorResponse"] = true;
                 _toReturnJsonRaw["doorStatus"] = _door.EntryStatus.ToString();
-                _toReturnJsonRaw["displayText"] = _door.DisplayName;
+                _toReturnJsonRaw["displayText"] = _door.DisplayText;
                 _toReturnJsonRaw["responseText"] = "Access granted";
 
                 returnValue = new JsonResult(_toReturnJsonRaw);
@@ -90,7 +90,7 @@ namespace control.Helper
 
             _toReturnJsonRaw["doorResponse"] = false;
             _toReturnJsonRaw["doorStatus"] = _door.EntryStatus.ToString();
-            _toReturnJsonRaw["displayText"] = _door.DisplayName;
+            _toReturnJsonRaw["displayText"] = _door.DisplayText;
             _toReturnJsonRaw["responseText"] = EnumHelper.ConvertEAccessReturnValueToString(_return_val);
             returnValue = new JsonResult(_toReturnJsonRaw);
             return true;
@@ -123,7 +123,7 @@ namespace control.Helper
             _toReturnJsonRaw = new JsonObject()
             {
                 { "entryMode" , _door.EntryStatus.ToString()},
-                { "displayText" , _door.DisplayName},
+                { "displayText" , _door.DisplayText},
                 { "timeStamp",  DateTime.Now.ToString()}
             };
 

@@ -17,13 +17,13 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Door[0].DisplayName)
+                    @Html.DisplayTextFor(model => model.Door[0].DisplayText)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Door[0].Id)
+                    @Html.DisplayTextFor(model => model.Door[0].Id)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Door[0].LastCheckInTime)
+                    @Html.DisplayTextFor(model => model.Door[0].LastCheckInTime)
                 </th>
                 <th>
 
@@ -36,7 +36,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.DisplayName)
+                        @Html.DisplayFor(modelItem => item.DisplayText)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Id)

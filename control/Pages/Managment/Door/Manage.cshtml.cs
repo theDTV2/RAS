@@ -51,7 +51,7 @@ namespace control.Pages.Managment.Door
 
 
             DoorID = _door.Id;
-            DoorDisplayName = _door.DisplayName;
+            DoorDisplayName = _door.DisplayText;
             DoorEntryMode = _door.EntryStatus;
 
             TempData["OldDoorAdminList"] = _door.AdminUsers.Select(s => s.UserName).ToArray();
@@ -77,7 +77,7 @@ namespace control.Pages.Managment.Door
             if (OldDoorAdminList is null)
                 OldDoorAdminList = new string[0];
 
-            _door.DisplayName = DoorDisplayName;
+            _door.DisplayText = DoorDisplayName;
             _door.EntryStatus = DoorEntryMode;
 
             _context.SaveChanges();

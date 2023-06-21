@@ -31,7 +31,7 @@ namespace control.Models
 
         public DateTime LastCheckInTime { get; set; }
 
-        public string DisplayName { get; set; } = "";
+        public string DisplayText { get; set; } = "";
 
         public bool SelfRegisterAllowed { get; set; } = false;
 
