@@ -79,6 +79,15 @@ namespace control.Generator
             return new MultiSelectList(_outputList, "Value", "Text", _selectedList);
         }
 
+        public static SelectList GenerateSelectListForLanguage()
+        {
+            List<SelectListItem> _outputList = new(){
+                new SelectListItem{Text = "English",Value = "en" },
+                new SelectListItem{Text = "German",Value = "de" }
+                  };
+
+            return new SelectList(_outputList, "Value", "Text");
+        }
 
         private static IList<Door> GetDoorListByUserAccess(control.Data.controlContext dataContext, User admin)
         {
@@ -117,5 +126,7 @@ namespace control.Generator
 
             return new SelectList(_outputList, "Value", "Text");
         }
+
+
     }
 }
