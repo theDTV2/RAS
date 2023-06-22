@@ -23,26 +23,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\english.Designer.cs">
+    <Compile Update="Resources\lang.german.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>English.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\German.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>German.resx</DependentUpon>
+      <DependentUpon>lang.german.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\German.resx">
+    <EmbeddedResource Update="Resources\lang.german.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>German.Designer.cs</LastGenOutput>
+      <LastGenOutput>lang.german.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\English.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>english.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Resources\Localization.resx">
+      <Generator></Generator>
     </EmbeddedResource>
   </ItemGroup>
 
