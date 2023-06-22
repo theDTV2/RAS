@@ -1,16 +1,14 @@
-import asyncio
-import fileinput
 import json
 from os.path import exists
 from ssl import SSLError
 import threading
-import sys
 from time import sleep
 import requests
 from datetime import datetime, timedelta
 
 import display
 import door_communicator
+import reader
 
 verify_ssl_cert = False
 # In Debug mode we don't check for the ssl certificate
@@ -122,13 +120,16 @@ else:
     print("secret found, assuming door is already registered")
 
 last_check_in = datetime.now()
-heartbeat_frequency_seconds = 60
+heartbeat_frequency_seconds = 6
 
 door_task = threading.Thread(target=door_communicator.door_task)
 door_task.start()
 
+door_task = threading.Thread(target=reader.reader_task)
+door_task.start()
+
 display.set_keep_last_message(False)
-display.set_default_message(message="System ready", color=(0,255,0))
+display.set_default_message(message="System ready", color=(255, 255, 255))
 
 while True:
     sleep(1)
@@ -146,13 +147,16 @@ while True:
         except ConnectionError:
             print("API not reachable")
             exit(RETURN_CONNECTION_ERROR)
+
+        _text_to_display = request_heartbeat.json()['displayText']
+        if _text_to_display is not None:
+            display.set_default_message(_text_to_display, color=(255, 255, 255))
+
         print("heartbeat done")
         last_check_in = datetime.now()
 
-    # If there is input, send request to api
-    input_handle = fileinput.input()
+    input_str = reader.get_next_input()
 
-    input_str = input_handle.readline()
     if input_str != "":
         cardCode = input_str.strip()
         time_stamp = datetime.now()
@@ -188,4 +192,4 @@ while True:
 
 
     # TODO: Send Response Text to Display
-    input_handle.close()
+

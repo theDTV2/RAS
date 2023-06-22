@@ -12,6 +12,7 @@ __default_message = ""
 __default_color = [255, 255, 255]
 __keep_last_value = False
 __run = True
+__displaying_default_message = False
 
 
 def write_success_message(message, duration):
@@ -32,8 +33,10 @@ def write_info_message(message, duration):
 def set_default_message(message, color):
     global __default_message
     global __default_color
+    global __displaying_default_message
     __default_message = message
-    default_color = color
+    __default_color = color
+    __displaying_default_message = False
     return
 
 
@@ -56,6 +59,7 @@ def __write_message(message, duration, color):
 
 def display_task():
     global __run
+    global __displaying_default_message
     print("Hello from display")
     pygame.init()
 
@@ -65,8 +69,6 @@ def display_task():
     font = pygame.font.Font(None, 48)
 
     cutoff_time = datetime.datetime.now()
-
-    _displaying_default_message = False
 
     while __run:
 
@@ -78,7 +80,7 @@ def display_task():
             continue
         else:
             # If we show the default message, we display it here
-            if not __keep_last_value and __message_queue.empty() and not _displaying_default_message:
+            if not __keep_last_value and __message_queue.empty() and not __displaying_default_message:
                 screen.fill([0, 0, 0])
                 _default_text = font.render(__default_message, True, __default_color)
                 _width_line_d = _default_text.get_width()
