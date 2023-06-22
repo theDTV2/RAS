@@ -42,7 +42,7 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-               
+
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav flex-grow-1 ms-auto">
                         <li class="nav-item">
@@ -50,51 +50,51 @@
                         </li>
                         @if (_userLevel >= EAccessLevel.kAdmin)
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Door Managment
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" asp-page="/Managment/Door/Register">Register</a></li>
-                                    <li><a class="dropdown-item" asp-page="/Managment/Door/List">List</a></li>
-                                </ul>
-                            </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Door Managment
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" asp-page="/Managment/Door/Register">Register</a></li>
+                                            <li><a class="dropdown-item" asp-page="/Managment/Door/List">List</a></li>
+                                        </ul>
+                                    </li>
                         }
                         @if (_userLevel >= EAccessLevel.kModerator)
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    User Managment
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" asp-page="/Managment/User/List">List</a></li>
-                                </ul>
-                            </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            User Managment
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" asp-page="/Managment/User/List">List</a></li>
+                                        </ul>
+                                    </li>
 
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    (Disabled) Stats
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item disabled" asp-page="" disabled="">Live</a></li>
-                                    <li><a class="dropdown-item disabled" asp-page="" disabled="">Over Time</a></li>
-                                </ul>
-                            </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            (Disabled) Stats
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item disabled" asp-page="" disabled="">Live</a></li>
+                                            <li><a class="dropdown-item disabled" asp-page="" disabled="">Over Time</a></li>
+                                        </ul>
+                                    </li>
                         }
 
 
-                          @if (_userLevel >= EAccessLevel.kSuperAdmin)
+                        @if (_userLevel >= EAccessLevel.kSuperAdmin)
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    System Managment
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" asp-page="/Managment/Settings/General">General Settings</a></li>
-                                    <li><a class="dropdown-item" asp-page="/Managment/Settings/Mail">Mail Settings</a></li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            System Managment
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" asp-page="/Managment/Settings/General">General Settings</a></li>
+                                            <li><a class="dropdown-item" asp-page="/Managment/Settings/Mail">Mail Settings</a></li>
 
-                                </ul>
-                            </li>
+                                        </ul>
+                                    </li>
                         }
 
                     </ul>
@@ -102,20 +102,20 @@
                      <ul class="navbar-nav me-auto">
                         @if (_loggedIn)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link disabled text-dark" asp-area="" asp-page="">@AccountHelper.GetUserName(Context) <br />  @AccountHelper.GetAccessLevelAsString(Context)</a>
-                            </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link disabled text-dark" asp-area="" asp-page="">@AccountHelper.GetUserName(Context) <br />  @AccountHelper.GetAccessLevelAsString(Context)</a>
+                                    </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Logout</a>
-                            </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Logout</a>
+                                    </li>
                         }
                         @if (!_loggedIn)
                         {
-       
-                            <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>
-                            </li>
+
+                                    <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>
+                                    </li>
                         }
 
                     </ul>
@@ -135,9 +135,13 @@
         </main>
     </div>
 
+    
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - control - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-4">&copy; 2023 - control - <a asp-area="" asp-page="/Privacy">Privacy</a></div>
+                <div class="col-md-4 ms-auto"><partial name="_LanguageSelectorPartial" /></div>
+            </div>    
         </div>
     </footer>
 
@@ -147,7 +151,7 @@
 
 
     <script src="~/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
-   
+
 
     <script src="~/js/site.js" asp-append-version="true"></script>
 
