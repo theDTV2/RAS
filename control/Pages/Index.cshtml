@@ -1,10 +1,12 @@
 ﻿@page
 @model IndexModel
+@using control
 @{
     ViewData["Title"] = "Home page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Hello World.</p>
+    <p>English: @control.Resources.English.Test</p>
+    <p>German: @control.Resources.German.Test</p>
 </div>
