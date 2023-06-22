@@ -46,7 +46,7 @@ namespace control.Helper
                 { "doorID" , doorID},
                 { "secret" , _newSecret},
                 { "timeStamp" , DateTime.Now.ToString()},
-                { "displayName", _door.DisplayText}
+                { "displayText", _door.DisplayText}
 
             };
 
