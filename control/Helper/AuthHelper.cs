@@ -36,7 +36,7 @@ namespace control.Helper
           
             if (result  == EAccessReturnValue.kAccessGranted)
             {
-                AccountHelper.LoginUser(context, email, user!.AccessLevel);
+                AccountHelper.LoginUser(context, email, user!.AccessLevel, user!.Language);
             }
 
             return result;
@@ -50,7 +50,7 @@ namespace control.Helper
             
             if (result == EAccessReturnValue.kAccessGranted)
             {
-                AccountHelper.LoginUser(context, user!.UserName, user!.AccessLevel);
+                AccountHelper.LoginUser(context, user!.UserName, user!.AccessLevel, user!.Language);
             }
 
             return result;
@@ -71,7 +71,7 @@ namespace control.Helper
 
             if (UserStateManager.UpdatePermissionsRequired(context.Session.Id))
             {
-                AccountHelper.RefreshUser(context, userName, user!.AccessLevel);
+                AccountHelper.RefreshUser(context, userName, user!.AccessLevel, user.Language);
             }
 
             //User State is not valid anymore (Somebody logged in with the same username)

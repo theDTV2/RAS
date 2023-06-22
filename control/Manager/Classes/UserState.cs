@@ -1,4 +1,6 @@
-﻿namespace control.Manager.Classes
+﻿using Org.BouncyCastle.Bcpg.OpenPgp;
+
+namespace control.Manager.Classes
 {
     public class UserState
     {
@@ -12,9 +14,12 @@
 
         public bool UpdatePermissionsRequired { get;  set; } = false;
 
-        public UserState(string username)
+        public string Language { get; set; } = "en";
+
+        public UserState(string username, string language)
         {
             UserName = username;
+            Language = language;
         }
 
         public void SetInvalid()

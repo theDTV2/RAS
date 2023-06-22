@@ -5,6 +5,7 @@ using control.Models;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Session;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics.CodeAnalysis;
@@ -18,7 +19,7 @@ namespace control.Manager
        
         private static IDictionary<string, UserState> UserStates { get; set; } = new Dictionary<string, UserState>();
 
-        public static bool AddUserState(string sessionid, string userName)
+        public static bool AddUserState(string sessionid, string userName, string language)
         {
             //If the user previously was logged in, we return true;
             bool _previouslyLoggedIn = false;
@@ -29,7 +30,7 @@ namespace control.Manager
                 _previousState.Value.SetInvalid();
                 _previouslyLoggedIn = true;
             }
-            UserStates.Add(sessionid, new(userName));
+            UserStates.Add(sessionid, new(userName, language));
 
             return _previouslyLoggedIn;
         }
@@ -76,17 +77,36 @@ namespace control.Manager
             if (_user.Value is null)
                 return;
 
-                
             _user.Value.UpdatePermissionsRequired = true;
 
             //If a User is locked, invalidate his session
             if (_levelToSetTo == EAccessLevel.kNone)
                 _user.Value.SetInvalid();
 
+            return;
+        }
+
+        public static void UpdateUserLanguage(HttpContext context, string language)
+        {
+            UserState _user = UserStates[context.Session.Id];
+
+            if (_user is null)
+                return;
+
+            _user.Language = language;
 
             return;
         }
 
+        public static string GetUserLanguage(HttpContext context)
+        {
+            UserState _user = UserStates[context.Session.Id];
+
+            if (_user is null)
+                return "en";
+
+            return _user.Language;
+        }
 
         public static bool RemoveState(string sessionid, string userName = "")
         {

@@ -35,7 +35,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>lang.german.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Localization.resx">
+    <EmbeddedResource Update="Resources\Localization.en.resx">
       <Generator></Generator>
     </EmbeddedResource>
   </ItemGroup>

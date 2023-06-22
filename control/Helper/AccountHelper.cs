@@ -8,12 +8,12 @@ namespace control.Helper
     public static class AccountHelper
     {
 
-        public static bool LoginUser(HttpContext httpContext, string username, EAccessLevel level)
+        public static bool LoginUser(HttpContext httpContext, string username, EAccessLevel level, string language)
         {
-            if (UserStateManager.AddUserState(httpContext.Session.Id, GetUserName(httpContext)))
+            if (UserStateManager.AddUserState(httpContext.Session.Id, GetUserName(httpContext),GetUserLanguage(httpContext)))
                 AlertGenerator.AddAlertToSession(httpContext, AlertGenerator.EAlertLevel.kWarning, "The previous session was terminated");
 
-            return RefreshUser(httpContext, username, level);
+            return RefreshUser(httpContext, username, level, language);
         }
 
         public static bool LogoutUser(HttpContext httpContext)
@@ -29,20 +29,26 @@ namespace control.Helper
             //return false;
         }
 
-        public static bool RefreshUser(HttpContext httpContext, string username, EAccessLevel level)
+        public static bool RefreshUser(HttpContext httpContext, string username, EAccessLevel level, string language)
         {
             SetLoggedInStatus(httpContext);
             SetUserName(httpContext, username);
             SetUserRole(httpContext, level);
+            SetUserLanguage(httpContext, language);
 
             //TODO: Think, if anything needs to be caught here
             return true;
         }
 
 
-            private static void SetLoggedInStatus(HttpContext context, bool statusToSetTo = true)
+        private static void SetLoggedInStatus(HttpContext context, bool statusToSetTo = true)
         {
             SessionHelper.SaveStringInSession(context,"loggedInStatus", statusToSetTo.ToString());
+        }
+
+        private static void SetUserLanguage(HttpContext context, string language = "en")
+        {
+            SessionHelper.SaveStringInSession(context, "language", language);
         }
 
         public static bool SetUserName(HttpContext context, string userName)
@@ -70,6 +76,13 @@ namespace control.Helper
             string userName = SessionHelper.GetStringFromSession(context, "userName");
 
             return userName;
+        }
+
+        public static string GetUserLanguage(HttpContext context)
+        {
+            string language = SessionHelper.GetStringFromSession(context, "language");
+
+            return language;
         }
 
         public static EAccessLevel GetEAccessLevel(HttpContext context)
@@ -136,7 +149,6 @@ namespace control.Helper
             //We need to get the user in another way here, otherwise the foreign list will not be loaded
             var _user = dataContext.User.Where(u => u.UserName == _username).Include(u => u.AdminDoors).First();
                 return dataContext.Door.Where(d => _user.AdminDoors.Contains(d)).ToList();
-
 
         }
 

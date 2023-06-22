@@ -68,5 +68,7 @@ namespace control.Models
 
         public string SecretCode { get; set; } = "";
 
+        public string Language { get; set; } = "en";
+
     }
 }
