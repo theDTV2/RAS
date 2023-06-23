@@ -1,32 +1,40 @@
 ﻿@page
 @model control.Pages.Account.PrivacyModel
 
+@using control.Helper;
+@using control.Generator;
+@using control.Models;
+@using control.Manager;
 
+@{
+
+    var lang = AccountHelper.GetUserLanguage(HttpContext);
+    var ACCOUNT_PRIVACY_TITLE = LanguageManager.GetLocalizedString("ACCOUNT_PRIVACY_TITLE", lang);
+    var ACCOUNT_PRIVACY_EULA = LanguageManager.GetLocalizedString("ACCOUNT_PRIVACY_EULA", lang);
+    var ACCOUNT_PRIVACY_INFO = LanguageManager.GetLocalizedString("ACCOUNT_PRIVACY_INFO", lang);
+    var ACCOUNT_PRIVACY_CHECKBOX_LABEL = LanguageManager.GetLocalizedString("ACCOUNT_PRIVACY_CHECKBOX_LABEL", lang);
+    var ACCOUNT_PRIVACY_BUTTON_LABEL = LanguageManager.GetLocalizedString("ACCOUNT_PRIVACY_BUTTON_LABEL", lang);
+
+}
 
 
 <div class="jumbotron">
-    <h1 class="display-4">Hello, world!</h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <h1 class="display-4">@ACCOUNT_PRIVACY_INFO</h1>
     <hr class="my-4">
     <p>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-        Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-        Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.
-        At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+        @ACCOUNT_PRIVACY_EULA
     </p>
 
     <div class="row">
         <div class="col-md-4">
             <form method="post">
                 <div class="form-group">
-                    <label asp-for="AcceptEula" class="control-label"></label>
+                    <label asp-for="AcceptEula" class="control-label">@ACCOUNT_PRIVACY_CHECKBOX_LABEL</label>
                     <input asp-for="AcceptEula" class="form-check-inline">
                     <span asp-validation-for="AcceptEula" class="text-danger"></span>
                 </div>
                 <div class="form-group btn btn-primary btn-lg">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="@ACCOUNT_PRIVACY_BUTTON_LABEL" class="btn btn-primary" />
                 </div>
             </form>
         </div>
