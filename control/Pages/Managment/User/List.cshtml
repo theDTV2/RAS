@@ -1,7 +1,30 @@
 ﻿@page "{handler?}"
 @model control.Pages.Managment.User.ListModel
+
 @using control.Helper;
+@using control.Generator;
 @using control.Models;
+@using control.Manager;
+@using System.Reflection;
+@using System.ComponentModel.DataAnnotations;
+
+@{
+    var lang = AccountHelper.GetUserLanguage(HttpContext);
+    var MANAGMENT_USER_EMAIL = LanguageManager.GetLocalizedString("MANAGMENT_USER_EMAIL", lang);
+    var MANAGMENT_USER_FIRSTNAME = LanguageManager.GetLocalizedString("MANAGMENT_USER_FIRSTNAME", lang);
+    var MANAGMENT_USER_LASTNAME = LanguageManager.GetLocalizedString("MANAGMENT_USER_LASTNAME", lang);
+    var MANAGMENT_USER_ACCESSLEVEL = LanguageManager.GetLocalizedString("MANAGMENT_USER_ACCESSLEVEL", lang);
+    var MANAGMENT_USER_EXPIRYDATE = LanguageManager.GetLocalizedString("MANAGMENT_USER_EXPIRYDATE", lang);
+    var MANAGMENT_USER_LASTLOGIN = LanguageManager.GetLocalizedString("MANAGMENT_USER_LASTLOGIN", lang);
+
+    var MANAGMENT_USER_COMPLETEDREGISTRATION = LanguageManager.GetLocalizedString("MANAGMENT_USER_COMPLETEDREGISTRATION", lang);
+    var MANAGMENT_USER_LIST_MANAGE = LanguageManager.GetLocalizedString("MANAGMENT_USER_LIST_MANAGE", lang);
+    var MANAGMENT_USER_LIST_UNLOCK = LanguageManager.GetLocalizedString("MANAGMENT_USER_LIST_UNLOCK", lang);
+    var MANAGMENT_USER_LIST_SEARCH = LanguageManager.GetLocalizedString("MANAGMENT_USER_LIST_UNLOCK", lang);
+    var MANAGMENT_USER_LIST_SEARCH_BACK = LanguageManager.GetLocalizedString("MANAGMENT_USER_LIST_SEARCH_BACK", lang);
+   
+}
+
 
 <!DOCTYPE html>
 
@@ -23,7 +46,7 @@
                 @if (Model.SearchedSomething)
                 {
                     <div class="p-2">
-                        <a class="btn btn-secondary" asp-page="List">Go Back</a>
+                        <a class="btn btn-secondary" asp-page="List">@MANAGMENT_USER_LIST_SEARCH_BACK</a>
                     </div>
                 }
             </div>
@@ -34,25 +57,25 @@
         <thead>
             <tr>
                 <th>
-                    <a> Email</a>
+                    <a> @MANAGMENT_USER_EMAIL</a>
                 </th>
                 <th>
-                    <a> First Name</a>
+                    <a> @MANAGMENT_USER_FIRSTNAME</a>
                 </th>
                 <th>
-                    <a> Last Name</a>
+                    <a> @MANAGMENT_USER_LASTNAME</a>
                 </th>
                 <th>
-                    <a> Access Level</a>
+                    <a> @MANAGMENT_USER_ACCESSLEVEL</a>
                 </th>
                 <th>
-                    <a> Expiry Date</a>
+                    <a> @MANAGMENT_USER_EXPIRYDATE</a>
                 </th>
                 <th>
-                    <a> Last Login</a>
+                    <a> @MANAGMENT_USER_LASTLOGIN</a>
                 </th>
                 <th>
-                    <a> Completed Registration</a>
+                    <a> @MANAGMENT_USER_COMPLETEDREGISTRATION</a>
                 </th>
                 <th></th>
             </tr>
@@ -71,7 +94,16 @@
                         @Html.DisplayFor(modelItem => item.LastName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.AccessLevel)
+                        @{
+                            //IMO this is a very ugly way of doing this
+                            //TODO: Improve accessing the Display Name Property of the Enum
+                            var memberInfo = item.AccessLevel.GetType().GetMember(item.AccessLevel.ToString()!)[0];
+                            var val = memberInfo.GetCustomAttribute<DisplayAttribute>()!.Name;
+                        }
+                            @Html.Raw(LanguageManager.GetLocalizedString(val!, lang))
+                        
+                       
+                        
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ExpiryDate)
@@ -83,13 +115,13 @@
                         @Html.DisplayFor(modelItem => item.CompletedRegistration)
                     </td>
                     <td>
-                        <a class="btn btn-primary" asp-page="./Unlock" asp-route-UserIdentifier="@item.UserName">Unlock</a>
+                        <a class="btn btn-primary" asp-page="./Unlock" asp-route-UserIdentifier="@item.UserName">@MANAGMENT_USER_LIST_UNLOCK</a>
 
 
                         @if (AccountHelper.GetEAccessLevel(HttpContext) > item.AccessLevel || AccountHelper.GetEAccessLevel(HttpContext) == EAccessLevel.kSuperAdmin)
                         {
                             @Html.Raw("|");
-                            <a class="btn btn-primary" asp-page="./Manage" asp-route-id="@item.UserName">Manage</a>
+                            <a class="btn btn-primary" asp-page="./Manage" asp-route-id="@item.UserName">@MANAGMENT_USER_LIST_MANAGE</a>
                         }
 
                     </td>
