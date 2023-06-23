@@ -1,2 +1,16 @@
-﻿
-<p>Hello from _LanguageSelectorPartial</p>
+﻿@using control.Generator;
+@using control.Helper;
+
+<select id="languageselector" asp-items="@SelectListGenerator.GenerateSelectListForLanguage(AccountHelper.GetUserLanguage(Context))" onchange="setLanguage()"></select>
+
+<script>
+    function setLanguage() {
+        var _value = document.getElementById("languageselector").value;
+        $.ajax({
+            url: '/Ajax/Connector/ChangeLanguage',
+            data: {
+                language: _value
+            }
+        })
+    }
+</script>

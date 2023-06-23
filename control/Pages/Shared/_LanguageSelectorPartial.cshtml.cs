@@ -21,9 +21,9 @@ namespace control.Pages.Shared
 
       public User User { get; set; } = default!; 
 
-        public void OnGet()
-        {
 
+        public void OnPost()
+        {
             return;
         }
     }
