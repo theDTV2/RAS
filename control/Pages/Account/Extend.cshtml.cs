@@ -1,5 +1,6 @@
 using control.Generator;
 using control.Helper;
+using control.Manager;
 using control.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -23,7 +24,7 @@ namespace control.Pages.Account
             if (!DateHelper.LoggedInUserIsAllowedToExtend(_context, HttpContext))
             {
                 //TODO: Guard against page entry instead of here
-                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kWarning, "Extension is not possible until shortly before semester end.");
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kWarning, LanguageManager.GetLocalizedString("ACCOUNT_EXTEND_NOT_POSSIBLE_YET", AccountHelper.GetUserLanguage(HttpContext)));
 
                 return RedirectToPage("Dashboard");
             }
@@ -48,6 +49,8 @@ namespace control.Pages.Account
 
             _context.SaveChanges();
             //TODO: Catch errors here necessary?
+
+            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, LanguageManager.GetLocalizedString("ACCOUNT_EXTEND_SUCCESS", AccountHelper.GetUserLanguage(HttpContext)));
 
             return RedirectToPage("Dashboard");
         }

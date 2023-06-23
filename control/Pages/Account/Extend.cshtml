@@ -1,11 +1,23 @@
 ﻿@page
 @model control.Pages.Account.ExtendModel
 
+@using control.Helper;
+@using control.Generator;
+@using control.Models;
+@using control.Manager;
+
+@{
+
+    var lang = AccountHelper.GetUserLanguage(HttpContext);
+    var ACCOUNT_EXTEND_LABEL = LanguageManager.GetLocalizedString("ACCOUNT_EXTEND_LABEL", lang);
+    var ACCOUNT_EXTEND_INFO = LanguageManager.GetLocalizedString("ACCOUNT_EXTEND_INFO", lang);
+    var ACCOUNT_EXTEND_BUTTON = LanguageManager.GetLocalizedString("ACCOUNT_EXTEND_BUTTON", lang);
+}
 
 <form method="post">
 
-    <h1 class="display-3">Extend Account</h1>
-    <p class="lead">Extending your account will allow you to enter the room until the end of the next semester.</p>
+    <h1 class="display-3">@ACCOUNT_EXTEND_LABEL</h1>
+    <p class="lead">@ACCOUNT_EXTEND_INFO</p>
         <input type="submit" value="Extend" class="btn btn-primary" />
 
 </form>
