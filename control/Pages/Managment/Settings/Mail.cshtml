@@ -1,10 +1,22 @@
 ﻿@page
 @model control.Pages.Managment.Site.MailModel
+
+@using control.Helper;
+@using control.Generator;
+@using control.Models;
+@using control.Manager;
+
 @{
 
+    var lang = AccountHelper.GetUserLanguage(HttpContext);
+    var MANAGMENT_SETTINGS_EMAIL_INFO = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_EMAIL_INFO", lang);
+    var MANAGMENT_SETTINGS_EMAIL_USERNAME = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_EMAIL_USERNAME", lang);
+    var MANAGMENT_SETTINGS_EMAIL_PASSWORD = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_EMAIL_PASSWORD", lang);
+    var MANAGMENT_SETTINGS_EMAIL_SMTP_ADDRESS = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_EMAIL_SMTP_ADDRESS", lang);
+    var MANAGMENT_SETTINGS_EMAIL_SMTP_PORT = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_EMAIL_SMTP_PORT", lang);
 
-
-
+    var MANAGMENT_SETTINGS_EMAIL_SUBMIT = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_EMAIL_SUBMIT", lang);
+    var MANAGMENT_SETTINGS_EMAIL_BACK = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_EMAIL_BACK", lang);
 
 }
 
@@ -12,22 +24,22 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <p> Adjust Email settings</p>
+                <p> @MANAGMENT_SETTINGS_EMAIL_INFO</p>
                 <br />
                 <div class="form-group">
-                    <label class="form-label" asp-for="UserName"> </label>
+                    <label class="form-label" asp-for="UserName"> @MANAGMENT_SETTINGS_EMAIL_USERNAME</label>
                     <input class="form-control" asp-for="UserName">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" asp-for="Password"> </label>
+                    <label class="form-label" asp-for="Password">@MANAGMENT_SETTINGS_EMAIL_PASSWORD </label>
                     <input type="password" class="form-control " asp-for="Password">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" asp-for="SMTPServer"> </label>
+                    <label class="form-label" asp-for="SMTPServer">@MANAGMENT_SETTINGS_EMAIL_SMTP_ADDRESS </label>
                     <input class="form-control" asp-for="SMTPServer">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" asp-for="Port"> </label>
+                    <label class="form-label" asp-for="Port">@MANAGMENT_SETTINGS_EMAIL_SMTP_PORT </label>
                     <input class="form-control" asp-for="Port">
                 </div>
             </div>
@@ -41,12 +53,12 @@
         <div class="row justify-content-center">
             <div class="col-4 text-center">
                 <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-primary" />
+                    <input type="submit" value="@MANAGMENT_SETTINGS_EMAIL_SUBMIT" class="btn btn-primary" />
                 </div>
             </div>
         </div>
         <div>
-            <a class="btn btn-secondary" asp-page="List">Back</a>
+            <a class="btn btn-secondary" asp-page="List">@MANAGMENT_SETTINGS_EMAIL_BACK</a>
         </div>
     </div>
 </form>

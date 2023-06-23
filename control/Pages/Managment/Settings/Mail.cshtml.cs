@@ -56,11 +56,11 @@ namespace control.Pages.Managment.Site
 
             if (!EMailManager.TestMailSettings())
             {
-                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Error. Check Mail settings");
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_EMAIL_ERROR_GENERAL", AccountHelper.GetUserLanguage(HttpContext)));
                 return Page();
             }
 
-            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Mail Settings correct");
+            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_EMAIL_SUCCESS", AccountHelper.GetUserLanguage(HttpContext)));
             return Page();
         }
 
