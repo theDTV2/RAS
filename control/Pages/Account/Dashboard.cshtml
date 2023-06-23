@@ -1,18 +1,27 @@
 ﻿@page
 @model control.Pages.Account.DashboardModel
+
+@using control.Helper;
+@using control.Generator;
+@using control.Models;
+@using control.Manager;
+
 @{
+
+    var lang = AccountHelper.GetUserLanguage(HttpContext);
+    var ACCOUNT_DASHBOARD_EXPIRY_DATE = LanguageManager.GetLocalizedString("ACCOUNT_DASHBOARD_EXPIRY_DATE", lang);
+    var ACCOUNT_DASHBOARD_EXTEND_BUTTON = LanguageManager.GetLocalizedString("ACCOUNT_DASHBOARD_EXTEND_BUTTON", lang);
+    var ACCOUNT_EXTEND_BUTTON = LanguageManager.GetLocalizedString("ACCOUNT_EXTEND_BUTTON", lang);
 }
-
-
 
 
 <div class="row">
     <div class="col">
-        Account valid until: @Model.ExpiryDate
+        @ACCOUNT_DASHBOARD_EXPIRY_DATE: @Model.ExpiryDate
     </div>
     <div class="col">
         <div>
-            <a class="btn btn-primary" asp-page="Extend">Extend</a>
+            <a class="btn btn-primary" asp-page="Extend">@ACCOUNT_DASHBOARD_EXTEND_BUTTON</a>
         </div>
     </div>
     <div class="w-100"></div>
