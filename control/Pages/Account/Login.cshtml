@@ -7,14 +7,16 @@
 @using control.Manager;
 
 @{
-    ViewData["Title"] = "Login";
-
 
 	var lang = AccountHelper.GetUserLanguage(HttpContext);
 
-	var ACCOUNT_LOGIN_MAIL = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_MAIL", lang);
+	var ACCOUNT_LOGIN_TITLE = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_TITLE", lang);
+	var ACCOUNT_LOGIN_MAIL_LABEL = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_MAIL_LABEL", lang);
 	var ACCOUNT_LOGIN_BUTTON = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_BUTTON", lang);
 	var ACCOUNT_LOGIN_INFO = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_INFO", lang);
+
+	ViewData["Title"] = ACCOUNT_LOGIN_TITLE;
+
 
 }
 
@@ -23,7 +25,7 @@
 		<div class="col-md-6">
 			<form method="post">
 				<div class="form-group">
-					<label asp-for="UserEmail" class="control-label">@ACCOUNT_LOGIN_MAIL</label>
+					<label asp-for="UserEmail" class="control-label">@ACCOUNT_LOGIN_MAIL_LABEL</label>
 					<input asp-for="UserEmail" class="form-control">
 					<span asp-validation-for="UserEmail" class="text-danger"></span>
 
