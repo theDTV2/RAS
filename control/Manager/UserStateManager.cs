@@ -28,9 +28,8 @@ namespace control.Manager
             if (_previousState.Value is not null)
             {
                 _previousState.Value.SetInvalid();
-                _previouslyLoggedIn = true;
             }
-            UserStates.Add(sessionid, new(userName, language));
+            UserStates.Add(sessionid, new(userName));
 
             return _previouslyLoggedIn;
         }
@@ -84,28 +83,6 @@ namespace control.Manager
                 _user.Value.SetInvalid();
 
             return;
-        }
-
-        public static void UpdateUserLanguage(HttpContext context, string language)
-        {
-            UserState _user = UserStates[context.Session.Id];
-
-            if (_user is null)
-                return;
-
-            _user.Language = language;
-
-            return;
-        }
-
-        public static string GetUserLanguage(HttpContext context)
-        {
-            UserState _user = UserStates[context.Session.Id];
-
-            if (_user is null)
-                return "en";
-
-            return _user.Language;
         }
 
         public static bool RemoveState(string sessionid, string userName = "")

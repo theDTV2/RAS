@@ -14,12 +14,10 @@ namespace control.Manager.Classes
 
         public bool UpdatePermissionsRequired { get;  set; } = false;
 
-        public string Language { get; set; } = "en";
 
-        public UserState(string username, string language)
+        public UserState(string username)
         {
             UserName = username;
-            Language = language;
         }
 
         public void SetInvalid()

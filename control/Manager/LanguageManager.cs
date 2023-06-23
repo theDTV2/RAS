@@ -29,5 +29,12 @@ namespace control.Manager
             return returnValue;
         }
 
+        public static bool IsValidLanguage(string language)
+        {
+            if (language == null) 
+                return false;
+
+            return Languages.ContainsKey(language);  
+        }
     }
 }
