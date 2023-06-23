@@ -26,11 +26,6 @@ namespace control.Pages
 
         public IActionResult OnGet()
         {
-            // Get the English version of the "Test" resource
-            // var englishTest = resourceManager.GetString("Test", new System.Globalization.CultureInfo("en"));
-
-            var test = LanguageManager.GetLocalizedString("Test", AccountHelper.GetUserLanguage(HttpContext));
-
             return Page();
         }
     }
