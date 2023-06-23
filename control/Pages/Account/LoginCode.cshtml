@@ -1,8 +1,22 @@
 ﻿@page "{SecretLoginCode?}"
 @model control.Pages.Account.LoginCodeModel
 
+@using control.Helper;
+@using control.Generator;
+@using control.Models;
+@using control.Manager;
+
 @{
-    ViewData["Title"] = "LoginCode";
+
+
+    
+    var lang = AccountHelper.GetUserLanguage(HttpContext);
+    var ACCOUNT_LOGINCODE_TITLE = LanguageManager.GetLocalizedString("ACCOUNT_LOGINCODE_TITLE", lang);
+    var ACCOUNT_LOGINCODE_CODE_LABEL = LanguageManager.GetLocalizedString("ACCOUNT_LOGINCODE_TITLE", lang);
+    var ACCOUNT_LOGINCODE_CODE_BUTTON = LanguageManager.GetLocalizedString("ACCOUNT_LOGINCODE_CODE_BUTTON", lang);
+
+
+    ViewData["Title"] = ACCOUNT_LOGINCODE_TITLE;
 }
 
 <h1>Login</h1>
@@ -13,12 +27,12 @@
     <div class="align-content-center">
         <form method="post">
             <div class="form-group">
-                <label class="control-label">Enter the login code for @ViewData["email"]:</label>
+                <label class="control-label">@ACCOUNT_LOGINCODE_CODE_LABEL</label>
                 <input asp-for="LoginCode" class="form-control">
                 <span asp-validation-for="LoginCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
+                <input type="submit" value="@ACCOUNT_LOGINCODE_CODE_BUTTON" class="btn btn-primary" />
             </div>
         </form>
     </div>

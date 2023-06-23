@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Http;
 using control.Helper;
 using control.Generator;
 using System.Web;
+using control.Manager;
 
 namespace control.Pages.Account
 {
@@ -46,10 +47,11 @@ namespace control.Pages.Account
 
             if (res == EAccessReturnValue.kAccessGranted)
             {
-                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Logged in successfully");
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, LanguageManager.GetLocalizedString("ACCOUNT_LOGINCODE_SUCCESS", AccountHelper.GetUserLanguage(HttpContext)));
 
                 res = AuthHelper.CheckUserPermission(_context, HttpContext);
 
+                //TODO: Alerts for these redirects
                 if (res == EAccessReturnValue.kAccountEulaNotAccepted)
                     return RedirectToPage("Privacy");
 
@@ -62,14 +64,14 @@ namespace control.Pages.Account
                 {
                     
                     AccountHelper.LogoutUser(HttpContext);
-                    AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Account locked");
+                    AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, LanguageManager.GetLocalizedString("ACCOUNT_LOGINCODE_LOCKED", AccountHelper.GetUserLanguage(HttpContext)));
                     return RedirectToPage("Login");
 
                 }
 
                 return RedirectToPage("Dashboard");
             }
-            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Login failed");
+            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, LanguageManager.GetLocalizedString("ACCOUNT_LOGINCODE_FAILED", AccountHelper.GetUserLanguage(HttpContext)));
             return Page();
         }
 
@@ -85,10 +87,11 @@ namespace control.Pages.Account
                 EAccessReturnValue res = AuthHelper.ChallengeLoginRequestWithLoginKey(_context, HttpContext, SecretLoginCode);
                 if (res == EAccessReturnValue.kAccessGranted)
                 {
-                    AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Logged in successfully");
+                    AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, LanguageManager.GetLocalizedString("ACCOUNT_LOGINCODE_SUCCESS", AccountHelper.GetUserLanguage(HttpContext)));
                     res = AuthHelper.CheckUserPermission(_context, HttpContext);
 
 
+                    //TODO: Alerts for these redirects
                     if (res == EAccessReturnValue.kAccountEulaNotAccepted)
                         return RedirectToPage("Privacy");
 
