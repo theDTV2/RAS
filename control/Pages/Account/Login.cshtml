@@ -1,8 +1,21 @@
 ﻿@page
 @model control.Pages.Account.LoginModel
 
+@using control.Helper;
+@using control.Generator;
+@using control.Models;
+@using control.Manager;
+
 @{
     ViewData["Title"] = "Login";
+
+
+	var lang = AccountHelper.GetUserLanguage(HttpContext);
+
+	var ACCOUNT_LOGIN_MAIL = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_MAIL", lang);
+	var ACCOUNT_LOGIN_BUTTON = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_BUTTON", lang);
+	var ACCOUNT_LOGIN_INFO = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_INFO", lang);
+
 }
 
 <div class="container-fluid">
@@ -10,15 +23,14 @@
 		<div class="col-md-6">
 			<form method="post">
 				<div class="form-group">
-
-					<label asp-for="UserEmail" class="control-label"></label>
+					<label asp-for="UserEmail" class="control-label">@ACCOUNT_LOGIN_MAIL</label>
 					<input asp-for="UserEmail" class="form-control">
 					<span asp-validation-for="UserEmail" class="text-danger"></span>
 
 				</div>
 
 				<div class="form-group">
-					<input type="submit" value="Request Login" class="btn btn-primary" />
+					<input type="submit" value=@ACCOUNT_LOGIN_BUTTON class="btn btn-primary" />
 				</div>
 
 
@@ -27,7 +39,7 @@
 
 		<div class="col-md-6">
 			<p>
-				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+				@ACCOUNT_LOGIN_INFO
 			</p>
 		</div>
 	</div>

@@ -10,6 +10,7 @@ using control.Models;
 using System.ComponentModel.DataAnnotations;
 using control.Helper;
 using control.Generator;
+using control.Manager;
 
 namespace control.Pages.Account
 {
@@ -24,31 +25,31 @@ namespace control.Pages.Account
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-            if (AccountHelper.GetLoggedIn(HttpContext))
-                Redirect("Account/Dashboard");
 
-            return Page();
-        }
 
         [BindProperty]
         [DataType(DataType.EmailAddress)]
-        public string UserEmail { get; set; }
+		public string UserEmail { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+
+		public IActionResult OnGet()
+		{
+			if (AccountHelper.GetLoggedIn(HttpContext))
+				Redirect("Account/Dashboard");
+
+			return Page();
+		}
+
+
+		public async Task<IActionResult> OnPostAsync()
         {
             if (AccountHelper.GetLoggedIn(HttpContext))
                 Redirect("Account/Dashboard");
 
 
-
             string _userMail = UserEmail.ToLower();
-
             string[] _userMailElements = _userMail.Split("@");
 
-            //Only reject non-htw adresses when we are not debugging
 
             if (_userMailElements[1] != "htw-berlin.de" || _userMailElements[0].Contains('.'))
             {
