@@ -10,9 +10,9 @@
 
 	var lang = AccountHelper.GetUserLanguage(HttpContext);
 	var ACCOUNT_REGISTER_TITLE = LanguageManager.GetLocalizedString("ACCOUNT_REGISTER_TITLE", lang);
-	var ACCOUNT_REGISTER_USER_FIRSTNAME_LABEL = LanguageManager.GetLocalizedString("ACCOUNT_REGISTER_USER_FIRSTNAME_LABEL", lang);
-	var ACCOUNT_REGISTER_USER_LASTNAME_LABEL = LanguageManager.GetLocalizedString("ACCOUNT_REGISTER_USER_LASTNAME_LABEL", lang);
-	var ACCOUNT_REGISTER_USER_CONFIRM_LABEL = LanguageManager.GetLocalizedString("ACCOUNT_REGISTER_USER_CONFIRM_LABEL", lang);
+	var ACCOUNT_REGISTER_USER_FIRSTNAME = LanguageManager.GetLocalizedString("ACCOUNT_REGISTER_USER_FIRSTNAME", lang);
+	var ACCOUNT_REGISTER_USER_LASTNAME = LanguageManager.GetLocalizedString("ACCOUNT_REGISTER_USER_LASTNAME", lang);
+	var ACCOUNT_REGISTER_USER_CONFIRM = LanguageManager.GetLocalizedString("ACCOUNT_REGISTER_USER_CONFIRM", lang);
 	var ACCOUNT_REGISTER_USER_BUTTON = LanguageManager.GetLocalizedString("ACCOUNT_REGISTER_USER_BUTTON", lang);
 }
 
@@ -37,15 +37,15 @@
 	<form method="post">
 		<div class="form-group">
 
-			<label asp-for="firstName" class="control-label">@ACCOUNT_REGISTER_USER_FIRSTNAME_LABEL</label>
+			<label asp-for="firstName" class="control-label">@ACCOUNT_REGISTER_USER_FIRSTNAME</label>
 			<input asp-for="firstName" class="form-control">
 			<span asp-validation-for="firstName" class="text-danger"></span>
 
-			<label asp-for="lastName" class="control-label">@ACCOUNT_REGISTER_USER_LASTNAME_LABEL</label>
+			<label asp-for="lastName" class="control-label">@ACCOUNT_REGISTER_USER_LASTNAME</label>
 			<input asp-for="lastName" class="form-control">
 			<span asp-validation-for="lastName" class="text-danger"></span>
 
-			<label asp-for="AreYouSure" class="control-label">@ACCOUNT_REGISTER_USER_CONFIRM_LABEL</label>
+			<label asp-for="AreYouSure" class="control-label">@ACCOUNT_REGISTER_USER_CONFIRM</label>
 			<input asp-for="AreYouSure" class="form-check-inline">
 			<span asp-validation-for="AreYouSure" class="checkbox"></span>
 
