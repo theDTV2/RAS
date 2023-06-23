@@ -10,15 +10,15 @@ namespace control.Models
 
     public enum EAccessLevel
     {
-        [Display(Name = "Deactivated")]
+        [Display(Name = "USER_LEVEL_LOCKED")]
         kNone,
-        [Display(Name = "User")]
+        [Display(Name = "USER_LEVEL_USER")]
         kUser,
-        [Display(Name = "Moderator")]
+        [Display(Name = "USER_LEVEL_MODERATOR")]
         kModerator,
-        [Display(Name = "Admin")]
+        [Display(Name = "USER_LEVEL_ADMIN")]
         kAdmin,
-        [Display(Name = "Super Admin")]
+        [Display(Name = "USER_LEVEL_SUPERADMIN")]
         kSuperAdmin
     }
 
