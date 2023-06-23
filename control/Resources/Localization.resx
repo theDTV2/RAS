@@ -117,7 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LAYOUT_MANAGMENT_DOOR" xml:space="preserve">
-    <value>Door Managment</value>
+  <data name="NOT_IN_USE" xml:space="preserve">
+    <value>NOT_IN_USE</value>
+    <comment>If this file does not exist, the website will crash when trying to find a non existant string</comment>
   </data>
 </root>
