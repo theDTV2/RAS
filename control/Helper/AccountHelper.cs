@@ -105,15 +105,15 @@ namespace control.Helper
             switch (GetEAccessLevel(context))
             {
                 case EAccessLevel.kNone:
-                    return "Gast";
+                    return "USER_LEVEL_GUEST";
                 case EAccessLevel.kUser:
-                    return "Nutzer";
+                    return "USER_LEVEL_USER";
                 case EAccessLevel.kModerator:
-                    return "Moderator";
+                    return "USER_LEVEL_MODERATOR";
                 case EAccessLevel.kAdmin:
-                    return "Administrator";
+                    return "USER_LEVEL_ADMIN";
                 case EAccessLevel.kSuperAdmin:
-                    return "Super Administrator";
+                    return "USER_LEVEL_SUPERADMIN";
                 default:
                     return "Error";
             }
