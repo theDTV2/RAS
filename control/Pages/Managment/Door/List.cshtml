@@ -1,29 +1,49 @@
 ﻿@page
 @model control.Pages.Managment.Door.ListModel
-@using control.Helper
+
+@using control.Helper;
+@using control.Generator;
+@using control.Models;
+@using control.Manager;
+
+@{
+
+    var lang = AccountHelper.GetUserLanguage(HttpContext);
+    var MANAGMENT_DOOR_LIST_TITLE = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_LIST_TITLE", lang);
+    var MANAGMENT_DOOR_LIST_NEW_DOOR = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_LIST_NEW_DOOR", lang);
+    var MANAGMENT_DOOR_DISPLAYTEXT = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_DISPLAYTEXT", lang);
+    var MANAGMENT_DOOR_ID = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_ID", lang);
+    var MANAGMENT_DOOR_LAST_CHECKIN = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_LAST_CHECKIN", lang);
+    var MANAGMENT_DOOR_LIST_MANAGE = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_LIST_MANAGE", lang);
+    var MANAGMENT_DOOR_LIST_DELETE = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_LIST_DELETE", lang);
+
+    var ACCOUNT_EXTEND_BUTTON = LanguageManager.GetLocalizedString("ACCOUNT_EXTEND_BUTTON", lang);
+}
+
+
 
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>List</title>
+    <title>@MANAGMENT_DOOR_LIST_TITLE</title>
 </head>
 <body>
     <p>
-        <a class="btn btn-primary" asp-page="Register">Register new </a>
+        <a class="btn btn-primary" asp-page="Register">@MANAGMENT_DOOR_LIST_NEW_DOOR </a>
     </p>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayTextFor(model => model.Door[0].DisplayText)
+                    @MANAGMENT_DOOR_DISPLAYTEXT
                 </th>
                 <th>
-                    @Html.DisplayTextFor(model => model.Door[0].Id)
+                    @MANAGMENT_DOOR_ID
                 </th>
                 <th>
-                    @Html.DisplayTextFor(model => model.Door[0].LastCheckInTime)
+                    @MANAGMENT_DOOR_LAST_CHECKIN
                 </th>
                 <th>
 
@@ -45,12 +65,12 @@
                         @Html.DisplayFor(modelItem => item.LastCheckInTime)
                     </td>
                     <td>
-                        <a class="btn btn-primary" asp-page="Manage" asp-route-DoorIdentifier="@item.Id">Manage</a>
+                        <a class="btn btn-primary" asp-page="Manage" asp-route-DoorIdentifier="@item.Id">@MANAGMENT_DOOR_LIST_MANAGE</a>
                    
                     @if(AccountHelper.GetEAccessLevel(HttpContext) >= Models.EAccessLevel.kAdmin)
                     {
-            
-                            <a class="btn btn-danger" asp-page="Delete" asp-route-DoorIdentifier="@item.Id">Delete</a>
+
+                            <a class="btn btn-danger" asp-page="Delete" asp-route-DoorIdentifier="@item.Id">@MANAGMENT_DOOR_LIST_DELETE</a>
 
                     }
                     </td>
