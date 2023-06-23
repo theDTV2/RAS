@@ -46,7 +46,7 @@ namespace control.Helper
             SessionHelper.SaveStringInSession(context,"loggedInStatus", statusToSetTo.ToString());
         }
 
-        private static void SetUserLanguage(HttpContext context, string language = "en")
+        public static void SetUserLanguage(HttpContext context, string language = "en")
         {
             SessionHelper.SaveStringInSession(context, "language", language);
         }
