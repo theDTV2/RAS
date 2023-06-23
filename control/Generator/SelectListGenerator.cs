@@ -1,4 +1,5 @@
 ﻿using control.Helper;
+using control.Manager;
 using control.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
@@ -105,24 +106,27 @@ namespace control.Generator
         {
             EAccessLevel _accessLevel = AccountHelper.GetEAccessLevel(httpContext);
 
+            var lang = AccountHelper.GetUserLanguage(httpContext);
+
+
             List<SelectListItem> _outputList = new(){
-                new SelectListItem{Text = "Locked",Value = "0" }
+                new SelectListItem{Text = LanguageManager.GetLocalizedString("USER_LEVEL_LOCKED", lang), Value = "0" }
                   };
 
             if (userToGenerateFor.AdminDoors.IsNullOrEmpty())
             {
-                _outputList.Add(new SelectListItem { Text = "User", Value = "1" });
+                _outputList.Add(new SelectListItem { Text = LanguageManager.GetLocalizedString("USER_LEVEL_USER", lang), Value = "1" });
 
                 if (_accessLevel >= EAccessLevel.kSuperAdmin)
                 {
-                    _outputList.Add(new SelectListItem { Text = "Admin", Value = "3" });
-                    _outputList.Add(new SelectListItem { Text = "Super Admin", Value = "4" });
+                    _outputList.Add(new SelectListItem { Text = LanguageManager.GetLocalizedString("USER_LEVEL_ADMIN", lang), Value = "3" });
+                    _outputList.Add(new SelectListItem { Text = LanguageManager.GetLocalizedString("USER_LEVEL_SUPERADMIN", lang), Value = "4" });
                 }
                 return new SelectList(_outputList, "Value", "Text");
             }
 
             //If we end up here, the user is an moderator
-            _outputList.Add(new SelectListItem { Text = "Moderator", Value = "2" });
+            _outputList.Add(new SelectListItem { Text = LanguageManager.GetLocalizedString("USER_LEVEL_MODERATOR", lang), Value = "2" });
 
             return new SelectList(_outputList, "Value", "Text");
         }
