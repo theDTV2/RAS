@@ -10,6 +10,10 @@
             url: '/Ajax/Connector/ChangeLanguage',
             data: {
                 language: _value
+            },
+            complete: function () {
+                window.location.reload();
+                deferred.resolve();
             }
         })
     }
