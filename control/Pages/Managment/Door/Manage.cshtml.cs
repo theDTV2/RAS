@@ -23,7 +23,6 @@ namespace control.Pages.Managment.Door
         }
 
         [BindProperty]
-        [Display(Name = "Tür Moderatoren:")]
         public string[] DoorAdminToGiveAccessTo { get; set; }
   
 
@@ -33,10 +32,8 @@ namespace control.Pages.Managment.Door
         public string DoorID { get; set; }
 
         [BindProperty]
-        [Display(Name = "Text to be displayed on door:")]
         public string DoorDisplayText { get; set; }
 
-        [Display(Name = "Tür Entry Mode:")]
         public EDoorEntryMode DoorEntryMode { get; set; }
 
         public IActionResult OnGet()
