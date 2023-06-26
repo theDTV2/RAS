@@ -35,6 +35,6 @@ for file in files_to_search:
 _result_file = open("result.txt", 'w')
 
 for line in result_strings:
-    _result_file.write(line + "\t \n")
+    _result_file.write(line + "\t\n")
 
 _result_file.close()
