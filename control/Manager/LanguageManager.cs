@@ -24,7 +24,7 @@ namespace control.Manager
 
             string? returnValue = ResManager.GetString(stringName, Languages[language]);
 
-            if (returnValue is null)
+            if (returnValue is null || returnValue == string.Empty)
                 return stringName;
             return returnValue;
         }

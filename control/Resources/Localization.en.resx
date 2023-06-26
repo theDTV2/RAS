@@ -118,288 +118,288 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACCOUNT_DASHBOARD_EXPIRY_DATE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_DASHBOARD_EXTEND_BUTTON" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_EXTEND_BUTTON" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_EXTEND_INFO" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_EXTEND_LABEL" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_EXTEND_NOT_POSSIBLE_YET" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_EXTEND_SUCCESS" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_LOGINCODE_CODE_BUTTON" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_LOGINCODE_FAILED" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_LOGINCODE_LOCKED" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_LOGINCODE_SUCCESS" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_LOGINCODE_TITLE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_LOGIN_BUTTON" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_LOGIN_INFO" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_LOGIN_MAIL_LABEL" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_LOGIN_TITLE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_LOGOUT_SUCCESS" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_PRIVACY_BUTTON_LABEL" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_PRIVACY_CHECKBOX_LABEL" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_PRIVACY_EULA" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_PRIVACY_INFO" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_PRIVACY_TITLE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_REGISTER_TITLE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_REGISTER_USER_BUTTON" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_REGISTER_USER_CONFIRM" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_REGISTER_USER_FIRSTNAME" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="ACCOUNT_REGISTER_USER_LASTNAME" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="LAYOUT_ACCOUNT_LOGIN" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="LAYOUT_ACCOUNT_LOGOUT" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="LAYOUT_HOME" xml:space="preserve">
-    <value> </value>
+    <value>Home</value>
   </data>
   <data name="LAYOUT_MANAGMENT_DOOR" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="LAYOUT_MANAGMENT_DOOR_LIST" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="LAYOUT_MANAGMENT_DOOR_REGISTER" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="LAYOUT_MANAGMENT_SETTINGS" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="LAYOUT_MANAGMENT_SETTINGS_GENERAL" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="LAYOUT_MANAGMENT_SETTINGS_MAIL" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="LAYOUT_MANAGMENT_USER" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="LAYOUT_MANAGMENT_USER_LIST" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="LAYOUT_STATS" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="LAYOUT_STATS_LIVE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="LAYOUT_STATS_OVERTIME" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_DELETE_AREYOUSURE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_DELETE_BACK" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_DELETE_CONFIRM" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_DISPLAYTEXT" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_ID" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_LAST_CHECKIN" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_LIST_DELETE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_LIST_MANAGE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_LIST_NEW_DOOR" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_LIST_TITLE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_MANAGE_BACK" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_MANAGE_ENTRYMODE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_MANAGE_MODERATOR" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_MANAGE_UPDATE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_REGISTER_BACK" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_REGISTER_CREATE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_DOOR_REGISTER_TITLE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_SETTINGS_EMAIL_BACK" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_SETTINGS_EMAIL_ERROR_GENERAL" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_SETTINGS_EMAIL_INFO" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_SETTINGS_EMAIL_PASSWORD" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_SETTINGS_EMAIL_SMTP_ADDRESS" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_SETTINGS_EMAIL_SMTP_PORT" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_SETTINGS_EMAIL_SUBMIT" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_SETTINGS_EMAIL_SUCCESS" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_SETTINGS_EMAIL_USERNAME" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_SETTINGS_GENERAL_BACK" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_SETTINGS_GENERAL_INFO" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_SETTINGS_GENERAL_SUCCESS" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_SETTINGS_GENERAL_TIMEOUT_LABEL" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_SETTINGS_GENERAL_UPDATE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_ACCESSLEVEL" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_COMPLETEDREGISTRATION" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_DOOR_ACCESS_LIST" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_EMAIL" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_EXPIRYDATE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_FIRSTNAME" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_LASTLOGIN" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_LASTNAME" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_LIST_MANAGE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_LIST_SEARCH_BACK" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_LIST_UNLOCK" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_MANAGE_SUCCESS" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_MANAGE_TITLE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_SECRET" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_UNLOCK_BACK" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_UNLOCK_CURRENT_USER" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_UNLOCK_TITLE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="MANAGMENT_USER_UNLOCK_UPDATE" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="USER_LEVEL_ADMIN" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="USER_LEVEL_LOCKED" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="USER_LEVEL_MODERATOR" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="USER_LEVEL_SUPERADMIN" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
   <data name="USER_LEVEL_USER" xml:space="preserve">
-    <value> </value>
+    <value />
   </data>
 </root>
