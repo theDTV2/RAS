@@ -12,11 +12,11 @@ def get_next_input() -> string:
 
 
 def reader_task():
-
+    input_handle = fileinput.input()
 
     while 1:
         # If there is input, send request to api
-        input_handle = fileinput.input()
+
 
         input_str = input_handle.readline()
         if input_str != "":
