@@ -207,28 +207,28 @@
   <data name="LAYOUT_HOME" xml:space="preserve">
     <value>Home</value>
   </data>
-  <data name="LAYOUT_MANAGMENT_DOOR" xml:space="preserve">
-    <value>Door Managment</value>
+  <data name="LAYOUT_MANAGEMENT_DOOR" xml:space="preserve">
+    <value>Door Management</value>
   </data>
-  <data name="LAYOUT_MANAGMENT_DOOR_LIST" xml:space="preserve">
+  <data name="LAYOUT_MANAGEMENT_DOOR_LIST" xml:space="preserve">
     <value>List</value>
   </data>
-  <data name="LAYOUT_MANAGMENT_DOOR_REGISTER" xml:space="preserve">
+  <data name="LAYOUT_MANAGEMENT_DOOR_REGISTER" xml:space="preserve">
     <value>Registration</value>
   </data>
-  <data name="LAYOUT_MANAGMENT_SETTINGS" xml:space="preserve">
+  <data name="LAYOUT_MANAGEMENT_SETTINGS" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="LAYOUT_MANAGMENT_SETTINGS_GENERAL" xml:space="preserve">
+  <data name="LAYOUT_MANAGEMENT_SETTINGS_GENERAL" xml:space="preserve">
     <value>General</value>
   </data>
-  <data name="LAYOUT_MANAGMENT_SETTINGS_MAIL" xml:space="preserve">
+  <data name="LAYOUT_MANAGEMENT_SETTINGS_MAIL" xml:space="preserve">
     <value>Mail</value>
   </data>
-  <data name="LAYOUT_MANAGMENT_USER" xml:space="preserve">
-    <value>User Managment</value>
+  <data name="LAYOUT_MANAGEMENT_USER" xml:space="preserve">
+    <value>User Management</value>
   </data>
-  <data name="LAYOUT_MANAGMENT_USER_LIST" xml:space="preserve">
+  <data name="LAYOUT_MANAGEMENT_USER_LIST" xml:space="preserve">
     <value>List</value>
   </data>
   <data name="LAYOUT_STATS" xml:space="preserve">
@@ -240,161 +240,164 @@
   <data name="LAYOUT_STATS_OVERTIME" xml:space="preserve">
     <value>Total</value>
   </data>
-  <data name="MANAGMENT_DOOR_DELETE_AREYOUSURE" xml:space="preserve">
-    <value>Are you sure, that you want to delete this entry?</value>
-  </data>
-  <data name="MANAGMENT_DOOR_DELETE_BACK" xml:space="preserve">
-    <value>Back</value>
-  </data>
-  <data name="MANAGMENT_DOOR_DELETE_CONFIRM" xml:space="preserve">
-    <value>Confirm</value>
-  </data>
-  <data name="MANAGMENT_DOOR_DISPLAYTEXT" xml:space="preserve">
-    <value>Display Text</value>
-  </data>
-  <data name="MANAGMENT_DOOR_ID" xml:space="preserve">
-    <value>ID</value>
-  </data>
-  <data name="MANAGMENT_DOOR_LAST_CHECKIN" xml:space="preserve">
-    <value>Last Check In Date</value>
-  </data>
-  <data name="MANAGMENT_DOOR_LIST_DELETE" xml:space="preserve">
+  <data name="MANAGEMENT_DOOR_LIST_DELETE" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="MANAGMENT_DOOR_LIST_MANAGE" xml:space="preserve">
+  <data name="MANAGEMENT_DOOR_DELETE_AREYOUSURE" xml:space="preserve">
+    <value>Are you sure, that you want to delete this entry?</value>
+  </data>
+  <data name="MANAGEMENT_DOOR_DELETE_BACK" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="MANAGEMENT_DOOR_DELETE_CONFIRM" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="MANAGEMENT_DOOR_DISPLAYTEXT" xml:space="preserve">
+    <value>Display Text</value>
+  </data>
+  <data name="MANAGEMENT_DOOR_ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="MANAGEMENT_DOOR_LAST_CHECKIN" xml:space="preserve">
+    <value>Last Check In Date</value>
+  </data>
+  <data name="MANAGEMENT_DOOR_LIST_MANAGE" xml:space="preserve">
     <value>Manage</value>
   </data>
-  <data name="MANAGMENT_DOOR_LIST_NEW_DOOR" xml:space="preserve">
+  <data name="MANAGEMENT_DOOR_LIST_NEW_DOOR" xml:space="preserve">
     <value>New Door</value>
   </data>
-  <data name="MANAGMENT_DOOR_LIST_TITLE" xml:space="preserve">
+  <data name="MANAGEMENT_DOOR_LIST_TITLE" xml:space="preserve">
     <value>Door List</value>
   </data>
-  <data name="MANAGMENT_DOOR_MANAGE_BACK" xml:space="preserve">
+  <data name="MANAGEMENT_DOOR_MANAGE_BACK" xml:space="preserve">
     <value>Back</value>
   </data>
-  <data name="MANAGMENT_DOOR_MANAGE_ENTRYMODE" xml:space="preserve">
+  <data name="MANAGEMENT_DOOR_MANAGE_ENTRYMODE" xml:space="preserve">
     <value>Entry Mode</value>
   </data>
-  <data name="MANAGMENT_DOOR_MANAGE_MODERATOR" xml:space="preserve">
+  <data name="MANAGEMENT_DOOR_MANAGE_MODERATOR" xml:space="preserve">
     <value>Moderators</value>
   </data>
-  <data name="MANAGMENT_DOOR_MANAGE_TITLE" xml:space="preserve">
+  <data name="MANAGEMENT_DOOR_MANAGE_TITLE" xml:space="preserve">
     <value>Manage Door</value>
   </data>
-  <data name="MANAGMENT_DOOR_MANAGE_UPDATE" xml:space="preserve">
+  <data name="MANAGEMENT_DOOR_MANAGE_UPDATE" xml:space="preserve">
     <value>Update</value>
   </data>
-  <data name="MANAGMENT_DOOR_REGISTER_BACK" xml:space="preserve">
+  <data name="MANAGEMENT_DOOR_REGISTER_BACK" xml:space="preserve">
     <value>Back</value>
   </data>
-  <data name="MANAGMENT_DOOR_REGISTER_CREATE" xml:space="preserve">
+  <data name="MANAGEMENT_DOOR_REGISTER_CREATE" xml:space="preserve">
     <value>Create</value>
   </data>
-  <data name="MANAGMENT_DOOR_REGISTER_TITLE" xml:space="preserve">
+  <data name="MANAGEMENT_DOOR_REGISTER_TITLE" xml:space="preserve">
     <value>Create Door</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_EMAIL_BACK" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_EMAIL_BACK" xml:space="preserve">
     <value>Back</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_EMAIL_ERROR_GENERAL" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_EMAIL_ERROR_GENERAL" xml:space="preserve">
     <value>Error while saving data, incorrect parameters?</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_EMAIL_INFO" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_EMAIL_INFO" xml:space="preserve">
     <value>&lt;email info here&gt;</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_EMAIL_PASSWORD" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_EMAIL_PASSWORD" xml:space="preserve">
     <value>SMTP Password</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_EMAIL_SMTP_ADDRESS" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_EMAIL_SMTP_ADDRESS" xml:space="preserve">
     <value>SMTP Login Name</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_EMAIL_SMTP_PORT" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_EMAIL_SMTP_PORT" xml:space="preserve">
     <value>SMTP Port</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_EMAIL_SUBMIT" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_EMAIL_SUBMIT" xml:space="preserve">
     <value>Submit</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_EMAIL_SUCCESS" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_EMAIL_SUCCESS" xml:space="preserve">
     <value>Email changed successfully</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_EMAIL_TITLE" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_EMAIL_TITLE" xml:space="preserve">
     <value>Manage</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_EMAIL_USERNAME" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_EMAIL_USERNAME" xml:space="preserve">
     <value>SMPT Username</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_GENERAL_BACK" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_GENERAL_BACK" xml:space="preserve">
     <value>Back</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_GENERAL_INFO" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_GENERAL_INFO" xml:space="preserve">
     <value>&lt;general info here&gt;</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_GENERAL_SUCCESS" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_GENERAL_SUCCESS" xml:space="preserve">
     <value>Settings changed successfully</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_GENERAL_TIMEOUT_LABEL" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_GENERAL_TIMEOUT_LABEL" xml:space="preserve">
     <value>This setting will not be applied until a system reboot</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_GENERAL_TITLE" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_GENERAL_TITLE" xml:space="preserve">
     <value>Manage</value>
   </data>
-  <data name="MANAGMENT_SETTINGS_GENERAL_UPDATE" xml:space="preserve">
+  <data name="MANAGEMENT_SETTINGS_GENERAL_UPDATE" xml:space="preserve">
     <value>Update</value>
   </data>
-  <data name="MANAGMENT_USER_ACCESSLEVEL" xml:space="preserve">
+  <data name="MANAGEMENT_USER_ACCESSLEVEL" xml:space="preserve">
     <value>Access Leve</value>
   </data>
-  <data name="MANAGMENT_USER_COMPLETEDREGISTRATION" xml:space="preserve">
+  <data name="MANAGEMENT_USER_COMPLETEDREGISTRATION" xml:space="preserve">
     <value>Completed Registration</value>
   </data>
-  <data name="MANAGMENT_USER_DOOR_ACCESS_LIST" xml:space="preserve">
+  <data name="MANAGEMENT_USER_DOOR_ACCESS_LIST" xml:space="preserve">
     <value>Door Access List</value>
   </data>
-  <data name="MANAGMENT_USER_EMAIL" xml:space="preserve">
+  <data name="MANAGEMENT_USER_EMAIL" xml:space="preserve">
     <value>Email</value>
   </data>
-  <data name="MANAGMENT_USER_EXPIRYDATE" xml:space="preserve">
+  <data name="MANAGEMENT_USER_EXPIRYDATE" xml:space="preserve">
     <value>Expiry Date</value>
   </data>
-  <data name="MANAGMENT_USER_FIRSTNAME" xml:space="preserve">
+  <data name="MANAGEMENT_USER_FIRSTNAME" xml:space="preserve">
     <value>First Name</value>
   </data>
-  <data name="MANAGMENT_USER_LASTLOGIN" xml:space="preserve">
+  <data name="MANAGEMENT_USER_LASTLOGIN" xml:space="preserve">
     <value>Last Login</value>
   </data>
-  <data name="MANAGMENT_USER_LASTNAME" xml:space="preserve">
+  <data name="MANAGEMENT_USER_LASTNAME" xml:space="preserve">
     <value>Last Name</value>
   </data>
-  <data name="MANAGMENT_USER_LIST_MANAGE" xml:space="preserve">
+  <data name="MANAGEMENT_USER_LIST_MANAGE" xml:space="preserve">
     <value>Manage</value>
   </data>
-  <data name="MANAGMENT_USER_LIST_SEARCH_BACK" xml:space="preserve">
+  <data name="MANAGEMENT_USER_LIST_SEARCH_BACK" xml:space="preserve">
     <value>Back to full List</value>
   </data>
-  <data name="MANAGMENT_USER_LIST_UNLOCK" xml:space="preserve">
+  <data name="MANAGEMENT_USER_LIST_UNLOCK" xml:space="preserve">
     <value>Unlock </value>
   </data>
-  <data name="MANAGMENT_USER_MANAGE_SUCCESS" xml:space="preserve">
+  <data name="MANAGEMENT_USER_MANAGE_SUCCESS" xml:space="preserve">
     <value>Applied settings sucessfully</value>
   </data>
-  <data name="MANAGMENT_USER_MANAGE_TITLE" xml:space="preserve">
+  <data name="MANAGEMENT_USER_MANAGE_TITLE" xml:space="preserve">
     <value>Manage</value>
   </data>
-  <data name="MANAGMENT_USER_SECRET" xml:space="preserve">
+  <data name="MANAGEMENT_USER_SECRET" xml:space="preserve">
     <value>User Login Secret</value>
   </data>
-  <data name="MANAGMENT_USER_UNLOCK_BACK" xml:space="preserve">
+  <data name="MANAGEMENT_USER_UNLOCK_BACK" xml:space="preserve">
     <value>Back</value>
   </data>
-  <data name="MANAGMENT_USER_UNLOCK_CURRENT_USER" xml:space="preserve">
+  <data name="MANAGEMENT_USER_UNLOCK_CURRENT_USER" xml:space="preserve">
     <value>Current User</value>
   </data>
-  <data name="MANAGMENT_USER_UNLOCK_TITLE" xml:space="preserve">
+  <data name="MANAGEMENT_USER_UNLOCK_TITLE" xml:space="preserve">
     <value>Title</value>
   </data>
-  <data name="MANAGMENT_USER_UNLOCK_UPDATE" xml:space="preserve">
+  <data name="MANAGEMENT_USER_UNLOCK_UPDATE" xml:space="preserve">
     <value>Update</value>
+  </data>
+  <data name="MANAGEMENT_USER_MANAGE_BACK" xml:space="preserve">
+    <value>Back</value>
   </data>
   <data name="USER_LEVEL_ADMIN" xml:space="preserve">
     <value>Admin</value>
@@ -410,5 +413,26 @@
   </data>
   <data name="USER_LEVEL_USER" xml:space="preserve">
     <value>User</value>
+  </data>
+  <data name="ACCOUNT_ACCEPT_EULA_REQUIRED" xml:space="preserve">
+    <value>Please accept the EULA</value>
+  </data>
+  <data name="ACCOUNT_INVALID_USER_STATE" xml:space="preserve">
+    <value>Invalid User State. You have been logged out!</value>
+  </data>
+  <data name="ACCOUNT_LOGIN_WRONG_EMAIL_PROVIDER" xml:space="preserve">
+    <value>Only login@htw-berlin.de emails are supported!</value>
+  </data>
+  <data name="ACCOUNT_LOGOUT_PREVIOUS_SESSION_TERMINATED" xml:space="preserve">
+    <value>The previous session was terminated</value>
+  </data>
+  <data name="MANAGEMENT_USER_UNLOCK_ERROR_CARDCODE_ALREADY_IN_USE" xml:space="preserve">
+    <value>Card code is already being used</value>
+  </data>
+  <data name="MANAGEMENT_USER_UNLOCK_ERROR_MISSING" xml:space="preserve">
+    <value>User missing or invalid</value>
+  </data>
+  <data name="MANAGMENT_USER_UNLOCK_SAVE_SUCCESSFUL" xml:space="preserve">
+    <value>Saving successfull</value>
   </data>
 </root>

@@ -9,13 +9,13 @@
 @{
 
     var lang = AccountHelper.GetUserLanguage(HttpContext);
-    var MANAGMENT_SETTINGS_GENERAL_TITLE = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_GENERAL_TITLE", lang);
-    var MANAGMENT_SETTINGS_GENERAL_INFO = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_GENERAL_INFO", lang);
-    var MANAGMENT_SETTINGS_GENERAL_TIMEOUT = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_GENERAL_TIMEOUT_LABEL", lang);
-    var MANAGMENT_SETTINGS_GENERAL_TIMEOUT_TOOLTIP = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_GENERAL_TIMEOUT_LABEL", lang);
+    var MANAGEMENT_SETTINGS_GENERAL_TITLE = LanguageManager.GetLocalizedString("MANAGEMENT_SETTINGS_GENERAL_TITLE", lang);
+    var MANAGEMENT_SETTINGS_GENERAL_INFO = LanguageManager.GetLocalizedString("MANAGEMENT_SETTINGS_GENERAL_INFO", lang);
+    var MANAGEMENT_SETTINGS_GENERAL_TIMEOUT = LanguageManager.GetLocalizedString("MANAGEMENT_SETTINGS_GENERAL_TIMEOUT_LABEL", lang);
+    var MANAGEMENT_SETTINGS_GENERAL_TIMEOUT_TOOLTIP = LanguageManager.GetLocalizedString("MANAGEMENT_SETTINGS_GENERAL_TIMEOUT_LABEL", lang);
 
-    var MANAGMENT_SETTINGS_GENERAL_UPDATE = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_GENERAL_UPDATE", lang);
-    var MANAGMENT_SETTINGS_GENERAL_BACK = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_GENERAL_BACK", lang);
+    var MANAGEMENT_SETTINGS_GENERAL_UPDATE = LanguageManager.GetLocalizedString("MANAGEMENT_SETTINGS_GENERAL_UPDATE", lang);
+    var MANAGEMENT_SETTINGS_GENERAL_BACK = LanguageManager.GetLocalizedString("MANAGEMENT_SETTINGS_GENERAL_BACK", lang);
 
 
 }
@@ -23,11 +23,11 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <h4>@MANAGMENT_SETTINGS_GENERAL_TITLE </h4>
+                <h4>@MANAGEMENT_SETTINGS_GENERAL_TITLE </h4>
                 <br />
                 <div class="form-group">
-                    <label class="form-label" asp-for="UserLoginTimeout" data-toggle="tooltip" data-placement="top" title="@MANAGMENT_SETTINGS_GENERAL_TIMEOUT_TOOLTIP">@MANAGMENT_SETTINGS_GENERAL_TIMEOUT </label>
-                    <input class="form-control" asp-for="UserLoginTimeout" data-toggle="tooltip" data-placement="top" title="@MANAGMENT_SETTINGS_GENERAL_TIMEOUT_TOOLTIP">
+                    <label class="form-label" asp-for="UserLoginTimeout" data-toggle="tooltip" data-placement="top" title="@MANAGEMENT_SETTINGS_GENERAL_TIMEOUT_TOOLTIP">@MANAGEMENT_SETTINGS_GENERAL_TIMEOUT </label>
+                    <input class="form-control" asp-for="UserLoginTimeout" data-toggle="tooltip" data-placement="top" title="@MANAGEMENT_SETTINGS_GENERAL_TIMEOUT_TOOLTIP">
                 </div>
 
             </div>
@@ -35,19 +35,19 @@
             <div class="col-sm">
             </div>
             <div class="col-sm">
-                @MANAGMENT_SETTINGS_GENERAL_INFO<br />
+                @MANAGEMENT_SETTINGS_GENERAL_INFO<br />
             </div>
         </div>
 
         <div class="row justify-content-center">
             <div class="col-4 text-center">
                 <div class="form-group">
-                    <input type="submit" value="@MANAGMENT_SETTINGS_GENERAL_UPDATE" class="btn btn-primary" />
+                    <input type="submit" value="@MANAGEMENT_SETTINGS_GENERAL_UPDATE" class="btn btn-primary" />
                 </div>
             </div>
         </div>
         <div>
-            <a class="btn btn-secondary" asp-page="List">@MANAGMENT_SETTINGS_GENERAL_BACK</a>
+            <a class="btn btn-secondary" asp-page="List">@MANAGEMENT_SETTINGS_GENERAL_BACK</a>
         </div>
     </div>
 </form>

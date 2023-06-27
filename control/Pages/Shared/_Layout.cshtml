@@ -19,17 +19,17 @@
     var lang = AccountHelper.GetUserLanguage(Context);
 
     var LAYOUT_HOME = LanguageManager.GetLocalizedString("LAYOUT_HOME", lang);
-    var LAYOUT_MANAGMENT_DOOR = LanguageManager.GetLocalizedString("LAYOUT_MANAGMENT_DOOR", lang);
-    var LAYOUT_MANAGMENT_DOOR_REGISTER = LanguageManager.GetLocalizedString("LAYOUT_MANAGMENT_DOOR_REGISTER", lang);
-    var LAYOUT_MANAGMENT_DOOR_LIST = LanguageManager.GetLocalizedString("LAYOUT_MANAGMENT_DOOR_LIST", lang);
-    var LAYOUT_MANAGMENT_USER = LanguageManager.GetLocalizedString("LAYOUT_MANAGMENT_USER", lang);
-    var LAYOUT_MANAGMENT_USER_LIST = LanguageManager.GetLocalizedString("LAYOUT_MANAGMENT_USER_LIST", lang);
+    var LAYOUT_MANAGEMENT_DOOR = LanguageManager.GetLocalizedString("LAYOUT_MANAGEMENT_DOOR", lang);
+    var LAYOUT_MANAGEMENT_DOOR_REGISTER = LanguageManager.GetLocalizedString("LAYOUT_MANAGEMENT_DOOR_REGISTER", lang);
+    var LAYOUT_MANAGEMENT_DOOR_LIST = LanguageManager.GetLocalizedString("LAYOUT_MANAGEMENT_DOOR_LIST", lang);
+    var LAYOUT_MANAGEMENT_USER = LanguageManager.GetLocalizedString("LAYOUT_MANAGEMENT_USER", lang);
+    var LAYOUT_MANAGEMENT_USER_LIST = LanguageManager.GetLocalizedString("LAYOUT_MANAGEMENT_USER_LIST", lang);
     var LAYOUT_STATS = LanguageManager.GetLocalizedString("LAYOUT_STATS", lang);
     var LAYOUT_STATS_LIVE = LanguageManager.GetLocalizedString("LAYOUT_STATS_LIVE", lang);
     var LAYOUT_STATS_OVERTIME = LanguageManager.GetLocalizedString("LAYOUT_STATS_OVERTIME", lang);
-    var LAYOUT_MANAGMENT_SETTINGS = LanguageManager.GetLocalizedString("LAYOUT_MANAGMENT_SETTINGS", lang);
-    var LAYOUT_MANAGMENT_SETTINGS_GENERAL = LanguageManager.GetLocalizedString("LAYOUT_MANAGMENT_SETTINGS_GENERAL", lang);
-    var LAYOUT_MANAGMENT_SETTINGS_MAIL = LanguageManager.GetLocalizedString("LAYOUT_MANAGMENT_SETTINGS_MAIL", lang);
+    var LAYOUT_MANAGEMENT_SETTINGS = LanguageManager.GetLocalizedString("LAYOUT_MANAGEMENT_SETTINGS", lang);
+    var LAYOUT_MANAGEMENT_SETTINGS_GENERAL = LanguageManager.GetLocalizedString("LAYOUT_MANAGEMENT_SETTINGS_GENERAL", lang);
+    var LAYOUT_MANAGEMENT_SETTINGS_MAIL = LanguageManager.GetLocalizedString("LAYOUT_MANAGEMENT_SETTINGS_MAIL", lang);
     var LAYOUT_ACCOUNT_LOGIN = LanguageManager.GetLocalizedString("LAYOUT_ACCOUNT_LOGIN", lang);
     var LAYOUT_ACCOUNT_LOGOUT = LanguageManager.GetLocalizedString("LAYOUT_ACCOUNT_LOGOUT", lang);
 
@@ -74,11 +74,11 @@
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    @LAYOUT_MANAGMENT_DOOR
+                                    @LAYOUT_MANAGEMENT_DOOR
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" asp-page="/Managment/Door/Register">@LAYOUT_MANAGMENT_DOOR_REGISTER</a></li>
-                                    <li><a class="dropdown-item" asp-page="/Managment/Door/List">@LAYOUT_MANAGMENT_DOOR_LIST</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Managment/Door/Register">@LAYOUT_MANAGEMENT_DOOR_REGISTER</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Managment/Door/List">@LAYOUT_MANAGEMENT_DOOR_LIST</a></li>
                                 </ul>
                             </li>
                         }
@@ -86,10 +86,10 @@
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    @LAYOUT_MANAGMENT_USER
+                                    @LAYOUT_MANAGEMENT_USER
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" asp-page="/Managment/User/List">@LAYOUT_MANAGMENT_USER_LIST</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Managment/User/List">@LAYOUT_MANAGEMENT_USER_LIST</a></li>
                                 </ul>
                             </li>
 
@@ -109,11 +109,11 @@
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    @LAYOUT_MANAGMENT_SETTINGS
+                                    @LAYOUT_MANAGEMENT_SETTINGS
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" asp-page="/Managment/Settings/General">@LAYOUT_MANAGMENT_SETTINGS_GENERAL</a></li>
-                                    <li><a class="dropdown-item" asp-page="/Managment/Settings/Mail">@LAYOUT_MANAGMENT_SETTINGS_MAIL</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Managment/Settings/General">@LAYOUT_MANAGEMENT_SETTINGS_GENERAL</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Managment/Settings/Mail">@LAYOUT_MANAGEMENT_SETTINGS_MAIL</a></li>
 
                                 </ul>
                             </li>

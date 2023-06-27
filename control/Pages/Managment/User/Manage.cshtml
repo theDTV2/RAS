@@ -11,16 +11,16 @@
 @{
     var lang = AccountHelper.GetUserLanguage(HttpContext);
 
-    var MANAGMENT_USER_EMAIL = LanguageManager.GetLocalizedString("MANAGMENT_USER_EMAIL", lang);
-    var MANAGMENT_USER_FIRSTNAME = LanguageManager.GetLocalizedString("MANAGMENT_USER_FIRSTNAME", lang);
-    var MANAGMENT_USER_LASTNAME = LanguageManager.GetLocalizedString("MANAGMENT_USER_LASTNAME", lang);
-    var MANAGMENT_USER_ACCESSLEVEL = LanguageManager.GetLocalizedString("MANAGMENT_USER_ACCESSLEVEL", lang);
-    var MANAGMENT_USER_EXPIRYDATE = LanguageManager.GetLocalizedString("MANAGMENT_USER_EXPIRYDATE", lang);
-    var MANAGMENT_USER_LASTLOGIN = LanguageManager.GetLocalizedString("MANAGMENT_USER_LASTLOGIN", lang);
+    var MANAGEMENT_USER_EMAIL = LanguageManager.GetLocalizedString("MANAGEMENT_USER_EMAIL", lang);
+    var MANAGEMENT_USER_FIRSTNAME = LanguageManager.GetLocalizedString("MANAGEMENT_USER_FIRSTNAME", lang);
+    var MANAGEMENT_USER_LASTNAME = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LASTNAME", lang);
+    var MANAGEMENT_USER_ACCESSLEVEL = LanguageManager.GetLocalizedString("MANAGEMENT_USER_ACCESSLEVEL", lang);
+    var MANAGEMENT_USER_EXPIRYDATE = LanguageManager.GetLocalizedString("MANAGEMENT_USER_EXPIRYDATE", lang);
+    var MANAGEMENT_USER_LASTLOGIN = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LASTLOGIN", lang);
 
-    var MANAGMENT_USER_MANAGE_TITLE = LanguageManager.GetLocalizedString("MANAGMENT_USER_MANAGE_TITLE", lang);
-    var MANAGMENT_USER_MANAGE_SAVE = LanguageManager.GetLocalizedString("MANAGMENT_USER_MANAGE_TITLE", lang);
-    var MANAGMENT_USER_MANAGE_BACK = LanguageManager.GetLocalizedString("MANAGMENT_USER_MANAGE_TITLE", lang);
+    var MANAGEMENT_USER_MANAGE_TITLE = LanguageManager.GetLocalizedString("MANAGEMENT_USER_MANAGE_TITLE", lang);
+    var MANAGEMENT_USER_MANAGE_SAVE = LanguageManager.GetLocalizedString("MANAGEMENT_USER_MANAGE_TITLE", lang);
+    var MANAGEMENT_USER_MANAGE_BACK = LanguageManager.GetLocalizedString("MANAGEMENT_USER_MANAGE_BACK", lang);
 
 
 }
@@ -33,7 +33,7 @@
 </head>
 <body>
 
-    <h4>User</h4>
+    <h4>@MANAGEMENT_USER_MANAGE_TITLE</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -41,35 +41,35 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="User.UserName" />
                 <div class="form-group">
-                    <label asp-for="User.FirstName" class="control-label">@MANAGMENT_USER_FIRSTNAME</label>
+                    <label asp-for="User.FirstName" class="control-label">@MANAGEMENT_USER_FIRSTNAME</label>
                     <input asp-for="User.FirstName" class="form-control" />
                     <span asp-validation-for="User.FirstName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="User.LastName" class="control-label">@MANAGMENT_USER_LASTNAME</label>
+                    <label asp-for="User.LastName" class="control-label">@MANAGEMENT_USER_LASTNAME</label>
                     <input asp-for="User.LastName" class="form-control" />
                     <span asp-validation-for="User.LastName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="User.AccessLevel" class="control-label">@MANAGMENT_USER_ACCESSLEVEL</label>
+                    <label asp-for="User.AccessLevel" class="control-label">@MANAGEMENT_USER_ACCESSLEVEL</label>
                     <select class="selectpicker" asp-for="User.AccessLevel" asp-items="(SelectList)@ViewData["AccessLevelSelectList"]!" class="form-control"></select>
                     <span asp-validation-for="User.AccessLevel" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="User.ExpiryDate" class="control-label">@MANAGMENT_USER_EXPIRYDATE</label>
+                    <label asp-for="User.ExpiryDate" class="control-label">@MANAGEMENT_USER_EXPIRYDATE</label>
                     <input asp-for="User.ExpiryDate" class="form-control" />
                     <span asp-validation-for="User.ExpiryDate" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="@MANAGMENT_USER_MANAGE_SAVE" class="btn btn-primary" />
+                    <input type="submit" value="@MANAGEMENT_USER_MANAGE_SAVE" class="btn btn-primary" />
                 </div>
             </form>
         </div>
     </div>
 
     <div>
-        <a class="btn btn-secondary" asp-page="./List">@MANAGMENT_USER_MANAGE_BACK</a>
+        <a class="btn btn-secondary" asp-page="./List">@MANAGEMENT_USER_MANAGE_BACK</a>
     </div>
 
     @section Scripts {

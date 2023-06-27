@@ -9,15 +9,15 @@
 @{
 
     var lang = AccountHelper.GetUserLanguage(HttpContext);
-    var MANAGMENT_DOOR_DISPLAYTEXT = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_DISPLAYTEXT", lang);
-    var MANAGMENT_DOOR_ID = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_ID", lang);
+    var MANAGEMENT_DOOR_DISPLAYTEXT = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_DISPLAYTEXT", lang);
+    var MANAGEMENT_DOOR_ID = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_ID", lang);
 
-    var MANAGMENT_DOOR_MANAGE_TITLE = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_MANAGE_TITLE", lang);
+    var MANAGEMENT_DOOR_MANAGE_TITLE = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_MANAGE_TITLE", lang);
 
-    var MANAGMENT_DOOR_MANAGE_MODERATOR = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_MANAGE_MODERATOR", lang);
-    var MANAGMENT_DOOR_MANAGE_ENTRYMODE = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_MANAGE_ENTRYMODE", lang);
-    var MANAGMENT_DOOR_MANAGE_UPDATE = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_MANAGE_UPDATE", lang);
-    var MANAGMENT_DOOR_MANAGE_BACK = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_MANAGE_BACK", lang);
+    var MANAGEMENT_DOOR_MANAGE_MODERATOR = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_MANAGE_MODERATOR", lang);
+    var MANAGEMENT_DOOR_MANAGE_ENTRYMODE = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_MANAGE_ENTRYMODE", lang);
+    var MANAGEMENT_DOOR_MANAGE_UPDATE = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_MANAGE_UPDATE", lang);
+    var MANAGEMENT_DOOR_MANAGE_BACK = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_MANAGE_BACK", lang);
 
 
 }
@@ -27,33 +27,33 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@MANAGMENT_DOOR_MANAGE_TITLE</title>
+    <title>@MANAGEMENT_DOOR_MANAGE_TITLE</title>
 </head>
 <body>
-    <h4>@MANAGMENT_DOOR_MANAGE_TITLE</h4>
+    <h4>@MANAGEMENT_DOOR_MANAGE_TITLE</h4>
     <hr />
     <form method="post">
         <div class="container">
             <div class="row">
                 <div class="col-sm">
                     <div class="form-group">
-                        <label class="form-label" asp-for="DoorAdminToGiveAccessTo"> @MANAGMENT_DOOR_MANAGE_MODERATOR</label>
+                        <label class="form-label" asp-for="DoorAdminToGiveAccessTo"> @MANAGEMENT_DOOR_MANAGE_MODERATOR</label>
                         <select class="selectpicker" asp-for="DoorAdminToGiveAccessTo" data-live-search="true" asp-items="(MultiSelectList)@ViewData["SelectBox"]!"></select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" asp-for="DoorEntryMode">@MANAGMENT_DOOR_MANAGE_ENTRYMODE </label> <br />
+                        <label class="form-label" asp-for="DoorEntryMode">@MANAGEMENT_DOOR_MANAGE_ENTRYMODE </label> <br />
                         <select class="selectpicker" asp-for="DoorEntryMode" asp-items="@Html.GetEnumSelectList(typeof(control.Models.EDoorEntryMode))" class="form-control"></select>
                     </div>
                     <br />
 
                 </div>
                 <div class="col-sm">
-                    <p>@MANAGMENT_DOOR_ID</a></p>
+                    <p>@MANAGEMENT_DOOR_ID</a></p>
                     <a> @Model.DoorID</a>
                     <br />
                     <br />
                     <div class="form-group">
-                        <label class="form-label" asp-for="DoorDisplayText"> @MANAGMENT_DOOR_DISPLAYTEXT</label>
+                        <label class="form-label" asp-for="DoorDisplayText"> @MANAGEMENT_DOOR_DISPLAYTEXT</label>
                         <input class="form-control" asp-for="DoorDisplayText">
                     </div>
 
@@ -64,8 +64,8 @@
             </div>
 
             <div>
-                <a class="btn btn-secondary" asp-page="List">@MANAGMENT_DOOR_MANAGE_BACK</a>
-                <input type="submit" value="@MANAGMENT_DOOR_MANAGE_UPDATE" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-page="List">@MANAGEMENT_DOOR_MANAGE_BACK</a>
+                <input type="submit" value="@MANAGEMENT_DOOR_MANAGE_UPDATE" class="btn btn-primary" />
             </div>
         </div>
     </form>

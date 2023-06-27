@@ -42,7 +42,7 @@ namespace control.Pages.Managment.Site
 
             GeneralSettingsManager.SaveGeneralSettingsToConfig();
 
-            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_GENERAL_SUCCESS", AccountHelper.GetUserLanguage(HttpContext)));
+            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, LanguageManager.GetLocalizedString("MANAGEMENT_SETTINGS_GENERAL_SUCCESS", AccountHelper.GetUserLanguage(HttpContext)));
 
 
             return Page();

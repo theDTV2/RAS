@@ -53,7 +53,7 @@ namespace control.Pages.Account
 
             if (_userMailElements[1] != "htw-berlin.de" || _userMailElements[0].Contains('.'))
             {
-                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Nur login@htw-berlin.de Adressen werden unterstützt");
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_WRONG_EMAIL_PROVIDER", AccountHelper.GetUserLanguage(HttpContext)));
                 return Page();
             }
 

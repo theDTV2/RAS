@@ -59,7 +59,7 @@ namespace control.Pages.Managment.User
 
             if ((UserIdentifier is null) || (User is null))
             {
-                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "User missing or invalid");
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, LanguageManager.GetLocalizedString("MANAGEMENT_USER_UNLOCK_ERROR_MISSING", AccountHelper.GetUserLanguage(HttpContext)));
 
                 return RedirectToPage("List");
             }
@@ -79,7 +79,7 @@ namespace control.Pages.Managment.User
             //Check, if secret code is unique
             if (_context.User.Where(u => u.SecretCode == Secret&& u.UserName != User.UserName).Any())
             {
-                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Card code is already being used");
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, LanguageManager.GetLocalizedString("MANAGEMENT_USER_UNLOCK_ERROR_CARDCODE_ALREADY_IN_USE", AccountHelper.GetUserLanguage(HttpContext)));
                 return OnGet();
             }
 
@@ -94,7 +94,7 @@ namespace control.Pages.Managment.User
 
             //TODO: Proper Error catching
 
-            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, "Saving successfull");
+            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, LanguageManager.GetLocalizedString("MANAGMENT_USER_UNLOCK_SAVE_SUCCESSFUL", AccountHelper.GetUserLanguage(HttpContext)));
 
             UserStateManager.SetUpdatePermissionsRequired(User.UserName, User.AccessLevel);
 

@@ -13,16 +13,16 @@
 
     var lang = AccountHelper.GetUserLanguage(HttpContext);
 
-    var MANAGMENT_USER_EMAIL = LanguageManager.GetLocalizedString("MANAGMENT_USER_EMAIL", lang);
-    var MANAGMENT_USER_FIRSTNAME = LanguageManager.GetLocalizedString("MANAGMENT_USER_FIRSTNAME", lang);
-    var MANAGMENT_USER_LASTNAME = LanguageManager.GetLocalizedString("MANAGMENT_USER_LASTNAME", lang);
-    var MANAGMENT_USER_SECRET = LanguageManager.GetLocalizedString("MANAGMENT_USER_SECRET", lang);
-    var MANAGMENT_USER_DOOR_ACCESS_LIST = LanguageManager.GetLocalizedString("MANAGMENT_USER_DOOR_ACCESS_LIST", lang);
+    var MANAGEMENT_USER_EMAIL = LanguageManager.GetLocalizedString("MANAGEMENT_USER_EMAIL", lang);
+    var MANAGEMENT_USER_FIRSTNAME = LanguageManager.GetLocalizedString("MANAGEMENT_USER_FIRSTNAME", lang);
+    var MANAGEMENT_USER_LASTNAME = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LASTNAME", lang);
+    var MANAGEMENT_USER_SECRET = LanguageManager.GetLocalizedString("MANAGEMENT_USER_SECRET", lang);
+    var MANAGEMENT_USER_DOOR_ACCESS_LIST = LanguageManager.GetLocalizedString("MANAGEMENT_USER_DOOR_ACCESS_LIST", lang);
 
-    var MANAGMENT_USER_UNLOCK_TITLE = LanguageManager.GetLocalizedString("MANAGMENT_USER_UNLOCK_TITLE", lang);
-    var MANAGMENT_USER_UNLOCK_CURRENT_USER = LanguageManager.GetLocalizedString("MANAGMENT_USER_UNLOCK_CURRENT_USER", lang);
-    var MANAGMENT_USER_UNLOCK_UPDATE = LanguageManager.GetLocalizedString("MANAGMENT_USER_UNLOCK_UPDATE", lang);
-    var MANAGMENT_USER_UNLOCK_BACK = LanguageManager.GetLocalizedString("MANAGMENT_USER_UNLOCK_BACK", lang);
+    var MANAGEMENT_USER_UNLOCK_TITLE = LanguageManager.GetLocalizedString("MANAGEMENT_USER_UNLOCK_TITLE", lang);
+    var MANAGEMENT_USER_UNLOCK_CURRENT_USER = LanguageManager.GetLocalizedString("MANAGEMENT_USER_UNLOCK_CURRENT_USER", lang);
+    var MANAGEMENT_USER_UNLOCK_UPDATE = LanguageManager.GetLocalizedString("MANAGEMENT_USER_UNLOCK_UPDATE", lang);
+    var MANAGEMENT_USER_UNLOCK_BACK = LanguageManager.GetLocalizedString("MANAGEMENT_USER_UNLOCK_BACK", lang);
 
 }
 
@@ -32,47 +32,47 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@MANAGMENT_USER_UNLOCK_TITLE</title>
+    <title>@MANAGEMENT_USER_UNLOCK_TITLE</title>
 </head>
 <body>
 
-    <h4>@MANAGMENT_USER_UNLOCK_TITLE</h4>
+    <h4>@MANAGEMENT_USER_UNLOCK_TITLE</h4>
     <hr />
     <form asp-page-handler="edit" method="post">
         <div class="row">
             <div class="col-sm-6">
-                <a>@MANAGMENT_USER_UNLOCK_CURRENT_USER: @Model.UserIdentifier</a>
+                <a>@MANAGEMENT_USER_UNLOCK_CURRENT_USER: @Model.UserIdentifier</a>
 
                 <div class="form-group">
-                    <label asp-for="FirstName" class="control-label">@MANAGMENT_USER_FIRSTNAME</label>
+                    <label asp-for="FirstName" class="control-label">@MANAGEMENT_USER_FIRSTNAME</label>
                     <input asp-for="FirstName" class="form-control" />
                     <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="LastName" class="control-label">@MANAGMENT_USER_LASTNAME</label>
+                    <label asp-for="LastName" class="control-label">@MANAGEMENT_USER_LASTNAME</label>
                     <input asp-for="LastName" class="form-control" />
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
 
 
                 <br />
-                <a class="btn btn-primary" asp-page="List">@MANAGMENT_USER_UNLOCK_BACK</a>
+                <a class="btn btn-primary" asp-page="List">@MANAGEMENT_USER_UNLOCK_BACK</a>
             </div>
 
             <div class="col-sm-4 offset-lg-1">
 
                 <div class="form-group">
-                    <label asp-for="Secret" class="control-label">@MANAGMENT_USER_SECRET</label>
+                    <label asp-for="Secret" class="control-label">@MANAGEMENT_USER_SECRET</label>
                     <input asp-for="Secret" class="form-control" />
                     <span asp-validation-for="Secret" class="text-danger"></span>
                 </div>
 
-                <label asp-for="DoorsToGiveAccessTo" class="control-label">@MANAGMENT_USER_DOOR_ACCESS_LIST</label>
+                <label asp-for="DoorsToGiveAccessTo" class="control-label">@MANAGEMENT_USER_DOOR_ACCESS_LIST</label>
                     <select class="selectpicker" asp-for="DoorsToGiveAccessTo" asp-items="(MultiSelectList)@ViewData["SelectBox"]!"></select>
 
                 <br /> <div class="form-group">
-                    <input type="submit" value="@MANAGMENT_USER_UNLOCK_UPDATE" class="btn btn-primary" />
+                    <input type="submit" value="@MANAGEMENT_USER_UNLOCK_UPDATE" class="btn btn-primary" />
                 </div>
                
             </div>

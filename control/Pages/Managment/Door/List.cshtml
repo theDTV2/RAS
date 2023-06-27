@@ -9,13 +9,13 @@
 @{
 
     var lang = AccountHelper.GetUserLanguage(HttpContext);
-    var MANAGMENT_DOOR_LIST_TITLE = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_LIST_TITLE", lang);
-    var MANAGMENT_DOOR_LIST_NEW_DOOR = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_LIST_NEW_DOOR", lang);
-    var MANAGMENT_DOOR_DISPLAYTEXT = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_DISPLAYTEXT", lang);
-    var MANAGMENT_DOOR_ID = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_ID", lang);
-    var MANAGMENT_DOOR_LAST_CHECKIN = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_LAST_CHECKIN", lang);
-    var MANAGMENT_DOOR_LIST_MANAGE = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_LIST_MANAGE", lang);
-    var MANAGMENT_DOOR_LIST_DELETE = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_LIST_DELETE", lang);
+    var MANAGEMENT_DOOR_LIST_TITLE = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LIST_TITLE", lang);
+    var MANAGEMENT_DOOR_LIST_NEW_DOOR = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LIST_NEW_DOOR", lang);
+    var MANAGEMENT_DOOR_DISPLAYTEXT = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_DISPLAYTEXT", lang);
+    var MANAGEMENT_DOOR_ID = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_ID", lang);
+    var MANAGEMENT_DOOR_LAST_CHECKIN = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LAST_CHECKIN", lang);
+    var MANAGEMENT_DOOR_LIST_MANAGE = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LIST_MANAGE", lang);
+    var MANAGEMENT_DOOR_LIST_DELETE = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LIST_DELETE", lang);
 
     var ACCOUNT_EXTEND_BUTTON = LanguageManager.GetLocalizedString("ACCOUNT_EXTEND_BUTTON", lang);
 }
@@ -27,23 +27,23 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@MANAGMENT_DOOR_LIST_TITLE</title>
+    <title>@MANAGEMENT_DOOR_LIST_TITLE</title>
 </head>
 <body>
     <p>
-        <a class="btn btn-primary" asp-page="Register">@MANAGMENT_DOOR_LIST_NEW_DOOR </a>
+        <a class="btn btn-primary" asp-page="Register">@MANAGEMENT_DOOR_LIST_NEW_DOOR </a>
     </p>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @MANAGMENT_DOOR_DISPLAYTEXT
+                    @MANAGEMENT_DOOR_DISPLAYTEXT
                 </th>
                 <th>
-                    @MANAGMENT_DOOR_ID
+                    @MANAGEMENT_DOOR_ID
                 </th>
                 <th>
-                    @MANAGMENT_DOOR_LAST_CHECKIN
+                    @MANAGEMENT_DOOR_LAST_CHECKIN
                 </th>
                 <th>
 
@@ -65,12 +65,12 @@
                         @Html.DisplayFor(modelItem => item.LastCheckInTime)
                     </td>
                     <td>
-                        <a class="btn btn-primary" asp-page="Manage" asp-route-DoorIdentifier="@item.Id">@MANAGMENT_DOOR_LIST_MANAGE</a>
+                        <a class="btn btn-primary" asp-page="Manage" asp-route-DoorIdentifier="@item.Id">@MANAGEMENT_DOOR_LIST_MANAGE</a>
                    
                     @if(AccountHelper.GetEAccessLevel(HttpContext) >= Models.EAccessLevel.kAdmin)
                     {
 
-                            <a class="btn btn-danger" asp-page="Delete" asp-route-DoorIdentifier="@item.Id">@MANAGMENT_DOOR_LIST_DELETE</a>
+                            <a class="btn btn-danger" asp-page="Delete" asp-route-DoorIdentifier="@item.Id">@MANAGEMENT_DOOR_LIST_DELETE</a>
 
                     }
                     </td>

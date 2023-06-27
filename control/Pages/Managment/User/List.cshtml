@@ -10,18 +10,18 @@
 
 @{
     var lang = AccountHelper.GetUserLanguage(HttpContext);
-    var MANAGMENT_USER_EMAIL = LanguageManager.GetLocalizedString("MANAGMENT_USER_EMAIL", lang);
-    var MANAGMENT_USER_FIRSTNAME = LanguageManager.GetLocalizedString("MANAGMENT_USER_FIRSTNAME", lang);
-    var MANAGMENT_USER_LASTNAME = LanguageManager.GetLocalizedString("MANAGMENT_USER_LASTNAME", lang);
-    var MANAGMENT_USER_ACCESSLEVEL = LanguageManager.GetLocalizedString("MANAGMENT_USER_ACCESSLEVEL", lang);
-    var MANAGMENT_USER_EXPIRYDATE = LanguageManager.GetLocalizedString("MANAGMENT_USER_EXPIRYDATE", lang);
-    var MANAGMENT_USER_LASTLOGIN = LanguageManager.GetLocalizedString("MANAGMENT_USER_LASTLOGIN", lang);
+    var MANAGEMENT_USER_EMAIL = LanguageManager.GetLocalizedString("MANAGEMENT_USER_EMAIL", lang);
+    var MANAGEMENT_USER_FIRSTNAME = LanguageManager.GetLocalizedString("MANAGEMENT_USER_FIRSTNAME", lang);
+    var MANAGEMENT_USER_LASTNAME = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LASTNAME", lang);
+    var MANAGEMENT_USER_ACCESSLEVEL = LanguageManager.GetLocalizedString("MANAGEMENT_USER_ACCESSLEVEL", lang);
+    var MANAGEMENT_USER_EXPIRYDATE = LanguageManager.GetLocalizedString("MANAGEMENT_USER_EXPIRYDATE", lang);
+    var MANAGEMENT_USER_LASTLOGIN = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LASTLOGIN", lang);
 
-    var MANAGMENT_USER_COMPLETEDREGISTRATION = LanguageManager.GetLocalizedString("MANAGMENT_USER_COMPLETEDREGISTRATION", lang);
-    var MANAGMENT_USER_LIST_MANAGE = LanguageManager.GetLocalizedString("MANAGMENT_USER_LIST_MANAGE", lang);
-    var MANAGMENT_USER_LIST_UNLOCK = LanguageManager.GetLocalizedString("MANAGMENT_USER_LIST_UNLOCK", lang);
-    var MANAGMENT_USER_LIST_SEARCH = LanguageManager.GetLocalizedString("MANAGMENT_USER_LIST_UNLOCK", lang);
-    var MANAGMENT_USER_LIST_SEARCH_BACK = LanguageManager.GetLocalizedString("MANAGMENT_USER_LIST_SEARCH_BACK", lang);
+    var MANAGEMENT_USER_COMPLETEDREGISTRATION = LanguageManager.GetLocalizedString("MANAGEMENT_USER_COMPLETEDREGISTRATION", lang);
+    var MANAGEMENT_USER_LIST_MANAGE = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LIST_MANAGE", lang);
+    var MANAGEMENT_USER_LIST_UNLOCK = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LIST_UNLOCK", lang);
+    var MANAGEMENT_USER_LIST_SEARCH = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LIST_UNLOCK", lang);
+    var MANAGEMENT_USER_LIST_SEARCH_BACK = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LIST_SEARCH_BACK", lang);
    
 }
 
@@ -46,7 +46,7 @@
                 @if (Model.SearchedSomething)
                 {
                     <div class="p-2">
-                        <a class="btn btn-secondary" asp-page="List">@MANAGMENT_USER_LIST_SEARCH_BACK</a>
+                        <a class="btn btn-secondary" asp-page="List">@MANAGEMENT_USER_LIST_SEARCH_BACK</a>
                     </div>
                 }
             </div>
@@ -57,25 +57,25 @@
         <thead>
             <tr>
                 <th>
-                    <a> @MANAGMENT_USER_EMAIL</a>
+                    <a> @MANAGEMENT_USER_EMAIL</a>
                 </th>
                 <th>
-                    <a> @MANAGMENT_USER_FIRSTNAME</a>
+                    <a> @MANAGEMENT_USER_FIRSTNAME</a>
                 </th>
                 <th>
-                    <a> @MANAGMENT_USER_LASTNAME</a>
+                    <a> @MANAGEMENT_USER_LASTNAME</a>
                 </th>
                 <th>
-                    <a> @MANAGMENT_USER_ACCESSLEVEL</a>
+                    <a> @MANAGEMENT_USER_ACCESSLEVEL</a>
                 </th>
                 <th>
-                    <a> @MANAGMENT_USER_EXPIRYDATE</a>
+                    <a> @MANAGEMENT_USER_EXPIRYDATE</a>
                 </th>
                 <th>
-                    <a> @MANAGMENT_USER_LASTLOGIN</a>
+                    <a> @MANAGEMENT_USER_LASTLOGIN</a>
                 </th>
                 <th>
-                    <a> @MANAGMENT_USER_COMPLETEDREGISTRATION</a>
+                    <a> @MANAGEMENT_USER_COMPLETEDREGISTRATION</a>
                 </th>
                 <th></th>
             </tr>
@@ -115,13 +115,13 @@
                         @Html.DisplayFor(modelItem => item.CompletedRegistration)
                     </td>
                     <td>
-                        <a class="btn btn-primary" asp-page="./Unlock" asp-route-UserIdentifier="@item.UserName">@MANAGMENT_USER_LIST_UNLOCK</a>
+                        <a class="btn btn-primary" asp-page="./Unlock" asp-route-UserIdentifier="@item.UserName">@MANAGEMENT_USER_LIST_UNLOCK</a>
 
 
                         @if (AccountHelper.GetEAccessLevel(HttpContext) > item.AccessLevel || AccountHelper.GetEAccessLevel(HttpContext) == EAccessLevel.kSuperAdmin)
                         {
                             @Html.Raw("|");
-                            <a class="btn btn-primary" asp-page="./Manage" asp-route-id="@item.UserName">@MANAGMENT_USER_LIST_MANAGE</a>
+                            <a class="btn btn-primary" asp-page="./Manage" asp-route-id="@item.UserName">@MANAGEMENT_USER_LIST_MANAGE</a>
                         }
 
                     </td>

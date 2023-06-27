@@ -3,6 +3,7 @@ using control.Manager;
 using control.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
 using static control.Helper.AccessHelper;
 
 namespace control.Helper
@@ -80,7 +81,7 @@ namespace control.Helper
                 AccountHelper.LogoutUser(context);
                 UserStateManager.RemoveState(context.Session.Id);
 
-                AlertGenerator.AddAlertToSession(context, AlertGenerator.EAlertLevel.kError, "Invalid User State. You have been logged out!");
+                AlertGenerator.AddAlertToSession(context, AlertGenerator.EAlertLevel.kError, LanguageManager.GetLocalizedString("ACCOUNT_INVALID_USER_STATE", AccountHelper.GetUserLanguage(context)));
 
                 return EAccessReturnValue.kAccessDenied;
             }
@@ -141,7 +142,7 @@ namespace control.Helper
 
             if (perm == EAccessReturnValue.kAccountEulaNotAccepted || perm == EAccessReturnValue.kAccountRegistrationNotCompleted)
             {
-                AlertGenerator.AddAlertToSession(context, AlertGenerator.EAlertLevel.kWarning, "Please accept the EULA");
+                AlertGenerator.AddAlertToSession(context, AlertGenerator.EAlertLevel.kWarning, LanguageManager.GetLocalizedString("ACCOUNT_ACCEPT_EULA_REQUIRED", AccountHelper.GetUserLanguage(context)));
                
                 context.Response.Redirect("/Account/Login");
                 AccountHelper.LogoutUser(context);

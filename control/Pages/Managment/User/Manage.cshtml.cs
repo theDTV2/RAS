@@ -79,7 +79,7 @@ namespace control.Pages.Managment.User
                     return NotFound();
                 }
 
-            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, LanguageManager.GetLocalizedString("MANAGMENT_USER_MANAGE_SUCCESS", AccountHelper.GetUserLanguage(HttpContext)));
+            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, LanguageManager.GetLocalizedString("MANAGEMENT_USER_MANAGE_SUCCESS", AccountHelper.GetUserLanguage(HttpContext)));
 
             UserStateManager.SetUpdatePermissionsRequired(User.UserName, User.AccessLevel);
 

@@ -9,35 +9,35 @@
 @{
 
     var lang = AccountHelper.GetUserLanguage(HttpContext);
-    var MANAGMENT_DOOR_DELETE_TITLE = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_LIST_TITLE", lang);
-    var MANAGMENT_DOOR_DELETE_AREYOUSURE = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_DELETE_AREYOUSURE", lang);
+    var MANAGEMENT_DOOR_DELETE_TITLE = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LIST_TITLE", lang);
+    var MANAGEMENT_DOOR_DELETE_AREYOUSURE = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_DELETE_AREYOUSURE", lang);
 
-    var MANAGMENT_DOOR_DISPLAYTEXT = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_DISPLAYTEXT", lang);
-    var MANAGMENT_DOOR_ID = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_ID", lang);
+    var MANAGEMENT_DOOR_DISPLAYTEXT = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_DISPLAYTEXT", lang);
+    var MANAGEMENT_DOOR_ID = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_ID", lang);
 
-    var MANAGMENT_DOOR_DELETE_BACK = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_DELETE_BACK", lang);
-    var MANAGMENT_DOOR_DELETE_CONFIRM = LanguageManager.GetLocalizedString("MANAGMENT_DOOR_DELETE_CONFIRM", lang);
+    var MANAGEMENT_DOOR_DELETE_BACK = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_DELETE_BACK", lang);
+    var MANAGEMENT_DOOR_DELETE_CONFIRM = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_DELETE_CONFIRM", lang);
 
 
 }
 
 
-<h1>@MANAGMENT_DOOR_DELETE_TITLE</h1>
+<h1>@MANAGEMENT_DOOR_DELETE_TITLE</h1>
 
-<h3>@MANAGMENT_DOOR_DELETE_AREYOUSURE</h3>
+<h3>@MANAGEMENT_DOOR_DELETE_AREYOUSURE</h3>
 <div>
     <br />
     <hr />
     <dl class="row">
      
         <dt class="col-sm-2">
-            @MANAGMENT_DOOR_ID
+            @MANAGEMENT_DOOR_ID
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Door.Id)
         </dd>
         <dt class="col-sm-2">
-            @MANAGMENT_DOOR_DISPLAYTEXT
+            @MANAGEMENT_DOOR_DISPLAYTEXT
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Door.DisplayText)
@@ -47,7 +47,7 @@
     
     <form method="post">
         <input type="hidden" asp-for="Door.Id" />
-        <input type="submit" value="@MANAGMENT_DOOR_DELETE_CONFIRM" class="btn btn-danger" /> |
-        <a asp-page="./List">@MANAGMENT_DOOR_DELETE_BACK</a>
+        <input type="submit" value="@MANAGEMENT_DOOR_DELETE_CONFIRM" class="btn btn-danger" /> |
+        <a asp-page="./List">@MANAGEMENT_DOOR_DELETE_BACK</a>
     </form>
 </div>
