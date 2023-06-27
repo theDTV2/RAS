@@ -9,6 +9,7 @@
 @{
 
     var lang = AccountHelper.GetUserLanguage(HttpContext);
+    var MANAGMENT_SETTINGS_EMAIL_TITLE = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_EMAIL_TITLE", lang);
     var MANAGMENT_SETTINGS_EMAIL_INFO = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_EMAIL_INFO", lang);
     var MANAGMENT_SETTINGS_EMAIL_USERNAME = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_EMAIL_USERNAME", lang);
     var MANAGMENT_SETTINGS_EMAIL_PASSWORD = LanguageManager.GetLocalizedString("MANAGMENT_SETTINGS_EMAIL_PASSWORD", lang);
@@ -24,7 +25,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <p> @MANAGMENT_SETTINGS_EMAIL_INFO</p>
+                <h4>@MANAGMENT_SETTINGS_EMAIL_TITLE </h4>
                 <br />
                 <div class="form-group">
                     <label class="form-label" asp-for="UserName"> @MANAGMENT_SETTINGS_EMAIL_USERNAME</label>
@@ -46,7 +47,7 @@
             <div class="col-sm">
             </div>
             <div class="col-sm">
-                TODO - PLACEHOLDER - TODO <br />
+                @MANAGMENT_SETTINGS_EMAIL_INFO <br />
             </div>
         </div>
 

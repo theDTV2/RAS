@@ -36,12 +36,12 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                    <label asp-for="Door.Id" class="control-label">MANAGMENT_DOOR_ID</label>
+                    <label asp-for="Door.Id" class="control-label">@MANAGMENT_DOOR_ID</label>
                 <input asp-for="Door.Id" class="form-control" />
                 <span asp-validation-for="Door.Id" class="text-danger"></span>
             </div>
                 <div class="form-group">
-                    <label asp-for="Door.DisplayText" class="control-label">MANAGMENT_DOOR_DISPLAYTEXT</label>
+                    <label asp-for="Door.DisplayText" class="control-label">@MANAGMENT_DOOR_DISPLAYTEXT</label>
                     <input asp-for="Door.DisplayText" class="form-control" />
                     <span asp-validation-for="Door.DisplayText" class="text-danger"></span>
                 </div>
