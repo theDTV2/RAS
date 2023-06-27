@@ -80,7 +80,7 @@ namespace control.Pages.Managment.User
             if (_context.User.Where(u => u.SecretCode == Secret&& u.UserName != User.UserName).Any())
             {
                 AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, "Card code is already being used");
-                return Page();
+                return OnGet();
             }
 
 
