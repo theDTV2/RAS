@@ -436,49 +436,49 @@
     <value>Erfolgreich gespeichert</value>
   </data>
   <data name="MANAGEMENT_DOOR_LIST_LOG" xml:space="preserve">
-    <value />
+    <value>Verlauf</value>
   </data>
   <data name="MANAGEMENT_DOOR_LOG_LIST_BACK" xml:space="preserve">
-    <value />
+    <value>Zurück</value>
   </data>
   <data name="MANAGEMENT_DOOR_LOG_LIST_TITLE" xml:space="preserve">
-    <value />
+    <value>Zutrittsverlauf</value>
   </data>
   <data name="MANAGEMENT_DOOR_LOG_NO_ENTRIES_FOUND" xml:space="preserve">
-    <value />
+    <value>Keine Einträge für Tür gefunden</value>
   </data>
   <data name="MANAGEMENT_LOG_DOORNAME" xml:space="preserve">
-    <value />
+    <value>Türname</value>
   </data>
   <data name="MANAGEMENT_LOG_ENTRYRESULT" xml:space="preserve">
-    <value />
+    <value>Zutrittsergebnis</value>
   </data>
   <data name="MANAGEMENT_LOG_ENTRYTIME" xml:space="preserve">
-    <value />
+    <value>Zutrittszeit</value>
   </data>
   <data name="MANAGEMENT_LOG_USERNAME" xml:space="preserve">
-    <value />
+    <value>Nutzer</value>
   </data>
   <data name="MANAGEMENT_USER_LIST_LOG" xml:space="preserve">
-    <value />
+    <value>Verlauf</value>
   </data>
   <data name="MANAGEMENT_USER_LOG_BACK" xml:space="preserve">
-    <value />
+    <value>Zurück</value>
   </data>
   <data name="MANAGEMENT_USER_LOG_DOORNAME" xml:space="preserve">
-    <value />
+    <value>Türname</value>
   </data>
   <data name="MANAGEMENT_USER_LOG_ENTRYRESULT" xml:space="preserve">
-    <value />
+    <value>Zutrittsergebnis</value>
   </data>
   <data name="MANAGEMENT_USER_LOG_ENTRYTIME" xml:space="preserve">
-    <value />
+    <value>Zutrittszeit</value>
   </data>
   <data name="MANAGEMENT_USER_LOG_NO_ENTRIES_FOUND" xml:space="preserve">
-    <value />
+    <value>Keine Einträge für Nutzer gefunden</value>
   </data>
   <data name="MANAGEMENT_USER_LOG_TITLE" xml:space="preserve">
-    <value />
+    <value>Verlauf</value>
   </data>
   <data name="USER_ACCESS_ALLOWED" xml:space="preserve">
     <value>Zugriff erlaubt</value>
