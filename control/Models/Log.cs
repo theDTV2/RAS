@@ -10,9 +10,9 @@ namespace control.Models
 {
     public class Log
     {
-        [Required]
         [Key]
-        public required string Id { get; set; }
+ 
+        public int Id { get; set; }
 
         public required User User { get; set; }
 
