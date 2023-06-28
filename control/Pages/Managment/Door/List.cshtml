@@ -14,6 +14,7 @@
     var MANAGEMENT_DOOR_DISPLAYTEXT = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_DISPLAYTEXT", lang);
     var MANAGEMENT_DOOR_ID = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_ID", lang);
     var MANAGEMENT_DOOR_LAST_CHECKIN = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LAST_CHECKIN", lang);
+    var MANAGEMENT_DOOR_LIST_LOG = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LIST_LOG", lang);
     var MANAGEMENT_DOOR_LIST_MANAGE = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LIST_MANAGE", lang);
     var MANAGEMENT_DOOR_LIST_DELETE = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LIST_DELETE", lang);
 
@@ -66,12 +67,11 @@
                     </td>
                     <td>
                         <a class="btn btn-primary" asp-page="Manage" asp-route-DoorIdentifier="@item.Id">@MANAGEMENT_DOOR_LIST_MANAGE</a>
+                        <a class="btn btn-secondary" asp-page="Log" asp-route-DoorIdentifier="@item.Id">@MANAGEMENT_DOOR_LIST_LOG</a>
                    
                     @if(AccountHelper.GetEAccessLevel(HttpContext) >= Models.EAccessLevel.kAdmin)
                     {
-
                             <a class="btn btn-danger" asp-page="Delete" asp-route-DoorIdentifier="@item.Id">@MANAGEMENT_DOOR_LIST_DELETE</a>
-
                     }
                     </td>
                 </tr>

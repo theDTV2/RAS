@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using control.Data;
 
@@ -10,9 +11,11 @@ using control.Data;
 namespace control.Migrations
 {
     [DbContext(typeof(controlContext))]
-    partial class controlContextModelSnapshot : ModelSnapshot
+    [Migration("20230628131559_Added DoorEntryLog")]
+    partial class AddedDoorEntryLog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
@@ -89,15 +92,11 @@ namespace control.Migrations
                     b.Property<DateTime>("EntryTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DoorId");
-
-                    b.HasIndex("UserName");
 
                     b.ToTable("Log");
                 });
@@ -195,25 +194,6 @@ namespace control.Migrations
                         .HasForeignKey("AdminUsers")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("control.Models.Log", b =>
-                {
-                    b.HasOne("control.Models.Door", "Door")
-                        .WithMany()
-                        .HasForeignKey("DoorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("control.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserName")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Door");
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

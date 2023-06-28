@@ -1,0 +1,70 @@
+﻿@page "{DoorIdentifier}"
+@model control.Pages.Managment.Door.LogModel
+
+@using control.Helper;
+@using control.Generator;
+@using control.Models;
+@using control.Manager;
+
+@{
+
+    var lang = AccountHelper.GetUserLanguage(HttpContext);
+    var MANAGEMENT_LOG_USERNAME = LanguageManager.GetLocalizedString("MANAGEMENT_LOG_USERNAME", lang);
+    var MANAGEMENT_LOG_DOORNAME = LanguageManager.GetLocalizedString("MANAGEMENT_LOG_DOORNAME", lang);
+    var MANAGEMENT_LOG_ENTRYTIME = LanguageManager.GetLocalizedString("MANAGEMENT_LOG_ENTRYTIME", lang);
+
+    var MANAGEMENT_DOOR_LOG_LIST_TITLE = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LOG_LIST_TITLE", lang);
+    var MANAGEMENT_DOOR_LOG_LIST_BACK = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LOG_LIST_BACK", lang);
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@MANAGEMENT_DOOR_LOG_LIST_TITLE</title>
+</head>
+<body>
+    <h4>@MANAGEMENT_DOOR_LOG_LIST_TITLE</h4>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @MANAGEMENT_LOG_DOORNAME
+                </th>
+                <th>
+                    @MANAGEMENT_LOG_USERNAME
+                </th>
+                <th>
+                    @MANAGEMENT_LOG_ENTRYTIME
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DoorEntries)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Door.Id)
+                    </td>
+                    <td>
+                        @{
+                            var _display = item.User.FirstName + " " + item.User.LastName + " (" + item.User.UserName + ")";
+                        }
+                        @Html.Raw(_display)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EntryTime)
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    <div>
+        <a class="btn btn-secondary" asp-page="List">@MANAGEMENT_DOOR_LOG_LIST_BACK</a>
+    </div>
+</body>
+</html>

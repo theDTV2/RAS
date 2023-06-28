@@ -1,31 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace control.Models
 {
     public class Log
     {
-        public enum ELogEntryType
-        {
-            kGeneral,
-            kInfo,
-            kWarning,
-            kError,
-            kFatal,
-            kDebug
-        }
-
         [Required]
         [Key]
-        public string Id { get; set; }
+        public required string Id { get; set; }
 
-        [Required]
-        public ELogEntryType Type { get; set; }
+        public required User User { get; set; }
 
-        public string Name { get; set; }
+        public required Door Door { get; set; }
 
-        public string Description { get; set; }
-         
 
+        public required DateTime EntryTime { get; set; }
 
     }
 }
