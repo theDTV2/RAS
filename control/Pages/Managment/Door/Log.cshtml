@@ -5,6 +5,8 @@
 @using control.Generator;
 @using control.Models;
 @using control.Manager;
+@using System.Reflection;
+@using System.ComponentModel.DataAnnotations;
 
 @{
 
@@ -12,6 +14,7 @@
     var MANAGEMENT_LOG_USERNAME = LanguageManager.GetLocalizedString("MANAGEMENT_LOG_USERNAME", lang);
     var MANAGEMENT_LOG_DOORNAME = LanguageManager.GetLocalizedString("MANAGEMENT_LOG_DOORNAME", lang);
     var MANAGEMENT_LOG_ENTRYTIME = LanguageManager.GetLocalizedString("MANAGEMENT_LOG_ENTRYTIME", lang);
+    var MANAGEMENT_LOG_ENTRYRESULT = LanguageManager.GetLocalizedString("MANAGEMENT_LOG_ENTRYRESULT", lang);
 
     var MANAGEMENT_DOOR_LOG_LIST_TITLE = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LOG_LIST_TITLE", lang);
     var MANAGEMENT_DOOR_LOG_LIST_BACK = LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LOG_LIST_BACK", lang);
@@ -40,6 +43,9 @@
                 <th>
                     @MANAGEMENT_LOG_USERNAME
                 </th>
+                <th>
+                    @MANAGEMENT_LOG_ENTRYRESULT
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -57,6 +63,13 @@
                             var _display = item.User.FirstName + " " + item.User.LastName + " (" + item.User.UserName + ")";
                         }
                         @Html.Raw(_display)
+                    </td>
+                    <td>
+                        @{
+                            var memberInfo = item.EntryResult.GetType().GetMember(item.EntryResult.ToString()!)[0];
+                            var val = memberInfo.GetCustomAttribute<DisplayAttribute>()!.Name;
+                        }
+                        @Html.Raw(LanguageManager.GetLocalizedString(val!, lang))
                     </td>
                     
                 </tr>

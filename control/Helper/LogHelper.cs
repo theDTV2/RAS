@@ -10,7 +10,8 @@ namespace control.Helper
             {
                 Door = door, 
                 User = user,
-                EntryTime = DateTime.Now };
+                EntryTime = DateTime.Now,
+                EntryResult = EntryResult.AccessAllowed};
 
 
            dataContext.Log.Add(_newEntry);

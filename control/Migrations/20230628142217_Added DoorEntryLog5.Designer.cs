@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using control.Data;
 
@@ -10,9 +11,11 @@ using control.Data;
 namespace control.Migrations
 {
     [DbContext(typeof(controlContext))]
-    partial class controlContextModelSnapshot : ModelSnapshot
+    [Migration("20230628142217_Added DoorEntryLog5")]
+    partial class AddedDoorEntryLog5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");

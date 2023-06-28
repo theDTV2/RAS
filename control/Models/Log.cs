@@ -8,6 +8,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace control.Models
 {
+
+    public enum EntryResult
+    {
+        [Display(Name = "USER_ACCESS_ALLOWED")]
+        AccessAllowed,
+        [Display(Name = "USER_ACCESS_DENIED")]
+        AccessDenied
+    }
+
     public class Log
     {
         [Key]
@@ -18,8 +27,10 @@ namespace control.Models
 
         public required Door Door { get; set; }
 
-
         public required DateTime EntryTime { get; set; }
+
+        public required EntryResult EntryResult { get; set; }
+
 
     }
 }

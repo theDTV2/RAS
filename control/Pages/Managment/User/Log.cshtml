@@ -12,6 +12,7 @@
     var lang = AccountHelper.GetUserLanguage(HttpContext);
     var MANAGEMENT_USER_LOG_TITLE = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LOG_TITLE", lang);
     var MANAGEMENT_USER_LOG_ENTRYTIME = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LOG_ENTRYTIME", lang);
+    var MANAGEMENT_USER_LOG_ENTRYRESULT = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LOG_DOORNAME", lang);
     var MANAGEMENT_USER_LOG_DOORNAME = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LOG_DOORNAME", lang);
 
     var MANAGEMENT_USER_LOG_BACK = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LOG_BACK", lang);
@@ -25,8 +26,12 @@
                 @MANAGEMENT_USER_LOG_ENTRYTIME
             </th>
             <th>
+                @MANAGEMENT_USER_LOG_ENTRYRESULT
+            </th>
+            <th>
                 @MANAGEMENT_USER_LOG_DOORNAME
             </th>
+
         </tr>
     </thead>
     <tbody>
@@ -38,6 +43,13 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Door.Id)
+                </td>
+                <td>
+                    @{
+                        var memberInfo = item.EntryResult.GetType().GetMember(item.EntryResult.ToString()!)[0];
+                        var val = memberInfo.GetCustomAttribute<DisplayAttribute>()!.Name;
+                    }
+                    @Html.Raw(LanguageManager.GetLocalizedString(val!, lang))
                 </td>
             </tr>
         }
