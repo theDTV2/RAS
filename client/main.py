@@ -125,71 +125,77 @@ heartbeat_frequency_seconds = 6
 door_task = threading.Thread(target=door_communicator.door_task)
 door_task.start()
 
-door_task = threading.Thread(target=reader.reader_task)
-door_task.start()
+reader_task = threading.Thread(target=reader.reader_task)
+reader_task.start()
 
 display.set_keep_last_message(False)
 display.set_default_message(message="System ready", color=(255, 255, 255))
 
-while True:
-    sleep(1)
+try:
+    while True:
+        sleep(1)
 
-    # Send Heartbeat to api
-    if last_check_in + timedelta(seconds=heartbeat_frequency_seconds) < datetime.now():
+        # Send Heartbeat to api
+        if last_check_in + timedelta(seconds=heartbeat_frequency_seconds) < datetime.now():
 
-        print("sending heartbeat...")
-        data_heartbeat = {'doorID': door_id,
-                          'timeStamp': datetime.now(),
-                          'secret': secret}
-        try:
-            request_heartbeat = requests.post(total_address + "/Heartbeat",
-                                              data=data_heartbeat, verify=verify_ssl_cert)
-        except ConnectionError:
-            print("API not reachable")
-            exit(RETURN_CONNECTION_ERROR)
+            print("sending heartbeat...")
+            data_heartbeat = {'doorID': door_id,
+                              'timeStamp': datetime.now(),
+                              'secret': secret}
+            try:
+                request_heartbeat = requests.post(total_address + "/Heartbeat",
+                                                  data=data_heartbeat, verify=verify_ssl_cert)
+            except ConnectionError:
+                print("API not reachable")
+                exit(RETURN_CONNECTION_ERROR)
 
-        _text_to_display = request_heartbeat.json()['displayText']
-        if _text_to_display is not None:
-            display.set_default_message(_text_to_display, color=(255, 255, 255))
+            _text_to_display = request_heartbeat.json()['displayText']
+            if _text_to_display is not None:
+                display.set_default_message(_text_to_display, color=(255, 255, 255))
 
-        print("heartbeat done")
-        last_check_in = datetime.now()
+            print("heartbeat done")
+            last_check_in = datetime.now()
 
-    input_str = reader.get_next_input()
+        input_str = reader.get_next_input()
 
-    if input_str != "":
-        cardCode = input_str.strip()
-        time_stamp = datetime.now()
+        if input_str != "":
+            cardCode = input_str.strip()
+            time_stamp = datetime.now()
 
-        data_request_access = {'doorID': door_id,
-                               'cardCode': cardCode,
-                               'timeStamp': datetime.now(),
-                               'secret': secret}
-        try:
-            return_access_request = requests.post(total_address + "/Access",
-                                                  data=data_request_access, verify=verify_ssl_cert)
-        except ConnectionError:
-            print("API not reachable")
-            break
+            data_request_access = {'doorID': door_id,
+                                   'cardCode': cardCode,
+                                   'timeStamp': datetime.now(),
+                                   'secret': secret}
+            try:
+                return_access_request = requests.post(total_address + "/Access",
+                                                      data=data_request_access, verify=verify_ssl_cert)
+            except ConnectionError:
+                print("API not reachable")
+                break
 
-        if return_access_request.status_code != 200:
-            print("API communication error")
-            exit(RETURN_API_ACCESS_ERROR)
+            if return_access_request.status_code != 200:
+                print("API communication error")
+                exit(RETURN_API_ACCESS_ERROR)
 
-        time_stamp_str = return_access_request.json()['timeStamp']
-        door_response = return_access_request.json()['doorResponse']
+            time_stamp_str = return_access_request.json()['timeStamp']
+            door_response = return_access_request.json()['doorResponse']
 
-        if time_stamp + timedelta(seconds=timeout) < datetime.now():
-            print("Register operation too old, check connection or check for manipulation")
-        if door_response:
-            display.write_success_message("Access Granted", 5)
-            print("doorResponse Access Granted")
-            door_communicator.request_open_door(duration=10)
-        else:
-            _return_text = return_access_request.json()['responseText']
-            display.write_error_message(_return_text, 3)
-            print("doorResponse Access denied")
+            if time_stamp + timedelta(seconds=timeout) < datetime.now():
+                print("Register operation too old, check connection or check for manipulation")
+            if door_response:
+                display.write_success_message("Access Granted", 5)
+                print("doorResponse Access Granted")
+                door_communicator.request_open_door(duration=10)
+            else:
+                _return_text = return_access_request.json()['responseText']
+                display.write_error_message(_return_text, 3)
+                print("doorResponse Access denied")
+
+except KeyboardInterrupt:
+    display.shut_down_task()
+    reader.shut_down_task()
+    door_communicator.shut_down_task()
 
 
-    # TODO: Send Response Text to Display
+
 

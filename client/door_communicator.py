@@ -2,6 +2,7 @@ import datetime
 from time import sleep
 
 __closing_time = datetime.datetime.now()
+__run = True
 
 
 def request_open_door(duration=5):
@@ -26,11 +27,16 @@ def __close_door():
     print("Closing door...")
 
 
+def shut_down_task():
+    global __run
+    __run = False
+
+
 def door_task():
     global __closing_time
     _door_is_open = False
 
-    while 1:
+    while __run:
         _time_now = datetime.datetime.now()
 
         if __closing_time > _time_now and not _door_is_open:
