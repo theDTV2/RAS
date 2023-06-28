@@ -82,6 +82,8 @@ namespace control.Helper
                 _toReturnJsonRaw["displayText"] = _door.DisplayText;
                 _toReturnJsonRaw["responseText"] = "Access granted";
 
+                LogHelper.AddSuccessfulUserEntryToLog(dataContext, _door, _user);
+
                 returnValue = new JsonResult(_toReturnJsonRaw);
                 return true;
             }

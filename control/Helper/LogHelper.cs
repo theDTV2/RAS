@@ -1,17 +1,20 @@
-﻿namespace control.Helper
+﻿using control.Models;
+
+namespace control.Helper
 {
     public class LogHelper
     {
-
-        public static void SetUpLogFile() 
+        public static void AddSuccessfulUserEntryToLog(control.Data.controlContext dataContext, Door door, User user)
         {
-            throw new NotImplementedException();
-                
-        }
+            Log _newEntry = new()
+            {
+                Door = door, 
+                User = user,
+                EntryTime = DateTime.Now };
 
-        public static void Log(string message)
-        {
-            throw new NotImplementedException();
+
+           dataContext.Log.Add(_newEntry);
+           dataContext.SaveChanges();
         }
     }
 }

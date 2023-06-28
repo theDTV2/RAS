@@ -22,6 +22,7 @@ namespace control.Pages.Managment.Door
             _context = context;
         }
 
+        [BindProperty(SupportsGet = true)]
         public string DoorIdentifier { get; set; } = "";
 
         public List<Log> DoorEntries { get; set; }
@@ -33,11 +34,11 @@ namespace control.Pages.Managment.Door
 
 
             if (DoorIdentifier != null)
-                DoorEntries = _context.Log.Where(d => d.Id == DoorIdentifier).ToList();
+                DoorEntries = _context.Log.Where(d => d.Door.Id == DoorIdentifier).Include(u => u.User).Include(d => d.Door).ToList();
             else
-                DoorEntries = _context.Log.ToList();
+                DoorEntries = _context.Log.Include(u => u.User).Include(d => d.Door).ToList();
 
-
+            DoorEntries.Reverse();
 
             return Page();
         }

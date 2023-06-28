@@ -32,13 +32,13 @@
         <thead>
             <tr>
                 <th>
+                    @MANAGEMENT_LOG_ENTRYTIME
+                </th>
+                <th>
                     @MANAGEMENT_LOG_DOORNAME
                 </th>
                 <th>
                     @MANAGEMENT_LOG_USERNAME
-                </th>
-                <th>
-                    @MANAGEMENT_LOG_ENTRYTIME
                 </th>
             </tr>
         </thead>
@@ -46,6 +46,9 @@
             @foreach (var item in Model.DoorEntries)
             {
                 <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EntryTime)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Door.Id)
                     </td>
@@ -55,9 +58,7 @@
                         }
                         @Html.Raw(_display)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EntryTime)
-                    </td>
+                    
                 </tr>
             }
 
