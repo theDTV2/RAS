@@ -447,6 +447,12 @@
   <data name="MANAGEMENT_DOOR_LOG_NO_ENTRIES_FOUND" xml:space="preserve">
     <value />
   </data>
+  <data name="MANAGEMENT_LOG_DOORNAME" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MANAGEMENT_LOG_ENTRYRESULT" xml:space="preserve">
+    <value />
+  </data>
   <data name="MANAGEMENT_LOG_ENTRYTIME" xml:space="preserve">
     <value />
   </data>
@@ -462,6 +468,9 @@
   <data name="MANAGEMENT_USER_LOG_DOORNAME" xml:space="preserve">
     <value />
   </data>
+  <data name="MANAGEMENT_USER_LOG_ENTRYRESULT" xml:space="preserve">
+    <value />
+  </data>
   <data name="MANAGEMENT_USER_LOG_ENTRYTIME" xml:space="preserve">
     <value />
   </data>
@@ -470,5 +479,11 @@
   </data>
   <data name="MANAGEMENT_USER_LOG_TITLE" xml:space="preserve">
     <value />
+  </data>
+  <data name="USER_ACCESS_ALLOWED" xml:space="preserve">
+    <value>Zugriff erlaubt</value>
+  </data>
+  <data name="USER_ACCESS_DENIED" xml:space="preserve">
+    <value>Zugriff verweigert</value>
   </data>
 </root>
