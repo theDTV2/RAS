@@ -435,4 +435,19 @@
   <data name="MANAGMENT_USER_UNLOCK_SAVE_SUCCESSFUL" xml:space="preserve">
     <value>Erfolgreich gespeichert</value>
   </data>
+  <data name="MANAGEMENT_DOOR_LIST_LOG" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MANAGEMENT_DOOR_LOG_LIST_BACK" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MANAGEMENT_DOOR_LOG_LIST_TITLE" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MANAGEMENT_LOG_ENTRYTIME" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MANAGEMENT_LOG_USERNAME" xml:space="preserve">
+    <value />
+  </data>
 </root>
