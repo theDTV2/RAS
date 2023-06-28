@@ -9,10 +9,9 @@ using control.Data;
 using control.Models;
 using control.Helper;
 using control.Generator;
-using System.ComponentModel.DataAnnotations;
 using control.Manager;
 
-namespace control.Pages.Managment.Door
+namespace control.Pages.Managment.User
 {
     public class LogModel : PageModel
     {
@@ -24,29 +23,31 @@ namespace control.Pages.Managment.Door
         }
 
         [BindProperty(SupportsGet = true)]
-        public string DoorIdentifier { get; set; } = "";
+        public string UserIdentifier { get; set; }
 
-        public IList<Log> DoorEntries { get; set; }
+
+        public IList<Log> LogEntries { get; set; } = default!;
 
         public IActionResult OnGet()
         {
             if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kModerator))
                 return Unauthorized();
 
+            if (UserIdentifier is null)
+                return NotFound();
 
-            if (DoorIdentifier != null)
-                DoorEntries = _context.Log.Where(d => d.Door.Id == DoorIdentifier).Include(u => u.User).Include(d => d.Door).AsEnumerable().Reverse().ToList();
-            else
-                DoorEntries = _context.Log.Include(u => u.User).Include(d => d.Door).AsEnumerable().Reverse().ToList();
 
-            if (!DoorEntries.Any())
+            LogEntries = _context.Log.Where(u => u.User.UserName == UserIdentifier).Include(d => d.Door).AsEnumerable().Reverse().ToList();
+
+
+            if (!LogEntries.Any())
             {
-                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kWarning, LanguageManager.GetLocalizedString("MANAGEMENT_DOOR_LOG_NO_ENTRIES_FOUND", AccountHelper.GetUserLanguage(HttpContext)));
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kWarning, LanguageManager.GetLocalizedString("MANAGEMENT_USER_LOG_NO_ENTRIES_FOUND", AccountHelper.GetUserLanguage(HttpContext)));
                 return RedirectToPage("List");
             }
 
             return Page();
-        }
 
+        }
     }
 }

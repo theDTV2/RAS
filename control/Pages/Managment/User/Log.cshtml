@@ -1,0 +1,48 @@
+﻿@page "{Useridentifier?}"
+@model control.Pages.Managment.User.LogModel
+
+@using control.Helper;
+@using control.Generator;
+@using control.Models;
+@using control.Manager;
+@using System.Reflection;
+@using System.ComponentModel.DataAnnotations;
+
+@{
+    var lang = AccountHelper.GetUserLanguage(HttpContext);
+    var MANAGEMENT_USER_LOG_TITLE = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LOG_TITLE", lang);
+    var MANAGEMENT_USER_LOG_ENTRYTIME = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LOG_ENTRYTIME", lang);
+    var MANAGEMENT_USER_LOG_DOORNAME = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LOG_DOORNAME", lang);
+
+    var MANAGEMENT_USER_LOG_BACK = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LOG_BACK", lang);
+
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @MANAGEMENT_USER_LOG_ENTRYTIME
+            </th>
+            <th>
+                @MANAGEMENT_USER_LOG_DOORNAME
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LogEntries)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntryTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Door.Id)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a class="btn btn-secondary" asp-page="./List">@MANAGEMENT_USER_LOG_BACK</a>
+</div>

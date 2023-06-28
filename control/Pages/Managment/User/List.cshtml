@@ -20,7 +20,8 @@
     var MANAGEMENT_USER_COMPLETEDREGISTRATION = LanguageManager.GetLocalizedString("MANAGEMENT_USER_COMPLETEDREGISTRATION", lang);
     var MANAGEMENT_USER_LIST_MANAGE = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LIST_MANAGE", lang);
     var MANAGEMENT_USER_LIST_UNLOCK = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LIST_UNLOCK", lang);
-    var MANAGEMENT_USER_LIST_SEARCH = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LIST_UNLOCK", lang);
+    var MANAGEMENT_USER_LIST_LOG = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LIST_LOG", lang);
+    var MANAGEMENT_USER_LIST_SEARCH = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LIST_SEARCH", lang);
     var MANAGEMENT_USER_LIST_SEARCH_BACK = LanguageManager.GetLocalizedString("MANAGEMENT_USER_LIST_SEARCH_BACK", lang);
    
 }
@@ -95,7 +96,6 @@
                     </td>
                     <td>
                         @{
-                            //IMO this is a very ugly way of doing this
                             //TODO: Improve accessing the Display Name Property of the Enum
                             var memberInfo = item.AccessLevel.GetType().GetMember(item.AccessLevel.ToString()!)[0];
                             var val = memberInfo.GetCustomAttribute<DisplayAttribute>()!.Name;
@@ -116,6 +116,7 @@
                     </td>
                     <td>
                         <a class="btn btn-primary" asp-page="./Unlock" asp-route-UserIdentifier="@item.UserName">@MANAGEMENT_USER_LIST_UNLOCK</a>
+                        <a class="btn btn-primary" asp-page="./Log" asp-route-UserIdentifier="@item.UserName">@MANAGEMENT_USER_LIST_LOG</a>
 
 
                         @if (AccountHelper.GetEAccessLevel(HttpContext) > item.AccessLevel || AccountHelper.GetEAccessLevel(HttpContext) == EAccessLevel.kSuperAdmin)
