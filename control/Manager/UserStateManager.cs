@@ -34,16 +34,16 @@ namespace control.Manager
             return _previouslyLoggedIn;
         }
 
-        public static bool CheckUserState(string sessionid)
+        public static bool CheckUserState(string sessionId)
         {
             UserState? _userState;
 
-            if (!UserStates.TryGetValue(sessionid, out _userState))
+            if (!UserStates.TryGetValue(sessionId, out _userState))
                 return false;
 
             if (!_userState.Valid)
             {
-                RemoveState(sessionid);
+                RemoveState(sessionId);
                 return false;
             }
 
@@ -52,11 +52,11 @@ namespace control.Manager
             return true;
         }
 
-        public static bool UpdatePermissionsRequired(string sessionid)
+        public static bool UpdatePermissionsRequired(string sessionId)
         {
             UserState? _userState;
 
-            if (!UserStates.TryGetValue(sessionid, out _userState))
+            if (!UserStates.TryGetValue(sessionId, out _userState))
                 return false;
 
             if (!_userState.Valid)
@@ -85,9 +85,9 @@ namespace control.Manager
             return;
         }
 
-        public static bool RemoveState(string sessionid)
+        public static bool RemoveState(string sessionId)
         {
-            return UserStates.Remove(sessionid);
+            return UserStates.Remove(sessionId);
         }
 
         public static async Task DeleteOldStatesAsync()
