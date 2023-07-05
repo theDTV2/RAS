@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Formatters;
+﻿using control.Manager.Classes;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -54,10 +55,4 @@ namespace control.Manager
     }
 
 
-    public class GeneralSettings
-    {
-        public TimeSpan UserLoginTimeout { get; set; } = TimeSpan.FromMinutes(15);
-
-
-    }
 }

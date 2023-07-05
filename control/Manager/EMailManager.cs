@@ -70,10 +70,10 @@ namespace control.Manager
             return LoadMailSettingsFromConfig();
         }
 
-        public static void AddLoginMailToQueue(HttpContext context, string adressToSendTo, string loginCode, string loginKey)
+        public static void AddLoginMailToQueue(HttpContext httpContext, string adressToSendTo, string loginCode, string loginKey)
         {
             string _message = "<p>Click the following link or use the login code to sign in.</p>"
-+ "<a href = https://" + context.Request.Host + @"/Account/LoginCode/" + HttpUtility.UrlEncode(loginKey) + ">Click here</a> <br> "
++ "<a href = https://" + httpContext.Request.Host + @"/Account/LoginCode/" + HttpUtility.UrlEncode(loginKey) + ">Click here</a> <br> "
 + loginCode + "<br> If you did not request this message, you can ignore it.";
 
             EmailQueueHighPriority.Push(new Email(adressToSendTo, "RAS Login", _message));
@@ -197,28 +197,8 @@ namespace control.Manager
             return false;
         }
     }
-
-
-    public class EMailSettings
-    {
-        public string MailSMTPAdress { get; set; } = String.Empty;
-        public int MailPort { get; set; } = 0;
-        public string MailUserName { get; set; } = String.Empty;
-        public string MailPassword { get; set; } = String.Empty;
-
-        public bool Tested { get; set; } = false;
-
-        public bool IsAnyEmpty()
-        {
-            if (MailSMTPAdress == string.Empty || MailPort == 0
-                || MailUserName == string.Empty || MailPassword == string.Empty)
-            {
-                return true;
-            }
-            return false;
-        }
-    }
 }
 
 
+   
 
