@@ -97,6 +97,14 @@ namespace control.Pages.Account
                     if (res == EAccessReturnValue.kAccountRegistrationNotCompleted)
                         return RedirectToPage("Registration");
 
+                    if (res == EAccessReturnValue.kAccountLocked)
+                    {
+                        AccountHelper.LogoutUser(HttpContext);
+                        AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, LanguageManager.GetLocalizedString("ACCOUNT_LOGINCODE_LOCKED", AccountHelper.GetUserLanguage(HttpContext)));
+                        return RedirectToPage("Login");
+
+                    }
+
 
                     return RedirectToPage("Dashboard");
                 }
