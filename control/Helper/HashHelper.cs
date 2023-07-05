@@ -6,9 +6,9 @@ namespace control.Helper
 {
     public class HashHelper
     {
-        static readonly byte[] salt = GenerateSalt();
-        static readonly int numberOfBytes = salt.Length * 2;
-        static readonly int numberOfIterations = 200000;
+        private static readonly byte[] salt = GenerateSalt();
+        private static readonly int numberOfBytes = salt.Length * 2;
+        private static readonly int numberOfIterations = 200000;
 
         public static byte[] GenerateSalt(int lenght = 64)
         {
