@@ -77,9 +77,9 @@ namespace control.Helper
 
         }
 
-        private static string GenerateLoginCode(int Lenght = 64)
+        private static string GenerateLoginCode(int lenght = 64)
         {
-            byte[] code = RandomNumberGenerator.GetBytes(Lenght);
+            byte[] code = RandomNumberGenerator.GetBytes(lenght);
             //We replace /, =, + to prevent issues with the url
             return Convert.ToBase64String(code).Replace('/','0').Replace('=','1').Replace('+','2');
         }
