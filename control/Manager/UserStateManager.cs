@@ -19,7 +19,7 @@ namespace control.Manager
        
         private static IDictionary<string, UserState> UserStates { get; set; } = new Dictionary<string, UserState>();
 
-        public static bool AddUserState(string sessionid, string userName, string language)
+        public static bool AddUserState(string sessionId, string userName)
         {
             //If the user previously was logged in, we return true;
             bool _previouslyLoggedIn = false;
@@ -29,7 +29,7 @@ namespace control.Manager
             {
                 _previousState.Value.SetInvalid();
             }
-            UserStates.Add(sessionid, new(userName));
+            UserStates.Add(sessionId, new(userName));
 
             return _previouslyLoggedIn;
         }
@@ -85,7 +85,7 @@ namespace control.Manager
             return;
         }
 
-        public static bool RemoveState(string sessionid, string userName = "")
+        public static bool RemoveState(string sessionid)
         {
             return UserStates.Remove(sessionid);
         }

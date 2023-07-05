@@ -11,7 +11,7 @@ namespace control.Helper
 
         public static bool LoginUser(HttpContext httpContext, string userName, EAccessLevel level, string language)
         {
-            if (UserStateManager.AddUserState(httpContext.Session.Id, GetUserName(httpContext),GetUserLanguage(httpContext)))
+            if (UserStateManager.AddUserState(httpContext.Session.Id, GetUserName(httpContext)))
                 AlertGenerator.AddAlertToSession(httpContext, AlertGenerator.EAlertLevel.kWarning, LanguageManager.GetLocalizedString("ACCOUNT_LOGOUT_PREVIOUS_SESSION_TERMINATED", AccountHelper.GetUserLanguage(httpContext)));
 
             return RefreshUser(httpContext, userName, level, language);
