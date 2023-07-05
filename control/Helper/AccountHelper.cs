@@ -1,6 +1,7 @@
 ﻿using control.Generator;
 using control.Manager;
 using control.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace control.Helper
@@ -8,12 +9,12 @@ namespace control.Helper
     public static class AccountHelper
     {
 
-        public static bool LoginUser(HttpContext httpContext, string username, EAccessLevel level, string language)
+        public static bool LoginUser(HttpContext httpContext, string userName, EAccessLevel level, string language)
         {
             if (UserStateManager.AddUserState(httpContext.Session.Id, GetUserName(httpContext),GetUserLanguage(httpContext)))
                 AlertGenerator.AddAlertToSession(httpContext, AlertGenerator.EAlertLevel.kWarning, LanguageManager.GetLocalizedString("ACCOUNT_LOGOUT_PREVIOUS_SESSION_TERMINATED", AccountHelper.GetUserLanguage(httpContext)));
 
-            return RefreshUser(httpContext, username, level, language);
+            return RefreshUser(httpContext, userName, level, language);
         }
 
         public static bool LogoutUser(HttpContext httpContext)
@@ -29,10 +30,10 @@ namespace control.Helper
             //return false;
         }
 
-        public static bool RefreshUser(HttpContext httpContext, string username, EAccessLevel level, string language)
+        public static bool RefreshUser(HttpContext httpContext, string userName, EAccessLevel level, string language)
         {
             SetLoggedInStatus(httpContext);
-            SetUserName(httpContext, username);
+            SetUserName(httpContext, userName);
             SetUserRole(httpContext, level);
             SetUserLanguage(httpContext, language);
 
@@ -41,57 +42,57 @@ namespace control.Helper
         }
 
 
-        private static void SetLoggedInStatus(HttpContext context, bool statusToSetTo = true)
+        private static void SetLoggedInStatus(HttpContext httpContext, bool statusToSetTo = true)
         {
-            SessionHelper.SaveStringInSession(context,"loggedInStatus", statusToSetTo.ToString());
+            SessionHelper.SaveStringInSession(httpContext, "loggedInStatus", statusToSetTo.ToString());
         }
 
-        public static void SetUserLanguage(HttpContext context, string language = "en")
+        public static void SetUserLanguage(HttpContext httpContext, string language = "en")
         {
-            SessionHelper.SaveStringInSession(context, "language", language);
+            SessionHelper.SaveStringInSession(httpContext, "language", language);
         }
 
-        public static bool SetUserName(HttpContext context, string userName)
+        public static bool SetUserName(HttpContext httpContext, string userName)
         {
-            SessionHelper.SaveStringInSession(context, "userName", userName);
+            SessionHelper.SaveStringInSession(httpContext, "userName", userName);
 
             return true;
         }
 
-        private static bool SetUserRole(HttpContext context, EAccessLevel role)
+        private static bool SetUserRole(HttpContext httpContext, EAccessLevel role)
         {
-            SessionHelper.SaveIntInSession(context, "userRole", Convert.ToInt32(role));
+            SessionHelper.SaveIntInSession(httpContext, "userRole", Convert.ToInt32(role));
 
             return true;
         }
 
-        public static bool GetLoggedIn(HttpContext context)
+        public static bool GetLoggedIn(HttpContext httpContext)
         {
-            if (SessionHelper.GetStringFromSession(context, "loggedInStatus") == "")
+            if (SessionHelper.GetStringFromSession(httpContext, "loggedInStatus") == "")
                 return false;
             return true;
         }
-        public static string GetUserName(HttpContext context)
+        public static string GetUserName(HttpContext httpContext)
         {
-            string userName = SessionHelper.GetStringFromSession(context, "userName");
+            string userName = SessionHelper.GetStringFromSession(httpContext, "userName");
 
             return userName;
         }
 
-        public static string GetUserLanguage(HttpContext context)
+        public static string GetUserLanguage(HttpContext httpContext)
         {
-            string language = SessionHelper.GetStringFromSession(context, "language");
+            string language = SessionHelper.GetStringFromSession(httpContext, "language");
 
             return language;
         }
 
-        public static EAccessLevel GetEAccessLevel(HttpContext context)
+        public static EAccessLevel GetEAccessLevel(HttpContext httpContext)
         {
 
-            if (!GetLoggedIn(context))
+            if (!GetLoggedIn(httpContext))
                 return EAccessLevel.kNone;
 
-            int userRoleRaw = SessionHelper.GetIntFromSession(context, "userRole");
+            int userRoleRaw = SessionHelper.GetIntFromSession(httpContext, "userRole");
 
              if (Enum.IsDefined(typeof(EAccessLevel),userRoleRaw))
                 return (EAccessLevel)userRoleRaw;
@@ -99,10 +100,10 @@ namespace control.Helper
             return EAccessLevel.kNone;
         }  
 
-        public static string GetAccessLevelAsString(HttpContext context)
+        public static string GetAccessLevelAsString(HttpContext httpContext)
         {
             //As GetEAccessLevel already checks for null, we can ignore the warning with !
-            switch (GetEAccessLevel(context))
+            switch (GetEAccessLevel(httpContext))
             {
                 case EAccessLevel.kNone:
                     return "USER_LEVEL_GUEST";
@@ -119,30 +120,30 @@ namespace control.Helper
             }
         }
 
-        public static User GetLoggedInUser(control.Data.controlContext dataContext, HttpContext context)
+        public static User GetLoggedInUser(control.Data.controlContext dataContext, HttpContext httpContext)
         {
-            if (!GetLoggedIn(context))
+            if (!GetLoggedIn(httpContext))
                 return new User();
 
-            string _userName = GetUserName(context);
+            string _userName = GetUserName(httpContext);
 
             return dataContext.User.Where(e => e.UserName == _userName).FirstOrDefault()!;
         }
 
-        public static string GetExpiryDate(control.Data.controlContext dataContext, HttpContext context)
+        public static string GetExpiryDate(control.Data.controlContext dataContext, HttpContext httpContext)
         {
-            if (!GetLoggedIn(context))
+            if (!GetLoggedIn(httpContext))
                 return "";
 
-            return GetLoggedInUser(dataContext, context).ExpiryDate.ToShortDateString();
+            return GetLoggedInUser(dataContext, httpContext).ExpiryDate.ToShortDateString();
         }
 
-        public static IList<Door> GetAdminDoorList(control.Data.controlContext dataContext, HttpContext context)
+        public static IList<Door> GetAdminDoorList(control.Data.controlContext dataContext, HttpContext httpContext)
         {   
-            string _username = GetUserName(context);
+            string _username = GetUserName(httpContext);
             
             //Admins and Super Admins get all doors
-            if (GetEAccessLevel(context) >= EAccessLevel.kAdmin)
+            if (GetEAccessLevel(httpContext) >= EAccessLevel.kAdmin)
                 return dataContext.Door.ToList();
 
 
