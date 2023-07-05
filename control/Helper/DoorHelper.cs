@@ -15,7 +15,7 @@ namespace control.Helper
 {
     public static class DoorHelper
     {
-        public static bool AttemptToRegisterDoor(control.Data.controlContext dataContext, string doorID, string timeStamp, ref JsonResult returnValue)
+        public static bool AttemptToRegisterDoor(control.Data.controlContext dataContext, string doorId, string timeStamp, ref JsonResult returnValue)
         {
             if (!DateTime.TryParse(timeStamp, out DateTime _timeStamp))
                 return false;
@@ -23,7 +23,7 @@ namespace control.Helper
             if (CheckIfTimedOut(_timeStamp))
                 return false;
 
-            Door? _door = GetDoor(dataContext, doorID);
+            Door? _door = GetDoor(dataContext, doorId);
 
             //No door with this name found
             if (_door is null)
@@ -43,7 +43,7 @@ namespace control.Helper
 
             JsonObject _toReturnJsonRaw = new JsonObject()
             {
-                { "doorID" , doorID},
+                { "doorID" , doorId},
                 { "secret" , _newSecret},
                 { "timeStamp" , DateTime.Now.ToString()},
                 { "displayText", _door.DisplayText}

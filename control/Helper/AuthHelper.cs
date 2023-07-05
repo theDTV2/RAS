@@ -12,7 +12,7 @@ namespace control.Helper
     {
         public static async Task<bool> CreateLoginRequest(control.Data.controlContext dataContext, HttpContext httpContext, string email) 
         {
-            var loginCode = AccessHelper.CreateAndSetLoginCodeForUserAsync(dataContext, email);
+            var loginCode = CreateAndSetLoginCodeForUserAsync(dataContext, email);
 
             var loginKey = LoginKeyHelper.RegisterLoginKeyForUserAsync(dataContext, email);
 
