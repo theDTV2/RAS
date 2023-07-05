@@ -10,78 +10,78 @@ namespace control.Helper
 {
     public class AuthHelper
     {
-        public static async Task<bool> CreateLoginRequest(control.Data.controlContext dataContext,HttpContext context, string email) 
+        public static async Task<bool> CreateLoginRequest(control.Data.controlContext dataContext, HttpContext httpContext, string email) 
         {
             var loginCode = AccessHelper.CreateAndSetLoginCodeForUserAsync(dataContext, email);
 
             var loginKey = LoginKeyHelper.RegisterLoginKeyForUserAsync(dataContext, email);
 
             //TODO: Improve this
-            AccountHelper.SetUserName(context, email);
+            AccountHelper.SetUserName(httpContext, email);
 
 
             //TODO: Log Login Request Creation
             await loginCode;
             await loginKey;
 
-            EmailHelper.AddAccessMailToBeSent(context, email, loginCode.Result, loginKey.Result);
+            EmailHelper.AddAccessMailToBeSent(httpContext, email, loginCode.Result, loginKey.Result);
 
             return true;
         }
 
 
-        public static EAccessReturnValue ChallengeLoginRequestWithLoginCode(control.Data.controlContext dataContext,HttpContext context, string email, string loginCode)
+        public static EAccessReturnValue ChallengeLoginRequestWithLoginCode(control.Data.controlContext dataContext, HttpContext httpContext, string email, string loginCode)
         {
             EAccessReturnValue result = AccessHelper.TryToAuthUserWithLoginCode(dataContext, email, loginCode, out User? user);
 
           
             if (result  == EAccessReturnValue.kAccessGranted)
             {
-                AccountHelper.LoginUser(context, email, user!.AccessLevel, user!.Language);
+                AccountHelper.LoginUser(httpContext, email, user!.AccessLevel, user!.Language);
             }
 
             return result;
             
         }
 
-        public static EAccessReturnValue ChallengeLoginRequestWithLoginKey(control.Data.controlContext dataContext, HttpContext context, string loginKey)
+        public static EAccessReturnValue ChallengeLoginRequestWithLoginKey(control.Data.controlContext dataContext, HttpContext httpContext, string loginKey)
         {
             EAccessReturnValue result = AccessHelper.TryToAuthUserWithLoginKey(dataContext, loginKey, out User? user);
 
             
             if (result == EAccessReturnValue.kAccessGranted)
             {
-                AccountHelper.LoginUser(context, user!.UserName, user!.AccessLevel, user!.Language);
+                AccountHelper.LoginUser(httpContext, user!.UserName, user!.AccessLevel, user!.Language);
             }
 
             return result;
         }
 
 
-       public static EAccessReturnValue CheckUserPermission(control.Data.controlContext dataContext, HttpContext context, EAccessLevel requiredAccessLevel = EAccessLevel.kUser, Door? doorToOpen = null)
+       public static EAccessReturnValue CheckUserPermission(control.Data.controlContext dataContext, HttpContext httpContext, EAccessLevel requiredAccessLevel = EAccessLevel.kUser, Door? doorToOpen = null)
         {
         
             //No User logged in
-            if (!AccountHelper.GetLoggedIn(context))
+            if (!AccountHelper.GetLoggedIn(httpContext))
                 return EAccessReturnValue.kAccessDenied;
 
-            string userName = AccountHelper.GetUserName(context);
+            string userName = AccountHelper.GetUserName(httpContext);
             User user = GetUserAsync(dataContext, userName).Result!;
 
             //Check, if user permissions need to be refreshed
 
-            if (UserStateManager.UpdatePermissionsRequired(context.Session.Id))
+            if (UserStateManager.UpdatePermissionsRequired(httpContext.Session.Id))
             {
-                AccountHelper.RefreshUser(context, userName, user!.AccessLevel, user.Language);
+                AccountHelper.RefreshUser(httpContext, userName, user!.AccessLevel, user.Language);
             }
 
             //User State is not valid anymore (Somebody logged in with the same username)
-            if (!UserStateManager.CheckUserState(context.Session.Id))
+            if (!UserStateManager.CheckUserState(httpContext.Session.Id))
             {
-                AccountHelper.LogoutUser(context);
-                UserStateManager.RemoveState(context.Session.Id);
+                AccountHelper.LogoutUser(httpContext);
+                UserStateManager.RemoveState(httpContext.Session.Id);
 
-                AlertGenerator.AddAlertToSession(context, AlertGenerator.EAlertLevel.kError, LanguageManager.GetLocalizedString("ACCOUNT_INVALID_USER_STATE", AccountHelper.GetUserLanguage(context)));
+                AlertGenerator.AddAlertToSession(httpContext, AlertGenerator.EAlertLevel.kError, LanguageManager.GetLocalizedString("ACCOUNT_INVALID_USER_STATE", AccountHelper.GetUserLanguage(httpContext)));
 
                 return EAccessReturnValue.kAccessDenied;
             }
@@ -124,9 +124,9 @@ namespace control.Helper
         }
 
         //Works same as CheckUserPermission(..), but only returns true/false
-        public static bool CheckUserAccess(control.Data.controlContext dataContext, HttpContext context, EAccessLevel requiredAccessLevel = EAccessLevel.kUser, Door? doorToOpen = null)
+        public static bool CheckUserAccess(control.Data.controlContext dataContext, HttpContext httpContext, EAccessLevel requiredAccessLevel = EAccessLevel.kUser, Door? doorToOpen = null)
         {
-            EAccessReturnValue perm = CheckUserPermission(dataContext, context, requiredAccessLevel, doorToOpen);
+            EAccessReturnValue perm = CheckUserPermission(dataContext, httpContext, requiredAccessLevel, doorToOpen);
             if (perm != EAccessReturnValue.kAccessGranted && perm != EAccessReturnValue.kAdminGranted)
                 return false;
 
@@ -136,16 +136,16 @@ namespace control.Helper
 
         //Works same as CheckUserPermission(..), but retirects users, when they have no permission to open a specific page
 
-        public static bool CheckUserAccessWithRedirect(control.Data.controlContext dataContext, HttpContext context, EAccessLevel requiredAccessLevel = EAccessLevel.kUser, Door? doorToOpen = null)
+        public static bool CheckUserAccessWithRedirect(control.Data.controlContext dataContext, HttpContext httpContext, EAccessLevel requiredAccessLevel = EAccessLevel.kUser, Door? doorToOpen = null)
         {
-            EAccessReturnValue perm = CheckUserPermission(dataContext, context, requiredAccessLevel, doorToOpen);
+            EAccessReturnValue perm = CheckUserPermission(dataContext, httpContext, requiredAccessLevel, doorToOpen);
 
             if (perm == EAccessReturnValue.kAccountEulaNotAccepted || perm == EAccessReturnValue.kAccountRegistrationNotCompleted)
             {
-                AlertGenerator.AddAlertToSession(context, AlertGenerator.EAlertLevel.kWarning, LanguageManager.GetLocalizedString("ACCOUNT_ACCEPT_EULA_REQUIRED", AccountHelper.GetUserLanguage(context)));
+                AlertGenerator.AddAlertToSession(httpContext, AlertGenerator.EAlertLevel.kWarning, LanguageManager.GetLocalizedString("ACCOUNT_ACCEPT_EULA_REQUIRED", AccountHelper.GetUserLanguage(httpContext)));
                
-                context.Response.Redirect("/Account/Login");
-                AccountHelper.LogoutUser(context);
+                httpContext.Response.Redirect("/Account/Login");
+                AccountHelper.LogoutUser(httpContext);
                 return false;
             }
           
@@ -153,7 +153,7 @@ namespace control.Helper
             if (perm != EAccessReturnValue.kAccessGranted && perm != EAccessReturnValue.kAdminGranted)
             {
                 //TODO: Redirect to proper Error page
-                context.Response.Redirect("/Index");
+                httpContext.Response.Redirect("/Index");
                 return false;
             }
             return true;
