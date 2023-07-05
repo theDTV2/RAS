@@ -6,7 +6,7 @@
 
         public string Title { get; private set; }
         public string Text { get; private set; }
-        public Email(string destination,string title, string text)
+        public Email(string destination, string title, string text)
         { 
             DestinationAddress = destination;
             Title = title;

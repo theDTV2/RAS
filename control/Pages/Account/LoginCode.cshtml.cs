@@ -37,7 +37,6 @@ namespace control.Pages.Account
         public string? SecretLoginCode { get; set; }
 
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public IActionResult OnPost()
         {
             if (AccountHelper.GetLoggedIn(HttpContext))
