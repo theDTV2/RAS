@@ -5,7 +5,7 @@ namespace control.Helper
     public class EmailHelper
     {
         //This function adds an mail, that the email routine will send
-        public static void AddAccessMailToBeSent(HttpContext httpContext, string emailAdress,string loginKey, string loginCode)
+        public static void AddAccessMailToBeSent(HttpContext httpContext, string emailAdress, string loginKey, string loginCode)
         {
             EMailManager.AddLoginMailToQueue(httpContext, emailAdress, loginKey, loginCode);
 
