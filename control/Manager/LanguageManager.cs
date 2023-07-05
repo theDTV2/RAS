@@ -4,7 +4,7 @@ using System.Resources;
 
 namespace control.Manager
 {
-    public class LanguageManager
+    public static class LanguageManager
     {
         private static readonly ResourceManager ResManager = new("control.Resources.Localization", Assembly.GetExecutingAssembly());
 
