@@ -191,9 +191,9 @@ namespace control.Helper
 
         }
 
-        private static Door? GetDoor(control.Data.controlContext dataContext, string doorID)
+        private static Door? GetDoor(control.Data.controlContext dataContext, string doorId)
         {
-            return dataContext.Door.Where(e => e.Id == doorID).FirstOrDefault();
+            return dataContext.Door.Where(e => e.Id == doorId).FirstOrDefault();
         }
 
         private static bool CheckIfTimedOut(DateTime timeStamp, TimeSpan? timeOut = null)
