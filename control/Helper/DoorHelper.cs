@@ -17,6 +17,12 @@ namespace control.Helper
     {
         public static bool AttemptToRegisterDoor(control.Data.controlContext dataContext, string doorID, string timeStamp, ref JsonResult returnValue)
         {
+            if (!DateTime.TryParse(timeStamp, out DateTime _timeStamp))
+                return false;
+
+            if (CheckIfTimedOut(_timeStamp))
+                return false;
+
             Door? _door = GetDoor(dataContext, doorID);
 
             //No door with this name found
@@ -25,12 +31,6 @@ namespace control.Helper
 
             //This door already is registered
             if (_door.Registered)
-                return false;
-
-            if (!DateTime.TryParse(timeStamp, out DateTime _timeStamp))
-                return false;
-
-             if (CheckIfTimedOut(_timeStamp))
                 return false;
 
             string _newSecret = HashHelper.GenerateRandomBase64String(128);
