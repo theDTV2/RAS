@@ -69,7 +69,7 @@ namespace control.Manager
             }
             return false;
         }
-        public static void SetUpdatePermissionsRequired(string userName, EAccessLevel _levelToSetTo = EAccessLevel.kUser)
+        public static void SetUpdatePermissionsRequired(string userName, EAccessLevel levelToSetTo = EAccessLevel.kUser)
         {
             var _user = UserStates.Where(u => u.Value.UserName == userName).FirstOrDefault();
 
@@ -79,7 +79,7 @@ namespace control.Manager
             _user.Value.UpdatePermissionsRequired = true;
 
             //If a User is locked, invalidate his session
-            if (_levelToSetTo == EAccessLevel.kNone)
+            if (levelToSetTo == EAccessLevel.kNone)
                 _user.Value.SetInvalid();
 
             return;

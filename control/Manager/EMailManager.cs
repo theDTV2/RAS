@@ -170,11 +170,11 @@ namespace control.Manager
 
         private static MimeMessage CreateMailObject(Email email)
         {
-            var name = email.DestinationAdress.Split("@")[0];
+            var name = email.DestinationAddress.Split("@")[0];
 
             MimeMessage _message = new MimeMessage();
             _message.From.Add(new MailboxAddress("RAS System", EMailSettingObj.MailUserName + "@htw-berlin.de"));
-            _message.To.Add(new MailboxAddress(name, email.DestinationAdress));
+            _message.To.Add(new MailboxAddress(name, email.DestinationAddress));
             _message.Subject = email.Title;
             _message.Body = new TextPart("html")
             {
