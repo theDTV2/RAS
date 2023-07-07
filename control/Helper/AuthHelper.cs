@@ -136,7 +136,7 @@ namespace control.Helper
 
         //Works same as CheckUserPermission(..), but retirects users, when they have no permission to open a specific page
 
-        public static bool CheckUserAccessWithRedirect(control.Data.controlContext dataContext, HttpContext httpContext, EAccessLevel requiredAccessLevel = EAccessLevel.kUser, Door? doorToOpen = null)
+        public static bool CheckUserAccessWithRedirect(control.Data.controlContext dataContext, HttpContext httpContext, EAccessLevel requiredAccessLevel = EAccessLevel.kUser, Door? doorToOpen = null, bool IgnoreExpiryDate = false)
         {
             EAccessReturnValue perm = CheckUserPermission(dataContext, httpContext, requiredAccessLevel, doorToOpen);
 
@@ -152,6 +152,10 @@ namespace control.Helper
 
             if (perm != EAccessReturnValue.kAccessGranted && perm != EAccessReturnValue.kAdminGranted)
             {
+                //If we visit a "expiry allowed"-Page, we ignore this return here
+                if (perm == EAccessReturnValue.kAccountExpired && IgnoreExpiryDate)
+                    return true;
+
                 //TODO: Redirect to proper Error page
                 httpContext.Response.Redirect("/Index");
                 return false;

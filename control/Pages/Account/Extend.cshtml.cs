@@ -18,7 +18,7 @@ namespace control.Pages.Account
 
         public IActionResult OnGet()
         {
-            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kUser))
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kUser, IgnoreExpiryDate: true))
                 return Unauthorized();
 
             if (!DateHelper.LoggedInUserIsAllowedToExtend(_context, HttpContext))
@@ -34,7 +34,7 @@ namespace control.Pages.Account
 
         public IActionResult OnPost()
         {
-            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kUser))
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kUser, IgnoreExpiryDate: true))
                 return Unauthorized();
 
             User _user = AccountHelper.GetLoggedInUser(_context, HttpContext);

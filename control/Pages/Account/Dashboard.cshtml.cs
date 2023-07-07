@@ -20,7 +20,7 @@ namespace control.Pages.Account
         public string ExpiryDate { get; set; }
         public IActionResult OnGet()
         {
-            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kUser))
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kUser, IgnoreExpiryDate: true))
                 return Unauthorized();
 
             ExpiryDate = AccountHelper.GetExpiryDate(_context, HttpContext);

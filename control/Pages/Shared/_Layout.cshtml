@@ -14,6 +14,9 @@
     {
         _userName = AccountHelper.GetUserName(Context);
         _userLevel = AccountHelper.GetEAccessLevel(Context);
+
+        //TODO: Add Account expire date information, remove not accessible pages from layout
+
         _homeLink = "/Account/Dashboard";
     }
     var lang = AccountHelper.GetUserLanguage(Context);
