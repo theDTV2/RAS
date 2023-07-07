@@ -106,14 +106,9 @@ namespace control.Helper
                 return EAccessReturnValue.kAccountLocked;
             if (doorToOpen is not null)
             {
-                //Check for regular Access right
-                if (!user.AccessDoors.Contains(doorToOpen))
-                    return EAccessReturnValue.kPermissionDenied;
-
                 //Check for Admin Rights
-                if (user.AdminDoors.Contains(doorToOpen))
+                if (user.AdminDoors.Contains(doorToOpen) || user.AccessLevel >= EAccessLevel.kAdmin)
                     return EAccessReturnValue.kAdminGranted;
-
             }
 
             if (user!.AccessLevel < requiredAccessLevel)

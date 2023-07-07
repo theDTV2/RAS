@@ -49,6 +49,9 @@ namespace control.Pages.Managment.User
 
         public IActionResult OnGet()
         {
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kModerator))
+                return Unauthorized();
+
             if (_context.User.Where(u => u.UserName == UserIdentifier).Count() != 1)
             {
                 return RedirectToPage("List");
@@ -74,6 +77,9 @@ namespace control.Pages.Managment.User
 
         public IActionResult OnPost()
         {
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kModerator))
+                return Unauthorized();
+
             User = _context.User.Where(u => u.UserName == UserIdentifier).Include(u => u.AccessDoors).Include(u => u.AdminDoors).First();
 
             //Check, if secret code is unique

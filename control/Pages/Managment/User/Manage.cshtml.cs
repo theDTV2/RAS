@@ -28,6 +28,9 @@ namespace control.Pages.Managment.User
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kModerator))
+                return Unauthorized();
+
             if (id == null || _context.User == null)
                 return NotFound();
 
@@ -47,6 +50,9 @@ namespace control.Pages.Managment.User
 
         public async Task<IActionResult> OnPostAsync()
         {
+            if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kModerator))
+                return Unauthorized();
+
             var _user = await _context.User.FirstOrDefaultAsync(m => m.UserName == User.UserName);
 
             if (_user == null) 
@@ -62,8 +68,6 @@ namespace control.Pages.Managment.User
             if (!ModelState.IsValid)
                 return Page();
 
-              //Use TryUpdateModelAsync to prevent data manipulation
-            
             _user.FirstName = User.FirstName;
             _user.LastName = User.LastName;
             _user.AccessLevel = User.AccessLevel;
