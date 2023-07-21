@@ -57,7 +57,9 @@ namespace control.Pages.Managment.User
                 return RedirectToPage("List");
             }
 
-            User = _context.User.Where(u => u.UserName == UserIdentifier).Include(u => u.AccessDoors).Include(u => u.AdminDoors).Include(u => u.AdminDoors).First();
+            User = _context.User
+                .Where(u => u.UserName == UserIdentifier)
+                .Include(u => u.AccessDoors).Include(u => u.AdminDoors).Include(u => u.AdminDoors).First();
 
 
             if ((UserIdentifier is null) || (User is null))
