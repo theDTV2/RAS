@@ -77,6 +77,8 @@ if request_test.status_code != 200:
     print("Connection test failed")
     exit(RETURN_CONNECTION_ERROR)
 
+
+
 print("api connection successful")
 # If secret is not set, we assume that this door is not registered
 if secret == "":
@@ -131,6 +133,8 @@ reader_task.start()
 display.set_keep_last_message(False)
 display.set_default_message(message="System ready", color=(255, 255, 255))
 
+
+
 try:
     while True:
         sleep(1)
@@ -145,13 +149,13 @@ try:
             try:
                 request_heartbeat = requests.post(total_address + "/Heartbeat",
                                                   data=data_heartbeat, verify=verify_ssl_cert)
+                _text_to_display = request_heartbeat.json()['displayText']
+                if _text_to_display is not None:
+                    display.set_default_message(_text_to_display, color=(255, 255, 255))
+
             except ConnectionError:
                 print("API not reachable")
-                exit(RETURN_CONNECTION_ERROR)
-
-            _text_to_display = request_heartbeat.json()['displayText']
-            if _text_to_display is not None:
-                display.set_default_message(_text_to_display, color=(255, 255, 255))
+                display.write_error_message("Lost connection to API\n Trying again in 10 seconds...", 10)
 
             print("heartbeat done")
             last_check_in = datetime.now()
@@ -171,10 +175,13 @@ try:
                                                       data=data_request_access, verify=verify_ssl_cert)
             except ConnectionError:
                 print("API not reachable")
+                display.write_error_message("Lost connection to API\n Trying again in 10 seconds...", 10)
+                sleep(10)
                 break
 
             if return_access_request.status_code != 200:
                 print("API communication error")
+                display.write_error_message("API communication error\n Shutting system down...", 60)
                 exit(RETURN_API_ACCESS_ERROR)
 
             time_stamp_str = return_access_request.json()['timeStamp']
@@ -182,6 +189,8 @@ try:
 
             if time_stamp + timedelta(seconds=timeout) < datetime.now():
                 print("Register operation too old, check connection or check for manipulation")
+                display.write_error_message("API communication error", 5)
+                sleep(5)
             if door_response:
                 display.write_success_message("Access Granted", 5)
                 print("doorResponse Access Granted")

@@ -96,7 +96,7 @@ def display_task():
             if '\n' in _message:
                 _pos = _message.find('\n')
 
-                _text_second_line = font.render("Reason: " + _message[_pos+1:], True, _color)
+                _text_second_line = font.render(_message[_pos+1:], True, _color)
 
                 [_width_line_2, _height_line_2] = _text_second_line.get_size()
                 screen.blit(_text_second_line,
