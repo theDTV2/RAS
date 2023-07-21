@@ -46,7 +46,7 @@ namespace control.Manager
                 DbSet<User> _userList = _context.User;
 
                 //TODO: Add customizable deletion time
-                DateTime _cutOffTime = DateTime.Now - TimeSpan.FromDays(7);
+                DateTime _cutOffTime = DateTime.Now - TimeSpan.FromDays(365);
 
                 if (!_userList.IsNullOrEmpty())
                 {
