@@ -486,4 +486,7 @@
   <data name="USER_ACCESS_DENIED" xml:space="preserve">
     <value>Access denied</value>
   </data>
+  <data name="USER_LEVEL_GUEST" xml:space="preserve">
+    <value>Guest</value>
+  </data>
 </root>
