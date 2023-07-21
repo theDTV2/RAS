@@ -50,7 +50,8 @@ namespace control.Manager
 
                 if (!_userList.IsNullOrEmpty())
                 {
-                    _userList.RemoveRange(_context.User.Where(l => l.LastLogin < _cutOffTime).ToList());
+                    _userList.RemoveRange(_context.User.Where(l => l.LastLogin < _cutOffTime
+                    && l.AccessLevel < EAccessLevel.kAdmin).ToList());
                     _context.SaveChanges();
                 }
 
