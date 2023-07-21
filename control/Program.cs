@@ -59,22 +59,35 @@ app.MapRazorPages();
 
 
 
+
 #if !DEBUG
-    Task _emailTaskResult = EMailManager.SendQueuedMailsAsync();
-    Task _userCleanupResult =  UserStateManager.DeleteOldStatesAsync();
+
+CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
 
-    var _dataBaseManager = app.Services.CreateScope().ServiceProvider.GetRequiredService<IDataBaseManager>();
+var _dataBaseManager = app.Services.CreateScope().ServiceProvider.GetRequiredService<IDataBaseManager>();
 
-    Task _dataBaseManagerResult = _dataBaseManager.DeleteOldLoginLinksAsync();
+Task _dataBaseManagerResultOldLoginLink = Task.Run(() => _dataBaseManager.DeleteOldLoginLinksAsync(_cancellationToken.Token));
+
+Task _dataBaseManagerResultOldAccount = Task.Run(() => _dataBaseManager.DeleteOldAccountsAsync(_cancellationToken.Token));
+
+
+Task _emailTaskResult = Task.Run(() => EMailManager.SendQueuedMailsAsync(_cancellationToken.Token));
+Task _userStateCleanupResult = Task.Run(() => UserStateManager.DeleteOldStatesAsync(_cancellationToken.Token));
+
+
+
+
+
 #endif
 
 
-    app.Run();
+app.Run();
+
 
 #if !DEBUG
-    await _emailTaskResult;
-    await _userCleanupResult;
+_cancellationToken.Cancel();
+Task.WaitAll(_dataBaseManagerResultOldLoginLink, _dataBaseManagerResultOldAccount, _emailTaskResult, _userStateCleanupResult);
 #endif
 
 

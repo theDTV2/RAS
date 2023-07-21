@@ -96,17 +96,17 @@ namespace control.Manager
         }
 
 
-        public static async Task SendQueuedMailsAsync()
+        public static async Task SendQueuedMailsAsync(CancellationToken stopToken)
         {
             //We wait, until an config file is written
             while (EMailSettingObj.IsAnyEmpty() || !EMailSettingObj.Tested)
             {
-                await Task.Delay(10000);
+                await Task.Delay(10000, stopToken);
                 LoadMailSettingsFromConfig();
                 TestMailSettings();
             }
 
-            while (true)
+            while (!stopToken.IsCancellationRequested)
             {
                 //Retreive Email from List
 
@@ -115,7 +115,7 @@ namespace control.Manager
                     if (ConnectToMailServer())
                     {
                         //TODO: Log error
-                        await Task.Delay(10000);
+                        await Task.Delay(10000, stopToken);
                         continue;
                     }
                 }

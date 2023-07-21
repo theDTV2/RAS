@@ -2,6 +2,7 @@
 {
     public interface IDataBaseManager
     {
-        Task DeleteOldLoginLinksAsync();
+        Task DeleteOldLoginLinksAsync(CancellationToken StopToken);
+        Task DeleteOldAccountsAsync(CancellationToken StopToken);
     }
 }

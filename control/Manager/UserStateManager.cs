@@ -90,14 +90,14 @@ namespace control.Manager
             return UserStates.Remove(sessionId);
         }
 
-        public static async Task DeleteOldStatesAsync()
+        public static async Task DeleteOldStatesAsync(CancellationToken stopToken)
         {
-            while (true)
+            while (!stopToken.IsCancellationRequested)
             {
                 /*We can use a rather large delay here to save performance
                 Doesnt really matter, if we remove a inactive user after 10 Minutes and 1 second or 10 minutes and 28 seconds, as
                  the user session will invalidate itself after 10 minutes regardless */
-                await Task.Delay(550000);
+                await Task.Delay(550000, stopToken);
 
                 //Use intermediary variabels to save performance
                 DateTime _now = DateTime.Now;
