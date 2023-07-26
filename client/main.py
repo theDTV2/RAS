@@ -134,9 +134,10 @@ display.set_keep_last_message(False)
 display.set_default_message(message="System ready", color=(255, 255, 255))
 
 
+_run = True
 
 try:
-    while True:
+    while _run:
         sleep(1)
 
         # Send Heartbeat to api
@@ -204,6 +205,7 @@ except KeyboardInterrupt:
     display.shut_down_task()
     reader.shut_down_task()
     door_communicator.shut_down_task()
+    _run = False
 
 
 
