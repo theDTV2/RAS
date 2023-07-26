@@ -26,7 +26,12 @@ namespace control.Pages
 
         public IActionResult OnGet()
         {
-            return Page();
+            if (!AccountHelper.GetLoggedIn(HttpContext))
+                return RedirectToPage("Account/Login");
+
+
+
+            return RedirectToPage("Account/Dashboard");
         }
     }
 }
