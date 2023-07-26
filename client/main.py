@@ -46,7 +46,7 @@ with open('config.cfg', 'r') as config_file_r:
     dns_name = config_data['dns_name']
     api_endpoint = config_data['api_endpoint']
     door_id = config_data['door_id']
-    door_name = config_data['door_name']
+    door_text = config_data['door_text']
     secret = config_data['secret']
     print("done")
     config_file_r.close()
@@ -78,7 +78,6 @@ if request_test.status_code != 200:
     exit(RETURN_CONNECTION_ERROR)
 
 
-
 print("api connection successful")
 # If secret is not set, we assume that this door is not registered
 if secret == "":
@@ -107,11 +106,11 @@ if secret == "":
         exit(RETURN_API_REGISTER_ERROR)
 
     secret = request_register.json()['secret']
-    door_name = request_register.json()['displayName']
+    door_text = request_register.json()['displayText']
 
     print("Door registered successfully, saving new parameters to config.cfg...")
     config_data['secret'] = secret
-    config_data['door_name'] = door_name
+    config_data['door_text'] = door_text
 
     with open('config.cfg', 'w') as config_file_w:
         json.dump(config_data, config_file_w)
@@ -131,7 +130,7 @@ reader_task = threading.Thread(target=reader.reader_task)
 reader_task.start()
 
 display.set_keep_last_message(False)
-display.set_default_message(message="System ready", color=(255, 255, 255))
+display.set_default_message(message="System ready\n"+door_text, color=(255, 255, 255))
 
 
 _run = True
