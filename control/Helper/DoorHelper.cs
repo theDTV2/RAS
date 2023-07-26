@@ -43,7 +43,6 @@ namespace control.Helper
 
             JsonObject _toReturnJsonRaw = new JsonObject()
             {
-                { "doorID" , doorId},
                 { "secret" , _newSecret},
                 { "timeStamp" , DateTime.Now.ToString()},
                 { "displayText", _door.DisplayText}
