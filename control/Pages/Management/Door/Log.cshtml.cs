@@ -12,7 +12,7 @@ using control.Generator;
 using System.ComponentModel.DataAnnotations;
 using control.Manager;
 
-namespace control.Pages.Managment.Door
+namespace control.Pages.Management.Door
 {
     public class LogModel : PageModel
     {

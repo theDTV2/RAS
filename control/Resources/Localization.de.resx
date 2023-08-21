@@ -432,7 +432,7 @@
   <data name="MANAGEMENT_USER_UNLOCK_ERROR_MISSING" xml:space="preserve">
     <value>Nutzer fehlt oder ungültig</value>
   </data>
-  <data name="MANAGMENT_USER_UNLOCK_SAVE_SUCCESSFUL" xml:space="preserve">
+  <data name="Management_USER_UNLOCK_SAVE_SUCCESSFUL" xml:space="preserve">
     <value>Erfolgreich gespeichert</value>
   </data>
   <data name="MANAGEMENT_DOOR_LIST_LOG" xml:space="preserve">

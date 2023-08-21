@@ -10,7 +10,7 @@ using control.Models;
 using control.Helper;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace control.Pages.Managment.Door
+namespace control.Pages.Management.Door
 {
     public class ListModel : PageModel
     {

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace control.Pages.Managment.Site
+namespace control.Pages.Management.Site
 {
     [BindProperties]
     public class MailModel : PageModel

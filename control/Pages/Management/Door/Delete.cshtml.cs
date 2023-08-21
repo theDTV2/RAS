@@ -9,7 +9,7 @@ using control.Data;
 using control.Models;
 using control.Helper;
 
-namespace control.Pages.Managment.Door
+namespace control.Pages.Management.Door
 {
     public class DeleteModel : PageModel
     {

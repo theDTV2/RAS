@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace control.Pages.Managment.Site
+namespace control.Pages.Management.Site
 {
     [BindProperties]
     public class GeneralModel : PageModel
@@ -29,7 +29,7 @@ namespace control.Pages.Managment.Site
 
             UserLoginTimeout = Convert.ToInt32(GeneralSettingsManager.GeneralSettingsObj.UserLoginTimeout.TotalMinutes);
 
-            //TODO: General Settings Managment Page
+            //TODO: General Settings Management Page
 
             return Page();
         }

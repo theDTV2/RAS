@@ -12,7 +12,7 @@ using control.Helper;
 using control.Generator;
 using control.Manager;
 
-namespace control.Pages.Managment.User
+namespace control.Pages.Management.User
 {
     public class ManageModel : PageModel
     {

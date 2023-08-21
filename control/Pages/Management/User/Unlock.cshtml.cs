@@ -14,7 +14,7 @@ using System.Runtime.ConstrainedExecution;
 using control.Helper;
 using control.Manager;
 
-namespace control.Pages.Managment.User
+namespace control.Pages.Management.User
 {
     public class UnlockModel : PageModel
     {
@@ -102,7 +102,7 @@ namespace control.Pages.Managment.User
 
             //TODO: Proper Error catching
 
-            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, LanguageManager.GetLocalizedString("MANAGMENT_USER_UNLOCK_SAVE_SUCCESSFUL", AccountHelper.GetUserLanguage(HttpContext)));
+            AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kSuccess, LanguageManager.GetLocalizedString("Management_USER_UNLOCK_SAVE_SUCCESSFUL", AccountHelper.GetUserLanguage(HttpContext)));
 
             UserStateManager.SetUpdatePermissionsRequired(User.UserName, User.AccessLevel);
 

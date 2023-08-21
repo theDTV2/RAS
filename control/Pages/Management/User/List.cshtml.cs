@@ -9,7 +9,7 @@ using control.Data;
 using control.Models;
 using control.Helper;
 
-namespace control.Pages.Managment.User
+namespace control.Pages.Management.User
 {
     public class ListModel : PageModel
     {

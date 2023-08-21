@@ -11,7 +11,7 @@ using control.Helper;
 using control.Generator;
 using System.ComponentModel.DataAnnotations;
 
-namespace control.Pages.Managment.Door
+namespace control.Pages.Management.Door
 {
     public class ManageModel : PageModel
     {
