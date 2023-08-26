@@ -94,7 +94,8 @@ namespace control.Helper
             _toReturnJsonRaw["displayText"] = _door.DisplayText;
             _toReturnJsonRaw["responseText"] = EnumHelper.ConvertEAccessReturnValueToString(_return_val);
 
-            LogHelper.AddDeniedUserEntryToLog(dataContext, _door, _user!);
+            if (_user is not null)
+                LogHelper.AddDeniedUserEntryToLog(dataContext, _door, _user);
 
             returnValue = new JsonResult(_toReturnJsonRaw);
             return true;
