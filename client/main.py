@@ -1,4 +1,5 @@
 import json
+import sys
 from os.path import exists
 from ssl import SSLError
 import threading
@@ -130,7 +131,7 @@ reader_task = threading.Thread(target=reader.reader_task)
 reader_task.start()
 
 display.set_keep_last_message(False)
-display.set_default_message(message="System ready\n"+door_text, color=(255, 255, 255))
+display.set_default_message(message="System ready", color=(255, 255, 255))
 
 
 _run = True
