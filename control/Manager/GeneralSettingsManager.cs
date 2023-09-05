@@ -51,6 +51,10 @@ namespace control.Manager
         {
             return GeneralSettingsObj.UserLoginTimeout;
         }
+        public static string GetEmailSuffix()
+        {
+            return GeneralSettingsObj.EMailSuffix;
+        }
 
     }
 
