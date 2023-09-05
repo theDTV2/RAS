@@ -160,7 +160,7 @@
     <value>&lt;Informationen über das Konto/Login&gt;</value>
   </data>
   <data name="ACCOUNT_LOGIN_MAIL_LABEL" xml:space="preserve">
-    <value>Emailadresse  nur "@htw-berlin.de"-Adressen werden unterstützt!)</value>
+    <value>Emailadresse  nur @{0}-Adressen werden unterstützt!)</value>
   </data>
   <data name="ACCOUNT_LOGIN_TITLE" xml:space="preserve">
     <value>Anmelden</value>
@@ -331,7 +331,7 @@
     <value>Einstellungen erfolgreich geändert</value>
   </data>
   <data name="MANAGEMENT_SETTINGS_GENERAL_TIMEOUT_LABEL" xml:space="preserve">
-    <value>Diese Einstellung wird erst nach einem Systemneustart übernommen</value>
+    <value>Wie lange die Logincodes aktiv bleiben. Diese Einstellung wird erst nach einem Systemneustart übernommen</value>
   </data>
   <data name="MANAGEMENT_SETTINGS_GENERAL_TITLE" xml:space="preserve">
     <value>Verwalten</value>
@@ -421,7 +421,7 @@
     <value>Fehlerhafter Status. Sie wurden abgemeldet</value>
   </data>
   <data name="ACCOUNT_LOGIN_WRONG_EMAIL_PROVIDER" xml:space="preserve">
-    <value>Nur login@htw-berlin.de Adressen werden unterstützt"</value>
+    <value>Nur @{0}-Adressen werden unterstützt"</value>
   </data>
   <data name="ACCOUNT_LOGOUT_PREVIOUS_SESSION_TERMINATED" xml:space="preserve">
     <value>Konto war bereits angemeldet. Vorherige Sitzung wurde terminiert.</value>
@@ -488,5 +488,11 @@
   </data>
   <data name="USER_LEVEL_GUEST" xml:space="preserve">
     <value>Gast</value>
+  </data>
+  <data name="MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX" xml:space="preserve">
+    <value>Login Email Suffix. Ohne das @!</value>
+  </data>
+  <data name="MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX_TOOLTIP" xml:space="preserve">
+    <value>Login Email Suffix. Ohne das @!</value>
   </data>
 </root>

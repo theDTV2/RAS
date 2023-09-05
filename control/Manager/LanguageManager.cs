@@ -29,6 +29,16 @@ namespace control.Manager
             return returnValue;
         }
 
+        public static string GetLocalizedStringWithParameter(string stringName, string parameter, string language)
+        {
+            string? returnValue = GetLocalizedString(stringName, language);
+
+            if(parameter == "")
+				return string.Format(returnValue, "missing value");
+
+			return string.Format(returnValue, parameter);
+        }
+
         public static bool IsValidLanguage(string language)
         {
             if (language == null) 

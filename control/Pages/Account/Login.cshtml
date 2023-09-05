@@ -11,7 +11,7 @@
 	var lang = AccountHelper.GetUserLanguage(HttpContext);
 
 	var ACCOUNT_LOGIN_TITLE = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_TITLE", lang);
-	var ACCOUNT_LOGIN_MAIL_LABEL = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_MAIL_LABEL", lang);
+	var ACCOUNT_LOGIN_MAIL_LABEL = LanguageManager.GetLocalizedStringWithParameter("ACCOUNT_LOGIN_MAIL_LABEL", GeneralSettingsManager.GetEmailSuffix(), lang);
 	var ACCOUNT_LOGIN_BUTTON = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_BUTTON", lang);
 	var ACCOUNT_LOGIN_INFO = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_INFO", lang);
 

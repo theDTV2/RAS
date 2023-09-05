@@ -17,6 +17,10 @@
     var MANAGEMENT_SETTINGS_GENERAL_UPDATE = LanguageManager.GetLocalizedString("MANAGEMENT_SETTINGS_GENERAL_UPDATE", lang);
     var MANAGEMENT_SETTINGS_GENERAL_BACK = LanguageManager.GetLocalizedString("MANAGEMENT_SETTINGS_GENERAL_BACK", lang);
 
+    var MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX_TOOLTIP = LanguageManager.GetLocalizedString("MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX_TOOLTIP", lang);
+
+    var MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX = LanguageManager.GetLocalizedString("MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX", lang);
+
 
 }
 <form method="post">
@@ -30,6 +34,10 @@
                     <input class="form-control" asp-for="UserLoginTimeout" data-toggle="tooltip" data-placement="top" title="@MANAGEMENT_SETTINGS_GENERAL_TIMEOUT_TOOLTIP">
                 </div>
 
+                <div class="form-group">
+                    <label class="form-label" asp-for="EMailSuffix" data-toggle="tooltip" data-placement="top" title="@MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX_TOOLTIP">@MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX</label>
+                    <input class="form-control" asp-for="EMailSuffix" data-toggle="tooltip" data-placement="top" title="@MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX_TOOLTIP">
+                </div>
             </div>
 
             <div class="col-sm">

@@ -160,7 +160,7 @@
     <value>&lt;info about login/account here&gt;</value>
   </data>
   <data name="ACCOUNT_LOGIN_MAIL_LABEL" xml:space="preserve">
-    <value>Email-Adress (only @htw-berlin.de-Adresses are supported!)</value>
+    <value>Email-Adress (only @{0}-Adresses are supported!)</value>
   </data>
   <data name="ACCOUNT_LOGIN_TITLE" xml:space="preserve">
     <value>Login</value>
@@ -334,7 +334,7 @@
     <value>Settings changed successfully</value>
   </data>
   <data name="MANAGEMENT_SETTINGS_GENERAL_TIMEOUT_LABEL" xml:space="preserve">
-    <value>This setting will not be applied until a system reboot</value>
+    <value>How long user logins stay valid. This setting will not be applied until a system reboot</value>
   </data>
   <data name="MANAGEMENT_SETTINGS_GENERAL_TITLE" xml:space="preserve">
     <value>Manage</value>
@@ -421,7 +421,7 @@
     <value>Invalid User State. You have been logged out!</value>
   </data>
   <data name="ACCOUNT_LOGIN_WRONG_EMAIL_PROVIDER" xml:space="preserve">
-    <value>Only login@htw-berlin.de emails are supported!</value>
+    <value>Only @{0} emails are supported!</value>
   </data>
   <data name="ACCOUNT_LOGOUT_PREVIOUS_SESSION_TERMINATED" xml:space="preserve">
     <value>The previous session was terminated</value>
@@ -488,5 +488,11 @@
   </data>
   <data name="USER_LEVEL_GUEST" xml:space="preserve">
     <value>Guest</value>
+  </data>
+  <data name="MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX" xml:space="preserve">
+    <value>Login Email Suffix. Without the @</value>
+  </data>
+  <data name="MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX_TOOLTIP" xml:space="preserve">
+    <value>Login Email Suffix. Without the @</value>
   </data>
 </root>
