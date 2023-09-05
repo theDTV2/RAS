@@ -19,7 +19,7 @@ namespace control.Helper
 
             var user = AccessHelper.GetOrCreateUserAsync(dataContext, email);
 
-            string loginKey = GenerateLoginCode();
+            string loginKey = GenerateLoginKey();
 
             await user;
 
@@ -77,7 +77,7 @@ namespace control.Helper
 
         }
 
-        private static string GenerateLoginCode(int lenght = 64)
+        private static string GenerateLoginKey(int lenght = 128)
         {
             byte[] code = RandomNumberGenerator.GetBytes(lenght);
             //We replace /, =, + to prevent issues with the url
