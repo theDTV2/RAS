@@ -70,6 +70,14 @@ namespace control.Pages.Account
 
                 return RedirectToPage("Dashboard");
             }
+
+             if (AuthHelper.CheckIfMaxAuthTriesReached(_context, AccountHelper.GetUserName(HttpContext)))
+            {
+                AccountHelper.LogoutUser(HttpContext);
+                AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, LanguageManager.GetLocalizedString("ACCOUNT_LOGINCODE_MAX_RETRIES", AccountHelper.GetUserLanguage(HttpContext)));
+                return RedirectToPage("Login");
+            }
+
             AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kError, LanguageManager.GetLocalizedString("ACCOUNT_LOGINCODE_FAILED", AccountHelper.GetUserLanguage(HttpContext)));
             return Page();
         }

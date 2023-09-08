@@ -76,12 +76,16 @@ namespace control.Helper
                 //Remove Access Code after login
                 userToCheck.AccessCode = String.Empty;
                 userToCheck.AccessCodeGenerationTime = DateTime.MinValue;
+                user.AccessCodeRetries = 0;
                 user.LastLogin = DateTime.Now;
 
                 dataContext.SaveChanges();
 
                 return EAccessReturnValue.kAccessGranted;
             }
+
+            user.AccessCodeRetries += 1;
+            dataContext.SaveChanges();
 
             return EAccessReturnValue.kAccessDenied;
         }
@@ -102,6 +106,7 @@ namespace control.Helper
                 //Remove Access Code after login
                 user.AccessCode = String.Empty;
                 user.AccessCodeGenerationTime = DateTime.MinValue;
+                user.AccessCodeRetries = 0;
                 user.LastLogin = DateTime.Now;
 
                 dataContext.SaveChanges();

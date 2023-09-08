@@ -158,6 +158,27 @@ namespace control.Helper
             return true;
         }
 
+        public static bool CheckIfMaxAuthTriesReached(control.Data.controlContext dataContext, string userName)
+        {
+
+            User? _user = GetUserAsync(dataContext, userName).Result;
+
+            if (_user == null)
+                return true;
+
+            if(_user.AccessCodeRetries >= 10)
+            {
+                _user.AccessCode = String.Empty;
+                _user.AccessCodeGenerationTime = DateTime.MinValue;
+                _user.AccessCodeRetries = 0;
+                dataContext.SaveChanges();
+                return true;
+            }
+               
+
+            return false;
+
+        }
         
     }
 }
