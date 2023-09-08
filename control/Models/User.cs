@@ -54,6 +54,8 @@ namespace control.Models
 
         public string AccessCode { get; set; } = "";
         public DateTime? AccessCodeGenerationTime { get; set; }
+
+        public int AccessCodeRetries { get; set; } = 0;
         public DateTime? LastLogin {get;set;}
 
         [ForeignKey("AccessUsers")]
