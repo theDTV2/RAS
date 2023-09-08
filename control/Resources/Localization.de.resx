@@ -495,4 +495,7 @@
   <data name="MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX_TOOLTIP" xml:space="preserve">
     <value>Login Email Suffix. Ohne das @!</value>
   </data>
+  <data name="ACCOUNT_LOGINCODE_MAX_RETRIES" xml:space="preserve">
+    <value>Maximale Anmeldeversuche erreicht</value>
+  </data>
 </root>
