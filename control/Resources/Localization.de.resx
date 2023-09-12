@@ -169,7 +169,7 @@
     <value>Erfolgreich abgemeldet</value>
   </data>
   <data name="ACCOUNT_PRIVACY_BUTTON_LABEL" xml:space="preserve">
-    <value>Datenschutzerklärung</value>
+    <value>Abschicken</value>
   </data>
   <data name="ACCOUNT_PRIVACY_CHECKBOX_LABEL" xml:space="preserve">
     <value>Ich stimme der obrigen Erklärung zu</value>

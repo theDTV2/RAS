@@ -169,7 +169,7 @@
     <value>Logged out successfully</value>
   </data>
   <data name="ACCOUNT_PRIVACY_BUTTON_LABEL" xml:space="preserve">
-    <value>Privacy Agreement</value>
+    <value>Submit</value>
   </data>
   <data name="ACCOUNT_PRIVACY_CHECKBOX_LABEL" xml:space="preserve">
     <value>I agree to the above statement</value>
