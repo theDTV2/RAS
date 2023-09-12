@@ -157,7 +157,7 @@
     <value>Login</value>
   </data>
   <data name="ACCOUNT_LOGIN_INFO" xml:space="preserve">
-    <value>&lt;info about login/account here&gt;</value>
+    <value>To register/login, use an @htw-berlin.de address</value>
   </data>
   <data name="ACCOUNT_LOGIN_MAIL_LABEL" xml:space="preserve">
     <value>Email-Adress (only @{0}-Adresses are supported!)</value>
