@@ -23,7 +23,7 @@ namespace control.Pages.Account
             if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kUser, IgnoreExpiryDate: true))
                 return Unauthorized();
 
-            ExpiryDate = AccountHelper.GetExpiryDate(_context, HttpContext);
+            ExpiryDate = AccountHelper.GetExpiryDateAsString(_context, HttpContext);
 
             return Page();
         }

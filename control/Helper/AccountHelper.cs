@@ -129,8 +129,15 @@ namespace control.Helper
 
             return dataContext.User.Where(e => e.UserName == _userName).FirstOrDefault()!;
         }
+        public static DateTime GetExpiryDate(control.Data.controlContext dataContext, HttpContext httpContext)
+        {
+            if (!GetLoggedIn(httpContext))
+                return DateTime.MinValue;
 
-        public static string GetExpiryDate(control.Data.controlContext dataContext, HttpContext httpContext)
+            return GetLoggedInUser(dataContext, httpContext).ExpiryDate;
+        }
+
+        public static string GetExpiryDateAsString(control.Data.controlContext dataContext, HttpContext httpContext)
         {
             if (!GetLoggedIn(httpContext))
                 return "";
