@@ -175,7 +175,76 @@
     <value>I agree to the above statement</value>
   </data>
   <data name="ACCOUNT_PRIVACY_EULA" xml:space="preserve">
-    <value>&lt;EULA here&gt;</value>
+    <value>&lt;p&gt;End User License Agreement (EULA) for the Use of the Management System.&lt;/p&gt;
+
+&lt;p&gt;Please carefully read this End User License Agreement (EULA) before using
+into our management system. By using this system, you agree to the following
+terms:&lt;/p&gt;
+
+&lt;p style='margin-left:36.0pt;text-indent:-18.0pt'&gt;1.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;/span&gt;&lt;b&gt;Data Collection and Usage:&lt;/b&gt; &lt;/p&gt;
+
+&lt;p style='margin-left:72.0pt;text-indent:-18.0pt'&gt;1.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;/span&gt;Email: Your email address will be collected and used for communication
+related to your account and the management system. We will not share your email
+address with third parties without your explicit consent. &lt;/p&gt;
+
+&lt;p style='margin-left:72.0pt;text-indent:-18.0pt'&gt;2.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;/span&gt;First Name and Last Name: We collect your first and last names for
+tracking activities, especially in the case of damage or misuse. &lt;/p&gt;
+
+&lt;p style='margin-left:72.0pt;text-indent:-18.0pt'&gt;3.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;/span&gt;Access Times: Your access times are recorded and used to create
+statistical analyses of the usage of the management system. This information
+helps us improve the performance and efficiency of the system. &lt;/p&gt;
+
+&lt;p style='margin-left:72.0pt;text-indent:-18.0pt'&gt;4.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;/span&gt;Login Timestamp: Your login timestamp is recorded to identify and delete
+inactive accounts that remain inactive for a specific period. &lt;/p&gt;
+
+&lt;p style='margin-left:72.0pt;text-indent:-18.0pt'&gt;5.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;/span&gt;NFC ID: For identification and authentication at a door lock, we may
+collect an NFC ID. This is used exclusively for access to specific physical
+spaces or facilities within the management system.&lt;/p&gt;
+
+&lt;p style='margin-left:36.0pt;text-indent:-18.0pt'&gt;2.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;/span&gt;&lt;b&gt;Confidentiality and Security&lt;/b&gt;: We take reasonable measures to
+protect your personal data and prevent unauthorized access, loss, misuse, or
+disclosure.&lt;/p&gt;
+
+&lt;p style='margin-left:36.0pt;text-indent:-18.0pt'&gt;3.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;/span&gt;&lt;b&gt;Account Responsibility&lt;/b&gt;: You are responsible for keeping your
+login credentials and account secure. Sharing your login information with third
+parties is not allowed.&lt;/p&gt;
+
+&lt;p style='margin-left:36.0pt;text-indent:-18.0pt'&gt;4.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;/span&gt;&lt;b&gt;Data Deletion&lt;/b&gt;: If your account remains inactive for an extended
+period, we reserve the right to delete your account and associated data. The
+exact timeframe for inactivity is 1 year.&lt;/p&gt;
+
+&lt;p style='margin-left:36.0pt;text-indent:-18.0pt'&gt;5.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;/span&gt;&lt;b&gt;Changes to the EULA:&lt;/b&gt; We reserve the right to change this EULA at
+any time. Changes will be posted on this platform, and your continued use of
+the system after the changes are published will be considered acceptance of the
+updated terms.&lt;/p&gt;
+
+&lt;p style='margin-left:36.0pt;text-indent:-18.0pt'&gt;6.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;/span&gt;&lt;b&gt;Contact&lt;/b&gt;: If you have any questions or concerns regarding this
+EULA or your personal data, you can contact us at &lt;a
+href="mailto:lupak@htw-berlin.de" target="_new"&gt;lupak@htw-berlin.de&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p style='margin-left:36.0pt;text-indent:-18.0pt'&gt;7.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;/span&gt;&lt;b&gt;Laboratory Regulations&lt;/b&gt;: When entering a room or facility within
+the management system, the respective laboratory regulations or guidelines of
+that space apply. These laboratory regulations may specify requirements,
+behavioral rules, and safety measures for the respective room or area. It is
+your responsibility to ensure that you comply with the applicable laboratory
+regulations when entering or using these spaces. Violations of these laboratory
+regulations may result in restrictions on your access or other actions taken by
+the management operators.&lt;/p&gt;
+
+&lt;p&gt;By logging into our management system, you agree to the terms of this EULA.
+If you do not agree to these terms, you may not use the system.&lt;/p&gt;</value>
   </data>
   <data name="ACCOUNT_PRIVACY_INFO" xml:space="preserve">
     <value>Please read the text and confirm your agreement to continue using this site.</value>
