@@ -154,7 +154,7 @@ try:
                 if _text_to_display is not None:
                     display.set_default_message(_text_to_display, color=(255, 255, 255))
 
-            except ConnectionError:
+            except requests.exceptions.ConnectionError:
                 print("API not reachable")
                 display.write_error_message("Lost connection to API\n Trying again in 10 seconds...", 10)
 
@@ -174,7 +174,7 @@ try:
             try:
                 return_access_request = requests.post(total_address + "/Access",
                                                       data=data_request_access, verify=verify_ssl_cert)
-            except ConnectionError:
+            except requests.exceptions.ConnectionError:
                 print("API not reachable")
                 display.write_error_message("Lost connection to API\n Trying again in 10 seconds...", 10)
                 sleep(10)
