@@ -23,7 +23,7 @@ namespace control.Pages.Account
 
             if (!DateHelper.LoggedInUserIsAllowedToExtend(_context, HttpContext))
             {
-                //TODO: Guard against page entry instead of here
+                
                 AlertGenerator.AddAlertToSession(HttpContext, AlertGenerator.EAlertLevel.kWarning, LanguageManager.GetLocalizedString("ACCOUNT_EXTEND_NOT_POSSIBLE_YET", AccountHelper.GetUserLanguage(HttpContext)));
 
                 return RedirectToPage("Dashboard");
