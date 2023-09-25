@@ -574,4 +574,10 @@ nicht einverstanden sind, d rfen Sie das System nicht nutzen.&lt;/p&gt;</value>
   <data name="ACCOUNT_LOGINCODE_MAX_RETRIES" xml:space="preserve">
     <value>Maximale Anmeldeversuche erreicht</value>
   </data>
+  <data name="MANAGEMENT_SETTINGS_HOSTNAME" xml:space="preserve">
+    <value>Website-URI</value>
+  </data>
+  <data name="MANAGEMENT_SETTINGS_HOSTNAME_TOOLTIP" xml:space="preserve">
+    <value>Website-URI</value>
+  </data>
 </root>
