@@ -26,6 +26,10 @@ namespace control.Pages.Management.Site
         [Display(Name = "Email Login Suffix (Example: htw-berlin.de)")]
         public string EMailSuffix { get; set; }
 
+        [Display(Name = "Full Site Hostname (Example: site.f1.htw-berlin.de")]
+        public string Hostname { get; set; }
+
+
         public IActionResult OnGet()
         {
             if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kSuperAdmin))
@@ -33,6 +37,7 @@ namespace control.Pages.Management.Site
 
             UserLoginTimeout = Convert.ToInt32(GeneralSettingsManager.GeneralSettingsObj.UserLoginTimeout.TotalMinutes);
             EMailSuffix = GeneralSettingsManager.GetEmailSuffix();
+            Hostname = GeneralSettingsManager.GetHostName();
             //TODO: General Settings Management Page
 
             return Page();
@@ -44,6 +49,7 @@ namespace control.Pages.Management.Site
 
             GeneralSettingsManager.GeneralSettingsObj.UserLoginTimeout = TimeSpan.FromMinutes(UserLoginTimeout);
             GeneralSettingsManager.GeneralSettingsObj.EMailSuffix = EMailSuffix;
+            GeneralSettingsManager.GeneralSettingsObj.Hostname = Hostname;
 
             GeneralSettingsManager.SaveGeneralSettingsToConfig();
 

@@ -55,6 +55,10 @@ namespace control.Manager
         {
             return GeneralSettingsObj.EMailSuffix;
         }
+        public static string GetHostName()
+        {
+            return GeneralSettingsObj.Hostname;
+        }
 
     }
 

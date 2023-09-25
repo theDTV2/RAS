@@ -21,6 +21,9 @@
 
     var MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX = LanguageManager.GetLocalizedString("MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX", lang);
 
+    var MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX = LanguageManager.GetLocalizedString("MANAGEMENT_SETTINGS_HOSTNAME", lang);
+    var MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX = LanguageManager.GetLocalizedString("MANAGEMENT_SETTINGS_HOSTNAME_TOOLTIP", lang);
+
 
 }
 <form method="post">
@@ -37,6 +40,11 @@
                 <div class="form-group">
                     <label class="form-label" asp-for="EMailSuffix" data-toggle="tooltip" data-placement="top" title="@MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX_TOOLTIP">@MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX</label>
                     <input class="form-control" asp-for="EMailSuffix" data-toggle="tooltip" data-placement="top" title="@MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX_TOOLTIP">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" asp-for="SiteHostName" data-toggle="tooltip" data-placement="top" title="@MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX_TOOLTIP">@MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX</label>
+                    <input class="form-control" asp-for="SiteHostName" data-toggle="tooltip" data-placement="top" title="@MANAGEMENT_SETTINGS_GENERAL_EMAIL_SUFFIX_TOOLTIP">
                 </div>
             </div>
 
