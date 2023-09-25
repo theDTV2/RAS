@@ -73,7 +73,7 @@ namespace control.Manager
         public static void AddLoginMailToQueue(HttpContext httpContext, string adressToSendTo, string loginCode, string loginKey)
         {
             string _message = "<p>Click the following link or use the login code to sign in.</p>"
-+ "<a href = https://" + httpContext.Request.Host + @"/Account/LoginCode/" + HttpUtility.UrlEncode(loginKey) + ">Click here</a> <br> "
++ "<a href = https://" + GeneralSettingsManager.GetHostName() + @"/Account/LoginCode/" + HttpUtility.UrlEncode(loginKey) + ">Click here</a> <br> "
 + loginCode + "<br> If you did not request this message, you can ignore it.";
 
             EmailQueueHighPriority.Push(new Email(adressToSendTo, "RAS Login", _message));
