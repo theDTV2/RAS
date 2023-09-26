@@ -12,6 +12,8 @@
     var ACCOUNT_DASHBOARD_EXPIRY_DATE = LanguageManager.GetLocalizedString("ACCOUNT_DASHBOARD_EXPIRY_DATE", lang);
     var ACCOUNT_DASHBOARD_EXTEND_BUTTON = LanguageManager.GetLocalizedString("ACCOUNT_DASHBOARD_EXTEND_BUTTON", lang);
     var ACCOUNT_EXTEND_BUTTON = LanguageManager.GetLocalizedString("ACCOUNT_EXTEND_BUTTON", lang);
+
+    var ACCOUNT_GUEST_INFO = LanguageManager.GetLocalizedString("ACCOUNT_GUEST_INFO", lang);
 }
 
 
@@ -25,5 +27,10 @@
         </div>
     </div>
     <div class="w-100"></div>
-    <div class="col">TODO: Door access list</div>
+    <div class="col">
+        @if (!Model.HasAnyDoorAccess)
+        {
+            <b>@ACCOUNT_GUEST_INFO</b>
+        }
+    </div>
 </div>

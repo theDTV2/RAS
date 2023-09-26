@@ -18,12 +18,18 @@ namespace control.Pages.Account
 
         [BindProperty]
         public string ExpiryDate { get; set; }
+
+
+        [BindProperty]
+        public bool HasAnyDoorAccess { get; set; }
         public IActionResult OnGet()
         {
             if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kUser, IgnoreExpiryDate: true))
                 return Unauthorized();
 
             ExpiryDate = AccountHelper.GetExpiryDateAsString(_context, HttpContext);
+
+            HasAnyDoorAccess = AccountHelper.DoesUserHasAccessToAnyDoor(_context, HttpContext);
 
             return Page();
         }
