@@ -376,7 +376,7 @@ If you do not agree to these terms, you may not use the system.&lt;/p&gt;</value
     <value>SMTP Password</value>
   </data>
   <data name="MANAGEMENT_SETTINGS_EMAIL_SMTP_ADDRESS" xml:space="preserve">
-    <value>SMTP Login Name</value>
+    <value>SMTP Server</value>
   </data>
   <data name="MANAGEMENT_SETTINGS_EMAIL_SMTP_PORT" xml:space="preserve">
     <value>SMTP Port</value>
