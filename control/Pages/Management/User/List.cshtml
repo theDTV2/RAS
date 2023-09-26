@@ -115,16 +115,18 @@
                         @Html.DisplayFor(modelItem => item.CompletedRegistration)
                     </td>
                     <td>
+                
+                        
                         <a class="btn btn-primary" asp-page="./Unlock" asp-route-UserIdentifier="@item.UserName">@MANAGEMENT_USER_LIST_UNLOCK</a>
                         <a class="btn btn-primary" asp-page="./Log" asp-route-UserIdentifier="@item.UserName">@MANAGEMENT_USER_LIST_LOG</a>
 
 
                         @if (AccountHelper.GetEAccessLevel(HttpContext) > item.AccessLevel || AccountHelper.GetEAccessLevel(HttpContext) == EAccessLevel.kSuperAdmin)
                         {
-                            @Html.Raw("|");
+                          
                             <a class="btn btn-primary" asp-page="./Manage" asp-route-id="@item.UserName">@MANAGEMENT_USER_LIST_MANAGE</a>
                         }
-
+        
                     </td>
                 </tr>
             }
