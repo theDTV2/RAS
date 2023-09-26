@@ -175,9 +175,9 @@
     <value>Ich stimme der obrigen Erklärung zu</value>
   </data>
   <data name="ACCOUNT_PRIVACY_EULA" xml:space="preserve">
-    <value>&lt;p&gt;Endbenutzer-Lizenzvereinbarung (EULA) f r die Nutzung des Verwaltungssystems&lt;/p&gt;
+    <value>&lt;p&gt;Endbenutzer-Lizenzvereinbarung (EULA) für die Nutzung des Verwaltungssystems&lt;/p&gt;
 
-&lt;p&gt;Bitte lesen Sie diese Endbenutzer-Lizenzvereinbarung (EULA) sorgf ltig
+&lt;p&gt;Bitte lesen Sie diese Endbenutzer-Lizenzvereinbarung (EULA) sorgfältig
 durch, bevor Sie sich in unserem Verwaltungssystem anmelden. Durch die Nutzung
 dieses Systems stimmen Sie den folgenden Bedingungen zu:&lt;/p&gt;
 
@@ -185,73 +185,73 @@ dieses Systems stimmen Sie den folgenden Bedingungen zu:&lt;/p&gt;
 &lt;/span&gt;&lt;strong&gt;Datenerfassung und -verwendung:&lt;/strong&gt; &lt;/p&gt;
 
 &lt;p style='margin-left:72.0pt;text-indent:-18.0pt'&gt;1.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-&lt;/span&gt;&lt;strong&gt;Email:&lt;/strong&gt; Ihre E-Mail-Adresse wird erfasst und f r die
+&lt;/span&gt;&lt;strong&gt;Email:&lt;/strong&gt; Ihre E-Mail-Adresse wird erfasst und für die
 Kommunikation mit Ihnen im Zusammenhang mit Ihrem Konto und dem
 Verwaltungssystem verwendet. Wir werden Ihre E-Mail-Adresse nicht ohne Ihre
-ausdr ckliche Zustimmung an Dritte weitergeben.&lt;/p&gt;
+ausdrückliche Zustimmung an Dritte weitergeben.&lt;/p&gt;
 
 &lt;p style='margin-left:72.0pt;text-indent:-18.0pt'&gt;2.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
 &lt;/span&gt;&lt;strong&gt;Vorname und Nachname:&lt;/strong&gt; Wir erfassen Ihren Vor- und
 Nachnamen zur Nachverfolgung von Aktivit ten, insbesondere im Falle von
-Besch digungen oder Missbrauch.&lt;/p&gt;
+Beschädigungen oder Missbrauch.&lt;/p&gt;
 
 &lt;p style='margin-left:72.0pt;text-indent:-18.0pt'&gt;3.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
 &lt;/span&gt;&lt;strong&gt;Zugangszeitpunkte:&lt;/strong&gt; Ihre Zugangszeitpunkte werden
-erfasst und zur Erstellung von statistischen Analysen  ber die Nutzung des
+erfasst und zur Erstellung von statistischen Analysen über die Nutzung des
 Verwaltungssystems verwendet. Diese Informationen helfen uns, die Leistung und
 Effizienz des Systems zu verbessern.&lt;/p&gt;
 
 &lt;p style='margin-left:72.0pt;text-indent:-18.0pt'&gt;4.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
 &lt;/span&gt;&lt;strong&gt;Anmeldezeitpunkt:&lt;/strong&gt; Ihr Anmeldezeitpunkt wird erfasst, um
-inaktive Konten zu identifizieren und zu l schen, wenn sie  ber einen
+inaktive Konten zu identifizieren und zu löschen, wenn sie über einen
 bestimmten Zeitraum hinweg inaktiv bleiben. &lt;/p&gt;
 
 &lt;p style='margin-left:72.0pt;text-indent:-18.0pt'&gt;5.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
 &lt;/span&gt;&lt;strong&gt;NFC-ID:&lt;/strong&gt; Zur Identifikation und Authentifizierung an
-einem T rschloss k nnen wir eine NFC-ID erfassen. Diese wird ausschlie lich f r
-den Zugang zu bestimmten physischen R umen oder Einrichtungen innerhalb des
+einem Türschloss können wir eine NFC-ID erfassen. Diese wird ausschließlich für
+den Zugang zu bestimmten physischen Räumen oder Einrichtungen innerhalb des
 Verwaltungssystems verwendet.&lt;/p&gt;
 
 &lt;p style='margin-left:36.0pt;text-indent:-18.0pt'&gt;2.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
 &lt;/span&gt;&lt;strong&gt;Vertraulichkeit und Sicherheit:&lt;/strong&gt; Wir unternehmen
-angemessene Ma nahmen, um Ihre pers nlichen Daten zu sch tzen und unbefugten
+angemessene Maßnahmen, um Ihre persönlichen Daten zu schützen und unbefugten
 Zugriff, Verlust, Missbrauch oder Offenlegung zu verhindern.&lt;/p&gt;
 
 &lt;p style='margin-left:36.0pt;text-indent:-18.0pt'&gt;3.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-&lt;/span&gt;&lt;strong&gt;Konto-Verantwortlichkeit:&lt;/strong&gt; Sie sind daf r
+&lt;/span&gt;&lt;strong&gt;Konto-Verantwortlichkeit:&lt;/strong&gt; Sie sind dafür
 verantwortlich, Ihre Anmeldeinformationen und Ihr Konto sicher zu halten. Die
 Weitergabe Ihrer Anmeldeinformationen an Dritte ist nicht gestattet.&lt;/p&gt;
 
 &lt;p style='margin-left:36.0pt;text-indent:-18.0pt'&gt;4.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-&lt;/span&gt;&lt;strong&gt;Datenl schung:&lt;/strong&gt; Wenn Ihr Konto f r einen l ngeren
+&lt;/span&gt;&lt;strong&gt;Datenl schung:&lt;/strong&gt; Wenn Ihr Konto für einen längeren
 Zeitraum inaktiv bleibt, behalten wir uns das Recht vor, Ihr Konto und Ihre
-damit verbundenen Daten zu l schen. Die genaue Zeitspanne f r die Inaktivit t betr gt
+damit verbundenen Daten zu löschen. Die genaue Zeitspanne für die Inaktivität beträgt
 1 Jahr.&lt;/p&gt;
 
 &lt;p style='margin-left:36.0pt;text-indent:-18.0pt'&gt;5.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-&lt;/span&gt;&lt;strong&gt; nderungen an der EULA:&lt;/strong&gt; Wir behalten uns das Recht vor,
-diese EULA jederzeit zu  ndern.  nderungen werden auf dieser Plattform
-ver ffentlicht, und Ihre fortgesetzte Nutzung des Systems nach Ver ffentlichung
-der  nderungen gilt als Annahme der aktualisierten Bedingungen.&lt;/p&gt;
+&lt;/span&gt;&lt;strong&gt; Änderungen an der EULA:&lt;/strong&gt; Wir behalten uns das Recht vor,
+diese EULA jederzeit zu ändern.  Änderungen werden auf dieser Plattform
+veröffentlicht, und Ihre fortgesetzte Nutzung des Systems nach Veröffentlichung
+der Änderungen gilt als Annahme der aktualisierten Bedingungen.&lt;/p&gt;
 
 &lt;p style='margin-left:36.0pt;text-indent:-18.0pt'&gt;6.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-&lt;/span&gt;&lt;strong&gt;Kontakt:&lt;/strong&gt; Bei Fragen oder Anliegen bez glich dieser EULA
-oder Ihrer pers nlichen Daten k nnen Sie sich an uns wenden unter lupak@htw-berlin.de&lt;/p&gt;
+&lt;/span&gt;&lt;strong&gt;Kontakt:&lt;/strong&gt; Bei Fragen oder Anliegen bezüglich dieser EULA
+oder Ihrer persönlichen Daten können Sie sich an uns wenden unter lupak@htw-berlin.de&lt;/p&gt;
 
 &lt;p style='margin-left:36.0pt;text-indent:-18.0pt'&gt;7.&lt;span style='font:7.0pt "Times New Roman"'&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
 &lt;/span&gt;&lt;strong&gt;Laborordnung:&lt;/strong&gt; Bei Betreten eines Raumes oder einer
 Einrichtung innerhalb des Verwaltungssystems gelten die jeweiligen
-Laborordnungen oder Richtlinien dieses Raumes. Diese Laborordnungen k nnen
-spezifische Anforderungen, Verhaltensregeln und Sicherheitsvorschriften f r den
+Laborordnungen oder Richtlinien dieses Raumes. Diese Laborordnungen können
+spezifische Anforderungen, Verhaltensregeln und Sicherheitsvorschriften für den
 jeweiligen Raum oder Bereich festlegen. Es ist Ihre Verantwortung
 sicherzustellen, dass Sie die geltenden Laborordnungen einhalten, wenn Sie
-diese R ume betreten oder nutzen. Verst  e gegen diese Laborordnungen k nnen
-zur Einschr nkung Ihres Zugangs oder anderen Ma nahmen f hren, die von den
+diese Räume betreten oder nutzen. Verstöße gegen diese Laborordnungen können
+zur Einschränkung Ihres Zugangs oder anderen Maßnahmen führen, die von den
 Verwaltungsbetreibern ergriffen werden.&lt;/p&gt;
 
-&lt;p&gt;Indem Sie sich in unserem Verwaltungssystem anmelden, erkl ren Sie sich mit
+&lt;p&gt;Indem Sie sich in unserem Verwaltungssystem anmelden, erklären Sie sich mit
 den Bedingungen dieser EULA einverstanden. Wenn Sie mit diesen Bedingungen
-nicht einverstanden sind, d rfen Sie das System nicht nutzen.&lt;/p&gt;</value>
+nicht einverstanden sind, dürfen Sie das System nicht nutzen.&lt;/p&gt;</value>
   </data>
   <data name="ACCOUNT_PRIVACY_INFO" xml:space="preserve">
     <value>Bitte lesen Sie den Text und bestätigen Sie Ihr Einverständnis zur weiteren Nutzung dieser Website.</value>
