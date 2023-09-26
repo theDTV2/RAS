@@ -160,5 +160,21 @@ namespace control.Helper
 
         }
 
+        public static bool DoesUserHasAccessToAnyDoor(control.Data.controlContext dataContext, HttpContext httpContext)
+        {
+            string _username = GetUserName(httpContext);
+
+            //Admins and Super Admins are ignored here
+            if (GetEAccessLevel(httpContext) >= EAccessLevel.kAdmin)
+                return true;
+        
+            var _user = dataContext.User.Where(u => u.UserName == _username).Include(u => u.AdminDoors).Include(u => u.AccessDoors).First();
+
+                if ((_user.AccessDoors.Count > 0) || (_user.AdminDoors.Count > 0))
+                    return true;
+
+            return false;
+        }
+
     }
 }
