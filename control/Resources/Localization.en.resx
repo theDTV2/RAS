@@ -252,7 +252,7 @@ If you do not agree to these terms, you may not use the system.&lt;/p&gt;</value
   <data name="ACCOUNT_PRIVACY_TITLE" xml:space="preserve">
     <value>Privacy Page</value>
   </data>
-  <data name="ACCOUNT_REGISTER_TITLE" xml:space="preserve">
+  <data name="ACCOUNT_REGISTER_USER_TITLE" xml:space="preserve">
     <value>Register Page</value>
   </data>
   <data name="ACCOUNT_REGISTER_USER_BUTTON" xml:space="preserve">
@@ -572,5 +572,8 @@ If you do not agree to these terms, you may not use the system.&lt;/p&gt;</value
   </data>
   <data name="MANAGEMENT_SETTINGS_HOSTNAME_TOOLTIP" xml:space="preserve">
     <value>Website-URI</value>
+  </data>
+  <data name="ACCOUNT_GUEST_INFO" xml:space="preserve">
+    <value>The account is not yet activated. Please finish your registration in room G531.</value>
   </data>
 </root>

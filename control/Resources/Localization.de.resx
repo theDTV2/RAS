@@ -259,7 +259,7 @@ nicht einverstanden sind, d rfen Sie das System nicht nutzen.&lt;/p&gt;</value>
   <data name="ACCOUNT_PRIVACY_TITLE" xml:space="preserve">
     <value>Datenschutzerklärung</value>
   </data>
-  <data name="ACCOUNT_REGISTER_TITLE" xml:space="preserve">
+  <data name="ACCOUNT_REGISTER_USER_TITLE" xml:space="preserve">
     <value>Registrierung</value>
   </data>
   <data name="ACCOUNT_REGISTER_USER_BUTTON" xml:space="preserve">
@@ -579,5 +579,8 @@ nicht einverstanden sind, d rfen Sie das System nicht nutzen.&lt;/p&gt;</value>
   </data>
   <data name="MANAGEMENT_SETTINGS_HOSTNAME_TOOLTIP" xml:space="preserve">
     <value>Website-URI</value>
+  </data>
+  <data name="ACCOUNT_GUEST_INFO" xml:space="preserve">
+    <value>Das Konto ist noch nicht freigeschaltet. Bitte in Raum G531 melden.</value>
   </data>
 </root>
