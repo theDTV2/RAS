@@ -62,15 +62,14 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="@MANAGEMENT_USER_MANAGE_SAVE" class="btn btn-primary" />
+                    <a class="btn btn-secondary" asp-page="./List">@MANAGEMENT_USER_MANAGE_BACK</a>
+                    <input type="submit" value="@MANAGEMENT_USER_MANAGE_SAVE" class="btn btn-success" />
                 </div>
             </form>
         </div>
     </div>
 
-    <div>
-        <a class="btn btn-secondary" asp-page="./List">@MANAGEMENT_USER_MANAGE_BACK</a>
-    </div>
+
 
     @section Scripts {
         @{

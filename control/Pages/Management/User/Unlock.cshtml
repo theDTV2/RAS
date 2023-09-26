@@ -57,7 +57,12 @@
 
 
                 <br />
-                <a class="btn btn-primary" asp-page="List">@MANAGEMENT_USER_UNLOCK_BACK</a>
+                
+
+                <div class="form-group">
+                    <a class="btn btn-primary" asp-page="List">@MANAGEMENT_USER_UNLOCK_BACK</a>
+                    <input type="submit" value="@MANAGEMENT_USER_UNLOCK_UPDATE" class="btn btn-success" />
+                </div>
             </div>
 
             <div class="col-sm-4 offset-lg-1">
@@ -71,12 +76,12 @@
                 <label asp-for="DoorsToGiveAccessTo" class="control-label">@MANAGEMENT_USER_DOOR_ACCESS_LIST</label>
                     <select class="selectpicker" asp-for="DoorsToGiveAccessTo" asp-items="(MultiSelectList)@ViewData["SelectBox"]!"></select>
 
-                <br /> <div class="form-group">
-                    <input type="submit" value="@MANAGEMENT_USER_UNLOCK_UPDATE" class="btn btn-primary" />
-                </div>
+      
                
             </div>
         </div>
+
+
         <script>
             document.getElementById('unlock-form').addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
