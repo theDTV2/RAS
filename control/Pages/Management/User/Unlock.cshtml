@@ -38,7 +38,7 @@
 
     <h4>@MANAGEMENT_USER_UNLOCK_TITLE</h4>
     <hr />
-    <form asp-page-handler="edit" method="post">
+    <form asp-page-handler="edit" id="unlock-form" method="post">
         <div class="row">
             <div class="col-sm-6">
                 <a>@MANAGEMENT_USER_UNLOCK_CURRENT_USER: @Model.UserIdentifier</a>
@@ -77,6 +77,14 @@
                
             </div>
         </div>
+        <script>
+            document.getElementById('unlock-form').addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault(); // Prevent form submission
+                }
+            });
+        </script>
+
 
     </form>
 
@@ -87,3 +95,4 @@
     }
 </body>
 </html>
+
