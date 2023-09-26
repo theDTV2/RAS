@@ -1,8 +1,16 @@
 ﻿@page
 @model PrivacyModel
+@using control.Helper;
+@using control.Manager;
 @{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+
+
+    var lang = AccountHelper.GetUserLanguage(HttpContext);
+
+    var ACCOUNT_PRIVACY_TITLE = LanguageManager.GetLocalizedString("ACCOUNT_PRIVACY_TITLE", lang);
+    var ACCOUNT_PRIVACY_EULA = LanguageManager.GetLocalizedString("ACCOUNT_PRIVACY_EULA", lang);
+}
+<h1>@ACCOUNT_PRIVACY_TITLE</h1>
+
+@Html.Raw(@ACCOUNT_PRIVACY_EULA)
