@@ -96,6 +96,8 @@ namespace control.Helper
 
             if (_user is not null)
                 LogHelper.AddDeniedUserEntryToLog(dataContext, _door, _user);
+            else
+                LogHelper.AddUnknownUserEntryToLog(dataContext, _door, cardCode);
 
             returnValue = new JsonResult(_toReturnJsonRaw);
             return true;
