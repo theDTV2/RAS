@@ -32,5 +32,21 @@ namespace control.Helper
             dataContext.Log.Add(_newEntry);
             dataContext.SaveChanges();
         }
-    }
+
+		public static void AddUnknownUserEntryToLog(control.Data.controlContext dataContext, Door door, string cardId)
+		{
+			Log _newEntry = new()
+			{
+				Door = door,
+				User = null,
+				EntryTime = DateTime.Now,
+				EntryResult = EntryResult.AccessDenied,
+				CardId = cardId
+			};
+
+
+			dataContext.Log.Add(_newEntry);
+			dataContext.SaveChanges();
+		}
+	}
 }
