@@ -60,11 +60,13 @@
                     </td>
                     <td>
                         @{
+                            string _display;
                             if (item.User is not null)
-                                var _display = item.User.FirstName + " " + item.User.LastName + " (" + item.User.UserName + ")";
+                                _display = item.User.FirstName + " " + item.User.LastName + " (" + item.User.UserName + ")";
                             else
-                                var _display = item.CardId;    
+                                _display = item.CardId;
                         }
+
                         @Html.Raw(_display)
                     </td>
                     <td>
