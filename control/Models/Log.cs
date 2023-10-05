@@ -23,13 +23,15 @@ namespace control.Models
  
         public int Id { get; set; }
 
-        public required User User { get; set; }
+        public required User? User { get; set; }
 
         public required Door Door { get; set; }
 
         public required DateTime EntryTime { get; set; }
 
         public required EntryResult EntryResult { get; set; }
+
+        public string? CardId { get; set; }
 
 
     }
