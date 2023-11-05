@@ -11,10 +11,10 @@ namespace control.Helper
         public static IEnumerable<User> SearchUser(controlContext dataContext,  string searchTerm)
         {
             IList<User> _user = dataContext.User.Where(e =>
-            e.UserName.Contains(searchTerm) ||
+            e.UserName.ToLower().Contains(searchTerm.ToLower()) ||
             e.SecretCode.Contains(searchTerm) ||
-            e.FirstName.Contains(searchTerm) ||
-            e.LastName.Contains(searchTerm)).ToList();
+            e.FirstName.ToLower().Contains(searchTerm.ToLower()) ||
+            e.LastName.ToLower().Contains(searchTerm.ToLower())).ToList();
 
             if (_user.IsNullOrEmpty() ) 
                 return new List<User>();
