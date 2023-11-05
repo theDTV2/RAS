@@ -14,6 +14,8 @@
 	var ACCOUNT_LOGIN_MAIL_LABEL = LanguageManager.GetLocalizedStringWithParameter("ACCOUNT_LOGIN_MAIL_LABEL", GeneralSettingsManager.GetEmailSuffix(), lang);
 	var ACCOUNT_LOGIN_BUTTON = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_BUTTON", lang);
 	var ACCOUNT_LOGIN_INFO = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_INFO", lang);
+	var ACCOUNT_LOGIN_NOTICE = LanguageManager.GetLocalizedString("ACCOUNT_LOGIN_NOTICE", lang);
+
 
 	ViewData["Title"] = ACCOUNT_LOGIN_TITLE;
 
@@ -43,8 +45,8 @@
 			<p>
 				@ACCOUNT_LOGIN_INFO
 			</p>
-			<p>This application is currently undergoing active development and may undergo frequent changes and updates. If you encounter any issues or have suggestions for improvement, please don't hesitate to reach out to us at <b>lupak(at)htw-berlin.de</b>.</p>
-
+		
+			<p>@Html.Raw(@ACCOUNT_LOGIN_NOTICE)</p>
 		</div>
 	</div>
 

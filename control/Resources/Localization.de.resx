@@ -583,4 +583,7 @@ nicht einverstanden sind, dürfen Sie das System nicht nutzen.&lt;/p&gt;</value>
   <data name="ACCOUNT_GUEST_INFO" xml:space="preserve">
     <value>Das Konto ist noch nicht freigeschaltet. Bitte in Raum G531 melden.</value>
   </data>
+  <data name="ACCOUNT_LOGIN_NOTICE" xml:space="preserve">
+    <value>Diese Anwendung befindet sich derzeit in aktiver Entwicklung und kann häufige Änderungen und Updates erfahren. Falls Sie auf Probleme stoßen oder Verbesserungsvorschläge haben, zögern Sie nicht, sich unter &lt;b&gt;lupak(at)htw-berlin.de&lt;/b&gt; an uns zu wenden.</value>
+  </data>
 </root>

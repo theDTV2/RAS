@@ -576,4 +576,7 @@ If you do not agree to these terms, you may not use the system.&lt;/p&gt;</value
   <data name="ACCOUNT_GUEST_INFO" xml:space="preserve">
     <value>The account is not yet activated. Please finish your registration in room G531.</value>
   </data>
+  <data name="ACCOUNT_LOGIN_NOTICE" xml:space="preserve">
+    <value>This application is currently undergoing active development and may undergo frequent changes and updates. If you encounter any issues or have suggestions for improvement, please don't hesitate to reach out to us at &lt;b&gt;lupak(at)htw-berlin.de&lt;/b&gt;</value>
+  </data>
 </root>
