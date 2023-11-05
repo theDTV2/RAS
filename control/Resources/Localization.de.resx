@@ -407,7 +407,7 @@ nicht einverstanden sind, dürfen Sie das System nicht nutzen.&lt;/p&gt;</value>
     <value>Einstellungen erfolgreich geändert</value>
   </data>
   <data name="MANAGEMENT_SETTINGS_GENERAL_TIMEOUT_LABEL" xml:space="preserve">
-    <value>Wie lange die Logincodes aktiv bleiben. Diese Einstellung wird erst nach einem Systemneustart übernommen</value>
+    <value>Wie lange die Loginsession aktiv bleibt. Diese Einstellung wird erst nach einem Systemneustart übernommen</value>
   </data>
   <data name="MANAGEMENT_SETTINGS_GENERAL_TITLE" xml:space="preserve">
     <value>Verwalten</value>
@@ -508,7 +508,7 @@ nicht einverstanden sind, dürfen Sie das System nicht nutzen.&lt;/p&gt;</value>
   <data name="MANAGEMENT_USER_UNLOCK_ERROR_MISSING" xml:space="preserve">
     <value>Nutzer fehlt oder ungültig</value>
   </data>
-  <data name="Management_USER_UNLOCK_SAVE_SUCCESSFUL" xml:space="preserve">
+  <data name="MANAGEMENT_USER_UNLOCK_SAVE_SUCCESSFUL" xml:space="preserve">
     <value>Erfolgreich gespeichert</value>
   </data>
   <data name="MANAGEMENT_DOOR_LIST_LOG" xml:space="preserve">

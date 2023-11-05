@@ -501,7 +501,7 @@ If you do not agree to these terms, you may not use the system.&lt;/p&gt;</value
   <data name="MANAGEMENT_USER_UNLOCK_ERROR_MISSING" xml:space="preserve">
     <value>User missing or invalid</value>
   </data>
-  <data name="Management_USER_UNLOCK_SAVE_SUCCESSFUL" xml:space="preserve">
+  <data name="MANAGEMENT_USER_UNLOCK_SAVE_SUCCESSFUL" xml:space="preserve">
     <value>Saving successfull</value>
   </data>
   <data name="MANAGEMENT_DOOR_LIST_LOG" xml:space="preserve">
