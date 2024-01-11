@@ -12,7 +12,7 @@ namespace control.Helper
                 User = user,
                 EntryTime = DateTime.Now,
                 EntryResult = EntryResult.AccessAllowed};
-
+                                                                                                 
 
            dataContext.Log.Add(_newEntry);
            dataContext.SaveChanges();

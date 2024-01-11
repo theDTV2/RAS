@@ -116,21 +116,21 @@ namespace control.Generator
             if (userToGenerateFor.AdminDoors.IsNullOrEmpty())
             {
                 _outputList.Add(new SelectListItem { Text = LanguageManager.GetLocalizedString("USER_LEVEL_USER", lang), Value = "1" });
+            }
+            else
+            {
+                //If we end up here, the user is at least an moderator
+                _outputList.Add(new SelectListItem { Text = LanguageManager.GetLocalizedString("USER_LEVEL_MODERATOR", lang), Value = "2" });
+            }
 
-                if (_accessLevel >= EAccessLevel.kSuperAdmin)
+            if (_accessLevel >= EAccessLevel.kSuperAdmin)
                 {
                     _outputList.Add(new SelectListItem { Text = LanguageManager.GetLocalizedString("USER_LEVEL_ADMIN", lang), Value = "3" });
                     _outputList.Add(new SelectListItem { Text = LanguageManager.GetLocalizedString("USER_LEVEL_SUPERADMIN", lang), Value = "4" });
                 }
+
                 return new SelectList(_outputList, "Value", "Text");
-            }
 
-            //If we end up here, the user is an moderator
-            _outputList.Add(new SelectListItem { Text = LanguageManager.GetLocalizedString("USER_LEVEL_MODERATOR", lang), Value = "2" });
-
-            return new SelectList(_outputList, "Value", "Text");
         }
-
-
     }
 }
