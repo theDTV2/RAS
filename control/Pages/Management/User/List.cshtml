@@ -121,7 +121,7 @@
                         <a class="btn btn-primary" asp-page="./Log" asp-route-UserIdentifier="@item.UserName">@MANAGEMENT_USER_LIST_LOG</a>
 
 
-                        @if (AccountHelper.GetEAccessLevel(HttpContext) > item.AccessLevel || AccountHelper.GetEAccessLevel(HttpContext) == EAccessLevel.kSuperAdmin)
+                        @if ((AccountHelper.GetEAccessLevel(HttpContext) > item.AccessLevel || AccountHelper.GetEAccessLevel(HttpContext) == EAccessLevel.kSuperAdmin) && AccountHelper.GetUserName(HttpContext) != item.UserName)
                         {
                           
                             <a class="btn btn-primary" asp-page="./Manage" asp-route-id="@item.UserName">@MANAGEMENT_USER_LIST_MANAGE</a>
