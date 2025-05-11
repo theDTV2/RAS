@@ -31,21 +31,21 @@ namespace control.Pages.Management.User
         public string? UserIdentifier { get; set; } = "";
 
         [BindProperty(SupportsGet = true)]
-        public bool FoundElement { get; set; } = false;
+        public required bool FoundElement { get; set; } = false;
 
 
 
         [BindProperty]
-        public string LastName { get; set; }
+        public required string LastName { get; set; }
         [BindProperty]
-        public string FirstName { get; set; }
+        public required string FirstName { get; set; }
         [BindProperty]
-        public string Secret { get; set; }
+        public required string Secret { get; set; }
         [BindProperty]
-        public string[] DoorsToGiveAccessTo { get; set; }
+        public required string[] DoorsToGiveAccessTo { get; set; }
 
 
-        public new Models.User User { get; set; }
+        public required new Models.User User { get; set; }
 
         public IActionResult OnGet()
         {

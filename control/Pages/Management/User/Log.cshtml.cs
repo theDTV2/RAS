@@ -23,7 +23,7 @@ namespace control.Pages.Management.User
         }
 
         [BindProperty(SupportsGet = true)]
-        public string UserIdentifier { get; set; }
+        public required string UserIdentifier { get; set; }
 
 
         public IList<Log> LogEntries { get; set; } = default!;
@@ -37,7 +37,7 @@ namespace control.Pages.Management.User
                 return NotFound();
 
 
-            LogEntries = _context.Log.Where(u => u.User.UserName == UserIdentifier).Include(d => d.Door).AsEnumerable().Reverse().ToList();
+            LogEntries = _context.Log.Where(u => u.User!.UserName == UserIdentifier).Include(d => d.Door).AsEnumerable().Reverse().ToList();
 
 
             if (!LogEntries.Any())

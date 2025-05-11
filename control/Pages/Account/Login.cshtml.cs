@@ -30,7 +30,7 @@ namespace control.Pages.Account
 
         [BindProperty]
         [DataType(DataType.EmailAddress)]
-		public string UserEmail { get; set; }
+		public required string UserEmail { get; set; }
 
 
 		public IActionResult OnGet()

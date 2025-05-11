@@ -17,11 +17,11 @@ namespace control.Pages.Account
         }
 
         [BindProperty]
-        public string ExpiryDate { get; set; }
+        public required string ExpiryDate { get; set; }
 
 
         [BindProperty]
-        public bool HasAnyDoorAccess { get; set; }
+        public required bool HasAnyDoorAccess { get; set; }
         public IActionResult OnGet()
         {
             if (!AuthHelper.CheckUserAccessWithRedirect(_context, HttpContext, EAccessLevel.kUser, IgnoreExpiryDate: true))

@@ -23,7 +23,7 @@ namespace control.Pages.Management.User
         public new IList<Models.User> User { get; set; } = default!;
 
         [BindProperty(SupportsGet = true)]
-        public string SearchTerm { get; set; }
+        public required string SearchTerm { get; set; }
 
         public bool SearchedSomething { get; set; } = false;
 

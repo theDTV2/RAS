@@ -21,7 +21,7 @@ namespace control.Pages.Account
             _context = context;
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public IActionResult OnGet()
         {
 			EAccessReturnValue _val = AuthHelper.CheckUserPermission(_context, HttpContext);
 
@@ -33,14 +33,14 @@ namespace control.Pages.Account
 
 
         [BindProperty]
-        public string firstName { get; set; }
+        public required string firstName { get; set; }
 
 		[BindProperty]
-		public string lastName { get; set; }
+		public required string lastName { get; set; }
 
 		[BindProperty]
 		public bool AreYouSure { get; set; }
-		public async Task<IActionResult> OnPostAsync()
+		public IActionResult OnPost()
         {
 			EAccessReturnValue _val = AuthHelper.CheckUserPermission(_context, HttpContext);
 

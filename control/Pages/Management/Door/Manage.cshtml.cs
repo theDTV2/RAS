@@ -23,16 +23,16 @@ namespace control.Pages.Management.Door
         }
 
         [BindProperty]
-        public string[] DoorAdminToGiveAccessTo { get; set; }
+        public required string[] DoorAdminToGiveAccessTo { get; set; }
   
 
         [BindProperty(SupportsGet = true)]
-        public string DoorIdentifier { get; set; } = "";
+        public required string DoorIdentifier { get; set; } = "";
 
-        public string DoorID { get; set; }
+        public required string DoorID { get; set; }
 
         [BindProperty]
-        public string DoorDisplayText { get; set; }
+        public required string DoorDisplayText { get; set; }
 
         public EDoorEntryMode DoorEntryMode { get; set; }
 

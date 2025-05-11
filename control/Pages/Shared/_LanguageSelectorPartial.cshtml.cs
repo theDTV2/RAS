@@ -19,7 +19,8 @@ namespace control.Pages.Shared
             _context = context;
         }
 
-      public User User { get; set; } = default!; 
+      //public User User { get; set; } = default!; 
+      // TODO: Braucht es die obrige Zeile?
 
 
         public void OnPost()

@@ -24,9 +24,9 @@ namespace control.Pages.Management.Door
         }
 
         [BindProperty(SupportsGet = true)]
-        public string DoorIdentifier { get; set; } = "";
+        public required string DoorIdentifier { get; set; } = "";
 
-        public IList<Log> DoorEntries { get; set; }
+        public required IList<Log> DoorEntries { get; set; }
 
         public IActionResult OnGet()
         {

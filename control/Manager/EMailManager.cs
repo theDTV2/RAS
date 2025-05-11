@@ -189,7 +189,7 @@ namespace control.Manager
             {
                 await EmailClient.SendAsync(emailObject);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

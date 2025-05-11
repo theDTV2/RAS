@@ -20,14 +20,14 @@ namespace control.Pages.Management.Site
 
         [Display(Name = "Login Timeout (In Minutes)")]
         
-        public int UserLoginTimeout { get; set; }
+        public required int UserLoginTimeout { get; set; }
 
 
         [Display(Name = "Email Login Suffix (Example: htw-berlin.de)")]
-        public string EMailSuffix { get; set; }
+        public required string EMailSuffix { get; set; }
 
         [Display(Name = "Full Site Hostname (Example: site.f1.htw-berlin.de")]
-        public string Hostname { get; set; }
+        public required string Hostname { get; set; }
 
 
         public IActionResult OnGet()

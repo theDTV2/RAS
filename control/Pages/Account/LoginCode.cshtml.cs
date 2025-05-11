@@ -30,7 +30,7 @@ namespace control.Pages.Account
 
         [BindProperty]
         [DataType(DataType.Text)]
-        public string LoginCode { get; set; }
+        public required string LoginCode { get; set; }
 
 
         [BindProperty(SupportsGet = true)]
